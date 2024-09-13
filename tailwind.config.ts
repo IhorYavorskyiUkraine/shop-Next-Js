@@ -6,6 +6,7 @@ const config: Config = {
       "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
       "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
       "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+      "./src/modules/**/*.{js,ts,jsx,tsx,mdx}",
    ],
    theme: {
       extend: {
@@ -29,8 +30,11 @@ const config: Config = {
          },
          lineHeight: {
             19: "19px",
+            20: "20px",
             22: "22px",
             30: "30px",
+            32: "32px",
+            64: "64px",
          },
          fontWeight: {
             hairline: "100",
@@ -45,6 +49,7 @@ const config: Config = {
          },
          colors: {
             gray: "#F0F0F0",
+            bg: "#F2F0F1",
          },
       },
    },

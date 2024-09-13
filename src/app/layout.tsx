@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { TopBanner } from "@/components/shared/TopBanner";
 import { Header } from "@/components/shared/header/Header";
 
 export const metadata: Metadata = {
@@ -15,8 +14,7 @@ export default function RootLayout({
 }>) {
    return (
       <html lang="en">
-         <body className="bg-white font-satoshi-r text-sm">
-            <TopBanner />
+         <body>
             <Header />
             {children}
          </body>
