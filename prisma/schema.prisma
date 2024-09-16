@@ -1,41 +1,149 @@
 generator client {
-	provider = "prisma-client-js"
+   provider = "prisma-client-js"
 }
 
 datasource db {
-	provider = "postgresql"
-	url = env("POSTGRES_URL")
-	directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+   provider  = "postgresql"
+   url       = env("POSTGRES_URL")
+   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-// schema.prisma
+model User {
+   id        Int      @id @default(autoincrement())
+   email     String   @unique
+   password  String
+   role      UserRole @default(USER)
+   cart      Cart?
+   orders    Order[]
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
+}
+
 model Product {
-  id          Int      @id @default(autoincrement())
-  name        String
-  price       Float
-  description String?
-  category    Category  @relation(fields: [categoryId], references: [id])
-  categoryId  Int
-  sizes       Size[]    @relation("ProductSizes")
-  colors      Color[]   @relation("ProductColors")
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+   id              Int              @id @default(autoincrement())
+   name            String
+   category        Category         @relation(fields: [categoryId], references: [id])
+   categoryId      Int
+   dressStyle      DressStyle       @relation(fields: [dressStyleId], references: [id])
+   dressStyleId    Int
+   productVariants ProductVariant[]
+   createdAt       DateTime         @default(now())
+   updatedAt       DateTime         @updatedAt
+}
+
+model ProductVariant {
+   id                    Int                    @id @default(autoincrement())
+   product               Product                @relation(fields: [productId], references: [id])
+   productId             Int
+   description           String?
+   imageUrl              String
+   productVariantOptions ProductVariantOption[]
+   price                 Float
+   oldPrice              Float?
+   createdAt             DateTime               @default(now())
+   updatedAt             DateTime               @updatedAt
+}
+
+model ProductVariantOption {
+   id               Int            @id @default(autoincrement())
+   productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
+   productVariantId Int
+   color            Color          @relation(fields: [colorId], references: [id])
+   colorId          Int
+   sizes            Size[]         @relation("ProductVariantOptionSizes")
+   price            Float
+   imageUrl         String[]
+   stockQuantity    Int            @default(0)
+   createdAt        DateTime       @default(now())
+   updatedAt        DateTime       @updatedAt
+   CartItem         CartItem[]
+   OrderItem        OrderItem[]
 }
 
 model Category {
-  id       Int       @id @default(autoincrement())
-  name     String    @unique
-  products Product[]
+   id       Int       @id @default(autoincrement())
+   name     String    @unique
+   products Product[]
+}
+
+model DressStyle {
+   id       Int       @id @default(autoincrement())
+   name     String    @unique
+   products Product[]
 }
 
 model Size {
-  id       Int       @id @default(autoincrement())
-  size     String    @unique
-  products Product[] @relation("ProductSizes")
+   id                    Int                    @id @default(autoincrement())
+   size                  String                 @unique
+   productVariantOptions ProductVariantOption[] @relation("ProductVariantOptionSizes")
 }
 
 model Color {
-  id       Int       @id @default(autoincrement())
-  color    String    @unique
-  products Product[] @relation("ProductColors")
+   id                    Int                    @id @default(autoincrement())
+   color                 String                 @unique
+   productVariantOptions ProductVariantOption[]
+}
+
+model Cart {
+   id          Int        @id @default(autoincrement())
+   user        User       @relation(fields: [userId], references: [id])
+   userId      Int        @unique
+   items       CartItem[]
+   token       String?
+   totalAmount Float?
+   createdAt   DateTime   @default(now())
+   updatedAt   DateTime   @updatedAt
+}
+
+model CartItem {
+   id                     Int                  @id @default(autoincrement())
+   cart                   Cart                 @relation(fields: [cartId], references: [id])
+   cartId                 Int
+   productVariantOption   ProductVariantOption @relation(fields: [productVariantOptionId], references: [id])
+   productVariantOptionId Int
+   quantity               Int                  @default(1)
+   imageUrl               String
+   createdAt              DateTime             @default(now())
+   updatedAt              DateTime             @updatedAt
+}
+
+model Order {
+   id          Int         @id @default(autoincrement())
+   user        User        @relation(fields: [userId], references: [id])
+   userId      Int
+   token       String
+   totalAmount Float
+   status      OrderStatus
+   paymentId   String?
+   items       OrderItem[]
+   fullName    String
+   email       String
+   phone       String
+   address     String
+   comment     String?
+   createdAt   DateTime    @default(now())
+   updatedAt   DateTime    @updatedAt
+}
+
+model OrderItem {
+   id                     Int                  @id @default(autoincrement())
+   order                  Order                @relation(fields: [orderId], references: [id])
+   orderId                Int
+   productVariantOption   ProductVariantOption @relation(fields: [productVariantOptionId], references: [id])
+   productVariantOptionId Int
+   quantity               Int                  @default(1)
+   price                  Float
+   createdAt              DateTime             @default(now())
+   updatedAt              DateTime             @updatedAt
+}
+
+enum OrderStatus {
+   PENDING
+   SUCCEEDED
+   CANCELED
+}
+
+enum UserRole {
+   USER
+   ADMIN
 }
