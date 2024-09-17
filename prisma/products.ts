@@ -1,6 +1,21 @@
 export const categories = [
    {
       id: 1,
+      name: "new arrivals",
+   },
+   {
+      id: 2,
+      name: "top selling",
+   },
+   {
+      id: 3,
+      name: "recommended",
+   },
+];
+
+export const productCategories = [
+   {
+      id: 1,
       name: "t-shirts",
    },
    {

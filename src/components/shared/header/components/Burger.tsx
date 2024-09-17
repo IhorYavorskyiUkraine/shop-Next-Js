@@ -28,12 +28,7 @@ export const Burger: React.FC = () => {
    return (
       <Drawer direction="left" open={open}>
          <DrawerTrigger>
-            <Menu
-               onClick={() => setOpen(!open)}
-               color={"#000"}
-               size={24}
-               className="md:hidden"
-            />
+            <Menu onClick={() => setOpen(!open)} color={"#000"} size={24} />
          </DrawerTrigger>
          <DrawerContent>
             <Container className="mx-0 justify-between">

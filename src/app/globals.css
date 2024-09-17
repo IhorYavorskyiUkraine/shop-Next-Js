@@ -30,6 +30,16 @@
 :root {
    --background: #ffffff;
    --foreground: #171717;
+   svg,
+   video,
+   canvas,
+   audio,
+   iframe,
+   embed,
+   object {
+      display: inline-block;
+      vertical-align: middle;
+   }
 }
 
 body {

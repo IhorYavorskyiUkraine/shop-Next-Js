@@ -1,5 +1,11 @@
 import { prisma } from "./PrismaClient";
-import { categories, colors, dressStyle, sizes } from "./products";
+import {
+   categories,
+   productCategories,
+   colors,
+   dressStyle,
+   sizes,
+} from "./products";
 
 const randomPrice = (min: number, max: number) => {
    return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10;
@@ -8,6 +14,7 @@ const randomPrice = (min: number, max: number) => {
 async function up() {
    await Promise.all([
       prisma.category.createMany({ data: categories }),
+      prisma.productCategory.createMany({ data: productCategories }),
       prisma.dressStyle.createMany({ data: dressStyle }),
       prisma.size.createMany({ data: sizes }),
       prisma.color.createMany({ data: colors }),
@@ -15,113 +22,386 @@ async function up() {
 
    await prisma.product.create({
       data: {
-         name: "T-Shirt",
+         name: "T-shirt with Tape Details",
+         productCategoryId: 1,
          categoryId: 1,
          dressStyleId: 2,
-         productVariants: {
+         description: "T-shirt with Tape Details",
+         imageUrl: "/images/newArrivals/1/1_black.png",
+         price: 120,
+         rating: 4.5,
+         productVariantOptions: {
             create: [
                {
-                  description: "T-SHIRT WITH TAPE DETAILS",
-                  imageUrl: "/images/tshirt_black.png",
-                  price: 17.99,
-                  oldPrice: 20.0,
-                  productVariantOptions: {
-                     create: [
-                        {
-                           colorId: 1,
-                           sizes: {
-                              connect: [{ id: 1 }, { id: 2 }],
-                           },
-                           price: 19.99,
-                           imageUrl: [
-                              "/images/tshirt_black.png",
-                              "/images/tshirt_black.png",
-                              "/images/tshirt_black.png",
-                           ],
-                           stockQuantity: 100,
-                        },
-                        {
-                           colorId: 2,
-                           sizes: {
-                              connect: [{ id: 1 }, { id: 2 }],
-                           },
-                           price: 21.99,
-                           stockQuantity: 50,
-                        },
+                  colorId: 8,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
                      ],
                   },
+                  price: 120,
+                  imageUrl: [
+                     "/images/newArrivals/1/1_black_1.png",
+                     "/images/newArrivals/1/1_black_2.png",
+                     "/images/newArrivals/1/1_black_3.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }],
+                  },
+                  price: 120,
+                  imageUrl: [
+                     "/images/newArrivals/1/1_blue.png",
+                     "/images/newArrivals/1/1_blue.png",
+                     "/images/newArrivals/1/1_blue.png",
+                  ],
+                  stockQuantity: 50,
+               },
+               {
+                  colorId: 9,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 3 }, { id: 4 }],
+                  },
+                  price: 120,
+                  imageUrl: [
+                     "/images/newArrivals/1/1_white.png",
+                     "/images/newArrivals/1/1_white.png",
+                     "/images/newArrivals/1/1_white.png",
+                  ],
+                  stockQuantity: 50,
                },
             ],
          },
       },
    });
 
-   // const productVariants = [
-   //    {
-   //       price: randomPrice(100, 119),
-   //       description: "Чёрная футболка из хлопка",
-   //       imageUrl: "/images/newArrivals/1/1_black_1.png",
-   //       productId: 1,
-   //       oldPrice: 120,
-   //       sizes: [{ id: 1 }, { id: 2 }],
-   //       color: { id: 1 },
-   //       images: [
-   //          { imageUrl: "/images/newArrivals/1/1_black_1.png" },
-   //          { imageUrl: "/images/newArrivals/1/1_black_2.png" },
-   //          { imageUrl: "/images/newArrivals/1/1_black_3.png" },
-   //       ],
-   //    },
-   //    {
-   //       price: randomPrice(100, 119),
-   //       description: "Синяя футболка из хлопка",
-   //       imageUrl: "/images/newArrivals/1/1_blue.png",
-   //       productId: 1,
-   //       oldPrice: 120,
-   //       sizes: [{ id: 2 }, { id: 3 }],
-   //       colors: [{ id: 2 }, { id: 3 }],
-   //       images: [
-   //          { imageUrl: "/images/newArrivals/1/1_blue.png" },
-   //          { imageUrl: "/images/newArrivals/1/1_blue.png" },
-   //          { imageUrl: "/images/newArrivals/1/1_blue.png" },
-   //       ],
-   //    },
-   //    {
-   //       price: randomPrice(80, 100),
-   //       description: "Белая футболка из хлопка",
-   //       imageUrl: "/images/newArrivals/1/1_blue.png",
-   //       productId: 1,
-   //       sizes: [{ id: 2 }, { id: 3 }],
-   //       colors: [{ id: 2 }, { id: 3 }],
-   //       images: [
-   //          { imageUrl: "/images/newArrivals/1/1_white.png" },
-   //          { imageUrl: "/images/newArrivals/1/1_white.png" },
-   //          { imageUrl: "/images/newArrivals/1/1_white.png" },
-   //       ],
-   //    },
-   // ];
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: randomPrice(220, 250),
+         oldPrice: 260,
+         rating: 3.5,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: randomPrice(220, 250),
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: randomPrice(220, 250),
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+      },
+   });
 
-   // for (const variant of productVariants) {
-   //    await prisma.productVariant.create({
-   //       data: {
-   //          price: variant.price,
-   //          description: variant.description,
-   //          imageUrl: variant.imageUrl,
-   //          oldPrice: variant.oldPrice,
-   //          product: {
-   //             connect: { id: variant.productId },
-   //          },
-   //          sizes: {
-   //             connect: variant.sizes,
-   //          },
-   //          color: {
-   //             connect: variant.colors,
-   //          },
-   //          images: {
-   //             create: variant.images,
-   //          },
-   //       },
-   //    });
-   // }
+   await prisma.product.create({
+      data: {
+         name: "Checkered Shirt",
+         productCategoryId: 3,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Checkered Shirt",
+         imageUrl: "/images/newArrivals/3/3_red.png",
+         price: randomPrice(180, 190),
+         rating: 4.5,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 1,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 3 }, { id: 4 }, { id: 5 }],
+                  },
+                  price: randomPrice(170, 189),
+                  oldPrice: 190,
+                  imageUrl: [
+                     "/images/newArrivals/3/3_red.png",
+                     "/images/newArrivals/3/3_red.png",
+                     "/images/newArrivals/3/3_red.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
+                  },
+                  price: randomPrice(180, 190),
+                  imageUrl: [
+                     "/images/newArrivals/3/3_blue.png",
+                     "/images/newArrivals/3/3_blue.png",
+                     "/images/newArrivals/3/3_blue.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Sleeve Striped T-shirt",
+         productCategoryId: 1,
+         categoryId: 1,
+         dressStyleId: 4,
+         description: "Sleeve Striped T-shirt",
+         imageUrl: "/images/newArrivals/4/4_orange.png",
+         price: randomPrice(130, 140),
+         oldPrice: 160,
+         rating: 4.5,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 2,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 3 }, { id: 4 }, { id: 5 }],
+                  },
+                  price: randomPrice(130, 140),
+                  oldPrice: 160,
+                  imageUrl: [
+                     "/images/newArrivals/4/4_orange.png",
+                     "/images/newArrivals/4/4_orange.png",
+                     "/images/newArrivals/4/4_orange.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 1,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
+                  },
+                  price: randomPrice(140, 160),
+                  imageUrl: [
+                     "/images/newArrivals/4/4_red.png",
+                     "/images/newArrivals/4/4_red.png",
+                     "/images/newArrivals/4/4_red.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Polo with Contrast Trims",
+         productCategoryId: 1,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Polo with Contrast Trims",
+         imageUrl: "/images/newArrivals/5/5_navy.png",
+         price: randomPrice(210, 230),
+         oldPrice: 242,
+         rating: 4,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 18,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 4 }, { id: 5 }],
+                  },
+                  price: randomPrice(210, 230),
+                  oldPrice: 242,
+                  imageUrl: [
+                     "/images/newArrivals/5/5_navy.png",
+                     "/images/newArrivals/5/5_navy.png",
+                     "/images/newArrivals/5/5_navy.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 10,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
+                  },
+                  price: randomPrice(210, 230),
+                  oldPrice: 242,
+                  imageUrl: [
+                     "/images/newArrivals/5/5_gray.png",
+                     "/images/newArrivals/5/5_gray.png",
+                     "/images/newArrivals/5/5_gray.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Gradient Graphic T-shirt",
+         productCategoryId: 1,
+         categoryId: 1,
+         dressStyleId: 3,
+         description: "Gradient Graphic T-shirt",
+         imageUrl: "/images/newArrivals/6/6_white.png",
+         price: randomPrice(140, 150),
+         rating: 3.5,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 9,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 4 }, { id: 5 }],
+                  },
+                  price: randomPrice(130, 140),
+                  oldPrice: 160,
+                  imageUrl: [
+                     "/images/newArrivals/6/6_white.png",
+                     "/images/newArrivals/6/6_white.png",
+                     "/images/newArrivals/6/6_white.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 10,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
+                  },
+                  price: randomPrice(130, 140),
+                  oldPrice: 150,
+                  imageUrl: [
+                     "/images/newArrivals/6/6_gray.png",
+                     "/images/newArrivals/6/6_gray.png",
+                     "/images/newArrivals/6/6_gray.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Polo with Tipping Details",
+         productCategoryId: 1,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Polo with Tipping Details",
+         imageUrl: "/images/newArrivals/7/7_pink.png",
+         price: randomPrice(170, 180),
+         rating: 4.5,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 13,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 4 }, { id: 5 }],
+                  },
+                  price: randomPrice(170, 180),
+                  oldPrice: 190,
+                  imageUrl: [
+                     "/images/newArrivals/7/7_pink.png",
+                     "/images/newArrivals/7/7_pink.png",
+                     "/images/newArrivals/7/7_pink.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 10,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
+                  },
+                  price: randomPrice(170, 180),
+                  oldPrice: 190,
+                  imageUrl: [
+                     "/images/newArrivals/7/7_gray.png",
+                     "/images/newArrivals/7/7_gray.png",
+                     "/images/newArrivals/7/7_gray.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Striped Sleeve Polo",
+         productCategoryId: 1,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Striped Sleeve Polo",
+         imageUrl: "/images/newArrivals/8/8_gray.png",
+         price: randomPrice(160, 170),
+         oldPrice: 185,
+         rating: 4,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 10,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 4 }, { id: 5 }],
+                  },
+                  price: randomPrice(160, 170),
+                  oldPrice: 185,
+                  imageUrl: [
+                     "/images/newArrivals/8/8_gray.png",
+                     "/images/newArrivals/8/8_gray.png",
+                     "/images/newArrivals/8/8_gray.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
+                  },
+                  price: randomPrice(170, 180),
+                  oldPrice: 190,
+                  imageUrl: [
+                     "/images/newArrivals/8/8_black.png",
+                     "/images/newArrivals/8/8_black.png",
+                     "/images/newArrivals/8/8_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+      },
+   });
 }
 
 async function down() {
@@ -132,8 +412,9 @@ async function down() {
       "Order", 
       "OrderItem", 
       "Product", 
-      "ProductVariant", 
+      "ProductVariantOption", 
       "Category", 
+		"ProductCategory", 
       "DressStyle", 
       "Size", 
       "Color" 

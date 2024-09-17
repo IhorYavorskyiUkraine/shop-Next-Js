@@ -1,18 +1,34 @@
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../prisma/PrismaClient";
-import { NextResponse, NextRequest } from "next/server";
 
-export async function GET() {
-   const product = await prisma.product.findMany();
+export async function GET(req: NextRequest) {
+   try {
+      const categoryId = req.nextUrl.searchParams.get("categoryId");
+      const limit = parseInt(req.nextUrl.searchParams.get("limit") || "4", 10);
+      const offset = parseInt(
+         req.nextUrl.searchParams.get("offset") || "0",
+         10,
+      );
 
-   return NextResponse.json(product);
-}
+      if (!categoryId || isNaN(Number(categoryId))) {
+         return NextResponse.json(
+            { message: "Неверный идентификатор категории" },
+            { status: 400 },
+         );
+      }
 
-export async function POST(req: NextRequest) {
-   const body = await req.json();
+      const products = await prisma.product.findMany({
+         where: { categoryId: Number(categoryId) },
+         include: { productCategory: true },
+         take: limit,
+         skip: offset,
+      });
 
-   const product = await prisma.product.create({
-      data: body,
-   });
-
-   return NextResponse.json(product);
+      return NextResponse.json(products);
+   } catch (error) {
+      return NextResponse.json(
+         { message: "Ошибка при получении продуктов", error },
+         { status: 500 },
+      );
+   }
 }
