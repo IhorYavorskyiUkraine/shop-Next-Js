@@ -2,7 +2,8 @@ import { create } from "zustand";
 import { Product } from "@prisma/client";
 
 type ProductStore = {
-   products: Product[];
+   newArrivals: Product[];
+   topSelling: Product[];
    loading: boolean;
    fetchProducts: (
       categoryId: number,
@@ -12,7 +13,8 @@ type ProductStore = {
 };
 
 export const useProductStore = create<ProductStore>(set => ({
-   products: [],
+   newArrivals: [],
+   topSelling: [],
    loading: false,
    fetchProducts: async (categoryId: number, limit: number, offset: number) => {
       set({ loading: true });
@@ -24,10 +26,17 @@ export const useProductStore = create<ProductStore>(set => ({
             throw new Error("Сетевая ошибка");
          }
          const products = await response.json();
-         set(state => ({
-            products: [...state.products, ...products],
-            loading: false,
-         }));
+         if (categoryId === 1) {
+            set(state => ({
+               newArrivals: [...state.newArrivals, ...products],
+               loading: false,
+            }));
+         } else if (categoryId === 2) {
+            set(state => ({
+               topSelling: [...state.topSelling, ...products],
+               loading: false,
+            }));
+         }
       } catch (error) {
          console.error("Не удалось получить продукты:", error);
          set({ loading: false });

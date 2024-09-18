@@ -12,9 +12,11 @@ const buttonVariants = cva(
             default:
                "bg-white border-[1px] w-full md:w-auto border-black/10 font-medium text-md leading-19 rounded-full md:leading-19 py-4 px-[54px] text-black hover:bg-black/5",
             black: "bg-black w-full md:w-auto font-medium text-md leading-19 md:leading-19 rounded-full py-4 px-[54px] text-white hover:bg-black/80",
+            none: "",
          },
          size: {
             default: "h-[52px] py-4 px-[54px]",
+            none: "",
          },
       },
       defaultVariants: {
