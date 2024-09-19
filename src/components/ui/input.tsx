@@ -5,14 +5,16 @@ import { cn } from "@/lib/utils";
 export interface InputProps
    extends React.InputHTMLAttributes<HTMLInputElement> {
    icon?: React.ReactNode;
+   iconHidden: boolean;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-   ({ className, icon, type, ...props }, ref) => {
+   ({ className, icon, iconHidden = true, type, ...props }, ref) => {
       return (
          <div
             className={cn(
                className,
+               iconHidden || "flex",
                "items-center rounded-full bg-gray px-4 py-3 md:flex",
             )}
          >

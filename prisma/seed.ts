@@ -1,3 +1,4 @@
+import { hashSync } from "bcrypt";
 import { prisma } from "./PrismaClient";
 import {
    categories,
@@ -20,65 +21,13 @@ async function up() {
       prisma.color.createMany({ data: colors }),
    ]);
 
-   await prisma.product.create({
+   const user1 = await prisma.user.create({
       data: {
-         name: "T-shirt with Tape Details",
-         productCategoryId: 1,
-         categoryId: 1,
-         dressStyleId: 2,
-         description: "T-shirt with Tape Details",
-         imageUrl: "/images/newArrivals/1/1_black.png",
-         price: 120,
-         rating: 4.5,
-         productVariantOptions: {
-            create: [
-               {
-                  colorId: 8,
-                  sizes: {
-                     connect: [
-                        { id: 1 },
-                        { id: 2 },
-                        { id: 3 },
-                        { id: 4 },
-                        { id: 5 },
-                     ],
-                  },
-                  price: 120,
-                  imageUrl: [
-                     "/images/newArrivals/1/1_black_1.png",
-                     "/images/newArrivals/1/1_black_2.png",
-                     "/images/newArrivals/1/1_black_3.png",
-                  ],
-                  stockQuantity: 100,
-               },
-               {
-                  colorId: 5,
-                  sizes: {
-                     connect: [{ id: 1 }, { id: 2 }],
-                  },
-                  price: 120,
-                  imageUrl: [
-                     "/images/newArrivals/1/1_blue.png",
-                     "/images/newArrivals/1/1_blue.png",
-                     "/images/newArrivals/1/1_blue.png",
-                  ],
-                  stockQuantity: 50,
-               },
-               {
-                  colorId: 9,
-                  sizes: {
-                     connect: [{ id: 1 }, { id: 3 }, { id: 4 }],
-                  },
-                  price: 120,
-                  imageUrl: [
-                     "/images/newArrivals/1/1_white.png",
-                     "/images/newArrivals/1/1_white.png",
-                     "/images/newArrivals/1/1_white.png",
-                  ],
-                  stockQuantity: 50,
-               },
-            ],
-         },
+         id: 1,
+         fullName: "John Doe",
+         email: "john.doe1@example.com",
+         password: hashSync("password123", 10),
+         role: "USER",
       },
    });
 
@@ -736,6 +685,60 @@ async function up() {
          },
       },
    });
+
+   await prisma.purchase.create({
+      data: {
+         user: {
+            connect: { id: 1 },
+         },
+         product: {
+            connect: { id: 1 },
+         },
+      },
+   });
+
+   await prisma.purchase.create({
+      data: {
+         user: {
+            connect: { id: 1 },
+         },
+         product: {
+            connect: { id: 2 },
+         },
+      },
+   });
+
+   await prisma.review.create({
+      data: {
+         rating: 5,
+         text: "Amazing product, highly recommend!",
+         author: {
+            connect: { id: 1 },
+         },
+         product: {
+            connect: { id: 1 },
+         },
+         purchase: {
+            connect: { id: 1 },
+         },
+      },
+   });
+
+   await prisma.review.create({
+      data: {
+         rating: 5,
+         text: "Amazing product, highly recommend!",
+         author: {
+            connect: { id: 1 },
+         },
+         product: {
+            connect: { id: 2 },
+         },
+         purchase: {
+            connect: { id: 2 },
+         },
+      },
+   });
 }
 
 async function down() {
@@ -744,6 +747,8 @@ async function down() {
       "Cart", 
       "CartItem", 
       "Order", 
+		"Purchase",
+		"Review",
       "OrderItem", 
       "Product", 
       "ProductVariantOption", 
