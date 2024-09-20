@@ -22,8 +22,11 @@ export const SearchInput: React.FC = () => {
    useDebounce(
       async () => {
          try {
-            // TODO
-            // Search product
+            const response = await fetch(
+               `/api/products/search?query=${searchQuery}`,
+            );
+            const data = await response.json();
+            setProducts(data);
          } catch (error) {
             console.log(error);
          }
@@ -43,33 +46,45 @@ export const SearchInput: React.FC = () => {
          {focused && (
             <div className="fixed bottom-0 left-0 right-0 top-0 z-30 bg-black/50" />
          )}
-         <Input
-            placeholder="Search for products..."
-            className={"hidden flex-1 md:flex"}
-            iconHidden={true}
-            ref={ref}
-            onFocus={() => setFocused(true)}
-            icon={<Search color={"#00000066"} size={20} />}
-         />
-         {products.length > 0 && (
-            <div
+         <div className="relative hidden flex-1 md:flex">
+            <Input
+               placeholder="Search for products..."
                className={cn(
-                  "invisible absolute top-14 z-30 w-full rounded-xl bg-white py-2 opacity-0 shadow-md transition-all duration-200",
-                  focused && "visible top-12 opacity-100",
+                  focused && "relative z-40",
+                  "hidden flex-1 md:flex",
                )}
-            >
-               {products.map(product => (
-                  <Link href={`/product/${product.id}`} key={product.id}>
-                     <div
+               iconHidden={true}
+               ref={ref}
+               value={searchQuery}
+               onChange={e => setSearchQuery(e.target.value)}
+               onFocus={() => setFocused(true)}
+               icon={<Search color={"#00000066"} size={20} />}
+            />
+            {products.length > 0 && (
+               <div
+                  className={cn(
+                     "invisible absolute top-0 z-30 w-full rounded-[30px] bg-gray py-2 opacity-0 shadow-md transition-all duration-200",
+                     focused && "visible top-0 w-full opacity-100 md:pt-[46px]",
+                  )}
+               >
+                  {products.map(product => (
+                     <Link
                         onClick={onClickItem}
-                        className="hover:bg-primary/10 cursor-pointer px-3 py-2"
+                        key={product.id}
+                        className="flex w-full items-center gap-3 px-3 py-2 hover:bg-black/10"
+                        href={`/product/${product.id}`}
                      >
-                        {product.name}
-                     </div>
-                  </Link>
-               ))}
-            </div>
-         )}
+                        <img
+                           className="h-8 w-8 rounded-sm"
+                           src={product.imageUrl}
+                           alt={product.name}
+                        />
+                        <span>{product.name}</span>
+                     </Link>
+                  ))}
+               </div>
+            )}
+         </div>
       </>
    );
 };
