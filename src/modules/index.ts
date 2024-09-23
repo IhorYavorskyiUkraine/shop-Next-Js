@@ -1,1 +1,1 @@
-export { Hero } from "./sections/Hero";
+export { ProductsWithCategories } from "./sections/productsWithCategories/ProductsWithCategories";

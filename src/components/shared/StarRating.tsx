@@ -10,6 +10,7 @@ interface Props {
 export const StarRating: React.FC<Props> = ({ rating, readonly = false }) => {
    return (
       <Rating
+         className="-translate-y-[3px]"
          readonly={readonly}
          allowFraction
          size={20}

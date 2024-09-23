@@ -1,7 +1,7 @@
-import { Hero } from "@/modules";
-import { DressStyle } from "@/modules/sections/DressStyle";
-import { ProductsWithCategories } from "@/modules/sections/productsWithCategories/ProductsWithCategories";
-import { Reviews } from "@/modules/sections/reviews/Reviews";
+import { ProductsWithCategories } from "@/modules";
+import { Reviews } from "@/app/(home)/sections/reviews/Reviews";
+import { DressStyle } from "./sections/DressStyle";
+import { Hero } from "./sections/Hero";
 
 export default function Home() {
    return (

@@ -1,9 +1,9 @@
+import { ReviewCarousel } from "@/app/(home)/components/ReviewCarousel";
 import {
    CarouselNext,
    Carousel,
    CarouselPrevious,
 } from "@/components/ui/carousel";
-import { ReviewCarousel } from "@/components/shared/ReviewCarousel";
 import { Container } from "@/components/ui/container";
 import { Title } from "@/components/ui/title";
 

@@ -2,14 +2,13 @@
 
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { useClickAway, useDebounce } from "react-use";
+import { useClickAway } from "react-use";
 import { useRef, useState } from "react";
-import { Product } from "@prisma/client";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useProductSearch } from "@/hooks/useProductSearch";
 
 export const SearchInput: React.FC = () => {
-   const [products, setProducts] = useState<Product[]>([]);
    const [searchQuery, setSearchQuery] = useState("");
    const [focused, setFocused] = useState(false);
 
@@ -19,24 +18,9 @@ export const SearchInput: React.FC = () => {
       setFocused(false);
    });
 
-   useDebounce(
-      async () => {
-         try {
-            const response = await fetch(
-               `/api/products/search?query=${searchQuery}`,
-            );
-            const data = await response.json();
-            setProducts(data);
-         } catch (error) {
-            console.log(error);
-         }
-      },
-      250,
-      [searchQuery],
-   );
+   const products = useProductSearch(searchQuery);
 
    const onClickItem = () => {
-      setProducts([]);
       setSearchQuery("");
       setFocused(false);
    };
@@ -46,7 +30,7 @@ export const SearchInput: React.FC = () => {
          {focused && (
             <div className="fixed bottom-0 left-0 right-0 top-0 z-30 bg-black/50" />
          )}
-         <div className="relative hidden flex-1 md:flex">
+         <div className="relative flex-1 md:flex">
             <Input
                placeholder="Search for products..."
                className={cn(

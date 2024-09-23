@@ -366,7 +366,7 @@ async function up() {
          productVariantOptions: {
             create: [
                {
-                  colorId: 8,
+                  colorId: 4,
                   sizes: {
                      connect: [
                         { id: 1 },
@@ -378,9 +378,9 @@ async function up() {
                   },
                   price: 220,
                   imageUrl: [
-                     "/images/topSelling/1/black_1.png",
-                     "/images/topSelling/1/black_2.png",
-                     "/images/topSelling/1/black_3.png",
+                     "/images/topSelling/1.png",
+                     "/images/topSelling/1.png",
+                     "/images/topSelling/1.png",
                   ],
                   stockQuantity: 100,
                },
@@ -402,7 +402,7 @@ async function up() {
          productVariantOptions: {
             create: [
                {
-                  colorId: 9,
+                  colorId: 2,
                   sizes: {
                      connect: [
                         { id: 1 },
@@ -414,9 +414,9 @@ async function up() {
                   },
                   price: 140,
                   imageUrl: [
-                     "/images/topSelling/2/white_1.png",
-                     "/images/topSelling/2/white_2.png",
-                     "/images/topSelling/2/white_3.png",
+                     "/images/topSelling/2.png",
+                     "/images/topSelling/2.png",
+                     "/images/topSelling/2.png",
                   ],
                   stockQuantity: 100,
                },
@@ -444,9 +444,9 @@ async function up() {
                   },
                   price: 80,
                   imageUrl: [
-                     "/images/topSelling/3/navy_1.png",
-                     "/images/topSelling/3/navy_2.png",
-                     "/images/topSelling/3/navy_3.png",
+                     "/images/topSelling/3.png",
+                     "/images/topSelling/3.png",
+                     "/images/topSelling/3.png",
                   ],
                   stockQuantity: 100,
                },
@@ -468,15 +468,15 @@ async function up() {
          productVariantOptions: {
             create: [
                {
-                  colorId: 5,
+                  colorId: 8,
                   sizes: {
                      connect: [{ id: 1 }, { id: 3 }, { id: 4 }, { id: 5 }],
                   },
                   price: 210,
                   imageUrl: [
-                     "/images/topSelling/4/blue_1.png",
-                     "/images/topSelling/4/blue_2.png",
-                     "/images/topSelling/4/blue_3.png",
+                     "/images/topSelling/4.png",
+                     "/images/topSelling/4.png",
+                     "/images/topSelling/4.png",
                   ],
                   stockQuantity: 100,
                },
@@ -711,7 +711,7 @@ async function up() {
    await prisma.review.create({
       data: {
          rating: 5,
-         text: "Amazing product, highly recommend!",
+         text: "Amazing product",
          author: {
             connect: { id: 1 },
          },
@@ -727,7 +727,7 @@ async function up() {
    await prisma.review.create({
       data: {
          rating: 5,
-         text: "Amazing product, highly recommend!",
+         text: "Highly recommend!",
          author: {
             connect: { id: 1 },
          },

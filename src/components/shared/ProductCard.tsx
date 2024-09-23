@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { StarRating } from "./StarRating";
+import { productCategories } from "../../../prisma/products";
 
 interface Props {
    id: number;
@@ -32,16 +33,16 @@ export const ProductCard: React.FC<Props> = ({
          <h4 className="text-md font-bold leading-22 md:text-lg md:leading-27">
             {name}
          </h4>
-         <div className="mb-1 flex items-center md:mb-2">
+         <div className="mb-1 flex items-center gap-2 md:mb-2">
             <StarRating rating={rating} />
             <p className="leading-20">{rating}/5</p>
          </div>
          <div className="flex gap-2 text-lg font-bold leading-27 md:text-xl">
             <p>${price}</p>
-            {oldPrice !== 0 && (
+            {discountPercentage > 0 && (
                <p className="line-through opacity-40">${oldPrice}</p>
             )}
-            {oldPrice !== 0 && (
+            {discountPercentage > 0 && (
                <div className="rounded-[62px] bg-[#FF33331A]/10 px-[14px] py-[6px] text-[10px] font-medium leading-[14px] text-[#FF3333] md:text-xs md:leading-[16px]">
                   -{discountPercentage.toFixed(0)}%
                </div>

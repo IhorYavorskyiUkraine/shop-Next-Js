@@ -1,5 +1,5 @@
-import { BrandIcons } from "@/components/shared/BrandIcons";
-import { NumberTable } from "@/components/shared/NumberTable";
+import { BrandIcons } from "@/app/(home)/components/BrandIcons";
+import { NumberTable } from "@/app/(home)/components/NumberTable";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Title } from "@/components/ui/title";

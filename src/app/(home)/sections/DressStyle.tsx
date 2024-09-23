@@ -1,4 +1,4 @@
-import { DressStyleCard } from "@/components/shared/DressStyleCard";
+import { DressStyleCard } from "@/app/(home)/components/DressStyleCard";
 import { Container } from "@/components/ui/container";
 import { Title } from "@/components/ui/title";
 
