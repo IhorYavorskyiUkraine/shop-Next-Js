@@ -3,6 +3,7 @@ import { Title } from "@/components/ui/title";
 import { SelectColor } from "./SelectColor";
 import { ProductWithOptions } from "@/@types/ProductWithOptions";
 import { SelectSize } from "./SelectSize";
+import { ProductAddToCart } from "./ProductAddToCart";
 
 interface Props {
    product: ProductWithOptions;
@@ -32,18 +33,19 @@ export const ProductAbout: React.FC<Props> = ({ product }) => {
                <p className="line-through opacity-40">${oldPrice}</p>
             )}
             {discountPercentage > 0 && (
-               <div className="rounded-[62px] bg-[#FF33331A]/10 px-[14px] py-[6px] font-medium leading-[14px] text-[#FF3333] md:text-md md:leading-[16px]">
+               <div className="rounded-[62px] bg-[#FF33331A]/10 px-[14px] py-[6px] text-sm font-medium leading-[14px] text-[#FF3333] md:text-md md:leading-[16px]">
                   -{discountPercentage.toFixed(0)}%
                </div>
             )}
          </div>
          {product.description && (
-            <p className="border-b-[1px] border-black/10 pb-6 pt-4 leading-20 opacity-60 md:text-md md:leading-22">
+            <p className="border-b-[1px] border-black/10 pb-3 leading-20 opacity-60 md:text-md md:leading-22">
                {product.description}
             </p>
          )}
          <SelectColor product={product} />
          <SelectSize product={product} />
+         <ProductAddToCart />
       </div>
    );
 };

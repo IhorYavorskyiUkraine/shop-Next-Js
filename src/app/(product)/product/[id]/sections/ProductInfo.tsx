@@ -11,14 +11,21 @@ interface Props {
 }
 
 export const ProductInfo: React.FC<Props> = ({ product }) => {
-   const [variant, setVariant] = useProductStore(state => [
-      state.variant,
-      state.setVariant,
-   ]);
+   const [variant, setVariant, setColor, setSize, setQuantity] =
+      useProductStore(state => [
+         state.variant,
+         state.setVariant,
+         state.setColor,
+         state.setSize,
+         state.setQuantity,
+      ]);
 
    useEffect(() => {
       if (product.productVariantOptions.length > 0) {
          setVariant(product.productVariantOptions[0]);
+         setColor(product.productVariantOptions[0].colorId);
+         setSize(product.productVariantOptions[0].sizes[0].size);
+         setQuantity(0);
       }
    }, []);
 

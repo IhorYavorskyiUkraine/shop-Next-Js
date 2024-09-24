@@ -2,6 +2,7 @@ import { Container } from "@/components/ui/container";
 import { prisma } from "../../../../../prisma/PrismaClient";
 import { BreadCrumb } from "@/components/shared/BreadCrumb";
 import { ProductInfo } from "@/app/(product)/product/[id]/sections/ProductInfo";
+import { ProductTabs } from "./sections/ProductTabs";
 
 interface Props {
    params: {
@@ -18,6 +19,8 @@ const ProductPage = async ({ params: { id } }: Props) => {
                sizes: true,
             },
          },
+         productDetails: true,
+         reviews: true,
       },
    });
 
@@ -29,7 +32,7 @@ const ProductPage = async ({ params: { id } }: Props) => {
       <Container>
          <BreadCrumb name={product.name} />
          <ProductInfo product={product} />
-         {/* <ProductTabs /> */}
+         <ProductTabs product={product} />
       </Container>
    );
 };

@@ -11,9 +11,13 @@ export const ProductImage: React.FC<Props> = ({ imageUrls }) => {
    const [image, setImage] = useState(0);
 
    return (
-      <div className="items-center justify-between md:flex md:flex-row-reverse">
+      <div className="mb-5 items-center justify-between md:mb-0 md:flex md:flex-row-reverse">
          <div className="relative flex h-[280px] w-full justify-center rounded-[20px] bg-[#F0EEED] md:h-[530px] md:w-[444px]">
-            <img className="absolute h-full" src={imageUrls[image]} alt={""} />
+            <img
+               className="absolute h-full md:w-full"
+               src={imageUrls[image]}
+               alt={""}
+            />
          </div>
          <div className="mt-3 grid grid-cols-3 gap-3 md:grid-cols-1 md:grid-rows-3 md:gap-[14px]">
             {imageUrls.map((url: string, index) => (

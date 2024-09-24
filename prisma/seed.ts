@@ -7,6 +7,7 @@ import {
    dressStyle,
    sizes,
 } from "./products";
+import { Prisma } from "@prisma/client";
 
 const randomPrice = (min: number, max: number) => {
    return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10;
@@ -78,6 +79,22 @@ async function up() {
                },
             ],
          },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
       },
    });
 
@@ -119,6 +136,26 @@ async function up() {
                      "/images/newArrivals/3/3_blue.png",
                   ],
                   stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "Cotton",
+               },
+               {
+                  name: "Color",
+                  value: "Red and Blue",
+               },
+               {
+                  name: "Fit",
+                  value: "Regular",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold.",
                },
             ],
          },
@@ -164,6 +201,26 @@ async function up() {
                      "/images/newArrivals/4/4_red.png",
                   ],
                   stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "Polyester",
+               },
+               {
+                  name: "Color",
+                  value: "Orange and Red Striped",
+               },
+               {
+                  name: "Fit",
+                  value: "Slim Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold.",
                },
             ],
          },
@@ -213,6 +270,26 @@ async function up() {
                },
             ],
          },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "Cotton",
+               },
+               {
+                  name: "Color Options",
+                  value: "Navy, Gray",
+               },
+               {
+                  name: "Fit",
+                  value: "Regular Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low.",
+               },
+            ],
+         },
       },
    });
 
@@ -258,6 +335,26 @@ async function up() {
                },
             ],
          },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "100% Cotton",
+               },
+               {
+                  name: "Color Options",
+                  value: "White, Gray",
+               },
+               {
+                  name: "Fit",
+                  value: "Regular Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold. Do not bleach.",
+               },
+            ],
+         },
       },
    });
 
@@ -300,6 +397,26 @@ async function up() {
                      "/images/newArrivals/7/7_gray.png",
                   ],
                   stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "Pique Cotton",
+               },
+               {
+                  name: "Color Options",
+                  value: "Pink, Gray",
+               },
+               {
+                  name: "Fit",
+                  value: "Classic Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold. Tumble dry low.",
                },
             ],
          },
@@ -349,6 +466,26 @@ async function up() {
                },
             ],
          },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "100% Cotton",
+               },
+               {
+                  name: "Color Options",
+                  value: "Gray, Black",
+               },
+               {
+                  name: "Fit",
+                  value: "Regular Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold. Do not iron.",
+               },
+            ],
+         },
       },
    });
 
@@ -383,6 +520,26 @@ async function up() {
                      "/images/topSelling/1.png",
                   ],
                   stockQuantity: 100,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "Cotton Blend",
+               },
+               {
+                  name: "Color Options",
+                  value: "Vertical Stripes in Blue and White",
+               },
+               {
+                  name: "Fit",
+                  value: "Slim Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Hand wash or machine wash cold.",
                },
             ],
          },
@@ -422,6 +579,26 @@ async function up() {
                },
             ],
          },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "100% Cotton",
+               },
+               {
+                  name: "Print Type",
+                  value: "Screen Printed",
+               },
+               {
+                  name: "Fit",
+                  value: "Regular Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, do not bleach.",
+               },
+            ],
+         },
       },
    });
 
@@ -452,6 +629,26 @@ async function up() {
                },
             ],
          },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "Cotton Blend",
+               },
+               {
+                  name: "Length",
+                  value: "Knee-Length",
+               },
+               {
+                  name: "Fit",
+                  value: "Loose Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low.",
+               },
+            ],
+         },
       },
    });
 
@@ -479,6 +676,26 @@ async function up() {
                      "/images/topSelling/4.png",
                   ],
                   stockQuantity: 100,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Spandex",
+               },
+               {
+                  name: "Fit",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Wash",
+                  value: "Faded Wash",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, do not iron.",
                },
             ],
          },
@@ -544,6 +761,26 @@ async function up() {
                },
             ],
          },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "100% Cotton",
+               },
+               {
+                  name: "Neckline",
+                  value: "Round Neck",
+               },
+               {
+                  name: "Sleeve Style",
+                  value: "Short Sleeve",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, do not bleach.",
+               },
+            ],
+         },
       },
    });
 
@@ -594,6 +831,26 @@ async function up() {
                },
             ],
          },
+         productDetails: {
+            create: [
+               {
+                  name: "Fit",
+                  value: "Skinny",
+               },
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Closure Type",
+                  value: "Zipper",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low.",
+               },
+            ],
+         },
       },
    });
 
@@ -635,6 +892,26 @@ async function up() {
                      "/images/newArrivals/3/3_blue.png",
                   ],
                   stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Pattern",
+                  value: "Checkered",
+               },
+               {
+                  name: "Material",
+                  value: "100% Cotton",
+               },
+               {
+                  name: "Fit",
+                  value: "Regular Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low.",
                },
             ],
          },
@@ -680,6 +957,26 @@ async function up() {
                      "/images/newArrivals/4/4_red.png",
                   ],
                   stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Style",
+                  value: "Striped",
+               },
+               {
+                  name: "Material",
+                  value: "Polyester Blend",
+               },
+               {
+                  name: "Sleeve Length",
+                  value: "Short Sleeve",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash warm, do not bleach.",
                },
             ],
          },

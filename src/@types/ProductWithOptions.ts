@@ -15,3 +15,16 @@ export interface ProductWithOptions {
    categoryId: number | null;
    productVariantOptions: ProductVariantOption[];
 }
+
+export interface ProductVariantOptionWithSizes {
+   id: number;
+   productId: number;
+   colorId: number;
+   price: number;
+   oldPrice: number | null;
+   imageUrl: string[];
+   stockQuantity: number;
+   createdAt: Date;
+   updatedAt: Date;
+   sizes: { id: number; size: string }[];
+}
