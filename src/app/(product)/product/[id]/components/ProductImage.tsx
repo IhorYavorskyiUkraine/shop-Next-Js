@@ -1,13 +1,10 @@
-"use client";
-
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { useProductStore } from "../store";
 
-interface Props {
-   imageUrls: string[];
-}
+export const ProductImage: React.FC = () => {
+   const [variant] = useProductStore(state => [state.variant]);
 
-export const ProductImage: React.FC<Props> = ({ imageUrls }) => {
    const [image, setImage] = useState(0);
 
    return (
@@ -15,12 +12,12 @@ export const ProductImage: React.FC<Props> = ({ imageUrls }) => {
          <div className="relative flex h-[280px] w-full justify-center rounded-[20px] bg-[#F0EEED] md:h-[530px] md:w-[444px]">
             <img
                className="absolute h-full md:w-full"
-               src={imageUrls[image]}
+               src={variant?.imageUrl[image]}
                alt={""}
             />
          </div>
          <div className="mt-3 grid grid-cols-3 gap-3 md:grid-cols-1 md:grid-rows-3 md:gap-[14px]">
-            {imageUrls.map((url: string, index) => (
+            {variant?.imageUrl.map((url: string, index) => (
                <div
                   className={cn(
                      index === image && "border-[1px]",

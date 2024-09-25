@@ -6,7 +6,7 @@ import { Title } from "@/components/ui/title";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { useProductStore } from "./store";
-import { SkeletonProductCard } from "@/components/shared/SkeletonProductCard";
+import { Skeleton } from "@/components/shared/Skeleton";
 
 interface Props {
    title: string;
@@ -51,7 +51,7 @@ export const ProductsWithCategories: React.FC<Props> = ({
                <div className="flex gap-4 overflow-x-scroll md:flex-wrap md:justify-center md:gap-3 md:overflow-x-hidden md:overflow-y-hidden">
                   {loading
                      ? Array.from({ length: limit }).map((_, index) => (
-                          <SkeletonProductCard key={index} />
+                          <Skeleton productCard key={index} />
                        ))
                      : products.map((product, index) => (
                           <ProductCard

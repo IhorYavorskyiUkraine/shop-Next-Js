@@ -1,8 +1,11 @@
+"use client";
+
 import { Container } from "@/components/ui/container";
-import { prisma } from "../../../../../prisma/PrismaClient";
 import { BreadCrumb } from "@/components/shared/BreadCrumb";
 import { ProductInfo } from "@/app/(product)/product/[id]/sections/ProductInfo";
 import { ProductTabs } from "./sections/ProductTabs";
+import { useProductStore } from "./store";
+import { useEffect } from "react";
 
 interface Props {
    params: {
@@ -10,29 +13,18 @@ interface Props {
    };
 }
 
-const ProductPage = async ({ params: { id } }: Props) => {
-   const product = await prisma.product.findFirst({
-      where: { id: Number(id) },
-      include: {
-         productVariantOptions: {
-            include: {
-               sizes: true,
-            },
-         },
-         productDetails: true,
-         reviews: true,
-      },
-   });
+const ProductPage = ({ params: { id } }: Props) => {
+   const [fetchProduct] = useProductStore(state => [state.fetchProduct]);
 
-   if (!product) {
-      return <p>Product not found</p>;
-   }
+   useEffect(() => {
+      fetchProduct({ id: Number(id) });
+   }, [id]);
 
    return (
       <Container>
-         <BreadCrumb name={product.name} />
-         <ProductInfo product={product} />
-         <ProductTabs product={product} />
+         <BreadCrumb />
+         <ProductInfo />
+         <ProductTabs />
       </Container>
    );
 };

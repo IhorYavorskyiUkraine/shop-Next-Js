@@ -1,6 +1,10 @@
 import { ProductVariantOption } from "@prisma/client";
 
-export interface ProductWithOptions {
+export interface ProductVariantWithSizes extends ProductVariantOption {
+   sizes: { id: number; size: string }[];
+}
+
+export interface ProductWithRelations {
    id: number;
    name: string;
    description: string | null;
@@ -13,18 +17,22 @@ export interface ProductWithOptions {
    createdAt: Date;
    updatedAt: Date;
    categoryId: number | null;
-   productVariantOptions: ProductVariantOption[];
-}
-
-export interface ProductVariantOptionWithSizes {
-   id: number;
-   productId: number;
-   colorId: number;
-   price: number;
-   oldPrice: number | null;
-   imageUrl: string[];
-   stockQuantity: number;
-   createdAt: Date;
-   updatedAt: Date;
-   sizes: { id: number; size: string }[];
+   productVariantOptions: ProductVariantWithSizes[];
+   productDetails: {
+      name: string;
+      value: string;
+   }[];
+   reviews: {
+      id: number;
+      author: {
+         fullName: string;
+      };
+      rating: number;
+      text: string;
+      createdAt: Date;
+      purchase: {
+         productId: number;
+         createdAt: Date;
+      } | null;
+   }[];
 }

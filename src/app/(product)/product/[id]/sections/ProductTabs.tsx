@@ -1,20 +1,20 @@
-"use client";
-
-import { Product } from "@prisma/client";
 import { useState } from "react";
 import { ProductDetailsTab } from "../components/ProductDetailsTab";
 import { ProductReviewsTab } from "../components/ProductReviewsTab";
 import { ProductFaqTab } from "../components/ProductFaqTab";
 import { cn } from "@/lib/utils";
+import { useProductStore } from "../store";
 
-interface Props {
-   product: Product;
-}
+export const ProductTabs: React.FC = () => {
+   const [product] = useProductStore(state => [state.product]);
 
-export const ProductTabs: React.FC<Props> = ({ product }) => {
    const [activeTab, setActiveTab] = useState(1);
 
    const tabs = ["Product Details", "Rating & Reviews", "FAQs"];
+
+   if (!product) {
+      return null;
+   }
 
    return (
       <section>

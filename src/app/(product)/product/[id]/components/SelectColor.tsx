@@ -1,22 +1,26 @@
 "use client";
 
-import { ProductWithOptions } from "@/@types/ProductWithOptions";
+import { ProductVariantWithSizes } from "@/@types/ProductWithOptions";
 import { colors } from "../../../../../../prisma/products";
 import { useProductStore } from "../store";
 import { Check } from "lucide-react";
 
-interface Props {
-   product: ProductWithOptions;
-}
-
-export const SelectColor: React.FC<Props> = ({ product }) => {
-   const [setVariant, variant, setColor] = useProductStore(state => [
+export const SelectColor: React.FC = () => {
+   const [product, setVariant, variant, setColor] = useProductStore(state => [
+      state.product,
       state.setVariant,
       state.variant,
       state.setColor,
    ]);
 
-   const onItemClick = (option, color) => {
+   if (!product) {
+      return null;
+   }
+
+   const onItemClick = (
+      option: ProductVariantWithSizes,
+      color: { id: number; color: string },
+   ) => {
       setVariant(option);
       setColor(color.color);
    };
@@ -29,10 +33,15 @@ export const SelectColor: React.FC<Props> = ({ product }) => {
          <div className="flex gap-4">
             {product.productVariantOptions.map(option => {
                const color = colors.find(c => c.id === option.colorId);
+
+               const safeColor = color
+                  ? color
+                  : { id: -1, color: "transparent" };
+
                return (
                   <button
                      onClick={() => {
-                        onItemClick(option, color);
+                        onItemClick(option, safeColor);
                      }}
                      key={option.colorId}
                      style={{

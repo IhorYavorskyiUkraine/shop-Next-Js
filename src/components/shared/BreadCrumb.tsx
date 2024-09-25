@@ -1,3 +1,4 @@
+import { useProductStore } from "@/app/(product)/product/[id]/store";
 import {
    Breadcrumb,
    BreadcrumbItem,
@@ -7,11 +8,9 @@ import {
    BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-interface Props {
-   name: string;
-}
+export const BreadCrumb: React.FC = () => {
+   const [product] = useProductStore(state => [state.product]);
 
-export const BreadCrumb: React.FC<Props> = ({ name }) => {
    return (
       <Breadcrumb>
          <BreadcrumbList className="border-t-[1px] border-black/10 py-5 md:py-8 md:text-md">
@@ -22,7 +21,7 @@ export const BreadCrumb: React.FC<Props> = ({ name }) => {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-               <BreadcrumbPage>{name}</BreadcrumbPage>
+               <BreadcrumbPage>{product?.name}</BreadcrumbPage>
             </BreadcrumbItem>
          </BreadcrumbList>
       </Breadcrumb>

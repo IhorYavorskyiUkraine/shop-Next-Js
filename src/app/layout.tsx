@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import "./globals.css";
+import NextTopLoader from "nextjs-toploader";
 
 export default function RootLayout({
    children,
@@ -8,7 +8,10 @@ export default function RootLayout({
 }>) {
    return (
       <html lang="en">
-         <body>{children}</body>
+         <body>
+            <NextTopLoader showSpinner={false} zIndex={1000} />
+            {children}
+         </body>
       </html>
    );
 }

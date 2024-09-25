@@ -1,7 +1,7 @@
-import { Product } from "@prisma/client";
+import { ProductWithRelations } from "@/@types/ProductWithOptions";
 
 interface Props {
-   product: Product;
+   product: ProductWithRelations;
 }
 
 type Detail = {

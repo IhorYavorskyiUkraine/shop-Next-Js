@@ -1,15 +1,20 @@
+"use client";
+
 import { StarRating } from "@/components/shared/StarRating";
 import { Title } from "@/components/ui/title";
 import { SelectColor } from "./SelectColor";
-import { ProductWithOptions } from "@/@types/ProductWithOptions";
 import { SelectSize } from "./SelectSize";
 import { ProductAddToCart } from "./ProductAddToCart";
+import { ProductWithRelations } from "@/@types/ProductWithOptions";
+import { useProductStore } from "../store";
 
-interface Props {
-   product: ProductWithOptions;
-}
+export const ProductAbout: React.FC = () => {
+   const [product] = useProductStore(state => [state.product]);
 
-export const ProductAbout: React.FC<Props> = ({ product }) => {
+   if (!product) {
+      return null;
+   }
+
    const { price, oldPrice } = product;
 
    const discountPercentage = oldPrice
@@ -43,8 +48,8 @@ export const ProductAbout: React.FC<Props> = ({ product }) => {
                {product.description}
             </p>
          )}
-         <SelectColor product={product} />
-         <SelectSize product={product} />
+         <SelectColor />
+         <SelectSize />
          <ProductAddToCart />
       </div>
    );

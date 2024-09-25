@@ -1,25 +1,32 @@
-import {
-   ProductVariantOptionWithSizes,
-   ProductWithOptions,
-} from "@/@types/ProductWithOptions";
 import { useProductStore } from "../store";
 import { sizes } from "../../../../../../prisma/products";
 import { cn } from "@/lib/utils";
+import { useEffect } from "react";
 
-interface Props {
-   product: ProductWithOptions;
-}
-
-export const SelectSize: React.FC<Props> = ({ product }) => {
-   const [variant, setSize, size] = useProductStore(state => [
+export const SelectSize: React.FC = () => {
+   const [product, variant, setSize, size] = useProductStore(state => [
+      state.product,
       state.variant,
       state.setSize,
       state.size,
    ]);
 
+   if (!product) {
+      return null;
+   }
+
    const activeVariant = product.productVariantOptions.find(
       option => option.colorId === variant?.colorId,
-   ) as ProductVariantOptionWithSizes;
+   );
+
+   useEffect(() => {
+      if (activeVariant?.sizes.length) {
+         const newSize = activeVariant.sizes.find(s => s.size === size)
+            ? size
+            : activeVariant.sizes[0].size;
+         setSize(newSize);
+      }
+   }, [activeVariant, size, setSize]);
 
    if (!activeVariant) {
       return null;
