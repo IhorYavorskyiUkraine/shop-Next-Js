@@ -59,7 +59,10 @@ export const Menu: React.FC = () => {
                      <NavigationMenu>
                         <NavigationMenuList>
                            <NavigationMenuItem>
-                              <NavigationMenuTrigger className="text-md leading-22">
+                              <NavigationMenuTrigger
+                                 arrow
+                                 className="text-md leading-22"
+                              >
                                  {item.name}
                               </NavigationMenuTrigger>
                               <NavigationMenuContent className="border-none bg-white">

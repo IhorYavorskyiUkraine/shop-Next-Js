@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { Skeleton as SkeletonBar } from "../ui/skeleton";
 
 type Props = {
@@ -5,6 +6,7 @@ type Props = {
    comment?: boolean;
    productImages?: boolean;
    productInfo?: boolean;
+   reviewDate?: boolean;
 };
 
 export const Skeleton: React.FC<Props> = ({
@@ -12,6 +14,7 @@ export const Skeleton: React.FC<Props> = ({
    comment,
    productImages,
    productInfo,
+   reviewDate,
 }) => {
    if (productCard) {
       return (
@@ -25,7 +28,20 @@ export const Skeleton: React.FC<Props> = ({
          </div>
       );
    } else if (comment) {
-      return <h1></h1>;
+      return (
+         <div className="rounded-[20px] border border-black/10 p-6">
+            <div className={cn(reviewDate && "flex justify-between", "mb-2")}>
+               <SkeletonBar className="h-4 w-[120px] bg-black/5" />
+               {reviewDate && <SkeletonBar className="h-2 w-5 bg-black/5" />}
+            </div>
+            <div className="mb-2 flex items-center gap-1 md:mb-2 md:text-lg">
+               <SkeletonBar className="h-4 w-[80px] bg-black/5" />
+               <SkeletonBar className="h-4 w-4 rounded-full bg-black/5" />
+            </div>
+            <SkeletonBar className="mb-2 h-12 w-full bg-black/5" />
+            <SkeletonBar className="h-5 w-[200px] bg-black/5" />
+         </div>
+      );
    } else if (productImages) {
       return (
          <div className="mb-5 items-center justify-between md:mb-0 md:flex md:flex-row-reverse">
@@ -41,6 +57,6 @@ export const Skeleton: React.FC<Props> = ({
          </div>
       );
    } else if (productInfo) {
-      return <h1></h1>;
+      return <div></div>;
    }
 };

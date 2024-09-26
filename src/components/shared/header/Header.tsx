@@ -1,4 +1,6 @@
-import { CircleUserRound, Search, ShoppingCart } from "lucide-react";
+"use client";
+
+import { ShoppingCart } from "lucide-react";
 import { Container } from "../../ui/container";
 import Link from "next/link";
 import { Burger } from "./components/Burger";
@@ -6,12 +8,19 @@ import { Menu } from "./components/Menu";
 import { TopBanner } from "../TopBanner";
 import { SearchInput } from "./components/SearchInput";
 import { SearchInputMobile } from "./components/SearchInputMobile";
+import { useSession, signIn } from "next-auth/react";
+import { AuthModal } from "./components/authModal/AuthModal";
+import { useState } from "react";
 
 export const Header: React.FC = () => {
+   const [openAuthModal, setOpenAuthModal] = useState(false);
+
+   const { data: session, status } = useSession();
+
    return (
       <>
          {/* TODO: remove if signed in */}
-         <TopBanner />
+         {status === "unauthenticated" && <TopBanner />}
          {/* TODO: remove if signed in */}
          <header className="z-50 bg-white py-[22px]">
             <Container className="flex items-center">
@@ -31,9 +40,10 @@ export const Header: React.FC = () => {
                   <Link href="/cart">
                      <ShoppingCart color={"#000"} size={20} />
                   </Link>
-                  <Link href="/account">
-                     <CircleUserRound color={"#000"} size={20} />
-                  </Link>
+                  <AuthModal
+                     open={openAuthModal}
+                     onClose={() => setOpenAuthModal(false)}
+                  />
                </div>
             </Container>
          </header>

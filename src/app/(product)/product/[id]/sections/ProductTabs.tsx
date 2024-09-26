@@ -40,7 +40,7 @@ export const ProductTabs: React.FC = () => {
             ))}
          </div>
          {activeTab === 0 && <ProductDetailsTab product={product} />}
-         {activeTab === 1 && <ProductReviewsTab product={product} />}
+         {activeTab === 1 && <ProductReviewsTab />}
          {activeTab === 2 && <ProductFaqTab />}
       </section>
    );

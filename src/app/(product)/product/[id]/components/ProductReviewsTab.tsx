@@ -1,12 +1,32 @@
+"use client";
+
 import { ReviewCard } from "@/components/shared/ReviewCard";
 import { ProductReviewsTabOptions } from "./ProductReviewsTabOptions";
-import { ProductWithRelations } from "@/@types/ProductWithOptions";
+import { useProductStore } from "../store";
+import { useEffect, useState } from "react";
+import { Skeleton } from "@/components/shared/Skeleton";
+import { Review } from "@/@types/Author";
 
-interface Props {
-   product: ProductWithRelations;
-}
+export const ProductReviewsTab: React.FC = () => {
+   const [product, fetchReviews, reviews, loading] = useProductStore(state => [
+      state.product,
+      state.fetchReviews,
+      state.reviews,
+      state.loading,
+   ]);
 
-export const ProductReviewsTab: React.FC<Props> = ({ product }) => {
+   const [orderBy, setOrderBy] = useState("desc");
+
+   if (!product || !reviews) {
+      return null;
+   }
+
+   useEffect(() => {
+      if (product?.id) {
+         fetchReviews({ id: product.id, orderBy });
+      }
+   }, [orderBy]);
+
    function formatCreatedAt(createdAt: Date) {
       const date = new Date(createdAt);
 
@@ -27,26 +47,30 @@ export const ProductReviewsTab: React.FC<Props> = ({ product }) => {
 
    return (
       <section className="py-6">
-         <div className="flex justify-between">
+         <div className="flex items-center justify-between pb-6">
             <h2 className="relative mb-2 inline-block text-lg font-bold md:mb-4 md:text-xl">
                All Reviews
                <span className="absolute -right-5 bottom-0 text-sm leading-22 opacity-60">
-                  ({product.reviews.length})
+                  ({reviews.length})
                </span>
             </h2>
-            <ProductReviewsTabOptions />
+            <ProductReviewsTabOptions setOrderBy={setOrderBy} />
          </div>
          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {product.reviews?.map(review => (
-               <ReviewCard
-                  key={review.id}
-                  name={review.author.fullName}
-                  rating={review.rating}
-                  text={review.text}
-                  checked={review.purchase?.productId === product.id}
-                  reviewDate={formatCreatedAt(review.createdAt)}
-               />
-            ))}
+            {loading
+               ? Array.from({ length: 3 }).map((_, index) => (
+                    <Skeleton key={index} comment reviewDate />
+                 ))
+               : reviews.map((review: Review) => (
+                    <ReviewCard
+                       key={review.id}
+                       name={review.author.fullName}
+                       rating={review.rating}
+                       text={review.text}
+                       checked={review.purchase?.productId === product.id}
+                       reviewDate={formatCreatedAt(review.createdAt)}
+                    />
+                 ))}
          </div>
       </section>
    );
