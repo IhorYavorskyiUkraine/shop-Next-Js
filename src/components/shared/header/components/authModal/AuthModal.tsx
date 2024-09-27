@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
-import { CircleUserRound } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
-import { Login } from "./forms/login";
+import { Login } from "./forms/Login";
+import { Register } from "./forms/Register";
 
 interface Props {
    open: boolean;
@@ -22,26 +22,19 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
       onClose();
    };
    return (
-      <Dialog onOpenChange={handleClose}>
-         <DialogTrigger>
-            <CircleUserRound
-               className="cursor-pointer"
-               color={"#000"}
-               size={20}
-            />
-         </DialogTrigger>
-         <DialogContent className="bg-[#F0F0F0]">
+      <Dialog open={open} onOpenChange={handleClose}>
+         <DialogContent className="bg-white">
             {type === "login" ? (
                <Login onClose={handleClose} />
             ) : (
-               <h1>Register</h1>
+               <Register onClose={handleClose} />
             )}
 
             <div className="flex gap-2 p-6">
                <Button
                   onClick={() =>
                      signIn("github", {
-                        callbackUrl: "/",
+                        callbackUrl: "/home",
                         redirect: true,
                      })
                   }
@@ -57,7 +50,7 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
                <Button
                   onClick={() =>
                      signIn("google", {
-                        callbackUrl: "/",
+                        callbackUrl: "/home",
                         redirect: true,
                      })
                   }
@@ -71,7 +64,7 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
                   Google
                </Button>
             </div>
-            <Button onClick={onSwitch}>
+            <Button variant="black" onClick={onSwitch}>
                {type === "login" ? "Register" : "Login"}
             </Button>
          </DialogContent>

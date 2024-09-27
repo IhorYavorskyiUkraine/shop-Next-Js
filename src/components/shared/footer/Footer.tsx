@@ -82,7 +82,7 @@ export const Footer: React.FC = () => {
             <div className="border-b-[1px] border-black/10 pb-10 md:flex md:justify-between md:gap-[110px] md:pb-[50px]">
                <div className="mb-8 md:mb-0 md:max-w-[250px]">
                   <Link
-                     href="/"
+                     href="/home"
                      className="mb-1 inline-block max-w-[160px] flex-1 font-integral-b text-[26px] font-bold uppercase leading-30 md:mb-2"
                   >
                      shop.co

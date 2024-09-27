@@ -1,11 +1,11 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { formLoginSchema, TFormLoginValues } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
-import { FormInput } from "../input";
+import { InputWithValidations } from "@/components/shared/InputWithValidations";
+import { Mail, Lock } from "lucide-react";
 
 type Props = {
    onClose: () => void;
@@ -31,14 +31,14 @@ export const Login: React.FC<Props> = ({ onClose }) => {
             throw Error();
          }
 
-         toast.success("Вы успешно вошли в аккаунт", {
+         toast.success("You have logged in successfully", {
             icon: "✅",
          });
 
          onClose?.();
       } catch (error) {
          console.error("Error [LOGIN]", error);
-         toast.error("Не удалось войти в аккаунт", {
+         toast.error("Unable to login", {
             icon: "❌",
          });
       }
@@ -50,9 +50,20 @@ export const Login: React.FC<Props> = ({ onClose }) => {
             className="flex flex-col gap-2"
             onSubmit={form.handleSubmit(onSubmit)}
          >
-            <FormInput name="email" label="E-Mail" />
-            <FormInput name="email" label="E-Mail" />
-
+            <InputWithValidations
+               icon={<Mail size={20} />}
+               name="email"
+               label="E-Mail"
+               required
+            />
+            <InputWithValidations
+               icon={<Lock size={20} />}
+               name="password"
+               label="Password"
+               type="password"
+               required
+               className="mb-2"
+            />
             <Button disabled={form.formState.isSubmitting} type="submit">
                Login
             </Button>

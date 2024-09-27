@@ -1016,6 +1016,17 @@ async function up() {
       },
    });
 
+   await prisma.purchase.create({
+      data: {
+         user: {
+            connect: { id: 1 },
+         },
+         product: {
+            connect: { id: 1 },
+         },
+      },
+   });
+
    await prisma.review.create({
       data: {
          rating: 5,
@@ -1060,6 +1071,22 @@ async function up() {
          },
          purchase: {
             connect: { id: 2 },
+         },
+      },
+   });
+
+   await prisma.review.create({
+      data: {
+         rating: 5,
+         text: "Amazing product",
+         author: {
+            connect: { id: 1 },
+         },
+         product: {
+            connect: { id: 1 },
+         },
+         purchase: {
+            connect: { id: 4 },
          },
       },
    });

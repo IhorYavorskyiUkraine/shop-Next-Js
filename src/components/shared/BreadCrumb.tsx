@@ -15,7 +15,7 @@ export const BreadCrumb: React.FC = () => {
       <Breadcrumb>
          <BreadcrumbList className="border-t-[1px] border-black/10 py-5 md:py-8 md:text-md">
             <BreadcrumbItem>
-               <BreadcrumbLink className="opacity-60" href="/">
+               <BreadcrumbLink className="opacity-60" href="/home">
                   Home
                </BreadcrumbLink>
             </BreadcrumbItem>
