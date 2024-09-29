@@ -1,11 +1,7 @@
-"use client";
-
-import { Container } from "@/components/ui/container";
-import { BreadCrumb } from "@/components/shared/BreadCrumb";
-import { ProductInfo } from "@/app/(product)/product/[id]/sections/ProductInfo";
-import { ProductTabs } from "./sections/ProductTabs";
-import { useProductStore } from "./store";
-import { useEffect } from "react";
+import { notFound } from "next/navigation";
+import { prisma } from "../../../../../prisma/PrismaClient";
+import { Hero } from "./sections/Hero";
+import { ProductWithRelations } from "@/@types/ProductWithOptions";
 
 interface Props {
    params: {
@@ -13,20 +9,39 @@ interface Props {
    };
 }
 
-const ProductPage = ({ params: { id } }: Props) => {
-   const [fetchProduct] = useProductStore(state => [state.fetchProduct]);
+const ProductPage = async ({ params: { id } }: Props) => {
+   try {
+      const product: ProductWithRelations | null =
+         await prisma.product.findFirst({
+            where: { id: Number(id) },
+            include: {
+               productVariantOptions: {
+                  include: {
+                     sizes: true,
+                  },
+               },
+               productDetails: true,
+               reviews: {
+                  include: {
+                     author: true,
+                     purchase: true,
+                  },
+                  orderBy: {
+                     createdAt: "desc",
+                  },
+               },
+            },
+         });
 
-   useEffect(() => {
-      fetchProduct({ id: Number(id) });
-   }, [id]);
+      if (!product) {
+         notFound();
+      }
 
-   return (
-      <Container>
-         <BreadCrumb />
-         <ProductInfo />
-         <ProductTabs />
-      </Container>
-   );
+      return <Hero product={product} />;
+   } catch (error) {
+      console.error("Error fetching product:", error);
+      return notFound();
+   }
 };
 
 export default ProductPage;

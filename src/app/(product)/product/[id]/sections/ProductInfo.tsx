@@ -1,19 +1,23 @@
-import { Skeleton } from "@/components/shared/Skeleton";
+"use client";
+
 import { ProductAbout } from "../components/ProductAbout";
 import { ProductImage } from "../components/ProductImage";
 import { useProductStore } from "../store";
 import { useEffect } from "react";
 
 export const ProductInfo: React.FC = () => {
-   const [product, setVariant, setColor, setSize, setQuantity, loading] =
+   const [product, setVariant, setColor, setSize, setQuantity] =
       useProductStore(state => [
          state.product,
          state.setVariant,
          state.setColor,
          state.setSize,
          state.setQuantity,
-         state.loading,
       ]);
+
+   if (!product) {
+      return;
+   }
 
    useEffect(() => {
       if (!product) {
@@ -30,9 +34,8 @@ export const ProductInfo: React.FC = () => {
 
    return (
       <div className="gap-10 md:grid md:grid-cols-[610px,_1fr]">
-         {/* TODO: Skeleton for both  */}
-         {loading ? <Skeleton productImages /> : <ProductImage />}
-         {loading ? <Skeleton /> : <ProductAbout />}
+         <ProductImage />
+         <ProductAbout product={product} />
       </div>
    );
 };

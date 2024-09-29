@@ -1,16 +1,15 @@
-"use client";
-
 import { StarRating } from "@/components/shared/StarRating";
 import { Title } from "@/components/ui/title";
 import { SelectColor } from "./SelectColor";
 import { SelectSize } from "./SelectSize";
 import { ProductAddToCart } from "./ProductAddToCart";
 import { ProductWithRelations } from "@/@types/ProductWithOptions";
-import { useProductStore } from "../store";
 
-export const ProductAbout: React.FC = () => {
-   const [product] = useProductStore(state => [state.product]);
+interface Props {
+   product: ProductWithRelations;
+}
 
+export const ProductAbout: React.FC<Props> = ({ product }) => {
    if (!product) {
       return null;
    }
@@ -24,7 +23,7 @@ export const ProductAbout: React.FC = () => {
    return (
       <div>
          <Title
-            className="md:md-4 mb-3 text-xl md:text-4xl md:leading-10"
+            className="mb-3 text-xl md:mb-4 md:text-4xl md:leading-10"
             size="lg"
             text={product?.name}
          />

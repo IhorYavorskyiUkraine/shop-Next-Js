@@ -4,15 +4,13 @@ import { ReviewCard } from "@/components/shared/ReviewCard";
 import { ProductReviewsTabOptions } from "./ProductReviewsTabOptions";
 import { useProductStore } from "../store";
 import { useEffect, useState } from "react";
-import { Skeleton } from "@/components/shared/Skeleton";
 import { Review } from "@/@types/Author";
 
 export const ProductReviewsTab: React.FC = () => {
-   const [product, fetchReviews, reviews, loading] = useProductStore(state => [
+   const [product, fetchReviews, reviews] = useProductStore(state => [
       state.product,
       state.fetchReviews,
       state.reviews,
-      state.loading,
    ]);
 
    const [orderBy, setOrderBy] = useState("desc");
@@ -57,20 +55,16 @@ export const ProductReviewsTab: React.FC = () => {
             <ProductReviewsTabOptions setOrderBy={setOrderBy} />
          </div>
          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {loading
-               ? Array.from({ length: 3 }).map((_, index) => (
-                    <Skeleton key={index} comment reviewDate />
-                 ))
-               : reviews.map((review: Review) => (
-                    <ReviewCard
-                       key={review.id}
-                       name={review.author.fullName}
-                       rating={review.rating}
-                       text={review.text}
-                       checked={review.purchase?.productId === product.id}
-                       reviewDate={formatCreatedAt(review.createdAt)}
-                    />
-                 ))}
+            {reviews.map((review: Review) => (
+               <ReviewCard
+                  key={review.id}
+                  name={review.author.fullName}
+                  rating={review.rating}
+                  text={review.text}
+                  checked={review.purchase?.productId === product.id}
+                  reviewDate={formatCreatedAt(review.createdAt)}
+               />
+            ))}
          </div>
       </section>
    );

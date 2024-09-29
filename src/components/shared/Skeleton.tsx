@@ -4,17 +4,17 @@ import { Skeleton as SkeletonBar } from "../ui/skeleton";
 type Props = {
    productCard?: boolean;
    comment?: boolean;
-   productImages?: boolean;
    productInfo?: boolean;
    reviewDate?: boolean;
+   productTabs?: boolean;
 };
 
 export const Skeleton: React.FC<Props> = ({
    productCard,
    comment,
-   productImages,
    productInfo,
    reviewDate,
+   productTabs,
 }) => {
    if (productCard) {
       return (
@@ -42,21 +42,63 @@ export const Skeleton: React.FC<Props> = ({
             <SkeletonBar className="h-5 w-[200px] bg-black/5" />
          </div>
       );
-   } else if (productImages) {
+   } else if (productInfo) {
       return (
-         <div className="mb-5 items-center justify-between md:mb-0 md:flex md:flex-row-reverse">
-            <SkeletonBar className="h-[280px] w-full rounded-[20px] bg-black/5 md:h-[530px] md:w-[444px]" />
-            <div className="mt-3 grid grid-cols-3 gap-3 md:grid-cols-1 md:grid-rows-3 md:gap-[14px]">
-               {Array.from({ length: 3 }).map((_, index) => (
-                  <SkeletonBar
+         <div className="gap-10 md:mb-5 md:grid md:grid-cols-[610px,_1fr]">
+            <div className="mb-5 items-center justify-between md:mb-0 md:flex md:flex-row-reverse">
+               <SkeletonBar className="h-[280px] w-full rounded-[20px] bg-black/5 md:h-[530px] md:w-[444px]" />
+               <div className="mt-3 grid grid-cols-3 gap-3 md:grid-cols-1 md:grid-rows-3 md:gap-[14px]">
+                  {Array.from({ length: 3 }).map((_, index) => (
+                     <SkeletonBar
+                        key={index}
+                        className="mb-1 h-[120px] w-[120px] rounded-[20px] bg-black/5 md:mb-2 md:h-[162px] md:w-[152px]"
+                     />
+                  ))}
+               </div>
+            </div>
+            <div>
+               <SkeletonBar className="mb-5 h-7 w-full bg-black/5 md:mb-6 md:h-12" />
+               <SkeletonBar className="mb-5 h-5 w-full bg-black/5 md:mb-4" />
+               <SkeletonBar className="mb-5 h-7 w-full bg-black/5 md:mb-4 md:h-10" />
+               <SkeletonBar className="mb-5 h-[100px] w-full bg-black/5 md:mb-9" />
+               <SkeletonBar className="mb-12 h-12 w-full bg-black/5" />
+               <SkeletonBar className="mb-5 h-12 w-full bg-black/5 md:mb-7" />
+               <SkeletonBar className="mb-5 h-12 w-full bg-black/5 md:mb-4" />
+            </div>
+         </div>
+      );
+   } else if (productTabs) {
+      return (
+         <div>
+            <SkeletonBar className="mb-5 h-7 w-full bg-black/5 md:mb-6 md:h-12" />
+            <SkeletonBar className="mb-12 h-7 w-full bg-black/5 md:mb-6 md:h-12" />
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+               {Array.from({ length: 6 }).map((_, index) => (
+                  <div
                      key={index}
-                     className="mb-1 rounded-[20px] bg-black/5 md:mb-2 md:h-[162px] md:w-[152px]"
-                  />
+                     className="rounded-[20px] border border-black/10 p-6"
+                  >
+                     <div
+                        className={cn(
+                           reviewDate && "flex justify-between",
+                           "mb-2",
+                        )}
+                     >
+                        <SkeletonBar className="h-4 w-[120px] bg-black/5" />
+                        {reviewDate && (
+                           <SkeletonBar className="h-2 w-5 bg-black/5" />
+                        )}
+                     </div>
+                     <div className="mb-2 flex items-center gap-1 md:mb-2 md:text-lg">
+                        <SkeletonBar className="h-4 w-[80px] bg-black/5" />
+                        <SkeletonBar className="h-4 w-4 rounded-full bg-black/5" />
+                     </div>
+                     <SkeletonBar className="mb-2 h-12 w-full bg-black/5" />
+                     <SkeletonBar className="h-5 w-[200px] bg-black/5" />
+                  </div>
                ))}
             </div>
          </div>
       );
-   } else if (productInfo) {
-      return <div></div>;
    }
 };

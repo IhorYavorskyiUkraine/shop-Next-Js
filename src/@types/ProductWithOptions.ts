@@ -4,6 +4,20 @@ export interface ProductVariantWithSizes extends ProductVariantOption {
    sizes: { id: number; size: string }[];
 }
 
+interface Review {
+   id: number;
+   author: {
+      fullName: string;
+   };
+   rating: number;
+   text: string;
+   createdAt: Date;
+   purchase: {
+      productId: number;
+      createdAt: Date; // Обязательно
+   } | null;
+}
+
 export interface ProductWithRelations {
    id: number;
    name: string;
@@ -32,7 +46,6 @@ export interface ProductWithRelations {
       createdAt: Date;
       purchase: {
          productId: number;
-         createdAt: Date;
       } | null;
    }[];
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { ProductDetailsTab } from "../components/ProductDetailsTab";
 import { ProductReviewsTab } from "../components/ProductReviewsTab";

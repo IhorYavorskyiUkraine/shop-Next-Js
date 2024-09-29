@@ -9,9 +9,16 @@ import { Register } from "./forms/Register";
 interface Props {
    open: boolean;
    onClose: () => void;
+   callbackUrl?: string;
+   redirect?: boolean;
 }
 
-export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
+export const AuthModal: React.FC<Props> = ({
+   open,
+   onClose,
+   callbackUrl,
+   redirect,
+}) => {
    const [type, setType] = useState<"login" | "register">("login");
 
    const onSwitch = () => {
@@ -34,8 +41,8 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
                <Button
                   onClick={() =>
                      signIn("github", {
-                        callbackUrl: "/home",
-                        redirect: true,
+                        callbackUrl: callbackUrl,
+                        redirect: redirect,
                      })
                   }
                   type="button"
@@ -50,8 +57,8 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
                <Button
                   onClick={() =>
                      signIn("google", {
-                        callbackUrl: "/home",
-                        redirect: true,
+                        callbackUrl: callbackUrl,
+                        redirect: redirect,
                      })
                   }
                   type="button"

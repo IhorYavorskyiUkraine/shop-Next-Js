@@ -16,7 +16,7 @@ type ProductStore = {
    size: string;
    quantity: number;
    loading: boolean;
-   fetchProduct: ({ id }: { id: number }) => Promise<void>;
+   setProduct: (product: ProductWithRelations) => void;
    fetchReviews: ({
       id,
       orderBy,
@@ -39,30 +39,7 @@ export const useProductStore = create<ProductStore>(set => ({
    size: "",
    quantity: 0,
    loading: true,
-   fetchProduct: async ({ id }) => {
-      set({ product: null });
-      try {
-         const response = await fetch(`/api/product?id=${id}`);
-
-         if (!response.ok) {
-            throw new Error(`Ошибка: ${response.statusText}`);
-         }
-
-         const product: ProductWithRelations = await response.json();
-
-         if (product) {
-            set({ product });
-         } else {
-            console.log("Продукт не найден");
-            set({ product: null });
-         }
-         set({ loading: false });
-      } catch (error) {
-         console.log("Ошибка при загрузке продукта:", error);
-         set({ loading: false });
-         set({ product: null });
-      }
-   },
+   setProduct: product => set({ product, loading: false }),
    fetchReviews: async ({ id, orderBy }) => {
       try {
          const response = await fetch(

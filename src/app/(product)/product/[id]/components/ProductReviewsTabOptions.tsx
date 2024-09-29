@@ -1,4 +1,3 @@
-import { Review } from "@/@types/Author";
 import { Button } from "@/components/ui/button";
 import {
    DropdownMenu,
@@ -7,12 +6,19 @@ import {
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
+import { ReviewModal } from "./ReviewModal";
+import { useState } from "react";
+import { useSession } from "next-auth/react";
+import { AuthModal } from "@/components/shared/header/components/authModal/AuthModal";
 
 type Props = {
    setOrderBy: (orderBy: string) => void;
 };
 
 export const ProductReviewsTabOptions: React.FC<Props> = ({ setOrderBy }) => {
+   const { data: session } = useSession();
+   const [open, setOpen] = useState(false);
+
    return (
       <div className="flex items-center">
          <DropdownMenu>
@@ -28,7 +34,18 @@ export const ProductReviewsTabOptions: React.FC<Props> = ({ setOrderBy }) => {
                   Oldest First
                </DropdownMenuItem>
             </DropdownMenuContent>
-            <Button variant="black">Write a Review</Button>
+            {session ? (
+               <ReviewModal open={open} onClose={() => setOpen(false)} />
+            ) : (
+               <AuthModal
+                  redirect={false}
+                  open={open}
+                  onClose={() => setOpen(false)}
+               />
+            )}
+            <Button onClick={() => setOpen(true)} variant="black">
+               Write a Review
+            </Button>
          </DropdownMenu>
       </div>
    );
