@@ -32,25 +32,25 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-   const { searchParams } = new URL(req.url);
-   const id = searchParams.get("id");
-   const { author, purchase, rating, text } = await req.json();
+   const body = await req.json();
 
-   if (!id) {
-      return NextResponse.json({ message: "ID не указан" }, { status: 400 });
+   const { productId, authorId, rating, text } = body;
+
+   if (!productId || !authorId || !rating || !text) {
+      return NextResponse.json(
+         { message: "Некорректные данные" },
+         { status: 400 },
+      );
    }
 
    try {
       const review = await prisma.review.create({
          data: {
             author: {
-               connect: { id: author },
+               connect: { id: authorId },
             },
             product: {
-               connect: { id: Number(id) },
-            },
-            purchase: {
-               connect: { id: purchase },
+               connect: { id: productId },
             },
             rating: Number(rating),
             text,
@@ -59,8 +59,9 @@ export async function POST(req: NextRequest) {
 
       return NextResponse.json({ message: "Отзыв успешно добавлен", review });
    } catch (error) {
+      console.error("Ошибка при создании отзыва:", error); // Лог ошибки
       return NextResponse.json(
-         { message: "Ошибка при получении отзывов", error },
+         { message: "Ошибка при создании отзыва", error },
          { status: 500 },
       );
    }

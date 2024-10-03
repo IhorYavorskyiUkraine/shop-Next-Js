@@ -6,10 +6,11 @@ import { useProductStore } from "../store";
 import { useEffect } from "react";
 
 export const ProductInfo: React.FC = () => {
-   const [product, setVariant, setColor, setSize, setQuantity] =
+   const [product, setVariant, variant, setColor, setSize, setQuantity] =
       useProductStore(state => [
          state.product,
          state.setVariant,
+         state.variant,
          state.setColor,
          state.setSize,
          state.setQuantity,
@@ -27,7 +28,7 @@ export const ProductInfo: React.FC = () => {
       if (product.productVariantOptions.length > 0) {
          setVariant(product.productVariantOptions[0]);
          setColor(product.productVariantOptions[0].colorId);
-         setSize(product.productVariantOptions[0].sizes[0].size);
+         setSize(product.productVariantOptions[0].sizes[0]);
          setQuantity(0);
       }
    }, [product]);
@@ -35,7 +36,7 @@ export const ProductInfo: React.FC = () => {
    return (
       <div className="gap-10 md:grid md:grid-cols-[610px,_1fr]">
          <ProductImage />
-         <ProductAbout product={product} />
+         <ProductAbout product={product} variant={variant} />
       </div>
    );
 };

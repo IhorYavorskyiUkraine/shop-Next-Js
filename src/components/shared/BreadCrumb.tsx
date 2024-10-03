@@ -8,12 +8,19 @@ import {
    BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-export const BreadCrumb: React.FC = () => {
-   const [product] = useProductStore(state => [state.product]);
+interface Props {
+   name?: {
+      name: string;
+      link: string;
+   };
+}
+
+export const BreadCrumb: React.FC<Props> = ({ name }) => {
+   const product = !name ? useProductStore(state => state.product) : null;
 
    return (
       <Breadcrumb>
-         <BreadcrumbList className="border-t-[1px] border-black/10 py-5 md:py-8 md:text-md">
+         <BreadcrumbList className="border-t-[1px] border-black/10 py-5 md:py-6 md:text-md">
             <BreadcrumbItem>
                <BreadcrumbLink className="opacity-60" href="/home">
                   Home
@@ -21,7 +28,9 @@ export const BreadCrumb: React.FC = () => {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-               <BreadcrumbPage>{product?.name}</BreadcrumbPage>
+               <BreadcrumbPage>
+                  {name ? name.name : product?.name}
+               </BreadcrumbPage>
             </BreadcrumbItem>
          </BreadcrumbList>
       </Breadcrumb>

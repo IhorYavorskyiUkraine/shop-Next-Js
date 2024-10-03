@@ -7,14 +7,16 @@ import { ProductWithRelations } from "@/@types/ProductWithOptions";
 
 interface Props {
    product: ProductWithRelations;
+   variant: any;
 }
 
-export const ProductAbout: React.FC<Props> = ({ product }) => {
+export const ProductAbout: React.FC<Props> = ({ product, variant }) => {
    if (!product) {
       return null;
    }
 
-   const { price, oldPrice } = product;
+   const price = variant?.price ?? 0;
+   const oldPrice = variant?.oldPrice ?? 0;
 
    const discountPercentage = oldPrice
       ? ((oldPrice - price) / oldPrice) * 100
@@ -49,7 +51,7 @@ export const ProductAbout: React.FC<Props> = ({ product }) => {
          )}
          <SelectColor />
          <SelectSize />
-         <ProductAddToCart />
+         <ProductAddToCart product={product} variant={variant} />
       </div>
    );
 };

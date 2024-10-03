@@ -7,6 +7,8 @@ type Props = {
    productInfo?: boolean;
    reviewDate?: boolean;
    productTabs?: boolean;
+   cartList?: boolean;
+   cartSummary?: boolean;
 };
 
 export const Skeleton: React.FC<Props> = ({
@@ -15,6 +17,8 @@ export const Skeleton: React.FC<Props> = ({
    productInfo,
    reviewDate,
    productTabs,
+   cartList,
+   cartSummary,
 }) => {
    if (productCard) {
       return (
@@ -97,6 +101,50 @@ export const Skeleton: React.FC<Props> = ({
                      <SkeletonBar className="h-5 w-[200px] bg-black/5" />
                   </div>
                ))}
+            </div>
+         </div>
+      );
+   } else if (cartList) {
+      return (
+         <div className="flex flex-1 flex-col rounded-[20px] border-[1px] border-black/10 px-4 md:px-6">
+            {Array.from({ length: 3 }).map((_, index) => (
+               <div
+                  key={index}
+                  className={cn(
+                     index < 2 && "border-b border-black/10",
+                     "flex gap-3 py-3 md:py-5",
+                  )}
+               >
+                  <SkeletonBar className="size-[100px] rounded-[8px] bg-black/5 md:size-[125px]" />
+                  <div className="flex-1">
+                     <div className="mb-1 flex items-center justify-between md:mb-3">
+                        <SkeletonBar className="h-5 w-[100px] bg-black/5 md:h-6 md:w-[200px]" />
+                        <SkeletonBar className="size-6 bg-black/5" />
+                     </div>
+                     <SkeletonBar className="mb-2 h-4 w-12 bg-black/5 md:mb-3 md:h-4 md:w-12" />
+                     <SkeletonBar className="mb-1 h-4 w-12 bg-black/5 md:mb-4 md:h-4 md:w-[100px]" />
+                     <div className="flex items-center justify-between">
+                        <SkeletonBar className="h-5 w-[80px] bg-black/5 md:h-7 md:w-[100px]" />
+                        <SkeletonBar className="h-6 w-[80px] bg-black/5 md:h-9 md:w-[100px]" />
+                     </div>
+                  </div>
+               </div>
+            ))}
+         </div>
+      );
+   } else if (cartSummary) {
+      return (
+         <div className="rounded-[20px] border-[1px] border-black/10 p-5 md:w-[367px] md:p-6">
+            <SkeletonBar className="bg-black/5 md:h-7 md:w-[180px]" />
+            <div className="border-b-[1px] border-black/10 py-3">
+               <SkeletonBar className="w-full bg-black/5 md:mb-2 md:h-7" />
+               <SkeletonBar className="w-full bg-black/5 md:mb-2 md:h-7" />
+               <SkeletonBar className="w-full bg-black/5 md:mb-2 md:h-7" />
+            </div>
+            <div className="md:pt-3">
+               <SkeletonBar className="w-full bg-black/5 md:mb-3 md:h-7" />
+               <SkeletonBar className="w-full bg-black/5 md:mb-3 md:h-12" />
+               <SkeletonBar className="w-full bg-black/5 md:mb-3 md:h-12" />
             </div>
          </div>
       );

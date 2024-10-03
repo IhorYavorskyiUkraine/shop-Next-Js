@@ -1,6 +1,5 @@
 "use client";
 
-import { ShoppingCart } from "lucide-react";
 import { Container } from "../../ui/container";
 import Link from "next/link";
 import { Burger } from "./components/Burger";
@@ -12,8 +11,13 @@ import { useSession } from "next-auth/react";
 import { AuthModal } from "./components/authModal/AuthModal";
 import { useState } from "react";
 import { ProfileButton } from "../ProfileButton";
+import { CartBtn } from "./components/CartBtn";
 
-export const Header: React.FC = () => {
+interface Props {
+   hasCart?: boolean;
+}
+
+export const Header: React.FC<Props> = ({ hasCart = true }) => {
    const [openAuthModal, setOpenAuthModal] = useState(false);
 
    const { status } = useSession();
@@ -38,9 +42,7 @@ export const Header: React.FC = () => {
                <SearchInput />
                <div className="flex flex-1 items-center justify-end gap-4 pl-6 md:flex-none md:gap-5">
                   <SearchInputMobile />
-                  <Link href="/cart">
-                     <ShoppingCart color={"#000"} size={20} />
-                  </Link>
+                  {hasCart && <CartBtn />}
                   <AuthModal
                      open={openAuthModal}
                      onClose={() => setOpenAuthModal(false)}

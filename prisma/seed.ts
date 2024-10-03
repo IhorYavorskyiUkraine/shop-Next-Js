@@ -7,11 +7,6 @@ import {
    dressStyle,
    sizes,
 } from "./products";
-import { Prisma } from "@prisma/client";
-
-const randomPrice = (min: number, max: number) => {
-   return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10;
-};
 
 async function up() {
    await Promise.all([
@@ -40,7 +35,7 @@ async function up() {
          dressStyleId: 1,
          description: "Skinny Fit Jeans",
          imageUrl: "/images/newArrivals/2/2_blue.png",
-         price: randomPrice(220, 250),
+         price: 220,
          oldPrice: 260,
          rating: 3.5,
          productVariantOptions: {
@@ -56,7 +51,8 @@ async function up() {
                         { id: 5 },
                      ],
                   },
-                  price: randomPrice(220, 250),
+                  price: 220,
+                  oldPrice: 260,
                   imageUrl: [
                      "/images/newArrivals/2/2_blue.png",
                      "/images/newArrivals/2/2_blue.png",
@@ -69,7 +65,7 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
                   },
-                  price: randomPrice(220, 250),
+                  price: 210,
                   imageUrl: [
                      "/images/newArrivals/2/2_black.png",
                      "/images/newArrivals/2/2_black.png",
@@ -106,7 +102,8 @@ async function up() {
          dressStyleId: 1,
          description: "Checkered Shirt",
          imageUrl: "/images/newArrivals/3/3_red.png",
-         price: randomPrice(180, 190),
+         price: 180,
+         oldPrice: 190,
          rating: 4.5,
          productVariantOptions: {
             create: [
@@ -115,7 +112,7 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 3 }, { id: 4 }, { id: 5 }],
                   },
-                  price: randomPrice(170, 189),
+                  price: 180,
                   oldPrice: 190,
                   imageUrl: [
                      "/images/newArrivals/3/3_red.png",
@@ -129,7 +126,7 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
                   },
-                  price: randomPrice(180, 190),
+                  price: 190,
                   imageUrl: [
                      "/images/newArrivals/3/3_blue.png",
                      "/images/newArrivals/3/3_blue.png",
@@ -170,7 +167,7 @@ async function up() {
          dressStyleId: 4,
          description: "Sleeve Striped T-shirt",
          imageUrl: "/images/newArrivals/4/4_orange.png",
-         price: randomPrice(130, 140),
+         price: 130,
          oldPrice: 160,
          rating: 4.5,
          productVariantOptions: {
@@ -180,7 +177,7 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 3 }, { id: 4 }, { id: 5 }],
                   },
-                  price: randomPrice(130, 140),
+                  price: 130,
                   oldPrice: 160,
                   imageUrl: [
                      "/images/newArrivals/4/4_orange.png",
@@ -194,7 +191,7 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
                   },
-                  price: randomPrice(140, 160),
+                  price: 160,
                   imageUrl: [
                      "/images/newArrivals/4/4_red.png",
                      "/images/newArrivals/4/4_red.png",
@@ -235,7 +232,7 @@ async function up() {
          dressStyleId: 1,
          description: "Polo with Contrast Trims",
          imageUrl: "/images/newArrivals/5/5_navy.png",
-         price: randomPrice(210, 230),
+         price: 210,
          oldPrice: 242,
          rating: 4,
          productVariantOptions: {
@@ -245,7 +242,7 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 4 }, { id: 5 }],
                   },
-                  price: randomPrice(210, 230),
+                  price: 210,
                   oldPrice: 242,
                   imageUrl: [
                      "/images/newArrivals/5/5_navy.png",
@@ -259,7 +256,7 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
                   },
-                  price: randomPrice(210, 230),
+                  price: 220,
                   oldPrice: 242,
                   imageUrl: [
                      "/images/newArrivals/5/5_gray.png",
@@ -301,7 +298,7 @@ async function up() {
          dressStyleId: 3,
          description: "Gradient Graphic T-shirt",
          imageUrl: "/images/newArrivals/6/6_white.png",
-         price: randomPrice(140, 150),
+         price: 150,
          rating: 3.5,
          productVariantOptions: {
             create: [
@@ -310,7 +307,7 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 4 }, { id: 5 }],
                   },
-                  price: randomPrice(130, 140),
+                  price: 150,
                   oldPrice: 160,
                   imageUrl: [
                      "/images/newArrivals/6/6_white.png",
@@ -324,7 +321,7 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
                   },
-                  price: randomPrice(130, 140),
+                  price: 130,
                   oldPrice: 150,
                   imageUrl: [
                      "/images/newArrivals/6/6_gray.png",
@@ -366,7 +363,8 @@ async function up() {
          dressStyleId: 1,
          description: "Polo with Tipping Details",
          imageUrl: "/images/newArrivals/7/7_pink.png",
-         price: randomPrice(170, 180),
+         price: 160,
+         oldPrice: 190,
          rating: 4.5,
          productVariantOptions: {
             create: [
@@ -375,7 +373,7 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 4 }, { id: 5 }],
                   },
-                  price: randomPrice(170, 180),
+                  price: 160,
                   oldPrice: 190,
                   imageUrl: [
                      "/images/newArrivals/7/7_pink.png",
@@ -389,7 +387,7 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
                   },
-                  price: randomPrice(170, 180),
+                  price: 170,
                   oldPrice: 190,
                   imageUrl: [
                      "/images/newArrivals/7/7_gray.png",
@@ -431,7 +429,7 @@ async function up() {
          dressStyleId: 1,
          description: "Striped Sleeve Polo",
          imageUrl: "/images/newArrivals/8/8_gray.png",
-         price: randomPrice(160, 170),
+         price: 170,
          oldPrice: 185,
          rating: 4,
          productVariantOptions: {
@@ -441,7 +439,7 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 4 }, { id: 5 }],
                   },
-                  price: randomPrice(160, 170),
+                  price: 170,
                   oldPrice: 185,
                   imageUrl: [
                      "/images/newArrivals/8/8_gray.png",
@@ -455,7 +453,7 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
                   },
-                  price: randomPrice(170, 180),
+                  price: 150,
                   oldPrice: 190,
                   imageUrl: [
                      "/images/newArrivals/8/8_black.png",
@@ -514,6 +512,7 @@ async function up() {
                      ],
                   },
                   price: 220,
+                  oldPrice: 232,
                   imageUrl: [
                      "/images/topSelling/1.png",
                      "/images/topSelling/1.png",
@@ -792,7 +791,7 @@ async function up() {
          dressStyleId: 1,
          description: "Skinny Fit Jeans",
          imageUrl: "/images/newArrivals/2/2_blue.png",
-         price: randomPrice(220, 250),
+         price: 220,
          oldPrice: 260,
          rating: 3.5,
          productVariantOptions: {
@@ -808,7 +807,8 @@ async function up() {
                         { id: 5 },
                      ],
                   },
-                  price: randomPrice(220, 250),
+                  price: 220,
+                  oldPrice: 260,
                   imageUrl: [
                      "/images/newArrivals/2/2_blue.png",
                      "/images/newArrivals/2/2_blue.png",
@@ -821,7 +821,8 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
                   },
-                  price: randomPrice(220, 250),
+                  price: 230,
+                  oldPrice: 260,
                   imageUrl: [
                      "/images/newArrivals/2/2_black.png",
                      "/images/newArrivals/2/2_black.png",
@@ -862,7 +863,7 @@ async function up() {
          dressStyleId: 1,
          description: "Checkered Shirt",
          imageUrl: "/images/newArrivals/3/3_red.png",
-         price: randomPrice(180, 190),
+         price: 180,
          rating: 4.5,
          productVariantOptions: {
             create: [
@@ -871,7 +872,7 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 3 }, { id: 4 }, { id: 5 }],
                   },
-                  price: randomPrice(170, 189),
+                  price: 180,
                   oldPrice: 190,
                   imageUrl: [
                      "/images/newArrivals/3/3_red.png",
@@ -885,7 +886,8 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
                   },
-                  price: randomPrice(180, 190),
+                  price: 170,
+                  oldPrice: 190,
                   imageUrl: [
                      "/images/newArrivals/3/3_blue.png",
                      "/images/newArrivals/3/3_blue.png",
@@ -926,7 +928,7 @@ async function up() {
          dressStyleId: 4,
          description: "Sleeve Striped T-shirt",
          imageUrl: "/images/newArrivals/4/4_orange.png",
-         price: randomPrice(130, 140),
+         price: 120,
          oldPrice: 160,
          rating: 4.5,
          productVariantOptions: {
@@ -936,7 +938,7 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 3 }, { id: 4 }, { id: 5 }],
                   },
-                  price: randomPrice(130, 140),
+                  price: 120,
                   oldPrice: 160,
                   imageUrl: [
                      "/images/newArrivals/4/4_orange.png",
@@ -950,7 +952,7 @@ async function up() {
                   sizes: {
                      connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
                   },
-                  price: randomPrice(140, 160),
+                  price: 160,
                   imageUrl: [
                      "/images/newArrivals/4/4_red.png",
                      "/images/newArrivals/4/4_red.png",
@@ -1087,6 +1089,39 @@ async function up() {
          },
          purchase: {
             connect: { id: 4 },
+         },
+      },
+   });
+
+   await prisma.cart.create({
+      data: {
+         id: 1,
+         userId: 1,
+         totalAmount: 0,
+         items: {
+            create: [
+               {
+                  id: 1,
+                  productId: 1,
+                  productVariantOptionId: 1,
+                  quantity: 1,
+                  sizeId: 1,
+               },
+               {
+                  id: 2,
+                  productId: 1,
+                  productVariantOptionId: 2,
+                  quantity: 2,
+                  sizeId: 1,
+               },
+               {
+                  id: 3,
+                  productId: 1,
+                  productVariantOptionId: 1,
+                  quantity: 3,
+                  sizeId: 1,
+               },
+            ],
          },
       },
    });

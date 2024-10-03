@@ -8,6 +8,7 @@ import { ProductTabs } from "./ProductTabs";
 import { useProductStore } from "../store";
 import { ProductWithRelations } from "@/@types/ProductWithOptions";
 import { useEffect } from "react";
+import { ProductsWithCategories } from "@/modules";
 
 interface Props {
    product: ProductWithRelations;
@@ -28,6 +29,7 @@ export const Hero: React.FC<Props> = ({ product }) => {
          <BreadCrumb />
          {loading ? <Skeleton productInfo /> : <ProductInfo />}
          {loading ? <Skeleton productTabs /> : <ProductTabs />}
+         <ProductsWithCategories categoryId={2} title="you might also like" />
       </Container>
    );
 };

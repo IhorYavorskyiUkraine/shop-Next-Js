@@ -10,6 +10,7 @@ import { ReviewModal } from "./ReviewModal";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { AuthModal } from "@/components/shared/header/components/authModal/AuthModal";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type Props = {
    setOrderBy: (orderBy: string) => void;
@@ -35,7 +36,11 @@ export const ProductReviewsTabOptions: React.FC<Props> = ({ setOrderBy }) => {
                </DropdownMenuItem>
             </DropdownMenuContent>
             {session ? (
-               <ReviewModal open={open} onClose={() => setOpen(false)} />
+               <ReviewModal
+                  session={session}
+                  open={open}
+                  onClose={() => setOpen(false)}
+               />
             ) : (
                <AuthModal
                   redirect={false}

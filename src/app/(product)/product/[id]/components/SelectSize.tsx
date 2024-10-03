@@ -21,9 +21,9 @@ export const SelectSize: React.FC = () => {
 
    useEffect(() => {
       if (activeVariant?.sizes.length) {
-         const newSize = activeVariant.sizes.find(s => s.size === size)
+         const newSize = activeVariant.sizes.find(s => s === size)
             ? size
-            : activeVariant.sizes[0].size;
+            : activeVariant.sizes[0];
          setSize(newSize);
       }
    }, [activeVariant, size, setSize]);
@@ -40,13 +40,13 @@ export const SelectSize: React.FC = () => {
          <div className="flex flex-wrap gap-4">
             {activeVariant.sizes.map(
                (sizeOption: { id: number; size: string }) => {
-                  const isActive = size === sizeOption.size;
+                  const isActive = size === sizeOption;
                   const sizeData = sizes.find(s => s.size === sizeOption.size);
 
                   return (
                      <button
                         key={sizeOption.id}
-                        onClick={() => setSize(sizeOption.size)}
+                        onClick={() => setSize(sizeOption)}
                         className={cn(
                            isActive && "!bg-black text-white",
                            "rounded-full bg-[#F0F0F0] px-5 py-[10px] md:px-6 md:py-3",

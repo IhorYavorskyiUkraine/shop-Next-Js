@@ -13,9 +13,13 @@ type ProductStore = {
    variant: ProductVariantWithSizes | null;
    reviews: any[] | null;
    color: string | number;
-   size: string;
+   size: {
+      id: number;
+      size: string;
+   };
    quantity: number;
    loading: boolean;
+   error: boolean;
    setProduct: (product: ProductWithRelations) => void;
    fetchReviews: ({
       id,
@@ -24,9 +28,9 @@ type ProductStore = {
       id: number;
       orderBy: string;
    }) => Promise<void>;
-   postReview: (review: Review) => Promise<void>;
+   postReview: (review: Review, productId: number) => Promise<void>;
    setColor: (color: string | number) => void;
-   setSize: (size: string) => void;
+   setSize: (size: { id: number; size: string }) => void;
    setVariant: (variant: ProductVariantWithSizes) => void;
    setQuantity: (quantity: number) => void;
 };
@@ -36,11 +40,13 @@ export const useProductStore = create<ProductStore>(set => ({
    variant: null,
    reviews: [],
    color: "",
-   size: "",
+   size: { id: 0, size: "" },
    quantity: 0,
    loading: true,
-   setProduct: product => set({ product, loading: false }),
+   error: false,
+   setProduct: product => set({ product, loading: false, error: false }),
    fetchReviews: async ({ id, orderBy }) => {
+      set({ error: false });
       try {
          const response = await fetch(
             `/api/reviews?id=${id}&orderBy=${orderBy}`,
@@ -60,12 +66,41 @@ export const useProductStore = create<ProductStore>(set => ({
          }
          set({ loading: false });
       } catch (error) {
+         set({ error: true });
          console.log("Ошибка при загрузке отзывов:", error);
          set({ loading: false });
          set({ reviews: null });
       }
    },
-   postReview: async review => {},
+   postReview: async (review, productId: number) => {
+      try {
+         set({ loading: true, error: false });
+         const response = await fetch(`/api/reviews?id=${productId}`, {
+            method: "POST",
+            headers: {
+               "Content-Type": "application/json",
+            },
+            body: JSON.stringify(review),
+         });
+
+         const addedReview = await response.json();
+
+         if (!response.ok) {
+            throw new Error(
+               `Ошибка при добавлении отзыва к товару: ${response.status} ${response.statusText}`,
+            );
+         }
+
+         set(state => ({
+            reviews: [...state.reviews, addedReview],
+         }));
+      } catch (error) {
+         console.error(error);
+         set({ error: true });
+      } finally {
+         set({ loading: false });
+      }
+   },
    setVariant: variant => set({ variant }),
    setColor: color => set({ color }),
    setSize: size => set({ size }),

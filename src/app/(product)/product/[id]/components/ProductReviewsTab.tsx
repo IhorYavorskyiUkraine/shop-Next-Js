@@ -23,7 +23,7 @@ export const ProductReviewsTab: React.FC = () => {
       if (product?.id) {
          fetchReviews({ id: product.id, orderBy });
       }
-   }, [orderBy]);
+   }, [orderBy, fetchReviews, product?.id]);
 
    function formatCreatedAt(createdAt: Date) {
       const date = new Date(createdAt);
