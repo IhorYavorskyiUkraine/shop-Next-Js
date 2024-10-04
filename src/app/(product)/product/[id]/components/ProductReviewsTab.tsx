@@ -3,27 +3,17 @@
 import { ReviewCard } from "@/components/shared/ReviewCard";
 import { ProductReviewsTabOptions } from "./ProductReviewsTabOptions";
 import { useProductStore } from "../store";
-import { useEffect, useState } from "react";
-import { Review } from "@/@types/Author";
+import { Review } from "@/@types/ProductWithOptions";
 
 export const ProductReviewsTab: React.FC = () => {
-   const [product, fetchReviews, reviews] = useProductStore(state => [
+   const [product, reviews] = useProductStore(state => [
       state.product,
-      state.fetchReviews,
       state.reviews,
    ]);
-
-   const [orderBy, setOrderBy] = useState("desc");
 
    if (!product || !reviews) {
       return null;
    }
-
-   useEffect(() => {
-      if (product?.id) {
-         fetchReviews({ id: product.id, orderBy });
-      }
-   }, [orderBy, fetchReviews, product?.id]);
 
    function formatCreatedAt(createdAt: Date) {
       const date = new Date(createdAt);
@@ -52,7 +42,7 @@ export const ProductReviewsTab: React.FC = () => {
                   ({reviews.length})
                </span>
             </h2>
-            <ProductReviewsTabOptions setOrderBy={setOrderBy} />
+            <ProductReviewsTabOptions />
          </div>
          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {reviews.map((review: Review) => (

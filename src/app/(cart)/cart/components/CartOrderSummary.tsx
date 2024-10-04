@@ -1,7 +1,6 @@
-import { InputWithValidations } from "@/components/shared/InputWithValidations";
+import { CartItem } from "@/@types/Cart";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { CartItem } from "@prisma/client";
 import { ArrowRight, Tag } from "lucide-react";
 import Link from "next/link";
 

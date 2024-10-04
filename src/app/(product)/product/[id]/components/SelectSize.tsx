@@ -4,12 +4,15 @@ import { cn } from "@/lib/utils";
 import { useEffect } from "react";
 
 export const SelectSize: React.FC = () => {
-   const [product, variant, setSize, size] = useProductStore(state => [
-      state.product,
-      state.variant,
-      state.setSize,
-      state.size,
-   ]);
+   const [product, variant, setQuantity, setSize, size] = useProductStore(
+      state => [
+         state.product,
+         state.variant,
+         state.setQuantity,
+         state.setSize,
+         state.size,
+      ],
+   );
 
    if (!product) {
       return null;
@@ -26,6 +29,8 @@ export const SelectSize: React.FC = () => {
             : activeVariant.sizes[0];
          setSize(newSize);
       }
+
+      setQuantity(0);
    }, [activeVariant, size, setSize]);
 
    if (!activeVariant) {

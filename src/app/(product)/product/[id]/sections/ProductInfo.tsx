@@ -1,16 +1,13 @@
-"use client";
-
 import { ProductAbout } from "../components/ProductAbout";
 import { ProductImage } from "../components/ProductImage";
 import { useProductStore } from "../store";
 import { useEffect } from "react";
 
 export const ProductInfo: React.FC = () => {
-   const [product, setVariant, variant, setColor, setSize, setQuantity] =
+   const [product, setVariant, setColor, setSize, setQuantity] =
       useProductStore(state => [
          state.product,
          state.setVariant,
-         state.variant,
          state.setColor,
          state.setSize,
          state.setQuantity,
@@ -36,7 +33,7 @@ export const ProductInfo: React.FC = () => {
    return (
       <div className="gap-10 md:grid md:grid-cols-[610px,_1fr]">
          <ProductImage />
-         <ProductAbout product={product} variant={variant} />
+         <ProductAbout />
       </div>
    );
 };

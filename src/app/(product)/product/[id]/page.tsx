@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { prisma } from "../../../../../prisma/PrismaClient";
 import { Hero } from "./sections/Hero";
-import { ProductWithRelations } from "@/@types/ProductWithOptions";
+import { ProductWithVariantsAndDetails } from "@/@types/ProductWithOptions";
 
 interface Props {
    params: {
@@ -11,7 +11,7 @@ interface Props {
 
 const ProductPage = async ({ params: { id } }: Props) => {
    try {
-      const product: ProductWithRelations | null =
+      const product: ProductWithVariantsAndDetails | null =
          await prisma.product.findFirst({
             where: { id: Number(id) },
             include: {
@@ -21,15 +21,6 @@ const ProductPage = async ({ params: { id } }: Props) => {
                   },
                },
                productDetails: true,
-               reviews: {
-                  include: {
-                     author: true,
-                     purchase: true,
-                  },
-                  orderBy: {
-                     createdAt: "desc",
-                  },
-               },
             },
          });
 

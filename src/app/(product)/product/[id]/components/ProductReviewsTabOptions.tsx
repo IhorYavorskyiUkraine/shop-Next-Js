@@ -10,13 +10,11 @@ import { ReviewModal } from "./ReviewModal";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { AuthModal } from "@/components/shared/header/components/authModal/AuthModal";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useProductStore } from "../store";
 
-type Props = {
-   setOrderBy: (orderBy: string) => void;
-};
+export const ProductReviewsTabOptions: React.FC = () => {
+   const setOrderBy = useProductStore(state => state.setOrderBy);
 
-export const ProductReviewsTabOptions: React.FC<Props> = ({ setOrderBy }) => {
    const { data: session } = useSession();
    const [open, setOpen] = useState(false);
 

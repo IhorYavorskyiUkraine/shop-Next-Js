@@ -1,25 +1,13 @@
-import { Product, CartItem as TCartItem } from "@prisma/client";
 import { CartDeleteBtn } from "./CartDeleteBtn";
 import { cn } from "@/lib/utils";
 import { CountButton } from "@/components/shared/CountButton";
 import { useCartStore } from "../store";
 import Link from "next/link";
 
+import { CartItem as ICartItem } from "@/@types/Cart";
+
 interface Props {
-   cartItem: TCartItem & {
-      productVariantOption: {
-         imageUrl: string[];
-         color: {
-            color: string;
-         };
-         price: number;
-      };
-      size: {
-         id: number;
-         size: string;
-      };
-      product: Product;
-   };
+   cartItem: ICartItem;
    className?: string;
 }
 

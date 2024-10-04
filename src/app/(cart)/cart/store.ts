@@ -1,28 +1,26 @@
 "use client";
 
-import { CartItem } from "@prisma/client";
+import { Cart, CartItem } from "@/@types/Cart";
 import { create } from "zustand";
 
-type CustomCartItem = {
-   productId: CartItem["productId"];
-   productVariantOptionId: CartItem["productVariantOptionId"];
-   quantity: CartItem["quantity"];
-   sizeId: CartItem["sizeId"];
-};
+type addToCartItem = Omit<
+   CartItem,
+   "id" | "product" | "createdAt" | "cartId" | "updatedAt" | "size"
+>;
 
 type CartStore = {
-   cart: any;
+   cart: Cart | null;
    newQuantity: number;
    loading: boolean;
    error: boolean;
    updateItemQuantity: (id: number, quantity: number) => Promise<void>;
    fetchCart: () => Promise<void>;
-   addToCart: (item: CustomCartItem) => Promise<void>;
+   addToCart: (item: addToCartItem) => Promise<void>;
    removeFromCart: (id: number) => Promise<void>;
 };
 
 export const useCartStore = create<CartStore>(set => ({
-   cart: {},
+   cart: null,
    newQuantity: 0,
    loading: true,
    error: false,
@@ -47,10 +45,11 @@ export const useCartStore = create<CartStore>(set => ({
 
          set(state => ({
             cart: {
-               ...state.cart,
-               items: state.cart.items.map((item: CartItem) =>
-                  item.id === id ? { ...item, quantity } : item,
-               ),
+               ...state.cart!,
+               items:
+                  state.cart?.items.map((item: CartItem) =>
+                     item.id === id ? { ...item, quantity } : item,
+                  ) || [],
             },
             newQuantity: quantity,
          }));
@@ -84,7 +83,7 @@ export const useCartStore = create<CartStore>(set => ({
             body: JSON.stringify(item),
          });
 
-         const addedItem = await response.json();
+         const addedItem: CartItem = await response.json();
 
          if (!response.ok) {
             throw new Error(
@@ -93,7 +92,10 @@ export const useCartStore = create<CartStore>(set => ({
          }
 
          set(state => ({
-            cart: [...state.cart, addedItem],
+            cart: {
+               ...state.cart!,
+               items: [...(state.cart?.items || []), addedItem],
+            },
          }));
       } catch (error) {
          console.error(error);
@@ -115,7 +117,11 @@ export const useCartStore = create<CartStore>(set => ({
          }
 
          set(state => ({
-            cart: state.cart.filter((item: CartItem) => item.id !== productId),
+            cart: {
+               ...state.cart!,
+               items:
+                  state.cart?.items.filter(item => item.id !== productId) || [],
+            },
          }));
       } catch (error) {
          console.error(error);

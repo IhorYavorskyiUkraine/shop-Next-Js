@@ -1,17 +1,9 @@
-import { CartItem as TCartItem } from "@prisma/client";
+import { CartItem as ICartItem } from "@/@types/Cart";
+
 import { CartItem } from "./CartItem";
 
 interface Props {
-   cartItems: TCartItem &
-      {
-         productVariantOption: {
-            imageUrl: string[];
-            color: {
-               color: string;
-            };
-            price: number;
-         };
-      }[];
+   cartItems: ICartItem[];
 }
 
 export const CartList: React.FC<Props> = ({ cartItems }) => {

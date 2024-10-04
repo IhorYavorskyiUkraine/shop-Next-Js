@@ -5,7 +5,6 @@ import { StarRating } from "@/components/shared/StarRating";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Session } from "next-auth";
-import { use } from "react";
 import { useForm } from "react-hook-form";
 import { useProductStore } from "../store";
 
@@ -40,7 +39,7 @@ export const ProductReviewForm: React.FC<Props> = ({ onClose, session }) => {
    const textareaError = errors["textarea"]?.message as string;
    const ratingError = errors["rating"]?.message as string;
 
-   const onSubmit = async (values: any) => {
+   const onSubmit = async (values: { rating: number; textarea: string }) => {
       if (values.rating === 0) {
          setError("rating", {
             type: "manual",

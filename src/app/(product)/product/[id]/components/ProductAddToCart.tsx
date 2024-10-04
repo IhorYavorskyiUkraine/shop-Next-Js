@@ -1,14 +1,12 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { Minus, Plus } from "lucide-react";
 import { useProductStore } from "../store";
 import { cn } from "@/lib/utils";
 import { useCartStore } from "@/app/(cart)/cart/store";
-import { ProductWithRelations } from "@/@types/ProductWithOptions";
+import { ProductWithVariantsAndDetails } from "@/@types/ProductWithOptions";
 
 interface Props {
-   product: ProductWithRelations;
+   product: ProductWithVariantsAndDetails;
    variant: any;
 }
 
@@ -19,7 +17,7 @@ export const ProductAddToCart: React.FC<Props> = ({ product, variant }) => {
       state.size,
    ]);
 
-   const [addToCart] = useCartStore(state => [state.addToCart]);
+   const addToCart = useCartStore(state => state.addToCart);
 
    const handleAddToCart = async () => {
       setQuantity(quantity || 1);

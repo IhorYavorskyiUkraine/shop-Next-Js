@@ -1,9 +1,7 @@
-"use client";
-
-import { ProductVariantWithSizes } from "@/@types/ProductWithOptions";
 import { colors } from "../../../../../../prisma/products";
 import { useProductStore } from "../store";
 import { Check } from "lucide-react";
+import { Color, ProductVariantOption } from "@prisma/client";
 
 export const SelectColor: React.FC = () => {
    const [product, setVariant, variant, setColor] = useProductStore(state => [
@@ -17,10 +15,7 @@ export const SelectColor: React.FC = () => {
       return null;
    }
 
-   const onItemClick = (
-      option: ProductVariantWithSizes,
-      color: { id: number; color: string },
-   ) => {
+   const onItemClick = (option: ProductVariantOption, color: Color) => {
       setVariant(option);
       setColor(color.color);
    };

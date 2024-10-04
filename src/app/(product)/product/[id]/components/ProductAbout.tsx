@@ -3,14 +3,14 @@ import { Title } from "@/components/ui/title";
 import { SelectColor } from "./SelectColor";
 import { SelectSize } from "./SelectSize";
 import { ProductAddToCart } from "./ProductAddToCart";
-import { ProductWithRelations } from "@/@types/ProductWithOptions";
+import { useProductStore } from "../store";
 
-interface Props {
-   product: ProductWithRelations;
-   variant: any;
-}
+export const ProductAbout: React.FC = () => {
+   const [product, variant] = useProductStore(state => [
+      state.product,
+      state.variant,
+   ]);
 
-export const ProductAbout: React.FC<Props> = ({ product, variant }) => {
    if (!product) {
       return null;
    }

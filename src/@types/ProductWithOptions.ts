@@ -1,21 +1,62 @@
 import { ProductVariantOption } from "@prisma/client";
 
+export interface ProductWithVariantsAndDetails {
+   id: number;
+   name: string;
+   description?: string | null;
+   imageUrl: string;
+   price: number;
+   oldPrice?: number | null;
+   rating?: number | null;
+   productCategoryId: number;
+   dressStyleId: number;
+   categoryId?: number | null;
+   createdAt: Date;
+   updatedAt: Date;
+   productDetails: ProductDetails[];
+   productVariantOptions: ProductVariantOptionWithSizes[];
+}
+
+export interface ProductVariantOptionWithSizes {
+   id: number;
+   productId: number;
+   colorId: number;
+   price: number;
+   oldPrice: number | null;
+   imageUrl: string[];
+   stockQuantity: number;
+   createdAt: Date;
+   updatedAt: Date;
+   sizes: Size[];
+}
+
+interface ProductDetails {
+   id: number;
+   productId: number;
+   name: string;
+   value: string;
+}
+
+interface Size {
+   id: number;
+   size: string;
+}
+
 export interface ProductVariantWithSizes extends ProductVariantOption {
    sizes: { id: number; size: string }[];
 }
 
-interface Review {
-   id: number;
+export interface Review {
+   id: string;
    author: {
       fullName: string;
    };
    rating: number;
    text: string;
-   createdAt: Date;
-   purchase: {
+   purchase?: {
       productId: number;
-      createdAt: Date; // Обязательно
-   } | null;
+   };
+   createdAt: Date;
 }
 
 export interface ProductWithRelations {
@@ -36,16 +77,5 @@ export interface ProductWithRelations {
       name: string;
       value: string;
    }[];
-   reviews: {
-      id: number;
-      author: {
-         fullName: string;
-      };
-      rating: number;
-      text: string;
-      createdAt: Date;
-      purchase: {
-         productId: number;
-      } | null;
-   }[];
+   reviews: Review[];
 }

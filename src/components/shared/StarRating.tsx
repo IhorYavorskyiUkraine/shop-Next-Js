@@ -9,7 +9,7 @@ interface Props {
    readonly?: boolean;
    size?: number;
    className?: string;
-   onRatingChange: (rate: number) => void;
+   onRatingChange?: (rate: number) => void;
 }
 
 export const StarRating = React.forwardRef<HTMLDivElement, Props>(
@@ -18,7 +18,7 @@ export const StarRating = React.forwardRef<HTMLDivElement, Props>(
       ref,
    ) => {
       const handleRating = (rate: number) => {
-         onRatingChange(rate);
+         if (onRatingChange) onRatingChange(rate);
       };
 
       return (

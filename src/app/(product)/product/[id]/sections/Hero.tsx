@@ -6,23 +6,31 @@ import { Container } from "@/components/ui/container";
 import { ProductInfo } from "./ProductInfo";
 import { ProductTabs } from "./ProductTabs";
 import { useProductStore } from "../store";
-import { ProductWithRelations } from "@/@types/ProductWithOptions";
-import { useEffect } from "react";
+import { ProductWithVariantsAndDetails } from "@/@types/ProductWithOptions";
+import { useEffect, useState } from "react";
 import { ProductsWithCategories } from "@/modules";
 
 interface Props {
-   product: ProductWithRelations;
+   product: ProductWithVariantsAndDetails;
 }
 
 export const Hero: React.FC<Props> = ({ product }) => {
-   const [setProduct, loading] = useProductStore(state => [
-      state.setProduct,
-      state.loading,
-   ]);
+   const [setProduct, fetchReviews, orderBy, loading] = useProductStore(
+      state => [
+         state.setProduct,
+         state.fetchReviews,
+         state.orderBy,
+         state.loading,
+      ],
+   );
 
    useEffect(() => {
       setProduct(product);
-   }, [product.id, setProduct]);
+   }, [product, setProduct]);
+
+   useEffect(() => {
+      fetchReviews({ id: product.id, orderBy });
+   }, [orderBy]);
 
    return (
       <Container>
