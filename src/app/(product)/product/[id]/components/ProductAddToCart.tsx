@@ -4,6 +4,7 @@ import { useProductStore } from "../store";
 import { cn } from "@/lib/utils";
 import { useCartStore } from "@/app/(cart)/cart/store";
 import { ProductWithVariantsAndDetails } from "@/@types/ProductWithOptions";
+import toast from "react-hot-toast";
 
 interface Props {
    product: ProductWithVariantsAndDetails;
@@ -19,7 +20,7 @@ export const ProductAddToCart: React.FC<Props> = ({ product, variant }) => {
 
    const addToCart = useCartStore(state => state.addToCart);
 
-   const handleAddToCart = async () => {
+   const handleAddToCart = () => {
       setQuantity(quantity || 1);
 
       const item = {
@@ -30,6 +31,10 @@ export const ProductAddToCart: React.FC<Props> = ({ product, variant }) => {
       };
 
       addToCart(item);
+
+      toast.success(`${product.name} added to your cart`, {
+         icon: "✅",
+      });
    };
 
    return (

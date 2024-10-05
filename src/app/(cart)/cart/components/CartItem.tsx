@@ -41,7 +41,10 @@ export const CartItem: React.FC<Props> = ({ cartItem, className }) => {
                      {cartItem?.product.name || "no name"}
                   </h4>
                </Link>
-               <CartDeleteBtn itemId={cartItem?.id} />
+               <CartDeleteBtn
+                  itemId={cartItem?.id}
+                  itemName={cartItem?.product.name}
+               />
             </div>
             <p className="mb-1 text-xs leading-[16px] md:mb-2 md:text-sm">
                Size:

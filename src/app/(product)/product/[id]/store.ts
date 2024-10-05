@@ -12,7 +12,7 @@ type ReviewInput = Omit<Review, "id" | "author" | "createdAt">;
 type ProductStore = {
    product: ProductWithVariantsAndDetails | null;
    variant: ProductVariantOption | null;
-   reviews: Review[] | null;
+   reviews: Review[];
    color: string | number;
    size: {
       id: number;
@@ -66,14 +66,14 @@ export const useProductStore = create<ProductStore>(set => ({
             set({ reviews });
          } else {
             console.log("Отзывы не найдены");
-            set({ reviews: null });
+            set({ reviews: [] });
          }
          set({ loading: false });
       } catch (error) {
          set({ error: true });
-         console.log("Ошибка при загрузке отзывов:", error);
+         console.error("Ошибка при загрузке отзывов:", error);
          set({ loading: false });
-         set({ reviews: null });
+         set({ reviews: [] });
       }
    },
    postReview: async (review, productId: number) => {

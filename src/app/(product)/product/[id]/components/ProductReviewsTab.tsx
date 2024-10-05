@@ -47,12 +47,12 @@ export const ProductReviewsTab: React.FC = () => {
          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {reviews.map((review: Review) => (
                <ReviewCard
-                  key={review.id}
-                  name={review.author.fullName}
-                  rating={review.rating}
-                  text={review.text}
-                  checked={review.purchase?.productId === product.id}
-                  reviewDate={formatCreatedAt(review.createdAt)}
+                  key={review?.id}
+                  name={review?.author?.fullName}
+                  rating={review?.rating}
+                  text={review?.text}
+                  checked={review?.purchase?.productId === product.id}
+                  reviewDate={formatCreatedAt(review?.createdAt)}
                />
             ))}
          </div>

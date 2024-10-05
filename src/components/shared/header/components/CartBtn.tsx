@@ -1,11 +1,16 @@
+import { Cart } from "@/@types/Cart";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
-export const CartBtn: React.FC = () => {
+interface Props {
+   cart: Cart | null;
+}
+
+export const CartBtn: React.FC<Props> = ({ cart }) => {
    return (
       <Link href="/cart">
          <ShoppingCart color={"#000"} size={20} />
-         <span>{0}</span>
+         <span>{cart?.items.length}</span>
       </Link>
    );
 };

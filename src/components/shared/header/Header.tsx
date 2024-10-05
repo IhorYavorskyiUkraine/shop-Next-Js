@@ -9,18 +9,28 @@ import { SearchInput } from "./components/SearchInput";
 import { SearchInputMobile } from "./components/SearchInputMobile";
 import { useSession } from "next-auth/react";
 import { AuthModal } from "./components/authModal/AuthModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProfileButton } from "../ProfileButton";
 import { CartBtn } from "./components/CartBtn";
+import { useCartStore } from "@/app/(cart)/cart/store";
 
 interface Props {
    hasCart?: boolean;
 }
 
 export const Header: React.FC<Props> = ({ hasCart = true }) => {
+   const [fetchCart, cart] = useCartStore(state => [
+      state.fetchCart,
+      state.cart,
+   ]);
+
    const [openAuthModal, setOpenAuthModal] = useState(false);
 
    const { status } = useSession();
+
+   useEffect(() => {
+      fetchCart();
+   }, []);
 
    return (
       <>
@@ -42,7 +52,7 @@ export const Header: React.FC<Props> = ({ hasCart = true }) => {
                <SearchInput />
                <div className="flex flex-1 items-center justify-end gap-4 pl-6 md:flex-none md:gap-5">
                   <SearchInputMobile />
-                  {hasCart && <CartBtn />}
+                  {hasCart && <CartBtn cart={cart} />}
                   <AuthModal
                      open={openAuthModal}
                      onClose={() => setOpenAuthModal(false)}

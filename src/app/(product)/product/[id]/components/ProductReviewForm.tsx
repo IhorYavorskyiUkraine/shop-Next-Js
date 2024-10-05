@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Session } from "next-auth";
 import { useForm } from "react-hook-form";
 import { useProductStore } from "../store";
+import toast from "react-hot-toast";
 
 interface Props {
    onClose: () => void;
@@ -14,10 +15,14 @@ interface Props {
 }
 
 export const ProductReviewForm: React.FC<Props> = ({ onClose, session }) => {
-   const [product, postReview] = useProductStore(state => [
-      state.product,
-      state.postReview,
-   ]);
+   const [product, postReview, fetchReviews, orderBy] = useProductStore(
+      state => [
+         state.product,
+         state.postReview,
+         state.fetchReviews,
+         state.orderBy,
+      ],
+   );
 
    const {
       handleSubmit,
@@ -59,7 +64,24 @@ export const ProductReviewForm: React.FC<Props> = ({ onClose, session }) => {
          productId: product?.id,
       };
 
-      await postReview(review, product?.id);
+      try {
+         await postReview(review, product?.id);
+
+         await fetchReviews({ id: product?.id, orderBy });
+
+         toast.success(`Thank you for your review`, {
+            icon: "✅",
+         });
+      } catch (e) {
+         console.error("Ошибка при отправке отзыва или обновлении отзывов:", e);
+
+         toast.error(
+            "Something went wrong while submitting your review. Please try again.",
+            {
+               icon: "❌",
+            },
+         );
+      }
 
       onClose();
    };

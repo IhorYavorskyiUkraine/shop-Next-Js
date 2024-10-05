@@ -22,7 +22,12 @@ const CartPage = () => {
 
    try {
       if (!cart || cart.items?.length === 0) {
-         return <h1>Cart is empty</h1>;
+         return (
+            <Container className="flex h-[400px] flex-col items-center justify-center">
+               <Title text="Your cart is empty" className="mb-5" />
+               <p className="text-[64px]">😞</p>
+            </Container>
+         );
       }
 
       return (
