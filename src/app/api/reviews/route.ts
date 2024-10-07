@@ -5,6 +5,8 @@ export async function GET(req: NextRequest) {
    const { searchParams } = new URL(req.url);
    const id = searchParams.get("id");
    const orderBy = searchParams.get("orderBy");
+   const limit = parseInt(req.nextUrl.searchParams.get("limit") || "4", 10);
+   const offset = parseInt(req.nextUrl.searchParams.get("offset") || "0", 10);
 
    if (!id) {
       return NextResponse.json({ message: "ID не указан" }, { status: 400 });
@@ -17,6 +19,8 @@ export async function GET(req: NextRequest) {
             author: true,
             purchase: true,
          },
+         take: limit,
+         skip: offset,
          orderBy: {
             createdAt: orderBy === "desc" ? "desc" : "asc",
          },

@@ -64,7 +64,7 @@ export const Login: React.FC<Props> = ({ onClose }) => {
                required
                className="mb-2"
             />
-            <Button disabled={form.formState.isSubmitting} type="submit">
+            <Button loading={form.formState.isSubmitting} type="submit">
                Login
             </Button>
          </form>

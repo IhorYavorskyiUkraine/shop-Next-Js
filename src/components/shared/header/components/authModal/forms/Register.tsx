@@ -62,7 +62,7 @@ export const Register: React.FC<Props> = ({ onClose, onClickLogin }) => {
                required
             />
             <Button
-               disabled={form.formState.isSubmitting}
+               loading={form.formState.isSubmitting}
                className="h-12 text-base"
                type="submit"
             >

@@ -46,7 +46,11 @@ export const ProductReviewsTabOptions: React.FC = () => {
                   onClose={() => setOpen(false)}
                />
             )}
-            <Button onClick={() => setOpen(true)} variant="black">
+            <Button
+               className="h-10 w-[81px] text-xs md:h-[52px] md:w-[166px] md:text-md"
+               onClick={() => setOpen(true)}
+               variant="black"
+            >
                Write a Review
             </Button>
          </DropdownMenu>

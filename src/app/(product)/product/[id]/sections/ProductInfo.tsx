@@ -31,7 +31,7 @@ export const ProductInfo: React.FC = () => {
    }, [product]);
 
    return (
-      <div className="gap-10 md:grid md:grid-cols-[610px,_1fr]">
+      <div className="gap-10 md:grid md:grid-cols-[610px,_1fr] md:items-start">
          <ProductImage />
          <ProductAbout />
       </div>

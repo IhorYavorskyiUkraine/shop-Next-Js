@@ -4,11 +4,14 @@ import { ReviewCard } from "@/components/shared/ReviewCard";
 import { ProductReviewsTabOptions } from "./ProductReviewsTabOptions";
 import { useProductStore } from "../store";
 import { Review } from "@/@types/ProductWithOptions";
+import { Button } from "@/components/ui/button";
 
 export const ProductReviewsTab: React.FC = () => {
-   const [product, reviews] = useProductStore(state => [
+   const [product, reviews, limit, setLimit] = useProductStore(state => [
       state.product,
       state.reviews,
+      state.limit,
+      state.setLimit,
    ]);
 
    if (!product || !reviews) {
@@ -55,6 +58,13 @@ export const ProductReviewsTab: React.FC = () => {
                   reviewDate={formatCreatedAt(review?.createdAt)}
                />
             ))}
+         </div>
+         <div className="mt-4 flex justify-center">
+            {reviews.length > 0 && (
+               <Button onClick={() => setLimit(limit + 6)}>
+                  Load More Reviews
+               </Button>
+            )}
          </div>
       </section>
    );

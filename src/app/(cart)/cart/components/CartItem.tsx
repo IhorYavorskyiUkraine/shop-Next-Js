@@ -26,7 +26,7 @@ export const CartItem: React.FC<Props> = ({ cartItem, className }) => {
    return (
       <div className={cn(className, "flex gap-3 py-3 md:py-5")}>
          <div className="rounded-[8px] bg-[#F0EEED]">
-            <Link href={`/product/${cartItem?.product.id}`}>
+            <Link href={`/product/${cartItem?.product?.id}`}>
                <img
                   className="size-[100px] md:size-[125px]"
                   src={cartItem?.productVariantOption?.imageUrl[0]}
@@ -36,20 +36,20 @@ export const CartItem: React.FC<Props> = ({ cartItem, className }) => {
          </div>
          <div className="flex-1">
             <div className="mb-1 flex items-center justify-between md:mb-2">
-               <Link href={`/product/${cartItem?.product.id}`}>
+               <Link href={`/product/${cartItem?.product?.id}`}>
                   <h4 className="text-md font-bold leading-22 md:text-lg md:leading-27">
-                     {cartItem?.product.name || "no name"}
+                     {cartItem?.product?.name || "no name"}
                   </h4>
                </Link>
                <CartDeleteBtn
                   itemId={cartItem?.id}
-                  itemName={cartItem?.product.name}
+                  itemName={cartItem?.product?.name}
                />
             </div>
             <p className="mb-1 text-xs leading-[16px] md:mb-2 md:text-sm">
                Size:
                <span className="pl-1 opacity-60">
-                  {cartItem?.size.size || "no size"}
+                  {cartItem?.size?.size || "no size"}
                </span>
             </p>
             <p className="mb-3 text-xs leading-[16px] md:mb-4 md:text-sm">
@@ -66,6 +66,7 @@ export const CartItem: React.FC<Props> = ({ cartItem, className }) => {
                   onClick={type =>
                      onClickCountButton(cartItem?.id, cartItem?.quantity, type)
                   }
+                  minValue={1}
                   value={cartItem?.quantity}
                />
             </div>

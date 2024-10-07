@@ -1,14 +1,16 @@
 import { Button } from "@/components/ui/button";
-import { Minus, Plus } from "lucide-react";
 import { useProductStore } from "../store";
-import { cn } from "@/lib/utils";
 import { useCartStore } from "@/app/(cart)/cart/store";
 import { ProductWithVariantsAndDetails } from "@/@types/ProductWithOptions";
 import toast from "react-hot-toast";
+import { CountButton } from "@/components/shared/CountButton";
+import { ProductVariantOption } from "@prisma/client";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface Props {
    product: ProductWithVariantsAndDetails;
-   variant: any;
+   variant: ProductVariantOption;
 }
 
 export const ProductAddToCart: React.FC<Props> = ({ product, variant }) => {
@@ -17,11 +19,25 @@ export const ProductAddToCart: React.FC<Props> = ({ product, variant }) => {
       state.setQuantity,
       state.size,
    ]);
+   const [addToCart, loading] = useCartStore(state => [
+      state.addToCart,
+      state.loading,
+   ]);
 
-   const addToCart = useCartStore(state => state.addToCart);
+   const [needToAdd, setNeedToAdd] = useState(true);
+
+   const onClickCountButton = (quantity: number, type: "plus" | "minus") => {
+      setNeedToAdd(false);
+      const newQuantity = type === "plus" ? quantity + 1 : quantity - 1;
+      setQuantity(newQuantity);
+   };
 
    const handleAddToCart = () => {
-      setQuantity(quantity || 1);
+      if (loading) {
+         return;
+      }
+
+      needToAdd && setQuantity(quantity + 1);
 
       const item = {
          productId: product.id,
@@ -35,33 +51,22 @@ export const ProductAddToCart: React.FC<Props> = ({ product, variant }) => {
       toast.success(`${product.name} added to your cart`, {
          icon: "✅",
       });
+
+      setNeedToAdd(true);
    };
 
    return (
       <div className="grid grid-cols-[112px,_1fr] items-center gap-3 py-6 md:grid-cols-1 lg:grid-cols-[112px,_1fr]">
-         <div className="flex h-[52px] items-center justify-between gap-4 rounded-full bg-[#F0F0F0] px-4 py-3 lg:justify-center">
-            <button
-               className={cn(
-                  quantity === 0 && "opacity-50",
-                  "inline-flex items-center justify-center",
-               )}
-               onClick={() => setQuantity(quantity - 1)}
-               disabled={quantity === 0}
-            >
-               <Minus size={20} />
-            </button>
-            <span>{quantity}</span>
-            <button
-               className="inline-flex items-center justify-center"
-               onClick={() => setQuantity(quantity + 1)}
-            >
-               <Plus size={20} />
-            </button>
-         </div>
+         <CountButton
+            className="!h-full"
+            value={quantity}
+            onClick={type => onClickCountButton(quantity, type)}
+         />
          <Button
-            className="md:w-full"
+            className={cn(loading && "opacity-50", "md:w-full")}
             onClick={handleAddToCart}
             variant="black"
+            loading={loading}
          >
             Add to Cart
          </Button>

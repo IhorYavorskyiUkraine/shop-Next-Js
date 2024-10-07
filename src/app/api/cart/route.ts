@@ -112,26 +112,46 @@ export async function POST(req: NextRequest) {
 
       const { productId, productVariantOptionId, quantity, sizeId } = body;
 
-      const cartItem = await prisma.cartItem.create({
-         data: {
+      const findCartItem = await prisma.cartItem.findFirst({
+         where: {
             cartId: userCart.id,
-            productId,
             productVariantOptionId,
-            quantity,
             sizeId,
-         },
-         include: {
-            product: true,
-            productVariantOption: {
-               include: {
-                  color: true,
-               },
-            },
-            size: true,
          },
       });
 
-      return NextResponse.json(cartItem);
+      if (findCartItem) {
+         await prisma.cartItem.update({
+            where: {
+               id: findCartItem.id,
+            },
+            data: {
+               quantity:
+                  findCartItem.quantity === quantity ? quantity + 1 : quantity,
+            },
+         });
+      } else {
+         await prisma.cartItem.create({
+            data: {
+               cartId: userCart.id,
+               productId,
+               productVariantOptionId,
+               quantity,
+               sizeId,
+            },
+            include: {
+               product: true,
+               productVariantOption: {
+                  include: {
+                     color: true,
+                  },
+               },
+               size: true,
+            },
+         });
+      }
+
+      return NextResponse.json({ message: "Товар добавлен в корзину" });
    } catch (error) {
       return NextResponse.json(
          { message: "Ошибка при получении продуктов", error },
@@ -145,7 +165,7 @@ export async function PATCH(req: NextRequest) {
    const id = searchParams.get("id");
    const quantity = searchParams.get("quantity");
 
-   if (!id ?? !quantity) {
+   if (!id && !quantity) {
       return NextResponse.json(
          {
             message: "Идентификатор товара не указан",

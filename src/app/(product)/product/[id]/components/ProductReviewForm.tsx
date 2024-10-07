@@ -15,14 +15,15 @@ interface Props {
 }
 
 export const ProductReviewForm: React.FC<Props> = ({ onClose, session }) => {
-   const [product, postReview, fetchReviews, orderBy] = useProductStore(
-      state => [
+   const [product, postReview, fetchReviews, limit, offset, orderBy] =
+      useProductStore(state => [
          state.product,
          state.postReview,
          state.fetchReviews,
+         state.limit,
+         state.offset,
          state.orderBy,
-      ],
-   );
+      ]);
 
    const {
       handleSubmit,
@@ -67,7 +68,7 @@ export const ProductReviewForm: React.FC<Props> = ({ onClose, session }) => {
       try {
          await postReview(review, product?.id);
 
-         await fetchReviews({ id: product?.id, orderBy });
+         await fetchReviews({ id: product?.id, orderBy, limit, offset });
 
          toast.success(`Thank you for your review`, {
             icon: "✅",

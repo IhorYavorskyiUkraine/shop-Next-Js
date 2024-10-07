@@ -19,15 +19,22 @@ type ProductStore = {
       size: string;
    };
    quantity: number;
+   limit: number;
+   offset: number;
    loading: boolean;
    error: boolean;
+   setLimit: (limit: number, offset?: number) => void;
    setProduct: (product: ProductWithVariantsAndDetails) => void;
    fetchReviews: ({
       id,
       orderBy,
+      limit,
+      offset,
    }: {
       id: number;
       orderBy: string;
+      limit: number;
+      offset: number;
    }) => Promise<void>;
    orderBy: string;
    setOrderBy: (orderBy: string) => void;
@@ -45,15 +52,18 @@ export const useProductStore = create<ProductStore>(set => ({
    color: "",
    size: { id: 0, size: "" },
    quantity: 0,
+   limit: 6,
+   offset: 0,
    orderBy: "desc",
    loading: true,
    error: false,
    setProduct: product => set({ product, loading: false, error: false }),
-   fetchReviews: async ({ id, orderBy }) => {
+   setLimit: (limit, offset = 0) => set({ limit, offset }),
+   fetchReviews: async ({ id, orderBy, limit, offset }) => {
       set({ error: false });
       try {
          const response = await fetch(
-            `/api/reviews?id=${id}&orderBy=${orderBy}`,
+            `/api/reviews?id=${id}&orderBy=${orderBy}&limit=${limit}&offset=${offset}`,
          );
 
          if (!response.ok) {
@@ -78,7 +88,7 @@ export const useProductStore = create<ProductStore>(set => ({
    },
    postReview: async (review, productId: number) => {
       try {
-         set({ loading: true, error: false });
+         set({ error: false });
          const response = await fetch(`/api/reviews?id=${productId}`, {
             method: "POST",
             headers: {

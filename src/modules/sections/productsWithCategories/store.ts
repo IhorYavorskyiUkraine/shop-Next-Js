@@ -16,7 +16,7 @@ export const useProductStore = create<ProductStore>(set => ({
    newArrivals: [],
    topSelling: [],
    loading: true,
-   fetchProducts: async (categoryId: number, limit: number, offset: number) => {
+   fetchProducts: async (categoryId, limit, offset) => {
       try {
          const response = await fetch(
             `/api/products?categoryId=${categoryId}&limit=${limit}&offset=${offset}`,
