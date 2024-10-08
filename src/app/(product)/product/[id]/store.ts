@@ -2,10 +2,7 @@
 
 import { create } from "zustand";
 import { ProductVariantOption } from "@prisma/client";
-import {
-   ProductWithVariantsAndDetails,
-   Review,
-} from "@/@types/ProductWithOptions";
+import { ProductWithVariantsAndDetails, Review } from "@/@types/Product";
 
 type ReviewInput = Omit<Review, "id" | "author" | "createdAt">;
 
@@ -75,7 +72,6 @@ export const useProductStore = create<ProductStore>(set => ({
          if (reviews) {
             set({ reviews });
          } else {
-            console.log("Отзывы не найдены");
             set({ reviews: [] });
          }
          set({ loading: false });

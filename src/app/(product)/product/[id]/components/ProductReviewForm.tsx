@@ -121,7 +121,8 @@ export const ProductReviewForm: React.FC<Props> = ({ onClose, session }) => {
                      message: "The minimum length must be 5",
                   },
                })}
-               className="h-[180px]"
+               placeholder="Write your review"
+               className="h-[100px]"
             />
             {textareaError && (
                <ErrorText text={textareaError} className="mt-2" />

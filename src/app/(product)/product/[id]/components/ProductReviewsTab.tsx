@@ -3,8 +3,9 @@
 import { ReviewCard } from "@/components/shared/ReviewCard";
 import { ProductReviewsTabOptions } from "./ProductReviewsTabOptions";
 import { useProductStore } from "../store";
-import { Review } from "@/@types/ProductWithOptions";
+import { Review } from "@/@types/Product";
 import { Button } from "@/components/ui/button";
+import { formatCreatedAt } from "@/lib/getDataReview";
 
 export const ProductReviewsTab: React.FC = () => {
    const [product, reviews, limit, setLimit] = useProductStore(state => [
@@ -18,31 +19,13 @@ export const ProductReviewsTab: React.FC = () => {
       return null;
    }
 
-   function formatCreatedAt(createdAt: Date) {
-      const date = new Date(createdAt);
-
-      if (isNaN(date.getTime())) {
-         return "Invalid Date";
-      }
-
-      const options: Intl.DateTimeFormatOptions = {
-         year: "numeric",
-         month: "long",
-         day: "numeric",
-      };
-
-      const formattedDate = date.toLocaleDateString("en-US", options);
-
-      return `Posted on ${formattedDate}`;
-   }
-
    return (
       <section className="py-6">
          <div className="flex items-center justify-between pb-6">
             <h2 className="relative mb-2 inline-block text-lg font-bold md:mb-4 md:text-xl">
                All Reviews
                <span className="absolute -right-5 bottom-0 text-sm leading-22 opacity-60">
-                  ({reviews.length})
+                  ({product.reviews.length})
                </span>
             </h2>
             <ProductReviewsTabOptions />

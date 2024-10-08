@@ -42,7 +42,7 @@ model VerificationCode {
 
 model Review {
    id         Int       @id @default(autoincrement())
-   rating     Int
+   rating     Float
    productId  Int
    purchaseId Int?
    text       String

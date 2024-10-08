@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Tag } from "lucide-react";
 import Link from "next/link";
+import { CartInfo } from "./CartInfo";
 
 interface Props {
    cartItems: CartItem[];
@@ -28,30 +29,19 @@ export const CartOrderSummary: React.FC<Props> = ({ cartItems }) => {
             Order Summary
          </h2>
          <div className="border-b-[1px] border-black/10 py-3">
-            <div className="mb-1 flex items-center justify-between md:mb-2">
-               <span className="text-md leading-22 opacity-60 md:text-lg md:leading-27">
-                  Subtotal
-               </span>
-               <span className="text-md font-bold leading-22 md:text-lg md:leading-27">
-                  ${totalCartPrice?.toFixed(2)}
-               </span>
-            </div>
-            <div className="mb-1 flex items-center justify-between md:mb-2">
-               <span className="text-md leading-22 opacity-60 md:text-lg md:leading-27">
-                  Discount (-20%)
-               </span>
-               <span className="text-md font-bold leading-22 text-[#FF3333] md:text-lg md:leading-27">
-                  -${discount.toFixed(2)}
-               </span>
-            </div>
-            <div className="mb-1 flex items-center justify-between md:mb-2 md:text-lg md:leading-27">
-               <span className="text-md leading-22 opacity-60 md:text-lg md:leading-27">
-                  Delivery Fee
-               </span>
-               <span className="text-md font-bold leading-22 md:text-lg md:leading-27">
-                  ${totalWithDiscount > 0 ? deliveryFee : 0}
-               </span>
-            </div>
+            <CartInfo
+               text="Subtotal"
+               price={Number(totalCartPrice?.toFixed(2))}
+            />
+            <CartInfo
+               text="Discount (-20%)"
+               discount
+               price={Number(discount.toFixed(2))}
+            />
+            <CartInfo
+               text="Delivery Fee"
+               price={Number(totalWithDiscount > 0 ? deliveryFee : 0)}
+            />
          </div>
          <div className="flex items-center justify-between py-3 md:py-4">
             <span className="text-md leading-22 md:text-lg md:leading-27">
@@ -69,12 +59,9 @@ export const CartOrderSummary: React.FC<Props> = ({ cartItems }) => {
             />
             <Button variant="black">Apply</Button>
          </div>
-         <Button
-            className="group flex !w-full items-center justify-center gap-2"
-            variant="black"
-         >
-            <Link href="/checkout">
-               Go to Checkout
+         <Button className="group !w-full" variant="black">
+            <Link href="/checkout" className="flex items-center gap-1">
+               <span> Go to Checkout</span>
                <ArrowRight
                   className="transition group-hover:translate-x-1"
                   size={16}

@@ -19,7 +19,7 @@ export const useProductSearch = (searchQuery: string) => {
             const data = await response.json();
             setProducts(data);
          } catch (error) {
-            console.log(error);
+            console.error(error);
             setProducts([]);
          }
       },

@@ -23,10 +23,11 @@ export const SelectSize: React.FC = () => {
    );
 
    useEffect(() => {
-      if (activeVariant?.sizes.length) {
-         const newSize = activeVariant.sizes.find(s => s === size)
+      if (activeVariant) {
+         const newSize = activeVariant.sizes.some(s => s.id === size.id)
             ? size
-            : activeVariant.sizes[0];
+            : sizes[0];
+
          setSize(newSize);
       }
 
@@ -45,7 +46,7 @@ export const SelectSize: React.FC = () => {
          <div className="flex flex-wrap gap-4">
             {activeVariant.sizes.map(
                (sizeOption: { id: number; size: string }) => {
-                  const isActive = size === sizeOption;
+                  const isActive = size?.id === sizeOption.id;
                   const sizeData = sizes.find(s => s.size === sizeOption.size);
 
                   return (

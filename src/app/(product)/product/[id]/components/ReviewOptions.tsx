@@ -13,9 +13,7 @@ export const ReviewOptions: React.FC = () => {
             <Ellipsis size={20} className="text-black/40" />
          </DropdownMenuTrigger>
          <DropdownMenuContent>
-            <DropdownMenuItem onClick={() => console.log(1)}>
-               Report
-            </DropdownMenuItem>
+            <DropdownMenuItem>Report</DropdownMenuItem>
          </DropdownMenuContent>
       </DropdownMenu>
    );

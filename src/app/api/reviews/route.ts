@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
 
       return NextResponse.json({ message: "Отзыв успешно добавлен", review });
    } catch (error) {
-      console.error("Ошибка при создании отзыва:", error); // Лог ошибки
+      console.error("Ошибка при создании отзыва:", error);
       return NextResponse.json(
          { message: "Ошибка при создании отзыва", error },
          { status: 500 },

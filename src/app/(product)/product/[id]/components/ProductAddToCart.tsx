@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useProductStore } from "../store";
 import { useCartStore } from "@/app/(cart)/cart/store";
-import { ProductWithVariantsAndDetails } from "@/@types/ProductWithOptions";
+import { ProductWithVariantsAndDetails } from "@/@types/Product";
 import toast from "react-hot-toast";
 import { CountButton } from "@/components/shared/CountButton";
 import { ProductVariantOption } from "@prisma/client";

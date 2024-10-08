@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../prisma/PrismaClient";
 import { getUserSession } from "@/lib/getUserSession";
-import { randomUUID } from "crypto";
+import { createCartToken } from "@/services/createCartToken";
+import { getUserCart } from "@/services/getUserCart";
+import { createUserCart } from "@/services/createUserCart";
+import { create } from "domain";
+import { createCartItem } from "@/services/createCartItem";
+import { getCartItem } from "@/services/getCartItem";
 
 export async function GET(req: NextRequest) {
    try {
@@ -10,60 +15,18 @@ export async function GET(req: NextRequest) {
       let newToken = token;
 
       if (!token && !session) {
-         newToken = randomUUID();
-
-         const response = NextResponse.json({
-            cart: [],
-         });
-
-         response.cookies.set("cartToken", newToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            maxAge: 60 * 60 * 24 * 30,
-            path: "/",
-         });
-
+         const { response } = await createCartToken();
          return response;
       }
 
-      const whereClause = session
-         ? { userId: Number(session.id) }
-         : { token: newToken };
-
-      const userCart = await prisma.cart.findFirst({
-         where: whereClause,
-         include: {
-            items: {
-               orderBy: {
-                  createdAt: "desc",
-               },
-               include: {
-                  product: true,
-                  productVariantOption: {
-                     include: {
-                        sizes: true,
-                        color: true,
-                     },
-                  },
-                  size: true,
-               },
-            },
-         },
-      });
-
-      if (!userCart) {
-         await prisma.cart.create({
-            data: {
-               token: newToken,
-               userId: session ? Number(session.id) : undefined,
-            },
-         });
-      }
+      const userCart =
+         (await getUserCart(Number(session?.id), newToken)) ||
+         createUserCart(Number(session?.id), newToken);
 
       return NextResponse.json(userCart);
    } catch (error) {
       return NextResponse.json(
-         { message: "Ошибка при получении продуктов", error },
+         { message: "Error when receiving a shopping cart", error },
          { status: 500 },
       );
    }
@@ -73,37 +36,18 @@ export async function POST(req: NextRequest) {
    try {
       const token = req.cookies.get("cartToken")?.value;
       const session = await getUserSession();
-
       let newToken = token;
 
       if (!token && !session) {
-         newToken = randomUUID();
-         const response = NextResponse.json({});
-         response.cookies.set("cartToken", newToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            maxAge: 60 * 60 * 24 * 30,
-            path: "/",
-         });
+         const { response } = await createCartToken();
          return response;
       }
 
-      const whereClause = session
-         ? { userId: Number(session.id) }
-         : { token: newToken };
-
-      const userCart =
-         (await prisma.cart.findFirst({ where: whereClause })) ||
-         (await prisma.cart.create({
-            data: {
-               token: newToken,
-               userId: session ? Number(session.id) : undefined,
-            },
-         }));
+      const userCart = await getUserCart(Number(session?.id), newToken);
 
       if (!userCart) {
          return NextResponse.json(
-            { message: "Корзина не найдена" },
+            { message: "Shopping cart not found" },
             { status: 404 },
          );
       }
@@ -120,41 +64,19 @@ export async function POST(req: NextRequest) {
          },
       });
 
-      if (findCartItem) {
-         await prisma.cartItem.update({
-            where: {
-               id: findCartItem.id,
-            },
-            data: {
-               quantity:
-                  findCartItem.quantity === quantity ? quantity + 1 : quantity,
-            },
-         });
-      } else {
-         await prisma.cartItem.create({
-            data: {
-               cartId: userCart.id,
-               productId,
-               productVariantOptionId,
-               quantity,
-               sizeId,
-            },
-            include: {
-               product: true,
-               productVariantOption: {
-                  include: {
-                     color: true,
-                  },
-               },
-               size: true,
-            },
-         });
-      }
+      await createCartItem({
+         findCartItem,
+         userCartId: userCart.id,
+         productId,
+         productVariantOptionId,
+         quantity,
+         sizeId,
+      });
 
-      return NextResponse.json({ message: "Товар добавлен в корзину" });
+      return NextResponse.json({ message: "Product added to cart" });
    } catch (error) {
       return NextResponse.json(
-         { message: "Ошибка при получении продуктов", error },
+         { message: "An error in receiving the products", error },
          { status: 500 },
       );
    }
@@ -164,40 +86,32 @@ export async function PATCH(req: NextRequest) {
    const { searchParams } = new URL(req.url);
    const id = searchParams.get("id");
    const quantity = searchParams.get("quantity");
+   const token = req.cookies.get("cartToken")?.value;
+   const session = await getUserSession();
 
    if (!id && !quantity) {
       return NextResponse.json(
          {
-            message: "Идентификатор товара не указан",
+            message: "No product id",
          },
          { status: 400 },
       );
    }
 
-   const token = req.cookies.get("cartToken")?.value;
-   const session = await getUserSession();
-
-   const whereClause = session ? { userId: Number(session.id) } : { token };
-
-   const userCart = await prisma.cart.findFirst({
-      where: whereClause,
-      include: {
-         items: true,
-      },
-   });
+   const userCart = await getUserCart(Number(session?.id), token);
 
    if (!userCart) {
       return NextResponse.json({
-         message: "Корзина не найдена",
+         message: "Shopping cart not found",
       });
    }
 
-   const cartItem = userCart.items.find(item => item.id === Number(id));
+   const cartItem = await getCartItem(userCart, Number(id));
 
    if (!cartItem) {
       return NextResponse.json(
          {
-            message: "Товар не найден в корзине",
+            message: "Product not found in shopping cart",
          },
          { status: 404 },
       );
@@ -212,47 +126,39 @@ export async function PATCH(req: NextRequest) {
       },
    });
 
-   return NextResponse.json({ message: "Товар удален из корзины" });
+   return NextResponse.json({ message: "Product quantity updated" });
 }
 
 export async function DELETE(req: NextRequest) {
    try {
       const { searchParams } = new URL(req.url);
       const id = searchParams.get("id");
+      const token = req.cookies.get("cartToken")?.value;
+      const session = await getUserSession();
 
       if (!id) {
          return NextResponse.json(
             {
-               message: "Идентификатор товара не указан",
+               message: "No product id",
             },
             { status: 400 },
          );
       }
 
-      const token = req.cookies.get("cartToken")?.value;
-      const session = await getUserSession();
-
-      const whereClause = session ? { userId: Number(session.id) } : { token };
-
-      const userCart = await prisma.cart.findFirst({
-         where: whereClause,
-         include: {
-            items: true,
-         },
-      });
+      const userCart = await getUserCart(Number(session?.id), token);
 
       if (!userCart) {
          return NextResponse.json({
-            message: "Корзина не найдена",
+            message: "Shopping cart not found",
          });
       }
 
-      const cartItem = userCart.items.find(item => item.id === Number(id));
+      const cartItem = await getCartItem(userCart, Number(id));
 
       if (!cartItem) {
          return NextResponse.json(
             {
-               message: "Товар не найден в корзине",
+               message: "Product not found in shopping cart",
             },
             { status: 404 },
          );
@@ -264,10 +170,10 @@ export async function DELETE(req: NextRequest) {
          },
       });
 
-      return NextResponse.json({ message: "Товар удален из корзины" });
+      return NextResponse.json({ message: "Product deleted" });
    } catch (error) {
       return NextResponse.json(
-         { message: "Ошибка при удалении продукта", error },
+         { message: "An error in receiving the products", error },
          { status: 500 },
       );
    }

@@ -12,6 +12,7 @@ export interface ProductWithVariantsAndDetails {
    dressStyleId: number;
    categoryId?: number | null;
    createdAt: Date;
+   reviews: Review[];
    updatedAt: Date;
    productDetails: ProductDetails[];
    productVariantOptions: ProductVariantOptionWithSizes[];
@@ -47,7 +48,7 @@ export interface ProductVariantWithSizes extends ProductVariantOption {
 }
 
 export interface Review {
-   id: string;
+   id: number;
    author: {
       fullName: string;
    };

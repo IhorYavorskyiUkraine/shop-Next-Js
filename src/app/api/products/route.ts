@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../prisma/PrismaClient";
+import { getProductsRating } from "@/lib/getProductsRating";
+import { ProductWithVariantsAndDetails } from "@/@types/Product";
 
 export async function GET(req: NextRequest) {
    try {
@@ -19,12 +21,19 @@ export async function GET(req: NextRequest) {
 
       const products = await prisma.product.findMany({
          where: { categoryId: Number(categoryId) },
-         include: { productCategory: true },
+         include: {
+            productCategory: true,
+            reviews: {
+               select: { rating: true },
+            },
+         },
          take: limit,
          skip: offset,
       });
 
-      return NextResponse.json(products);
+      const updatedProducts = await getProductsRating(products);
+
+      return NextResponse.json(updatedProducts);
    } catch (error) {
       return NextResponse.json(
          { message: "Ошибка при получении продуктов", error },

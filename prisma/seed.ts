@@ -1151,7 +1151,7 @@ async function main() {
       await down();
       await up();
    } catch (error) {
-      console.log(error);
+      console.error(error);
    }
 }
 

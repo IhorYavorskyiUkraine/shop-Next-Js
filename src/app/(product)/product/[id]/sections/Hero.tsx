@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/container";
 import { ProductInfo } from "./ProductInfo";
 import { ProductTabs } from "./ProductTabs";
 import { useProductStore } from "../store";
-import { ProductWithVariantsAndDetails } from "@/@types/ProductWithOptions";
+import { ProductWithVariantsAndDetails } from "@/@types/Product";
 import { useEffect } from "react";
 import { ProductsWithCategories } from "@/modules";
 
@@ -35,7 +35,7 @@ export const Hero: React.FC<Props> = ({ product }) => {
 
    return (
       <Container>
-         <BreadCrumb />
+         <BreadCrumb loading={loading} />
          {loading ? <Skeleton productInfo /> : <ProductInfo />}
          {loading ? <Skeleton productTabs /> : <ProductTabs />}
          <ProductsWithCategories categoryId={2} title="you might also like" />

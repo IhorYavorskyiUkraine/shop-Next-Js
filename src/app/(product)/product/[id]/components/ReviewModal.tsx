@@ -16,9 +16,7 @@ export const ReviewModal: React.FC<Props> = ({ open, onClose, session }) => {
             <div className="hidden">
                <DialogTitle></DialogTitle>
             </div>
-            <h2 className="text-lg font-bold md:mb-4 md:text-xl">
-               Leave a Comment
-            </h2>
+            <h2 className="text-lg font-bold md:text-xl">Leave a Comment</h2>
             <ProductReviewForm session={session} onClose={onClose} />
          </DialogContent>
       </Dialog>
