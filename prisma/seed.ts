@@ -7,6 +7,7 @@ import {
    dressStyle,
    sizes,
 } from "./products";
+import { get } from "http";
 
 async function up() {
    await Promise.all([
@@ -22,6 +23,7 @@ async function up() {
          id: 1,
          fullName: "John Doe",
          email: "john.doe1@example.com",
+         verified: new Date(),
          password: hashSync("password123", 10),
          role: "USER",
       },
@@ -979,147 +981,6 @@ async function up() {
                {
                   name: "Care Instructions",
                   value: "Machine wash warm, do not bleach.",
-               },
-            ],
-         },
-      },
-   });
-
-   await prisma.purchase.create({
-      data: {
-         user: {
-            connect: { id: 1 },
-         },
-         product: {
-            connect: { id: 1 },
-         },
-      },
-   });
-
-   await prisma.purchase.create({
-      data: {
-         user: {
-            connect: { id: 1 },
-         },
-         product: {
-            connect: { id: 2 },
-         },
-      },
-   });
-
-   await prisma.purchase.create({
-      data: {
-         user: {
-            connect: { id: 1 },
-         },
-         product: {
-            connect: { id: 1 },
-         },
-      },
-   });
-
-   await prisma.purchase.create({
-      data: {
-         user: {
-            connect: { id: 1 },
-         },
-         product: {
-            connect: { id: 1 },
-         },
-      },
-   });
-
-   await prisma.review.create({
-      data: {
-         rating: 5,
-         text: "Amazing product",
-         author: {
-            connect: { id: 1 },
-         },
-         product: {
-            connect: { id: 1 },
-         },
-         purchase: {
-            connect: { id: 1 },
-         },
-      },
-   });
-
-   await prisma.review.create({
-      data: {
-         rating: 5,
-         text: "I love this jeans!",
-         author: {
-            connect: { id: 1 },
-         },
-         product: {
-            connect: { id: 1 },
-         },
-         purchase: {
-            connect: { id: 3 },
-         },
-      },
-   });
-
-   await prisma.review.create({
-      data: {
-         rating: 5,
-         text: "Highly recommend!",
-         author: {
-            connect: { id: 1 },
-         },
-         product: {
-            connect: { id: 2 },
-         },
-         purchase: {
-            connect: { id: 2 },
-         },
-      },
-   });
-
-   await prisma.review.create({
-      data: {
-         rating: 5,
-         text: "Amazing product",
-         author: {
-            connect: { id: 1 },
-         },
-         product: {
-            connect: { id: 1 },
-         },
-         purchase: {
-            connect: { id: 4 },
-         },
-      },
-   });
-
-   await prisma.cart.create({
-      data: {
-         id: 1,
-         userId: 1,
-         totalAmount: 0,
-         items: {
-            create: [
-               {
-                  id: 1,
-                  productId: 1,
-                  productVariantOptionId: 1,
-                  quantity: 1,
-                  sizeId: 1,
-               },
-               {
-                  id: 2,
-                  productId: 1,
-                  productVariantOptionId: 2,
-                  quantity: 2,
-                  sizeId: 1,
-               },
-               {
-                  id: 3,
-                  productId: 1,
-                  productVariantOptionId: 1,
-                  quantity: 3,
-                  sizeId: 1,
                },
             ],
          },

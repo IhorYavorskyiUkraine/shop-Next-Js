@@ -6,8 +6,9 @@ import { CartList } from "./components/CartList";
 import { CartOrderSummary } from "./components/CartOrderSummary";
 import { Title } from "@/components/ui/title";
 import { useCartStore } from "./store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/shared/Skeleton";
+import { ContactForm } from "./components/ContactForm";
 
 const CartPage = () => {
    const [cart, fetchCart, loading] = useCartStore(state => [
@@ -15,6 +16,8 @@ const CartPage = () => {
       state.fetchCart,
       state.loading,
    ]);
+
+   const [contactOpen, setContactOpen] = useState(false);
 
    useEffect(() => {
       fetchCart();
@@ -32,18 +35,30 @@ const CartPage = () => {
 
       return (
          <Container>
-            <BreadCrumb name={{ name: "Cart", link: "/cart" }} />
+            <BreadCrumb
+               name={
+                  contactOpen
+                     ? { name: "Contact Form", link: "/contact" }
+                     : { name: "Cart", link: "/cart" }
+               }
+            />
             <Title
                className="mb-5 text-2xl md:mb-6 md:-translate-y-1 md:!text-4xl"
-               text="Your Cart"
+               text={contactOpen ? "Contact Form" : "Your Cart"}
             />
             <div className="flex flex-col gap-5 pb-12 md:flex-row md:items-start md:pb-[80px]">
                {loading ? (
                   <Skeleton cartList />
+               ) : contactOpen ? (
+                  <ContactForm setContactOpen={setContactOpen} />
                ) : (
                   <CartList cartItems={cart.items} />
                )}
-               <CartOrderSummary cartItems={cart.items} />
+               <CartOrderSummary
+                  setContactOpen={setContactOpen}
+                  contactOpen={contactOpen}
+                  cartItems={cart.items}
+               />
             </div>
          </Container>
       );

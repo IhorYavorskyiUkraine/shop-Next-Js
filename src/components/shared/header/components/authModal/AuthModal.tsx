@@ -28,6 +28,7 @@ export const AuthModal: React.FC<Props> = ({
    const handleClose = () => {
       onClose();
    };
+
    return (
       <Dialog open={open} onOpenChange={handleClose}>
          <DialogContent className="bg-white">

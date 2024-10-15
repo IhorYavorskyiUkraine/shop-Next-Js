@@ -16,10 +16,12 @@ model User {
    createdAt DateTime @default(now())
    updatedAt DateTime @updatedAt
    fullName  String
+   imageUrl  String   @default("/images/user/userImagePlaceholder.png")
 
    provider         String?
    providerId       String?
    verificationCode VerificationCode?
+   verified         DateTime?
 
    cart     Cart?
    orders   Order[]
@@ -150,7 +152,7 @@ model Cart {
    user        User?      @relation(fields: [userId], references: [id])
    userId      Int?       @unique
    token       String?
-   totalAmount Int?
+   totalAmount Int        @default(0)
    createdAt   DateTime   @default(now())
    updatedAt   DateTime   @updatedAt
    items       CartItem[]
@@ -173,19 +175,19 @@ model CartItem {
 
 model Order {
    id          Int         @id @default(autoincrement())
-   userId      Int
+   userId      Int?
    token       String
    totalAmount Int
-   status      OrderStatus
    paymentId   String?
    fullName    String
    email       String
    phone       String
    address     String
    comment     String?
+   status      OrderStatus @default(PENDING)
    createdAt   DateTime    @default(now())
    updatedAt   DateTime    @updatedAt
-   user        User        @relation(fields: [userId], references: [id])
+   user        User?       @relation(fields: [userId], references: [id])
    items       OrderItem[]
 }
 
@@ -195,6 +197,7 @@ model OrderItem {
    productVariantOptionId Int
    quantity               Int                  @default(1)
    price                  Int
+   sizeId                 Int
    createdAt              DateTime             @default(now())
    updatedAt              DateTime             @updatedAt
    order                  Order                @relation(fields: [orderId], references: [id])

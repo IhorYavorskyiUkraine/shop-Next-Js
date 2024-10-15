@@ -4,9 +4,9 @@ import { getUserSession } from "@/lib/getUserSession";
 import { createCartToken } from "@/services/createCartToken";
 import { getUserCart } from "@/services/getUserCart";
 import { createUserCart } from "@/services/createUserCart";
-import { create } from "domain";
 import { createCartItem } from "@/services/createCartItem";
 import { getCartItem } from "@/services/getCartItem";
+import { updateCartTotalAmount } from "@/app/actions";
 
 export async function GET(req: NextRequest) {
    try {
@@ -22,6 +22,8 @@ export async function GET(req: NextRequest) {
       const userCart =
          (await getUserCart(Number(session?.id), newToken)) ||
          createUserCart(Number(session?.id), newToken);
+
+      await updateCartTotalAmount(userCart);
 
       return NextResponse.json(userCart);
    } catch (error) {

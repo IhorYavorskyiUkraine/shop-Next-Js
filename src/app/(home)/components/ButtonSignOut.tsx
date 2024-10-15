@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { signOut } from "next-auth/react";
 
 export const ButtonSignOut: React.FC = () => {
@@ -8,5 +9,9 @@ export const ButtonSignOut: React.FC = () => {
          callbackUrl: "/",
       });
    };
-   return <button onClick={onClickSignOut}>logout</button>;
+   return (
+      <Button variant="black" className="!w-full" onClick={onClickSignOut}>
+         Log Out
+      </Button>
+   );
 };

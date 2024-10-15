@@ -1,15 +1,22 @@
 import { CartItem } from "@/@types/Cart";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, Tag } from "lucide-react";
-import Link from "next/link";
+import { Tag } from "lucide-react";
 import { CartInfo } from "./CartInfo";
+import { CartCheckOutButton } from "./CartCheckOutButton";
+import { useState } from "react";
 
 interface Props {
    cartItems: CartItem[];
+   contactOpen: boolean;
+   setContactOpen: (value: boolean) => void;
 }
 
-export const CartOrderSummary: React.FC<Props> = ({ cartItems }) => {
+export const CartOrderSummary: React.FC<Props> = ({
+   cartItems,
+   contactOpen,
+   setContactOpen,
+}) => {
    const totalCartPrice =
       cartItems?.reduce((cartTotal, item) => {
          const itemTotal = item.productVariantOption
@@ -48,7 +55,7 @@ export const CartOrderSummary: React.FC<Props> = ({ cartItems }) => {
                Total
             </span>
             <span className="text-lg font-bold leading-27">
-               ${totalWithDiscount.toFixed(2)}
+               ${Number(totalWithDiscount.toFixed(2))}
             </span>
          </div>
          <div className="mb-4 grid grid-cols-[1fr,_90px] gap-2 md:mb-6">
@@ -59,15 +66,10 @@ export const CartOrderSummary: React.FC<Props> = ({ cartItems }) => {
             />
             <Button variant="black">Apply</Button>
          </div>
-         <Button className="group !w-full" variant="black">
-            <Link href="/checkout" className="flex items-center gap-1">
-               <span> Go to Checkout</span>
-               <ArrowRight
-                  className="transition group-hover:translate-x-1"
-                  size={16}
-               />
-            </Link>
-         </Button>
+         <CartCheckOutButton
+            contactOpen={contactOpen}
+            setContactOpen={setContactOpen}
+         />
       </div>
    );
 };

@@ -52,6 +52,10 @@ export const authOptions: AuthOptions = {
                return null;
             }
 
+            if (!findUser.verified) {
+               return null;
+            }
+
             return {
                id: findUser.id,
                email: findUser.email,
@@ -81,7 +85,7 @@ export const authOptions: AuthOptions = {
                   OR: [
                      {
                         provider: account?.provider,
-                        providerId: account?.providerId || "",
+                        providerId: account?.providerAccountId || "",
                      },
                      { email: user.email },
                   ],
@@ -95,7 +99,7 @@ export const authOptions: AuthOptions = {
                   },
                   data: {
                      provider: account?.provider,
-                     providerId: account?.providerId || "",
+                     providerId: account?.providerAccountId || "",
                   },
                });
 
@@ -107,15 +111,17 @@ export const authOptions: AuthOptions = {
                   email: user.email,
                   fullName: user.name || "User #" + user.id,
                   password: hashSync(user.id.toString(), 10),
+                  verified: new Date(),
                   provider: account?.provider,
                   providerId: account?.providerAccountId,
                },
             });
+
+            return true;
          } catch (e) {
             console.error(e);
             return false;
          }
-         return true;
       },
       async jwt({ token }) {
          if (!token.email) {
@@ -137,7 +143,7 @@ export const authOptions: AuthOptions = {
          return token;
       },
       async session({ session, token }) {
-         if (session.user) {
+         if (session?.user) {
             session.user.id = token.id;
             session.user.role = token.role;
          }

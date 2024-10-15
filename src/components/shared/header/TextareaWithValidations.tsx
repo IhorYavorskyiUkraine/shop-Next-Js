@@ -1,23 +1,17 @@
+import { ClearButton } from "@/components/ui/clear-button";
 import { useFormContext } from "react-hook-form";
-import { RequiredSymbol } from "./RequiredSymbol";
-import { ClearButton } from "../ui/clear-button";
-import { ErrorText } from "./ErrorText";
-import { Input } from "../ui/input";
+import { ErrorText } from "../ErrorText";
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
    name: string;
    label?: string;
-   required?: boolean;
    className?: string;
-   icon?: React.ReactNode;
 }
 
-export const InputWithValidations: React.FC<Props> = ({
+export const TextareaWithValidations: React.FC<Props> = ({
    className,
    name,
    label,
-   required,
-   icon,
    ...props
 }) => {
    const {
@@ -35,17 +29,11 @@ export const InputWithValidations: React.FC<Props> = ({
    };
    return (
       <div className={className}>
-         {label && (
-            <p className="mb-1 font-medium">
-               {label} {required && <RequiredSymbol />}
-            </p>
-         )}
+         {label && <p className="mb-1 font-medium">{label}</p>}
 
          <div className="relative">
-            <Input
-               iconHidden
-               icon={icon}
-               className="h-12 text-md"
+            <textarea
+               className="rounded-m !h-[132px] w-full resize-none rounded-[20px] bg-gray px-3 py-2 text-md focus:outline-none"
                {...register(name)}
                {...props}
             />
