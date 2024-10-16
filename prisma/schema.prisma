@@ -139,6 +139,7 @@ model Size {
    size                  String                 @unique
    productVariantOptions ProductVariantOption[] @relation("ProductVariantOptionSizes")
    cartItems             CartItem[]
+   OrderItem             OrderItem[]
 }
 
 model Color {
@@ -197,6 +198,7 @@ model OrderItem {
    productVariantOptionId Int
    quantity               Int                  @default(1)
    price                  Int
+   size                   Size                 @relation(fields: [sizeId], references: [id])
    sizeId                 Int
    createdAt              DateTime             @default(now())
    updatedAt              DateTime             @updatedAt

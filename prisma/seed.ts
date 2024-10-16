@@ -7,7 +7,6 @@ import {
    dressStyle,
    sizes,
 } from "./products";
-import { get } from "http";
 
 async function up() {
    await Promise.all([
@@ -18,7 +17,7 @@ async function up() {
       prisma.color.createMany({ data: colors }),
    ]);
 
-   const user1 = await prisma.user.create({
+   await prisma.user.create({
       data: {
          id: 1,
          fullName: "John Doe",
@@ -994,9 +993,9 @@ async function down() {
       "Cart", 
       "CartItem", 
       "Order", 
+      "OrderItem", 
 		"Purchase",
 		"Review",
-      "OrderItem", 
       "Product", 
       "ProductVariantOption", 
       "Category", 

@@ -69,7 +69,7 @@ export const ProfileTabs: React.FC<Props> = ({ user, session, userOrders }) => {
                         </div>
                      </div>
                      {index === tabIndex && (
-                        <div className="md:hidden">{renderTab(index)}</div>
+                        <div className="py-5 md:hidden">{renderTab(index)}</div>
                      )}
                   </div>
                ))}

@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { MutableRefObject } from "react";
+import { ProductCard } from "./ProductCard";
 
 interface Props {
    ref: MutableRefObject<null>;
@@ -35,9 +36,12 @@ export const OrderCard: React.FC<Props> = ({
       Phone: phone,
    };
 
-   const productName = items
-      .map((item: any) => item.productVariantOption.product.name)
-      .join(", ");
+   const totalProductPrice = items?.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0,
+   );
+
+   const deliveryFee = 15;
 
    return (
       <article
@@ -45,37 +49,77 @@ export const OrderCard: React.FC<Props> = ({
          className="mb-4 border-b-[1px] border-black/10 pb-4 last:mb-0 last:border-b-0 last:pb-0"
          onClick={() => setOpen(!open)}
       >
-         <div className="flex cursor-pointer items-center justify-between">
-            <h3 className="text-xl font-bold leading-27 md:text-lg">
-               Order#{id}
-            </h3>
+         <div
+            className={cn(
+               open && "!grid-cols-[auto_16px]",
+               "grid cursor-pointer grid-cols-[auto_1fr_1fr_16px] items-center",
+            )}
+         >
+            <div className="mb-2 flex items-center justify-between">
+               <h3 className="pr-4 text-xl font-bold leading-27 md:text-lg">
+                  Order#{id}
+               </h3>
+            </div>
+            {open || (
+               <div className="flex gap-2">
+                  {items?.map((item, index) => (
+                     <img
+                        key={index}
+                        className="size-[50px]"
+                        src={item.productVariantOption.imageUrl[0]}
+                        alt=""
+                     />
+                  ))}
+               </div>
+            )}
+            {open || (
+               <div className="flex items-center justify-center text-xl font-bold leading-27 md:text-lg">
+                  ${totalProductPrice * 0.8 + deliveryFee}
+               </div>
+            )}
             <ChevronDown className={cn(open && "rotate-180")} size={16} />
          </div>
          {open && (
             <div className="mt-4">
-               <ul className="mb-4 grid grid-cols-1 md:grid-cols-2">
-                  {Object.entries(orderDetails).map(([key, value]) => (
-                     <li
-                        key={key}
-                        className="flex items-center justify-between gap-4 text-sm font-medium leading-22 opacity-60"
-                     >
-                        {key}: {value}
-                     </li>
-                  ))}
+               <ul className="mb-4 grid grid-cols-1 border-b-[1px] border-b-black/10 pb-4 md:grid-cols-2">
+                  {Object.entries(orderDetails).map(
+                     ([key, value]) =>
+                        value && (
+                           <li
+                              key={key}
+                              className="flex items-center justify-between gap-4 text-sm font-medium leading-22 opacity-60"
+                           >
+                              {key}: {value}
+                           </li>
+                        ),
+                  )}
                </ul>
+               <div className="mb-2 grid">
+                  {items?.map(item => (
+                     <ProductCard
+                        key={item.productVariantOption.product.id}
+                        id={item.productVariantOption.product.id}
+                        imageUrl={item.productVariantOption.imageUrl[0]}
+                        name={item.productVariantOption.product.name}
+                        category={
+                           item.productVariantOption.product.productCategory
+                              .name
+                        }
+                        quantity={item.quantity}
+                        price={item.price}
+                        size={item.size.size}
+                     />
+                  ))}
+               </div>
                <div>
-                  <div className="flex gap-2">
-                     {items?.map(item => (
-                        <Link
-                           href={`/product/${item.productVariantOption.product.id}`}
-                        >
-                           <img
-                              className="h-20 w-20"
-                              src={item.productVariantOption.imageUrl[0]}
-                              alt="Product Image"
-                           />
-                        </Link>
-                     ))}
+                  <div className="flex justify-between">
+                     Price: <span>${totalProductPrice * 0.8}</span>
+                  </div>
+                  <div className="mb-3 flex justify-between">
+                     Delivery: <span>${deliveryFee}</span>
+                  </div>
+                  <div className="flex justify-between text-xl font-bold leading-27 md:text-lg">
+                     Total Amount: <span>${totalAmount}</span>
                   </div>
                </div>
             </div>

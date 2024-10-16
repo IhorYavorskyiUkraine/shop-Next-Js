@@ -4,11 +4,11 @@ import { Input } from "@/components/ui/input";
 import { Tag } from "lucide-react";
 import { CartInfo } from "./CartInfo";
 import { CartCheckOutButton } from "./CartCheckOutButton";
-import { useState } from "react";
 
 interface Props {
    cartItems: CartItem[];
    contactOpen: boolean;
+   isSubmitting: boolean;
    setContactOpen: (value: boolean) => void;
 }
 
@@ -16,6 +16,7 @@ export const CartOrderSummary: React.FC<Props> = ({
    cartItems,
    contactOpen,
    setContactOpen,
+   isSubmitting,
 }) => {
    const totalCartPrice =
       cartItems?.reduce((cartTotal, item) => {
@@ -67,6 +68,7 @@ export const CartOrderSummary: React.FC<Props> = ({
             <Button variant="black">Apply</Button>
          </div>
          <CartCheckOutButton
+            isSubmitting={isSubmitting}
             contactOpen={contactOpen}
             setContactOpen={setContactOpen}
          />

@@ -14,7 +14,7 @@ export const ProfileMain: React.FC = async () => {
    }
 
    const user = await getUser(Number(session.id));
-   const userOrders = await getUserOrders(token, Number(session.id));
+   const userOrders = await getUserOrders(Number(session.id));
 
    return <ProfileTabs userOrders={userOrders} user={user} session={session} />;
 };

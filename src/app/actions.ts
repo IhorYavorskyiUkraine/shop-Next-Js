@@ -70,6 +70,7 @@ export async function createOrder(data: any) {
 
       const order = await prisma.order.create({
          data: {
+            userId: Number(session?.id),
             token: token,
             totalAmount: updatedCart.totalAmount,
             status: OrderStatus.PENDING,
@@ -112,7 +113,7 @@ export async function createOrder(data: any) {
          }),
       );
 
-      return "http://localhost:3000/home";
+      return "http://localhost:3000/profile";
    } catch (e) {
       console.error(e);
    }
