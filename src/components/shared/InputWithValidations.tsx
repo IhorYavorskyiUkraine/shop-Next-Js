@@ -43,7 +43,7 @@ export const InputWithValidations: React.FC<Props> = ({
 
          <div className="relative">
             <Input
-               iconHidden
+               iconHidden={false}
                icon={icon}
                className="h-12 text-md"
                {...register(name)}

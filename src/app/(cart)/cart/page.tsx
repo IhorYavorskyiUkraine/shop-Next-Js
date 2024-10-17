@@ -14,6 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { checkoutFormSchema } from "@/lib/constants";
 import toast from "react-hot-toast";
 import { createOrder } from "@/app/actions";
+import { useProfileStore } from "@/app/(home)/profile/store";
 
 const CartPage = () => {
    const [cart, fetchCart, loading] = useCartStore(state => [
@@ -21,8 +22,13 @@ const CartPage = () => {
       state.fetchCart,
       state.loading,
    ]);
-
+   const [user, fetchUser] = useProfileStore(state => [
+      state.user,
+      state.fetchUser,
+   ]);
    const [isSubmitting, setIsSubmitting] = useState(false);
+   const [contactOpen, setContactOpen] = useState(false);
+   const [firstName, lastName] = user?.fullName?.split(" ") || [];
 
    const form = useForm({
       resolver: zodResolver(checkoutFormSchema),
@@ -36,11 +42,22 @@ const CartPage = () => {
       },
    });
 
-   const [contactOpen, setContactOpen] = useState(false);
-
    useEffect(() => {
       fetchCart();
+      fetchUser();
    }, [fetchCart]);
+
+   useEffect(() => {
+      if (user) {
+         form.reset({
+            firstName: firstName || "",
+            lastName: lastName || "",
+            email: user.email || "",
+            phone: user.phone || "",
+            address: user.address || "",
+         });
+      }
+   }, [user]);
 
    const onSubmit = async (data: any) => {
       try {
@@ -68,11 +85,15 @@ const CartPage = () => {
       }
    };
 
+   const triggerSubmit = () => {
+      form.handleSubmit(onSubmit)();
+   };
+
    try {
       if (!cart || cart.items?.length === 0) {
          return (
             <Container className="flex h-[400px] flex-col items-center justify-center">
-               <Title text="Your cart is empty" className="mb-5" />
+               <Title text="Your cart is empty" className="mb-5 text-center" />
                <p className="text-[64px]">😞</p>
             </Container>
          );
@@ -91,25 +112,27 @@ const CartPage = () => {
                className="mb-5 text-2xl md:mb-6 md:-translate-y-1 md:!text-4xl"
                text={contactOpen ? "Contact Form" : "Your Cart"}
             />
-            <FormProvider {...form}>
-               <form onSubmit={form.handleSubmit(onSubmit)}>
-                  <div className="flex flex-col gap-5 pb-12 md:flex-row md:items-start md:pb-[80px]">
-                     {loading ? (
-                        <Skeleton cartList />
-                     ) : contactOpen ? (
-                        <ContactForm setContactOpen={setContactOpen} />
-                     ) : (
-                        <CartList cartItems={cart.items} />
-                     )}
-                     <CartOrderSummary
-                        isSubmitting={isSubmitting}
+            <div className="flex flex-col gap-5 pb-12 md:flex-row md:items-start md:pb-[80px]">
+               <FormProvider {...form}>
+                  {loading ? (
+                     <Skeleton cartList />
+                  ) : contactOpen ? (
+                     <ContactForm
+                        onSubmit={onSubmit}
                         setContactOpen={setContactOpen}
-                        contactOpen={contactOpen}
-                        cartItems={cart.items}
                      />
-                  </div>
-               </form>
-            </FormProvider>
+                  ) : (
+                     <CartList cartItems={cart.items} />
+                  )}
+                  <CartOrderSummary
+                     isSubmitting={isSubmitting}
+                     setContactOpen={setContactOpen}
+                     contactOpen={contactOpen}
+                     triggerSubmit={triggerSubmit}
+                     cartItems={cart.items}
+                  />
+               </FormProvider>
+            </div>
          </Container>
       );
    } catch (error) {

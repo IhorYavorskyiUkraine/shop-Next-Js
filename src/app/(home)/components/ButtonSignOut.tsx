@@ -10,7 +10,7 @@ export const ButtonSignOut: React.FC = () => {
       });
    };
    return (
-      <Button variant="black" className="!w-full" onClick={onClickSignOut}>
+      <Button variant="black" onClick={onClickSignOut}>
          Log Out
       </Button>
    );

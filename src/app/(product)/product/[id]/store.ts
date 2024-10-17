@@ -64,7 +64,7 @@ export const useProductStore = create<ProductStore>(set => ({
          );
 
          if (!response.ok) {
-            throw new Error(`Ошибка: ${response.statusText}`);
+            throw new Error(`Error: ${response.statusText}`);
          }
 
          const reviews: Review[] = await response.json();

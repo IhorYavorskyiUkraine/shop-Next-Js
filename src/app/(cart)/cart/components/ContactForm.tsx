@@ -1,19 +1,22 @@
 import { TextareaWithValidations } from "@/components/shared/header/TextareaWithValidations";
 import { InputWithValidations } from "@/components/shared/InputWithValidations";
 import { ChevronLeftIcon, Mail, MapPinHouse, Phone, User } from "lucide-react";
-
+import { useFormContext } from "react-hook-form";
 interface Props {
+   onSubmit: (data: any) => void;
    setContactOpen: (value: boolean) => void;
 }
 
-export const ContactForm: React.FC<Props> = ({ setContactOpen }) => {
+export const ContactForm: React.FC<Props> = ({ setContactOpen, onSubmit }) => {
+   const { handleSubmit } = useFormContext();
+
    return (
       <div className="flex flex-1 gap-3 rounded-[20px] border-[1px] border-black/10 p-5 md:p-6">
          <ChevronLeftIcon
             onClick={() => setContactOpen(false)}
             className="cursor-pointer"
          />
-         <form className="flex-1">
+         <form onSubmit={handleSubmit(onSubmit)} className="flex-1">
             <div className="mb-5 grid grid-cols-1 gap-4 md:grid-cols-2">
                <InputWithValidations
                   icon={<User size={20} />}

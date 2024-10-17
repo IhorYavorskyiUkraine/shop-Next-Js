@@ -9,6 +9,7 @@ interface Props {
    cartItems: CartItem[];
    contactOpen: boolean;
    isSubmitting: boolean;
+   triggerSubmit: () => void;
    setContactOpen: (value: boolean) => void;
 }
 
@@ -17,6 +18,7 @@ export const CartOrderSummary: React.FC<Props> = ({
    contactOpen,
    setContactOpen,
    isSubmitting,
+   triggerSubmit,
 }) => {
    const totalCartPrice =
       cartItems?.reduce((cartTotal, item) => {
@@ -65,9 +67,12 @@ export const CartOrderSummary: React.FC<Props> = ({
                iconHidden={false}
                placeholder="Add promo code"
             />
-            <Button variant="black">Apply</Button>
+            <Button type="button" variant="black">
+               Apply
+            </Button>
          </div>
          <CartCheckOutButton
+            triggerSubmit={triggerSubmit}
             isSubmitting={isSubmitting}
             contactOpen={contactOpen}
             setContactOpen={setContactOpen}

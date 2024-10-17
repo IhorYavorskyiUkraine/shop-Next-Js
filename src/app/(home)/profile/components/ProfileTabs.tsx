@@ -1,8 +1,6 @@
 "use client";
 
 import { User, UserRole } from "@prisma/client";
-import { ButtonSignOut } from "../../components/ButtonSignOut";
-import { ProfileInfo } from "./ProfileInfo";
 import { useState } from "react";
 import { ProfileContactInfoTab } from "./ProfileContactInfoTab";
 import { ProfileOrderHistoryTab } from "./ProfileOrderHistoryTab";
@@ -30,7 +28,7 @@ export const ProfileTabs: React.FC<Props> = ({ user, session, userOrders }) => {
    const renderTab = (index: number) => {
       switch (index) {
          case 0:
-            return <ProfileContactInfoTab />;
+            return <ProfileContactInfoTab user={user} session={session} />;
          case 1:
             return <ProfileOrderHistoryTab userOrders={userOrders} />;
          case 2:
@@ -38,7 +36,7 @@ export const ProfileTabs: React.FC<Props> = ({ user, session, userOrders }) => {
          case 3:
             return <ProfileWishListTab />;
          default:
-            return null;
+            return 0;
       }
    };
 
@@ -48,15 +46,18 @@ export const ProfileTabs: React.FC<Props> = ({ user, session, userOrders }) => {
    };
 
    return (
-      <aside className="grid grid-cols-1 gap-12 py-5 md:grid-cols-[200px_1fr] md:py-8">
+      <aside className="grid grid-cols-1 py-5 md:grid-cols-[144px_1fr] md:py-8">
          <div>
-            <ProfileInfo user={user} session={session} />
-            <div className="my-4 flex flex-col rounded-[20px] py-4 md:my-5">
+            <div className="flex flex-1 flex-col rounded-[20px]">
                {tabs.map((tab, index) => (
                   <div key={tab} className="mb-4 last:mb-0 md:mb-6">
                      <div
                         onClick={() => toggleTab(index)}
-                        className="flex cursor-pointer items-center justify-between"
+                        className={cn(
+                           tabIndex === index &&
+                              "md:border-r-[1px] md:border-r-black",
+                           "flex cursor-pointer items-center justify-between",
+                        )}
                      >
                         <h3 className="text-xl font-bold leading-27 md:text-lg">
                            {tab}
@@ -74,9 +75,10 @@ export const ProfileTabs: React.FC<Props> = ({ user, session, userOrders }) => {
                   </div>
                ))}
             </div>
-            <ButtonSignOut />
          </div>
-         <div className="hidden md:block">{renderTab(Number(tabIndex))}</div>
+         <div className="hidden md:block md:border-l-[1px] md:border-l-black/10 md:pl-6">
+            {renderTab(Number(tabIndex))}
+         </div>
       </aside>
    );
 };

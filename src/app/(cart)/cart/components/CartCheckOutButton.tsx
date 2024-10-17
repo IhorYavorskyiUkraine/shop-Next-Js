@@ -5,17 +5,19 @@ interface Props {
    contactOpen: boolean;
    isSubmitting: boolean;
    setContactOpen: (value: boolean) => void;
+   triggerSubmit: () => void;
 }
 
 export const CartCheckOutButton: React.FC<Props> = ({
    setContactOpen,
    contactOpen,
    isSubmitting,
+   triggerSubmit,
 }) => {
    return contactOpen ? (
       <Button
+         onClick={triggerSubmit}
          loading={isSubmitting}
-         type="submit"
          className="group !w-full"
          variant="black"
       >
@@ -32,6 +34,7 @@ export const CartCheckOutButton: React.FC<Props> = ({
          className="group !w-full"
          onClick={() => setContactOpen(true)}
          variant="black"
+         type="button"
       >
          <div className="flex items-center gap-1">
             <span>Go to Checkout</span>

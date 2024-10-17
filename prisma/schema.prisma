@@ -17,6 +17,8 @@ model User {
    updatedAt DateTime @updatedAt
    fullName  String
    imageUrl  String   @default("/images/user/userImagePlaceholder.png")
+   phone     String?
+   address   String?
 
    provider         String?
    providerId       String?

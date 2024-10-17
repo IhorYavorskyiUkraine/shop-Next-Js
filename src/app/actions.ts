@@ -7,6 +7,7 @@ import { prisma } from "../../prisma/PrismaClient";
 import { OrderStatus } from "@prisma/client";
 import { sendEmail } from "@/lib/sendEmail";
 import { PayOrderTemplate } from "@/components/shared/emailTemplates/PayOrderTemplate";
+import { getUser } from "@/lib/getUser";
 
 export async function updateCartTotalAmount(userCart: any) {
    try {
@@ -114,6 +115,36 @@ export async function createOrder(data: any) {
       );
 
       return "http://localhost:3000/profile";
+   } catch (e) {
+      console.error(e);
+   }
+}
+
+export async function updateUserProfile(data: any) {
+   try {
+      const session = await getUserSession();
+
+      if (!session) {
+         throw new Error("No session found");
+      }
+
+      const user = await getUser(Number(session.id));
+
+      if (!user) {
+         throw new Error("No user found");
+      }
+
+      await prisma.user.update({
+         where: {
+            id: user.id,
+         },
+         data: {
+            fullName: `${data.firstName} ${data.lastName}`,
+            email: data.email,
+            phone: data.phone,
+            address: data.address,
+         },
+      });
    } catch (e) {
       console.error(e);
    }
