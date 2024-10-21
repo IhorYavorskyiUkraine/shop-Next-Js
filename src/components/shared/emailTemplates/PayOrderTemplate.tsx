@@ -1,19 +1,19 @@
 interface EmailTemplateProps {
-   firstName: string;
+   fullName: string;
    orderId: number;
    orderTotal: number;
    paymentLink: string;
 }
 
 export const PayOrderTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
-   firstName,
+   fullName,
    orderId,
    orderTotal,
    paymentLink,
 }) => (
    <div className="text-gray-800 bg-white p-6 font-sans leading-relaxed">
       <h1 className="text-2xl font-bold text-green-600">
-         Thank you for your order, {firstName}!
+         Thank you for your order, {fullName}!
       </h1>
       <p className="mt-4">
          We appreciate your purchase. Your order

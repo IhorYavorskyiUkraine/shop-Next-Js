@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../prisma/PrismaClient";
 import { getProductsRating } from "@/lib/getProductsRating";
-import { ProductWithVariantsAndDetails } from "@/@types/Product";
 
 export async function GET(req: NextRequest) {
    try {
@@ -14,7 +13,7 @@ export async function GET(req: NextRequest) {
 
       if (!categoryId || isNaN(Number(categoryId))) {
          return NextResponse.json(
-            { message: "Неверный идентификатор категории" },
+            { message: "Cant find category" },
             { status: 400 },
          );
       }
@@ -23,8 +22,16 @@ export async function GET(req: NextRequest) {
          where: { categoryId: Number(categoryId) },
          include: {
             productCategory: true,
+            productDetails: true,
+            productVariantOptions: {
+               include: {
+                  sizes: true,
+               },
+            },
             reviews: {
-               select: { rating: true },
+               include: {
+                  author: true,
+               },
             },
          },
          take: limit,
@@ -36,7 +43,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(updatedProducts);
    } catch (error) {
       return NextResponse.json(
-         { message: "Ошибка при получении продуктов", error },
+         { message: "Something went wrong", error },
          { status: 500 },
       );
    }

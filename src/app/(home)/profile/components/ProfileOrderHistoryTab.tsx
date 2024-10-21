@@ -1,19 +1,16 @@
 import { useState } from "react";
 import { OrderCard } from "./OrderCard";
 import { Title } from "@/components/ui/title";
+import { Order } from "@prisma/client";
 
 interface Props {
-   userOrders: any;
+   userOrders: Order[] | null;
 }
 
 export const ProfileOrderHistoryTab: React.FC<Props> = ({ userOrders }) => {
    const [open, setOpen] = useState<number | null>(null);
 
-   const toggleTab = (index: number) => {
-      setOpen(open === index ? null : index);
-   };
-
-   if (userOrders.length === 0) {
+   if (!userOrders || userOrders.length === 0) {
       return (
          <div className="flex flex-col items-center justify-center">
             <Title text="No Orders Yet" className="mb-5 text-center" />
@@ -22,16 +19,25 @@ export const ProfileOrderHistoryTab: React.FC<Props> = ({ userOrders }) => {
       );
    }
 
+   const toggleTab = (index: number) => {
+      setOpen(open === index ? null : index);
+   };
+
    return (
       <div className="rounded-[20px] bg-gray p-4">
-         {userOrders?.map((order: any, index: number) => (
-            <OrderCard
-               setOpen={() => toggleTab(index)}
-               open={open === index}
-               key={order.id}
-               {...order}
-            />
-         ))}
+         {userOrders?.map(
+            (order: Order, index: number) => (
+               console.log(order),
+               (
+                  <OrderCard
+                     setOpen={() => toggleTab(index)}
+                     open={open === index}
+                     key={order.id}
+                     {...order}
+                  />
+               )
+            ),
+         )}
       </div>
    );
 };

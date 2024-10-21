@@ -23,10 +23,10 @@ export type CartItem = {
    product: {
       id: number;
       name: string;
-      description?: string;
-      imageUrl: string[];
+      description?: string | null;
+      imageUrl: string;
       price: number;
-      color: {
+      color?: {
          id: number;
          color: string;
       };
@@ -35,8 +35,8 @@ export type CartItem = {
 
 export type Cart = {
    id: number;
-   userId?: number;
-   token?: string;
+   userId?: number | null;
+   token?: string | null;
    totalAmount?: number;
    createdAt: Date;
    updatedAt: Date;

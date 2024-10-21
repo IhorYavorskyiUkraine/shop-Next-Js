@@ -3,7 +3,7 @@ import { InputWithValidations } from "@/components/shared/InputWithValidations";
 import { ChevronLeftIcon, Mail, MapPinHouse, Phone, User } from "lucide-react";
 import { useFormContext } from "react-hook-form";
 interface Props {
-   onSubmit: (data: any) => void;
+   onSubmit: (data: any) => Promise<void>;
    setContactOpen: (value: boolean) => void;
 }
 

@@ -13,23 +13,35 @@ import { useEffect, useState } from "react";
 import { ProfileButton } from "../ProfileButton";
 import { CartBtn } from "./components/CartBtn";
 import { useCartStore } from "@/app/(cart)/cart/store";
+import { useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface Props {
    hasCart?: boolean;
 }
 
 export const Header: React.FC<Props> = ({ hasCart = true }) => {
+   const router = useRouter();
    const [fetchCart, cart] = useCartStore(state => [
       state.fetchCart,
       state.cart,
    ]);
-
    const [openAuthModal, setOpenAuthModal] = useState(false);
-
    const { status } = useSession();
+   const searchParams = useSearchParams();
 
    useEffect(() => {
       fetchCart();
+   }, []);
+
+   useEffect(() => {
+      if (searchParams.has("verified")) {
+         router.replace("/home");
+         setTimeout(() => {
+            toast.success("Email verified");
+         }, 500);
+      }
    }, []);
 
    return (

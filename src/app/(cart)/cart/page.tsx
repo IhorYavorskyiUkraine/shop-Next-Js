@@ -11,7 +11,7 @@ import { Skeleton } from "@/components/shared/Skeleton";
 import { ContactForm } from "./components/ContactForm";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { checkoutFormSchema } from "@/lib/constants";
+import { checkoutFormSchema, CheckoutFormValues } from "@/lib/constants";
 import toast from "react-hot-toast";
 import { createOrder } from "@/app/actions";
 import { useProfileStore } from "@/app/(home)/profile/store";
@@ -30,7 +30,7 @@ const CartPage = () => {
    const [contactOpen, setContactOpen] = useState(false);
    const [firstName, lastName] = user?.fullName?.split(" ") || [];
 
-   const form = useForm({
+   const form = useForm<CheckoutFormValues>({
       resolver: zodResolver(checkoutFormSchema),
       defaultValues: {
          firstName: "",
@@ -59,14 +59,16 @@ const CartPage = () => {
       }
    }, [user]);
 
-   const onSubmit = async (data: any) => {
+   const onSubmit = async (data: CheckoutFormValues) => {
       try {
          setIsSubmitting(true);
          if (!data) {
             return;
          }
 
-         const url = await createOrder(data);
+         const fullName = `${data.firstName} ${data.lastName}`;
+
+         const url = await createOrder(data, fullName);
 
          toast.success("Order created", {
             icon: "✅",

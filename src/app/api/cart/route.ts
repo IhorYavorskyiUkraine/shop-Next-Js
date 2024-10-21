@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
 
       const userCart =
          (await getUserCart(Number(session?.id), newToken)) ||
-         createUserCart(Number(session?.id), newToken);
+         (await createUserCart(Number(session?.id), newToken));
 
       await updateCartTotalAmount(userCart);
 

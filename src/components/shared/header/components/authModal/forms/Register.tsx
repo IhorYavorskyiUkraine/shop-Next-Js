@@ -4,6 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import { InputWithValidations } from "@/components/shared/InputWithValidations";
+import { Mail, Lock, UserIcon } from "lucide-react";
+import { registerUser } from "@/app/actions";
 
 interface Props {
    onClose?: VoidFunction;
@@ -23,11 +25,11 @@ export const Register: React.FC<Props> = ({ onClose, onClickLogin }) => {
 
    const onSubmit = async (data: TFormRegisterValues) => {
       try {
-         // await registerUser({
-         //    email: data.email,
-         //    fullName: data.fullName,
-         //    password: data.password,
-         // });
+         await registerUser({
+            email: data.email,
+            fullName: data.fullName,
+            password: data.password,
+         });
 
          toast.error("Registration completed 📝. Confirm your email", {
             icon: "✅",
@@ -47,15 +49,27 @@ export const Register: React.FC<Props> = ({ onClose, onClickLogin }) => {
             className="flex flex-col gap-5"
             onSubmit={form.handleSubmit(onSubmit)}
          >
-            <InputWithValidations name="email" label="E-Mail" required />
-            <InputWithValidations name="fullName" label="Full name" required />
             <InputWithValidations
+               icon={<Mail size={20} />}
+               name="email"
+               label="E-Mail"
+               required
+            />
+            <InputWithValidations
+               icon={<UserIcon size={20} />}
+               name="fullName"
+               label="Full name"
+               required
+            />
+            <InputWithValidations
+               icon={<Lock size={20} />}
                name="password"
                label="Password"
                type="password"
                required
             />
             <InputWithValidations
+               icon={<Lock size={20} />}
                name="confirmPassword"
                label="Confirm password"
                type="password"

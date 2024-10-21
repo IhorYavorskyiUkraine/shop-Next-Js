@@ -1,8 +1,14 @@
 import { prisma } from "../../prisma/PrismaClient";
 
-export async function getUserOrders(sessionId: number) {
+export async function getUserOrders(
+   sessionId?: number,
+   email?: string,
+   token?: string,
+) {
+   const whereClause = sessionId ? { email } : { userId: sessionId };
+
    return await prisma.order.findMany({
-      where: { userId: sessionId },
+      where: whereClause || { token },
       include: {
          items: {
             include: {

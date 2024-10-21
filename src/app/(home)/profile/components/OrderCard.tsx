@@ -1,11 +1,10 @@
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
-import Link from "next/link";
 import { MutableRefObject } from "react";
 import { ProductCard } from "./ProductCard";
 
 interface Props {
-   ref: MutableRefObject<null>;
+   ref?: MutableRefObject<null>;
    id: number;
    open: boolean;
    address: string;

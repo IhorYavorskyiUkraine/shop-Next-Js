@@ -17,17 +17,6 @@ async function up() {
       prisma.color.createMany({ data: colors }),
    ]);
 
-   await prisma.user.create({
-      data: {
-         id: 1,
-         fullName: "John Doe",
-         email: "john.doe1@example.com",
-         verified: new Date(),
-         password: hashSync("password123", 10),
-         role: "USER",
-      },
-   });
-
    await prisma.product.create({
       data: {
          name: "Skinny Fit Jeans",

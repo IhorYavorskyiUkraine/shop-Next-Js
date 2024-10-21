@@ -4,12 +4,62 @@ import { getUserSession } from "@/lib/getUserSession";
 import { getUserCart } from "@/services/getUserCart";
 import { cookies } from "next/headers";
 import { prisma } from "../../prisma/PrismaClient";
-import { OrderStatus } from "@prisma/client";
+import { OrderStatus, Prisma } from "@prisma/client";
 import { sendEmail } from "@/lib/sendEmail";
 import { PayOrderTemplate } from "@/components/shared/emailTemplates/PayOrderTemplate";
 import { getUser } from "@/lib/getUser";
+import { hashSync } from "bcrypt";
+import { VerificationUserTemplate } from "@/components/shared/emailTemplates/VerificationUserTemplate";
+import { Cart } from "@/@types/Cart";
+import { OrderInput } from "@/@types/CheckOut";
 
-export async function updateCartTotalAmount(userCart: any) {
+export async function registerUser(data: Prisma.UserCreateInput) {
+   try {
+      const user = await prisma.user.findFirst({
+         where: {
+            email: data.email,
+         },
+      });
+
+      if (user) {
+         if (!user?.verified) {
+            throw new Error("User is not verified");
+         }
+         throw new Error("User already exists");
+      }
+
+      const newUser = await prisma.user.create({
+         data: {
+            email: data.email,
+            fullName: data.fullName,
+            password: hashSync(data.password, 10),
+         },
+      });
+
+      const code = (Math.floor(Math.random() * 9000) + 1000).toString();
+
+      await prisma.verificationCode.create({
+         data: {
+            userId: newUser.id,
+            code,
+         },
+      });
+
+      await sendEmail(
+         newUser.email,
+         "SHOP.CO | 📝 Verify Email",
+         VerificationUserTemplate({
+            code,
+         }),
+      );
+   } catch (e) {
+      console.error(e);
+   }
+}
+
+export async function updateCartTotalAmount(
+   userCart: Pick<Cart, "items" | "id"> | null,
+) {
    try {
       if (!userCart) {
          throw new Error("No cart found");
@@ -39,7 +89,7 @@ export async function updateCartTotalAmount(userCart: any) {
    }
 }
 
-export async function createOrder(data: any) {
+export async function createOrder(data: OrderInput, fullName: string) {
    try {
       const cookieStore = cookies();
       const session = await getUserSession();
@@ -72,7 +122,7 @@ export async function createOrder(data: any) {
       const order = await prisma.order.create({
          data: {
             userId: Number(session?.id),
-            token: token,
+            token,
             totalAmount: updatedCart.totalAmount,
             status: OrderStatus.PENDING,
             items: {
@@ -83,7 +133,7 @@ export async function createOrder(data: any) {
                   sizeId: item.sizeId,
                })),
             },
-            fullName: `${data.firstName} ${data.lastName}`,
+            fullName,
             email: data.email,
             phone: data.phone,
             address: data.address,
@@ -107,7 +157,7 @@ export async function createOrder(data: any) {
          data.email,
          "New order",
          PayOrderTemplate({
-            firstName: data.firstName,
+            fullName,
             orderId: order.id,
             orderTotal: updatedCart.totalAmount,
             paymentLink: "https://example.com",
@@ -142,7 +192,9 @@ export async function updateUserProfile(data: any) {
             fullName: `${data.firstName} ${data.lastName}`,
             email: data.email,
             phone: data.phone,
-            address: data.address,
+            password: data.password
+               ? hashSync(data.password, 10)
+               : user?.password,
          },
       });
    } catch (e) {

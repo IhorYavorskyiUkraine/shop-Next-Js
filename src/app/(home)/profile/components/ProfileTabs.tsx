@@ -1,6 +1,6 @@
 "use client";
 
-import { User, UserRole } from "@prisma/client";
+import { Order, User, UserRole } from "@prisma/client";
 import { useState } from "react";
 import { ProfileContactInfoTab } from "./ProfileContactInfoTab";
 import { ProfileOrderHistoryTab } from "./ProfileOrderHistoryTab";
@@ -17,7 +17,7 @@ interface Props {
       name: string;
       image: string;
    } | null;
-   userOrders: any;
+   userOrders: Order[] | null;
 }
 
 export const ProfileTabs: React.FC<Props> = ({ user, session, userOrders }) => {

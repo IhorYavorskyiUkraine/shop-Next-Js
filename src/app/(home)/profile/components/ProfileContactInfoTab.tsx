@@ -6,10 +6,10 @@ import { ButtonSignOut } from "../../components/ButtonSignOut";
 import { InputWithValidations } from "@/components/shared/InputWithValidations";
 import { Button } from "@/components/ui/button";
 import { updateUserProfile } from "@/app/actions";
-import { profileFormSchema } from "@/lib/constants";
+import { profileFormSchema, ProfileFormValues } from "@/lib/constants";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import { Mail, MapPinHouse, Phone, User as UserIcon } from "lucide-react";
+import { Mail, Lock, Phone, User as UserIcon } from "lucide-react";
 
 interface Props {
    user: User | null;
@@ -25,18 +25,19 @@ export const ProfileContactInfoTab: React.FC<Props> = ({ user, session }) => {
    const [firstName = "", lastName = ""] = user?.fullName?.split(" ") || [];
    const [isSubmitting, setIsSubmitting] = useState(false);
 
-   const form = useForm({
+   const form = useForm<ProfileFormValues>({
       resolver: zodResolver(profileFormSchema),
       defaultValues: {
          firstName: firstName,
          lastName: lastName,
-         email: user?.email,
-         phone: user?.phone,
-         address: user?.address,
+         email: user?.email || "",
+         phone: user?.phone || "",
+         password: "",
+         confirmPassword: "",
       },
    });
 
-   const onSubmit = async (data: any) => {
+   const onSubmit = async (data: ProfileFormValues) => {
       setIsSubmitting(true);
       try {
          await updateUserProfile(data);
@@ -80,9 +81,14 @@ export const ProfileContactInfoTab: React.FC<Props> = ({ user, session }) => {
                         label="Phone"
                      />
                      <InputWithValidations
-                        icon={<MapPinHouse size={20} />}
-                        name="address"
-                        label="Address"
+                        icon={<Lock size={20} />}
+                        name="password"
+                        label="Password"
+                     />
+                     <InputWithValidations
+                        icon={<Lock size={20} />}
+                        name="confirmPassword"
+                        label="Confirm Password"
                      />
                   </div>
                   <div className="flex justify-center">
