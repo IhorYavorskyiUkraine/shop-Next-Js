@@ -1,6 +1,6 @@
 "use client";
 
-import { Order, User, UserRole } from "@prisma/client";
+import { User, UserRole } from "@prisma/client";
 import { useState } from "react";
 import { ProfileContactInfoTab } from "./ProfileContactInfoTab";
 import { ProfileOrderHistoryTab } from "./ProfileOrderHistoryTab";
@@ -8,6 +8,8 @@ import { ProfileAddressBookTab } from "./ProfileAddressBookTab";
 import { ProfileWishListTab } from "./ProfileWishListTab";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { UserOrdersType } from "@/lib/getUserOrders";
+import { UserAddressType } from "@/lib/getUserAddress";
 
 interface Props {
    user: User | null;
@@ -17,10 +19,16 @@ interface Props {
       name: string;
       image: string;
    } | null;
-   userOrders: Order[] | null;
+   userOrders: UserOrdersType | null;
+   userAddress: UserAddressType | null;
 }
 
-export const ProfileTabs: React.FC<Props> = ({ user, session, userOrders }) => {
+export const ProfileTabs: React.FC<Props> = ({
+   user,
+   session,
+   userOrders,
+   userAddress,
+}) => {
    const [tabIndex, setTabIndex] = useState<number | null>(0);
 
    const tabs = ["Contact Info", "Order History", "Address Book", "Wish List"];
@@ -32,7 +40,9 @@ export const ProfileTabs: React.FC<Props> = ({ user, session, userOrders }) => {
          case 1:
             return <ProfileOrderHistoryTab userOrders={userOrders} />;
          case 2:
-            return <ProfileAddressBookTab />;
+            return (
+               <ProfileAddressBookTab userAddress={userAddress} user={user} />
+            );
          case 3:
             return <ProfileWishListTab />;
          default:

@@ -9,16 +9,17 @@ datasource db {
 }
 
 model User {
-   id        Int      @id @default(autoincrement())
-   email     String   @unique
-   password  String
-   role      UserRole @default(USER)
-   createdAt DateTime @default(now())
-   updatedAt DateTime @updatedAt
-   fullName  String
-   imageUrl  String   @default("/images/user/userImagePlaceholder.png")
-   phone     String?
-   address   String?
+   id               Int              @id @default(autoincrement())
+   email            String           @unique
+   password         String
+   role             UserRole         @default(USER)
+   createdAt        DateTime         @default(now())
+   updatedAt        DateTime         @updatedAt
+   fullName         String
+   imageUrl         String           @default("/images/user/userImagePlaceholder.png")
+   phone            String?
+   address          String?
+   usersAddressBook UserAddressBook?
 
    provider         String?
    providerId       String?
@@ -206,6 +207,36 @@ model OrderItem {
    updatedAt              DateTime             @updatedAt
    order                  Order                @relation(fields: [orderId], references: [id])
    productVariantOption   ProductVariantOption @relation(fields: [productVariantOptionId], references: [id])
+}
+
+model UserAddressBook {
+   id Int @id @default(autoincrement())
+
+   user   User? @relation(fields: [userId], references: [id])
+   userId Int?  @unique
+
+   address Address[]
+
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
+}
+
+model Address {
+   id Int @id @default(autoincrement())
+
+   addressBook   UserAddressBook @relation(fields: [addressBookId], references: [id])
+   addressBookId Int
+
+   fullName  String
+   phone     String
+   city      String
+   street    String
+   house     String
+   apartment String
+   postcode  String
+
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
 }
 
 enum OrderStatus {

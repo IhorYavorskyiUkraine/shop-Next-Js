@@ -12,6 +12,8 @@ import { hashSync } from "bcrypt";
 import { VerificationUserTemplate } from "@/components/shared/emailTemplates/VerificationUserTemplate";
 import { Cart } from "@/@types/Cart";
 import { OrderInput } from "@/@types/CheckOut";
+import { UpdateUserProfileData } from "@/@types/Profile";
+import { AddressFormValues } from "@/lib/constants";
 
 export async function registerUser(data: Prisma.UserCreateInput) {
    try {
@@ -170,7 +172,7 @@ export async function createOrder(data: OrderInput, fullName: string) {
    }
 }
 
-export async function updateUserProfile(data: any) {
+export async function updateUserProfile(data: UpdateUserProfileData) {
    try {
       const session = await getUserSession();
 
@@ -201,3 +203,43 @@ export async function updateUserProfile(data: any) {
       console.error(e);
    }
 }
+
+export async function createUserAddress(
+   data: AddressFormValues,
+   userId: number,
+) {
+   try {
+      if (!userId || !data) {
+         throw new Error("User ID or data is missing");
+      }
+
+      let addressBook = await prisma.userAddressBook.findFirst({
+         where: { userId },
+      });
+
+      if (!addressBook) {
+         addressBook = await prisma.userAddressBook.create({
+            data: { userId },
+         });
+      }
+
+      await prisma.address.create({
+         data: {
+            fullName: `${data.firstName} ${data.lastName}`,
+            phone: data.phone,
+            city: data.city,
+            street: data.street,
+            house: data.house,
+            apartment: data.apartment || "",
+            postcode: data.postcode,
+            addressBookId: addressBook.id,
+         },
+      });
+   } catch (e) {
+      console.error(e);
+   }
+}
+
+export async function updateUserAddress(userId: number, addressId: number) {}
+
+export async function deleteUserAddress(userId: number, addressId: number) {}

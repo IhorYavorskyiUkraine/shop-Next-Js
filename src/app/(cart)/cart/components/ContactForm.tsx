@@ -1,5 +1,5 @@
-import { TextareaWithValidations } from "@/components/shared/header/TextareaWithValidations";
 import { InputWithValidations } from "@/components/shared/InputWithValidations";
+import { TextareaWithValidations } from "@/components/shared/TextareaWithValidations";
 import { ChevronLeftIcon, Mail, MapPinHouse, Phone, User } from "lucide-react";
 import { useFormContext } from "react-hook-form";
 interface Props {
@@ -39,6 +39,7 @@ export const ContactForm: React.FC<Props> = ({ setContactOpen, onSubmit }) => {
                <InputWithValidations
                   icon={<Phone size={20} />}
                   name="phone"
+                  phoneMask
                   label="Phone"
                   required
                />

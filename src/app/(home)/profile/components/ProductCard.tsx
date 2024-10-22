@@ -5,7 +5,7 @@ interface Props {
    imageUrl: string;
    name: string;
    category: string;
-   quantity: string;
+   quantity: number;
    price: number;
    size: string;
 }

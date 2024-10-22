@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { OrderCard } from "./OrderCard";
 import { Title } from "@/components/ui/title";
-import { Order } from "@prisma/client";
+import { UserOrdersType } from "@/lib/getUserOrders";
+import { Order } from "@/@types/Order";
 
 interface Props {
-   userOrders: Order[] | null;
+   userOrders: UserOrdersType | null;
 }
 
 export const ProfileOrderHistoryTab: React.FC<Props> = ({ userOrders }) => {
@@ -25,19 +26,14 @@ export const ProfileOrderHistoryTab: React.FC<Props> = ({ userOrders }) => {
 
    return (
       <div className="rounded-[20px] bg-gray p-4">
-         {userOrders?.map(
-            (order: Order, index: number) => (
-               console.log(order),
-               (
-                  <OrderCard
-                     setOpen={() => toggleTab(index)}
-                     open={open === index}
-                     key={order.id}
-                     {...order}
-                  />
-               )
-            ),
-         )}
+         {userOrders?.map((order: Order, index: number) => (
+            <OrderCard
+               setOpen={() => toggleTab(index)}
+               open={open === index}
+               key={order.id}
+               {...order}
+            />
+         ))}
       </div>
    );
 };

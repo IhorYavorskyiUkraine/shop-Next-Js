@@ -1,23 +1,21 @@
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
-import { MutableRefObject } from "react";
 import { ProductCard } from "./ProductCard";
+import { OrderItem } from "@/@types/Order";
 
 interface Props {
-   ref?: MutableRefObject<null>;
    id: number;
    open: boolean;
    address: string;
    status: string;
-   comment: string;
+   comment: string | null;
    phone: string;
    totalAmount: number;
-   items: any[];
+   items: OrderItem[];
    setOpen: (open: boolean) => void;
 }
 
 export const OrderCard: React.FC<Props> = ({
-   ref,
    id,
    open,
    setOpen,
@@ -44,7 +42,6 @@ export const OrderCard: React.FC<Props> = ({
 
    return (
       <article
-         ref={ref}
          className="mb-4 border-b-[1px] border-black/10 pb-4 last:mb-0 last:border-b-0 last:pb-0"
          onClick={() => setOpen(!open)}
       >
@@ -94,7 +91,7 @@ export const OrderCard: React.FC<Props> = ({
                   )}
                </ul>
                <div className="mb-2 grid">
-                  {items?.map(item => (
+                  {items?.map((item: OrderItem) => (
                      <ProductCard
                         key={item.productVariantOption.product.id}
                         id={item.productVariantOption.product.id}

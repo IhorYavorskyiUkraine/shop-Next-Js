@@ -30,3 +30,5 @@ export async function getUserOrders(
       },
    });
 }
+
+export type UserOrdersType = Awaited<ReturnType<typeof getUserOrders>>;

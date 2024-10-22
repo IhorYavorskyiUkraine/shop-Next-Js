@@ -24,6 +24,7 @@ interface Props {
 export const ProfileContactInfoTab: React.FC<Props> = ({ user, session }) => {
    const [firstName = "", lastName = ""] = user?.fullName?.split(" ") || [];
    const [isSubmitting, setIsSubmitting] = useState(false);
+   const [value, setValue] = useState("");
 
    const form = useForm<ProfileFormValues>({
       resolver: zodResolver(profileFormSchema),
@@ -64,31 +65,37 @@ export const ProfileContactInfoTab: React.FC<Props> = ({ user, session }) => {
                         icon={<UserIcon size={20} />}
                         name="firstName"
                         label="First Name"
+                        placeholder="Enter First Name"
                      />
                      <InputWithValidations
                         icon={<UserIcon size={20} />}
                         name="lastName"
                         label="Last Name"
+                        placeholder="Enter Last Name"
                      />
                      <InputWithValidations
                         icon={<Mail size={20} />}
                         name="email"
                         label="E-Mail"
+                        placeholder="Enter E-Mail"
                      />
                      <InputWithValidations
                         icon={<Phone size={20} />}
                         name="phone"
+                        phoneMask
                         label="Phone"
                      />
                      <InputWithValidations
                         icon={<Lock size={20} />}
                         name="password"
                         label="Password"
+                        placeholder="Enter Password"
                      />
                      <InputWithValidations
                         icon={<Lock size={20} />}
                         name="confirmPassword"
                         label="Confirm Password"
+                        placeholder="Confirm Password"
                      />
                   </div>
                   <div className="flex justify-center">
