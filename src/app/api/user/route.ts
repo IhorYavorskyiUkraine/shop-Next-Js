@@ -1,16 +1,12 @@
 import { NextResponse } from "next/server";
 import { getUser } from "@/lib/getUser";
-import { getUserSession } from "@/lib/getUserSession";
+import { getSessionId } from "@/lib/getSessionId";
 
 export async function GET() {
-   const session = await getUserSession();
-
-   if (!session) {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-   }
+   const sessionId = await getSessionId();
 
    try {
-      const user = await getUser(Number(session.id));
+      const user = await getUser(sessionId);
 
       return NextResponse.json(user);
    } catch (error) {

@@ -1,13 +1,23 @@
 import { prisma } from "../../prisma/PrismaClient";
 
 export async function getUserAddress(sessionId: number) {
-   return await prisma.userAddressBook.findMany({
+   let userAddress = await prisma.userAddressBook.findUnique({
       where: { id: sessionId },
       include: {
          address: true,
       },
-      orderBy: {
-         createdAt: "desc",
-      },
    });
+
+   if (!userAddress) {
+      userAddress = await prisma.userAddressBook.create({
+         data: {
+            userId: sessionId,
+         },
+         include: {
+            address: true,
+         },
+      });
+   }
+
+   return userAddress;
 }

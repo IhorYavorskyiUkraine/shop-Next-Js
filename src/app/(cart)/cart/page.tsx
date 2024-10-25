@@ -28,7 +28,11 @@ const CartPage = () => {
    ]);
    const [isSubmitting, setIsSubmitting] = useState(false);
    const [contactOpen, setContactOpen] = useState(false);
-   const [firstName, lastName] = user?.fullName?.split(" ") || [];
+   const userAddress =
+      user?.usersAddressBook?.address?.filter(address => address.active) || [];
+
+   const [firstName = "", lastName = ""] =
+      userAddress[0]?.fullName.split(" ") || [];
 
    const form = useForm<CheckoutFormValues>({
       resolver: zodResolver(checkoutFormSchema),
@@ -48,14 +52,26 @@ const CartPage = () => {
    }, [fetchCart]);
 
    useEffect(() => {
-      if (user) {
-         form.reset({
-            firstName: firstName || "",
-            lastName: lastName || "",
-            email: user.email || "",
-            phone: user.phone || "",
-            address: user.address || "",
-         });
+      if (userAddress && userAddress.length > 0) {
+         const address = [
+            userAddress[0].city ? `m. ${userAddress[0].city}` : "",
+            userAddress[0].street ? `vul. ${userAddress[0].street}` : "",
+            userAddress[0].house ? `${userAddress[0].house}` : "",
+            userAddress[0].apartment ? `kv. ${userAddress[0].apartment}` : "",
+            userAddress[0].postcode ? `${userAddress[0].postcode}` : "",
+         ]
+            .filter(Boolean)
+            .join(", ");
+
+         if (user) {
+            form.reset({
+               firstName: firstName || "",
+               lastName: lastName || "",
+               phone: userAddress[0].phone || "",
+               address: address || "",
+               email: user.email || "",
+            });
+         }
       }
    }, [user]);
 

@@ -212,8 +212,8 @@ model OrderItem {
 model UserAddressBook {
    id Int @id @default(autoincrement())
 
-   user   User? @relation(fields: [userId], references: [id])
-   userId Int?  @unique
+   user   User @relation(fields: [userId], references: [id])
+   userId Int  @unique
 
    address Address[]
 
@@ -226,6 +226,8 @@ model Address {
 
    addressBook   UserAddressBook @relation(fields: [addressBookId], references: [id])
    addressBookId Int
+
+   active Boolean @default(false)
 
    fullName  String
    phone     String

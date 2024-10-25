@@ -14,6 +14,7 @@ import { Cart } from "@/@types/Cart";
 import { OrderInput } from "@/@types/CheckOut";
 import { UpdateUserProfileData } from "@/@types/Profile";
 import { AddressFormValues } from "@/lib/constants";
+import { getSessionId } from "@/lib/getSessionId";
 
 export async function registerUser(data: Prisma.UserCreateInput) {
    try {
@@ -94,14 +95,14 @@ export async function updateCartTotalAmount(
 export async function createOrder(data: OrderInput, fullName: string) {
    try {
       const cookieStore = cookies();
-      const session = await getUserSession();
+      const sessionId = await getSessionId();
       const token = cookieStore.get("cartToken")?.value;
 
       if (!token) {
          throw new Error("No token found");
       }
 
-      const userCart = await getUserCart(Number(session?.id), token);
+      const userCart = await getUserCart(sessionId, token);
 
       if (!userCart) {
          throw new Error("No cart found");
@@ -123,7 +124,7 @@ export async function createOrder(data: OrderInput, fullName: string) {
 
       const order = await prisma.order.create({
          data: {
-            userId: Number(session?.id),
+            userId: sessionId,
             token,
             totalAmount: updatedCart.totalAmount,
             status: OrderStatus.PENDING,
@@ -174,13 +175,9 @@ export async function createOrder(data: OrderInput, fullName: string) {
 
 export async function updateUserProfile(data: UpdateUserProfileData) {
    try {
-      const session = await getUserSession();
+      const sessionId = await getSessionId();
 
-      if (!session) {
-         throw new Error("No session found");
-      }
-
-      const user = await getUser(Number(session.id));
+      const user = await getUser(sessionId);
 
       if (!user) {
          throw new Error("No user found");
@@ -213,15 +210,9 @@ export async function createUserAddress(
          throw new Error("User ID or data is missing");
       }
 
-      let addressBook = await prisma.userAddressBook.findFirst({
+      const addressBook = await prisma.userAddressBook.findFirst({
          where: { userId },
       });
-
-      if (!addressBook) {
-         addressBook = await prisma.userAddressBook.create({
-            data: { userId },
-         });
-      }
 
       await prisma.address.create({
          data: {
@@ -232,7 +223,7 @@ export async function createUserAddress(
             house: data.house,
             apartment: data.apartment || "",
             postcode: data.postcode,
-            addressBookId: addressBook.id,
+            addressBookId: addressBook!.id,
          },
       });
    } catch (e) {
@@ -240,6 +231,17 @@ export async function createUserAddress(
    }
 }
 
-export async function updateUserAddress(userId: number, addressId: number) {}
-
-export async function deleteUserAddress(userId: number, addressId: number) {}
+export async function updateUserAddress(data: AddressFormValues, id: number) {
+   return await prisma.address.update({
+      where: { id },
+      data: {
+         fullName: `${data.firstName} ${data.lastName}`,
+         phone: data.phone,
+         city: data.city,
+         street: data.street,
+         house: data.house,
+         apartment: data.apartment,
+         postcode: data.postcode,
+      },
+   });
+}

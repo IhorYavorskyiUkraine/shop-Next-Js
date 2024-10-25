@@ -7,21 +7,22 @@ import { createUserCart } from "@/services/createUserCart";
 import { createCartItem } from "@/services/createCartItem";
 import { getCartItem } from "@/services/getCartItem";
 import { updateCartTotalAmount } from "@/app/actions";
+import { getSessionId } from "@/lib/getSessionId";
 
 export async function GET(req: NextRequest) {
    try {
       const token = req.cookies.get("cartToken")?.value;
-      const session = await getUserSession();
+      const sessionId = await getSessionId();
       let newToken = token;
 
-      if (!token && !session) {
+      if (!token) {
          const { response } = await createCartToken();
          return response;
       }
 
       const userCart =
-         (await getUserCart(Number(session?.id), newToken)) ||
-         (await createUserCart(Number(session?.id), newToken));
+         (await getUserCart(sessionId, newToken)) ||
+         (await createUserCart(sessionId, newToken));
 
       await updateCartTotalAmount(userCart);
 
@@ -37,15 +38,15 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
    try {
       const token = req.cookies.get("cartToken")?.value;
-      const session = await getUserSession();
+      const sessionId = await getSessionId();
       let newToken = token;
 
-      if (!token && !session) {
+      if (!token) {
          const { response } = await createCartToken();
          return response;
       }
 
-      const userCart = await getUserCart(Number(session?.id), newToken);
+      const userCart = await getUserCart(sessionId, newToken);
 
       if (!userCart) {
          return NextResponse.json(
@@ -89,7 +90,7 @@ export async function PATCH(req: NextRequest) {
    const id = searchParams.get("id");
    const quantity = searchParams.get("quantity");
    const token = req.cookies.get("cartToken")?.value;
-   const session = await getUserSession();
+   const sessionId = await getSessionId();
 
    if (!id && !quantity) {
       return NextResponse.json(
@@ -100,7 +101,7 @@ export async function PATCH(req: NextRequest) {
       );
    }
 
-   const userCart = await getUserCart(Number(session?.id), token);
+   const userCart = await getUserCart(sessionId, token);
 
    if (!userCart) {
       return NextResponse.json({
@@ -136,7 +137,7 @@ export async function DELETE(req: NextRequest) {
       const { searchParams } = new URL(req.url);
       const id = searchParams.get("id");
       const token = req.cookies.get("cartToken")?.value;
-      const session = await getUserSession();
+      const sessionId = await getSessionId();
 
       if (!id) {
          return NextResponse.json(
@@ -147,7 +148,7 @@ export async function DELETE(req: NextRequest) {
          );
       }
 
-      const userCart = await getUserCart(Number(session?.id), token);
+      const userCart = await getUserCart(sessionId, token);
 
       if (!userCart) {
          return NextResponse.json({

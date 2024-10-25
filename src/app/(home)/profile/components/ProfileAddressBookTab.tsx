@@ -1,25 +1,38 @@
 import { addressFormSchema, AddressFormValues } from "@/lib/constants";
 import { FormProvider, useForm } from "react-hook-form";
 import { InputWithValidations } from "@/components/shared/InputWithValidations";
-import { createUserAddress } from "@/app/actions";
+import { createUserAddress, updateUserAddress } from "@/app/actions";
 import { User } from "@prisma/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { UserAddressType } from "@/lib/getUserAddress";
 import { AddressCard } from "./AddressCard";
+import { useProfileStore } from "../store";
+import { set } from "zod";
 
 interface Props {
    user: User | null;
-   userAddress: UserAddressType | null;
 }
 
-export const ProfileAddressBookTab: React.FC<Props> = ({
-   user,
-   userAddress,
-}) => {
+export const ProfileAddressBookTab: React.FC<Props> = ({ user }) => {
+   const [
+      addressBook,
+      fetchAddressBook,
+      toggleAddressActivity,
+      deleteAddress,
+      loading,
+   ] = useProfileStore(state => [
+      state.addressBook,
+      state.fetchAddressBook,
+      state.toggleAddressActivity,
+      state.deleteAddress,
+      state.loading,
+   ]);
    const [submitting, setSubmitting] = useState(false);
+   const [editingAddressId, setEditingAddressId] = useState<number | null>(
+      null,
+   );
    const form = useForm<AddressFormValues>({
       resolver: zodResolver(addressFormSchema),
       defaultValues: {
@@ -34,42 +47,113 @@ export const ProfileAddressBookTab: React.FC<Props> = ({
       },
    });
 
-   if (!user || !userAddress) {
+   const { handleSubmit, reset } = form;
+
+   useEffect(() => {
+      fetchAddressBook();
+   }, []);
+
+   if (!user || !addressBook) {
       return null;
    }
 
    const onSubmit = async (data: AddressFormValues) => {
       setSubmitting(true);
+
       try {
-         if (!data) {
-            return null;
+         if (editingAddressId) {
+            await updateUserAddress(data, editingAddressId);
+            toast.success("Address updated", {
+               icon: "✅",
+            });
+         } else {
+            await createUserAddress(data, user.id);
+            toast.success("Address created", {
+               icon: "✅",
+            });
          }
-
-         await createUserAddress(data, user.id);
-
-         toast.success("Address created", {
-            icon: "✅",
-         });
-
-         form.reset();
-         setSubmitting(false);
+         reset();
+         fetchAddressBook();
+         setEditingAddressId(null);
       } catch (e) {
          console.error(e);
          toast.error("Something went wrong", {
             icon: "❌",
          });
+      } finally {
          setSubmitting(false);
+         reset();
       }
    };
 
-   console.log(userAddress);
+   const handleUpdateAddress = async (data: AddressFormValues, id: number) => {
+      try {
+         const [firstName, lastName] = data.fullName.split(" ");
+
+         console.log(data);
+
+         if (data) {
+            reset({
+               firstName: firstName || "",
+               lastName: lastName || "",
+               phone: data.phone || "",
+               city: data.city || "",
+               street: data.street || "",
+               house: data.house || "",
+               apartment: data.apartment || "",
+               postcode: data.postcode || "",
+            });
+         }
+
+         setEditingAddressId(id);
+      } catch (e) {
+         console.error(e);
+         toast.error("Something went wrong", {
+            icon: "❌",
+         });
+      }
+   };
+
+   const toggleActivity = async (id: number) => {
+      try {
+         await toggleAddressActivity(id);
+
+         fetchAddressBook();
+      } catch (e) {
+         console.error(e);
+         toast.error("Something went wrong", {
+            icon: "❌",
+         });
+      }
+   };
+
+   const handleDeleteAddress = async (id: number) => {
+      try {
+         await deleteAddress(id);
+
+         reset();
+
+         fetchAddressBook();
+
+         toast.success("Address deleted", {
+            icon: "✅",
+         });
+      } catch (e) {
+         console.error(e);
+         toast.error("Something went wrong", {
+            icon: "❌",
+         });
+      }
+   };
+
+   const addresses = addressBook?.address;
 
    return (
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr]">
+      <div className="grid grid-cols-1 gap-12 md:grid-cols-[300px_1fr]">
          <div>
-            {userAddress.length === 0
+            {addresses?.length === 0
                ? "No addresses found"
-               : userAddress?.map(address => (
+               : addresses?.map(address => (
                     <AddressCard
                        key={address.id}
                        fullName={address.fullName || "Unknown"}
@@ -77,21 +161,27 @@ export const ProfileAddressBookTab: React.FC<Props> = ({
                        city={address.city || "Unknown"}
                        street={address.street || "Unknown"}
                        house={address.house || "Unknown"}
-                       apartment={address.apartment || "Unknown"}
+                       apartment={address.apartment || null}
                        postcode={address.postcode || "Unknown"}
+                       toggleActivity={() => toggleActivity(address.id)}
+                       updateAddress={() =>
+                          handleUpdateAddress(address, address.id)
+                       }
+                       deleteAddress={() => handleDeleteAddress(address.id)}
+                       active={address.active || false}
                     />
                  ))}
          </div>
          <FormProvider {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
+            <form className="sticky top-0" onSubmit={handleSubmit(onSubmit)}>
                <div className="mb-4 grid grid-cols-2 gap-4">
                   <InputWithValidations
-                     label="Recipient first name"
+                     label="First name"
                      name="firstName"
                      placeholder="Enter First Name"
                   />
                   <InputWithValidations
-                     label="Recipient last name"
+                     label="Last name"
                      name="lastName"
                      placeholder="Enter Last Name"
                   />
@@ -130,8 +220,10 @@ export const ProfileAddressBookTab: React.FC<Props> = ({
                         clearBtn
                      />
                   </div>
+               </div>
+               <div className="justify-self-center md:justify-self-end">
                   <Button loading={submitting} variant="black" type="submit">
-                     Save
+                     {editingAddressId ? "Update" : "Save"}
                   </Button>
                </div>
             </form>

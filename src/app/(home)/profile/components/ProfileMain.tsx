@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 import { getUserOrders } from "@/lib/getUserOrders";
 import { getUser } from "@/lib/getUser";
 import { ProfileTabs } from "./ProfileTabs";
-import { getUserAddress } from "@/lib/getUserAddress";
 
 export const ProfileMain: React.FC = async () => {
    const session = await getUserSession();
@@ -20,14 +19,6 @@ export const ProfileMain: React.FC = async () => {
       user?.email,
       token,
    );
-   const userAddress = await getUserAddress(Number(session.id));
 
-   return (
-      <ProfileTabs
-         userAddress={userAddress}
-         userOrders={userOrders}
-         user={user}
-         session={session}
-      />
-   );
+   return <ProfileTabs userOrders={userOrders} user={user} session={session} />;
 };

@@ -991,6 +991,8 @@ async function down() {
 		"ProductCategory", 
       "DressStyle", 
       "Size", 
+		"UserAddressBook",
+		"Address",  
       "Color" 
       RESTART IDENTITY CASCADE`;
 }
