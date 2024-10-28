@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { useProductStore } from "./store";
 import { Skeleton } from "@/components/shared/Skeleton";
+import { useProfileStore } from "@/app/(home)/profile/store";
+import { WishListItem } from "@prisma/client";
 
 interface Props {
    title: string;
@@ -25,6 +27,11 @@ export const ProductsWithCategories: React.FC<Props> = ({
          state.loading,
       ],
    );
+   const [wishList, fetchWishList, toggleWishList] = useProfileStore(state => [
+      state.wishList,
+      state.fetchWishList,
+      state.toggleWishList,
+   ]);
 
    const [limit, setLimit] = useState(4);
    const [offset, setOffset] = useState(0);
@@ -32,6 +39,15 @@ export const ProductsWithCategories: React.FC<Props> = ({
    useEffect(() => {
       fetchProducts(categoryId, limit, offset);
    }, [limit, offset]);
+
+   useEffect(() => {
+      fetchWishList();
+   }, []);
+
+   const toggleList = async (id: number) => {
+      await toggleWishList(id);
+      fetchWishList();
+   };
 
    const loadMoreProducts = () => {
       setOffset(prevOffset => prevOffset + limit);
@@ -61,6 +77,11 @@ export const ProductsWithCategories: React.FC<Props> = ({
                           rating={product.rating || 0}
                           price={product.price}
                           oldPrice={product.oldPrice || 0}
+                          toggleWishList={() => toggleList(product.id)}
+                          wishList={wishList?.items?.some(
+                             (item: WishListItem) =>
+                                item.productId === product.id,
+                          )}
                        />
                     ))}
             </div>

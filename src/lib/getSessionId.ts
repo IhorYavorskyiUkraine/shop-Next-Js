@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { getUserSession } from "./getUserSession";
 
 export async function getSessionId() {

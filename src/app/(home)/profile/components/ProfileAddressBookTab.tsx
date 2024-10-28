@@ -9,7 +9,8 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AddressCard } from "./AddressCard";
 import { useProfileStore } from "../store";
-import { set } from "zod";
+import { Title } from "@/components/ui/title";
+import { cn } from "@/lib/utils";
 
 interface Props {
    user: User | null;
@@ -90,8 +91,6 @@ export const ProfileAddressBookTab: React.FC<Props> = ({ user }) => {
       try {
          const [firstName, lastName] = data.fullName.split(" ");
 
-         console.log(data);
-
          if (data) {
             reset({
                firstName: firstName || "",
@@ -149,28 +148,41 @@ export const ProfileAddressBookTab: React.FC<Props> = ({ user }) => {
    const addresses = addressBook?.address;
 
    return (
-      <div className="grid grid-cols-1 gap-12 md:grid-cols-[300px_1fr]">
+      <div
+         className={cn(
+            addresses?.length === 0 && "items-center",
+            "grid grid-cols-1 gap-12 md:grid-cols-[300px_1fr]",
+         )}
+      >
          <div>
-            {addresses?.length === 0
-               ? "No addresses found"
-               : addresses?.map(address => (
-                    <AddressCard
-                       key={address.id}
-                       fullName={address.fullName || "Unknown"}
-                       phone={address.phone || "N/A"}
-                       city={address.city || "Unknown"}
-                       street={address.street || "Unknown"}
-                       house={address.house || "Unknown"}
-                       apartment={address.apartment || null}
-                       postcode={address.postcode || "Unknown"}
-                       toggleActivity={() => toggleActivity(address.id)}
-                       updateAddress={() =>
-                          handleUpdateAddress(address, address.id)
-                       }
-                       deleteAddress={() => handleDeleteAddress(address.id)}
-                       active={address.active || false}
-                    />
-                 ))}
+            {addresses?.length === 0 ? (
+               <div className="flex flex-col items-center justify-center">
+                  <Title
+                     text="No Address Found"
+                     className="text-center !text-lg !leading-22"
+                  />
+                  <p className="text-[32px]">😞</p>
+               </div>
+            ) : (
+               addresses?.map(address => (
+                  <AddressCard
+                     key={address.id}
+                     fullName={address.fullName || "Unknown"}
+                     phone={address.phone || "N/A"}
+                     city={address.city || "Unknown"}
+                     street={address.street || "Unknown"}
+                     house={address.house || "Unknown"}
+                     apartment={address.apartment || null}
+                     postcode={address.postcode || "Unknown"}
+                     toggleActivity={() => toggleActivity(address.id)}
+                     updateAddress={() =>
+                        handleUpdateAddress(address, address.id)
+                     }
+                     deleteAddress={() => handleDeleteAddress(address.id)}
+                     active={address.active || false}
+                  />
+               ))
+            )}
          </div>
          <FormProvider {...form}>
             <form className="sticky top-0" onSubmit={handleSubmit(onSubmit)}>

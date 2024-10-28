@@ -7,6 +7,8 @@ import { CountButton } from "@/components/shared/CountButton";
 import { ProductVariantOption } from "@prisma/client";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useProfileStore } from "@/app/(home)/profile/store";
+import { Heart } from "lucide-react";
 
 interface Props {
    product: ProductWithVariantsAndDetails;
@@ -23,6 +25,11 @@ export const ProductAddToCart: React.FC<Props> = ({ product, variant }) => {
       state.addToCart,
       state.loading,
    ]);
+   const [wishList, fetchWishList, toggleWishList] = useProfileStore(state => [
+      state.wishList,
+      state.fetchWishList,
+      state.toggleWishList,
+   ]);
 
    const [needToAdd, setNeedToAdd] = useState(true);
 
@@ -30,6 +37,11 @@ export const ProductAddToCart: React.FC<Props> = ({ product, variant }) => {
       setNeedToAdd(false);
       const newQuantity = type === "plus" ? quantity + 1 : quantity - 1;
       setQuantity(newQuantity);
+   };
+
+   const toggleList = async (id: number) => {
+      await toggleWishList(id);
+      fetchWishList();
    };
 
    const handleAddToCart = () => {
@@ -56,7 +68,7 @@ export const ProductAddToCart: React.FC<Props> = ({ product, variant }) => {
    };
 
    return (
-      <div className="grid grid-cols-[112px,_1fr] items-center gap-3 py-6 md:grid-cols-1 lg:grid-cols-[112px,_1fr]">
+      <div className="grid grid-cols-[112px,_1fr,_24px] items-center gap-3 py-6 md:grid-cols-1 lg:grid-cols-[112px,_1fr,_24px]">
          <CountButton
             className="!h-full"
             value={quantity}
@@ -70,6 +82,14 @@ export const ProductAddToCart: React.FC<Props> = ({ product, variant }) => {
          >
             Add to Cart
          </Button>
+         <Heart
+            onClick={() => toggleList(product.id)}
+            className={cn(
+               wishList?.items?.some(item => item.productId === product.id) &&
+                  "fill-red-500 text-red-500",
+               "cursor-pointer md:w-full",
+            )}
+         />
       </div>
    );
 };

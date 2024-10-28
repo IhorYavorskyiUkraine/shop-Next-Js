@@ -27,7 +27,7 @@ async function up() {
          imageUrl: "/images/newArrivals/2/2_blue.png",
          price: 220,
          oldPrice: 260,
-         rating: 3.5,
+         rating: 0,
          productVariantOptions: {
             create: [
                {
@@ -94,7 +94,7 @@ async function up() {
          imageUrl: "/images/newArrivals/3/3_red.png",
          price: 180,
          oldPrice: 190,
-         rating: 4.5,
+         rating: 0,
          productVariantOptions: {
             create: [
                {
@@ -159,7 +159,7 @@ async function up() {
          imageUrl: "/images/newArrivals/4/4_orange.png",
          price: 130,
          oldPrice: 160,
-         rating: 4.5,
+         rating: 0,
          productVariantOptions: {
             create: [
                {
@@ -224,7 +224,7 @@ async function up() {
          imageUrl: "/images/newArrivals/5/5_navy.png",
          price: 210,
          oldPrice: 242,
-         rating: 4,
+         rating: 0,
          productVariantOptions: {
             create: [
                {
@@ -289,7 +289,7 @@ async function up() {
          description: "Gradient Graphic T-shirt",
          imageUrl: "/images/newArrivals/6/6_white.png",
          price: 150,
-         rating: 3.5,
+         rating: 0,
          productVariantOptions: {
             create: [
                {
@@ -355,7 +355,7 @@ async function up() {
          imageUrl: "/images/newArrivals/7/7_pink.png",
          price: 160,
          oldPrice: 190,
-         rating: 4.5,
+         rating: 0,
          productVariantOptions: {
             create: [
                {
@@ -421,7 +421,7 @@ async function up() {
          imageUrl: "/images/newArrivals/8/8_gray.png",
          price: 170,
          oldPrice: 185,
-         rating: 4,
+         rating: 0,
          productVariantOptions: {
             create: [
                {
@@ -487,7 +487,7 @@ async function up() {
          imageUrl: "/images/topSelling/1.png",
          price: 220,
          oldPrice: 232,
-         rating: 5,
+         rating: 0,
          productVariantOptions: {
             create: [
                {
@@ -544,7 +544,7 @@ async function up() {
          description: "Courage Graphic T-shirt",
          imageUrl: "/images/topSelling/2.png",
          price: 140,
-         rating: 4,
+         rating: 0,
          productVariantOptions: {
             create: [
                {
@@ -600,7 +600,7 @@ async function up() {
          description: "Loose Fit Bermuda Shorts",
          imageUrl: "/images/topSelling/3.png",
          price: 80,
-         rating: 4.5,
+         rating: 0,
          productVariantOptions: {
             create: [
                {
@@ -650,7 +650,7 @@ async function up() {
          description: "Faded Skinny Jeans",
          imageUrl: "/images/topSelling/4.png",
          price: 210,
-         rating: 4.5,
+         rating: 0,
          productVariantOptions: {
             create: [
                {
@@ -700,7 +700,7 @@ async function up() {
          description: "T-shirt with Tape Details",
          imageUrl: "/images/newArrivals/1/1_black.png",
          price: 120,
-         rating: 4.5,
+         rating: 0,
          productVariantOptions: {
             create: [
                {
@@ -783,7 +783,7 @@ async function up() {
          imageUrl: "/images/newArrivals/2/2_blue.png",
          price: 220,
          oldPrice: 260,
-         rating: 3.5,
+         rating: 0,
          productVariantOptions: {
             create: [
                {
@@ -854,7 +854,7 @@ async function up() {
          description: "Checkered Shirt",
          imageUrl: "/images/newArrivals/3/3_red.png",
          price: 180,
-         rating: 4.5,
+         rating: 0,
          productVariantOptions: {
             create: [
                {
@@ -920,7 +920,7 @@ async function up() {
          imageUrl: "/images/newArrivals/4/4_orange.png",
          price: 120,
          oldPrice: 160,
-         rating: 4.5,
+         rating: 0,
          productVariantOptions: {
             create: [
                {
