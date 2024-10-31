@@ -4,7 +4,6 @@ import { useCartStore } from "@/app/(cart)/cart/store";
 import { ProductWithVariantsAndDetails } from "@/@types/Product";
 import toast from "react-hot-toast";
 import { CountButton } from "@/components/shared/CountButton";
-import { ProductVariantOption } from "@prisma/client";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useProfileStore } from "@/app/(home)/profile/store";
@@ -12,12 +11,12 @@ import { Heart } from "lucide-react";
 
 interface Props {
    product: ProductWithVariantsAndDetails;
-   variant: ProductVariantOption;
 }
 
-export const ProductAddToCart: React.FC<Props> = ({ product, variant }) => {
-   const [quantity, setQuantity, size] = useProductStore(state => [
+export const ProductAddToCart: React.FC<Props> = ({ product }) => {
+   const [quantity, variant, setQuantity, size] = useProductStore(state => [
       state.quantity,
+      state.variant,
       state.setQuantity,
       state.size,
    ]);
@@ -50,6 +49,10 @@ export const ProductAddToCart: React.FC<Props> = ({ product, variant }) => {
       }
 
       needToAdd && setQuantity(quantity + 1);
+
+      if (!variant) {
+         return;
+      }
 
       const item = {
          productId: product.id,

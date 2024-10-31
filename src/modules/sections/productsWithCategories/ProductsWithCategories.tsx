@@ -1,14 +1,11 @@
 "use client";
 
-import { Container } from "@/components/ui/container";
 import { ProductCard } from "@/components/shared/ProductCard";
 import { Title } from "@/components/ui/title";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { useProductStore } from "./store";
 import { Skeleton } from "@/components/shared/Skeleton";
-import { useProfileStore } from "@/app/(home)/profile/store";
-import { WishListItem } from "@prisma/client";
 
 interface Props {
    title: string;
@@ -19,18 +16,20 @@ export const ProductsWithCategories: React.FC<Props> = ({
    categoryId,
    title,
 }) => {
-   const [fetchProducts, topSelling, newArrivals, loading] = useProductStore(
-      state => [
-         state.fetchProducts,
-         state.topSelling,
-         state.newArrivals,
-         state.loading,
-      ],
-   );
-   const [wishList, fetchWishList, toggleWishList] = useProfileStore(state => [
-      state.wishList,
-      state.fetchWishList,
-      state.toggleWishList,
+   const [
+      fetchProducts,
+      hasMoreNewArrivals,
+      hasMoreTopSelling,
+      topSelling,
+      newArrivals,
+      loading,
+   ] = useProductStore(state => [
+      state.fetchProducts,
+      state.hasMoreNewArrivals,
+      state.hasMoreTopSelling,
+      state.topSelling,
+      state.newArrivals,
+      state.loading,
    ]);
 
    const [limit, setLimit] = useState(4);
@@ -40,20 +39,12 @@ export const ProductsWithCategories: React.FC<Props> = ({
       fetchProducts(categoryId, limit, offset);
    }, [limit, offset]);
 
-   useEffect(() => {
-      fetchWishList();
-   }, []);
-
-   const toggleList = async (id: number) => {
-      await toggleWishList(id);
-      fetchWishList();
-   };
-
    const loadMoreProducts = () => {
       setOffset(prevOffset => prevOffset + limit);
    };
 
    const products = categoryId === 1 ? newArrivals : topSelling;
+   const hasMore = categoryId === 1 ? hasMoreNewArrivals : hasMoreTopSelling;
 
    return (
       <>
@@ -77,19 +68,16 @@ export const ProductsWithCategories: React.FC<Props> = ({
                           rating={product.rating || 0}
                           price={product.price}
                           oldPrice={product.oldPrice || 0}
-                          toggleWishList={() => toggleList(product.id)}
-                          wishList={wishList?.items?.some(
-                             (item: WishListItem) =>
-                                item.productId === product.id,
-                          )}
                        />
                     ))}
             </div>
-            <div className="mt-4 flex justify-center">
-               {products.length > 0 && (
-                  <Button onClick={loadMoreProducts}>View More</Button>
-               )}
-            </div>
+            {hasMore && (
+               <div className="mt-4 flex justify-center">
+                  {products.length > 0 && (
+                     <Button onClick={loadMoreProducts}>View More</Button>
+                  )}
+               </div>
+            )}
          </section>
          {products === newArrivals && (
             <div className="border-[1px] border-black/5"></div>

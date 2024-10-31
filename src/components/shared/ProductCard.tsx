@@ -1,18 +1,16 @@
 import Link from "next/link";
 import { StarRating } from "./StarRating";
-import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Props {
    id: number;
    imageUrl: string;
    name: string;
-   rating: number;
+   rating?: number;
    price: number;
    oldPrice?: number;
-   toggleWishList: () => void;
-   wishList?: boolean;
    className?: string;
+   categoriesPageSizes?: boolean;
 }
 
 export const ProductCard: React.FC<Props> = ({
@@ -22,18 +20,27 @@ export const ProductCard: React.FC<Props> = ({
    rating,
    price,
    oldPrice,
-   toggleWishList,
-   wishList = false,
    className,
+   categoriesPageSizes,
 }) => {
    const discountPercentage = oldPrice
       ? ((oldPrice - price) / oldPrice) * 100
       : 0;
 
    return (
-      <div className="max-w-[200px] md:max-w-[300px]">
+      <div
+         className={cn(
+            categoriesPageSizes ? "max-w-[174px]" : "max-w-[200px]",
+            "md:max-w-[300px]",
+         )}
+      >
          <Link className={className} href={`/product/${id}`}>
-            <div className="mb-[10px] h-[200px] w-[200px] rounded-[14px] bg-[#F0EEED] md:mb-4 md:h-[300px] md:w-[300px] md:rounded-[20px]">
+            <div
+               className={cn(
+                  categoriesPageSizes ? "size-[174px]" : "size-[200px]",
+                  "mb-[10px] rounded-[14px] bg-[#F0EEED] md:mb-4 md:size-[300px] md:rounded-[20px]",
+               )}
+            >
                <img src={imageUrl} alt={""} />
             </div>
             <h4 className="text-md font-bold leading-22 md:text-lg md:leading-27">
@@ -56,13 +63,6 @@ export const ProductCard: React.FC<Props> = ({
                   </div>
                )}
             </div>
-            <Heart
-               onClick={toggleWishList}
-               className={cn(
-                  wishList && "fill-red-500 text-red-500",
-                  "cursor-pointer",
-               )}
-            />
          </div>
       </div>
    );

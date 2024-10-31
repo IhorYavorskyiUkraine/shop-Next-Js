@@ -107,55 +107,51 @@ const CartPage = () => {
       form.handleSubmit(onSubmit)();
    };
 
-   try {
-      if (!cart || cart.items?.length === 0) {
-         return (
-            <Container className="flex h-[400px] flex-col items-center justify-center">
-               <Title text="Your cart is empty" className="mb-5 text-center" />
-               <p className="text-[64px]">😞</p>
-            </Container>
-         );
-      }
-
+   if (!cart || cart.items?.length === 0) {
       return (
-         <Container>
-            <BreadCrumb
-               name={
-                  contactOpen
-                     ? { name: "Contact Form", link: "/contact" }
-                     : { name: "Cart", link: "/cart" }
-               }
-            />
-            <Title
-               className="mb-5 text-2xl md:mb-6 md:-translate-y-1 md:!text-4xl"
-               text={contactOpen ? "Contact Form" : "Your Cart"}
-            />
-            <div className="flex flex-col gap-5 pb-12 md:flex-row md:items-start md:pb-[80px]">
-               <FormProvider {...form}>
-                  {loading ? (
-                     <Skeleton cartList />
-                  ) : contactOpen ? (
-                     <ContactForm
-                        onSubmit={onSubmit}
-                        setContactOpen={setContactOpen}
-                     />
-                  ) : (
-                     <CartList cartItems={cart.items} />
-                  )}
-                  <CartOrderSummary
-                     isSubmitting={isSubmitting}
-                     setContactOpen={setContactOpen}
-                     contactOpen={contactOpen}
-                     triggerSubmit={triggerSubmit}
-                     cartItems={cart.items}
-                  />
-               </FormProvider>
-            </div>
+         <Container className="flex h-[400px] flex-col items-center justify-center">
+            <Title text="Your cart is empty" className="mb-5 text-center" />
+            <p className="text-[64px]">😞</p>
          </Container>
       );
-   } catch (error) {
-      console.error("Error fetching product:", error);
    }
+
+   return (
+      <Container>
+         <BreadCrumb
+            name={
+               contactOpen
+                  ? { name: "Contact Form", link: "/contact" }
+                  : { name: "Cart", link: "/cart" }
+            }
+         />
+         <Title
+            className="mb-5 text-2xl md:mb-6 md:-translate-y-1 md:!text-4xl"
+            text={contactOpen ? "Contact Form" : "Your Cart"}
+         />
+         <div className="flex flex-col gap-5 pb-12 md:flex-row md:items-start md:pb-[80px]">
+            <FormProvider {...form}>
+               {loading ? (
+                  <Skeleton cartList />
+               ) : contactOpen ? (
+                  <ContactForm
+                     onSubmit={onSubmit}
+                     setContactOpen={setContactOpen}
+                  />
+               ) : (
+                  <CartList cartItems={cart.items} />
+               )}
+               <CartOrderSummary
+                  isSubmitting={isSubmitting}
+                  setContactOpen={setContactOpen}
+                  contactOpen={contactOpen}
+                  triggerSubmit={triggerSubmit}
+                  cartItems={cart.items}
+               />
+            </FormProvider>
+         </div>
+      </Container>
+   );
 };
 
 export default CartPage;

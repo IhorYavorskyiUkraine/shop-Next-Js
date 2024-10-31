@@ -3,14 +3,12 @@ import { Header } from "@/components/shared/header/Header";
 import { Footer } from "@/components/shared/footer/Footer";
 import { Suspense } from "react";
 
-export async function generateMetadata(): Promise<Metadata> {
-   return {
-      title: "SHOP.CO | Cart",
-      description: "Your Cart",
-   };
-}
+export const metadata: Metadata = {
+   title: "SHOP.CO | Category",
+   description: "Category Page",
+};
 
-export default function CartLayout({
+export default function HomeLayout({
    children,
 }: Readonly<{
    children: React.ReactNode;
@@ -18,7 +16,7 @@ export default function CartLayout({
    return (
       <main>
          <Suspense>
-            <Header hasCart={false} />
+            <Header />
          </Suspense>
          {children}
          <Footer />

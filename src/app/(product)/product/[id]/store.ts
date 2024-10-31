@@ -16,6 +16,7 @@ type ProductStore = {
       size: string;
    };
    quantity: number;
+   hasMoreReviews: boolean;
    limit: number;
    offset: number;
    loading: boolean;
@@ -49,6 +50,7 @@ export const useProductStore = create<ProductStore>(set => ({
    color: "",
    size: { id: 0, size: "" },
    quantity: 0,
+   hasMoreReviews: true,
    limit: 6,
    offset: 0,
    orderBy: "desc",
@@ -68,6 +70,10 @@ export const useProductStore = create<ProductStore>(set => ({
          }
 
          const reviews: Review[] = await response.json();
+
+         if (reviews.length < limit) {
+            set({ hasMoreReviews: false });
+         }
 
          if (reviews) {
             set({ reviews });

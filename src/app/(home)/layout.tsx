@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/shared/header/Header";
 import { Footer } from "@/components/shared/footer/Footer";
-import { prisma } from "../../../prisma/PrismaClient";
-import { getUserSession } from "@/lib/getUserSession";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
    title: "SHOP.CO | Home",
@@ -16,7 +15,9 @@ export default function HomeLayout({
 }>) {
    return (
       <main>
-         <Header />
+         <Suspense>
+            <Header />
+         </Suspense>
          {children}
          <Footer />
       </main>

@@ -5,6 +5,9 @@ type ProductStore = {
    newArrivals: Product[];
    topSelling: Product[];
    loading: boolean;
+   hasMoreNewArrivals: boolean;
+   hasMoreTopSelling: boolean;
+   error: boolean;
    fetchProducts: (
       categoryId: number,
       limit: number,
@@ -15,30 +18,56 @@ type ProductStore = {
 export const useProductStore = create<ProductStore>(set => ({
    newArrivals: [],
    topSelling: [],
-   loading: true,
+   loading: false,
+   hasMoreNewArrivals: true,
+   hasMoreTopSelling: true,
+   error: false,
    fetchProducts: async (categoryId, limit, offset) => {
       try {
+         set({ loading: true, error: false });
+
          const response = await fetch(
             `/api/products?categoryId=${categoryId}&limit=${limit}&offset=${offset}`,
          );
+
          if (!response.ok) {
-            throw new Error("Сетевая ошибка");
+            throw new Error("Something went wrong");
          }
+
          const products = await response.json();
-         if (categoryId === 1) {
-            set(state => ({
-               newArrivals: [...state.newArrivals, ...products],
-               loading: false,
-            }));
-         } else if (categoryId === 2) {
-            set(state => ({
-               topSelling: [...state.topSelling, ...products],
-               loading: false,
-            }));
+
+         if (products.length < limit) {
+            categoryId === 1
+               ? set({ hasMoreNewArrivals: false })
+               : set({ hasMoreTopSelling: false });
          }
+
+         set(state => {
+            const existingIds = new Set(
+               categoryId === 1
+                  ? state.newArrivals.map(product => product.id)
+                  : state.topSelling.map(product => product.id),
+            );
+
+            const uniqueProducts = products.filter(
+               (product: Product) => !existingIds.has(product.id),
+            );
+
+            return {
+               newArrivals:
+                  categoryId === 1
+                     ? [...state.newArrivals, ...uniqueProducts]
+                     : state.newArrivals,
+               topSelling:
+                  categoryId === 2
+                     ? [...state.topSelling, ...uniqueProducts]
+                     : state.topSelling,
+               loading: false,
+            };
+         });
       } catch (error) {
-         console.error("Не удалось получить продукты:", error);
-         set({ loading: false });
+         console.error("Error fetching products", error);
+         set({ loading: false, error: true });
       }
    },
 }));

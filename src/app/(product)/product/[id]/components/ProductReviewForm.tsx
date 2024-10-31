@@ -8,6 +8,7 @@ import { Session } from "next-auth";
 import { useForm } from "react-hook-form";
 import { useProductStore } from "../store";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 interface Props {
    onClose: () => void;
@@ -24,6 +25,7 @@ export const ProductReviewForm: React.FC<Props> = ({ onClose, session }) => {
          state.offset,
          state.orderBy,
       ]);
+   const [submitting, setSubmitting] = useState(false);
 
    const {
       handleSubmit,
@@ -46,6 +48,10 @@ export const ProductReviewForm: React.FC<Props> = ({ onClose, session }) => {
    const ratingError = errors["rating"]?.message as string;
 
    const onSubmit = async (values: { rating: number; textarea: string }) => {
+      if (submitting) return;
+
+      setSubmitting(true);
+
       if (values.rating === 0) {
          setError("rating", {
             type: "manual",
@@ -74,14 +80,15 @@ export const ProductReviewForm: React.FC<Props> = ({ onClose, session }) => {
             icon: "✅",
          });
       } catch (e) {
-         console.error("Ошибка при отправке отзыва или обновлении отзывов:", e);
-
+         console.error("Error:", e);
          toast.error(
             "Something went wrong while submitting your review. Please try again.",
             {
                icon: "❌",
             },
          );
+      } finally {
+         setTimeout(() => setSubmitting(false), 1000);
       }
 
       onClose();
@@ -120,6 +127,8 @@ export const ProductReviewForm: React.FC<Props> = ({ onClose, session }) => {
                      value: 5,
                      message: "The minimum length must be 5",
                   },
+                  validate: value =>
+                     value.trim().length > 0 || "Review cannot be empty",
                })}
                placeholder="Write your review"
                className="h-[100px]"
@@ -129,7 +138,12 @@ export const ProductReviewForm: React.FC<Props> = ({ onClose, session }) => {
             )}
          </div>
          <div className="flex">
-            <Button variant="black" type="submit" className="flex-1">
+            <Button
+               variant="black"
+               loading={submitting}
+               type="submit"
+               className="flex-1"
+            >
                Submit
             </Button>
          </div>

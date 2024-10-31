@@ -21,13 +21,13 @@ export async function POST(req: NextRequest) {
       const productId = searchParams.get("id");
 
       if (!productId) {
-         return null;
+         return NextResponse.json({ message: "Product ID not provided" });
       }
 
       const wishList = await getWishList();
 
       if (!wishList) {
-         return null;
+         return NextResponse.json({ message: "Wish list not found" });
       }
 
       const product = await prisma.product.findFirst({

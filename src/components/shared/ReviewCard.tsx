@@ -29,7 +29,7 @@ export const ReviewCard: React.FC<Props> = ({
             {checked && <CircleCheck color={"green"} size={16} />}
          </div>
          <p className="leading-20 opacity-60 md:text-md md:leading-22">
-            "{text}"
+            "{text?.replace(/\s+/g, " ").trim()}"
          </p>
          {reviewDate && (
             <p className="mt-1 text-sm font-bold leading-22 opacity-60 md:text-md">

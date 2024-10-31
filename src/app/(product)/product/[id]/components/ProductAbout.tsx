@@ -51,7 +51,7 @@ export const ProductAbout: React.FC = () => {
          )}
          <SelectColor />
          <SelectSize />
-         <ProductAddToCart product={product} variant={variant} />
+         <ProductAddToCart product={product} />
       </div>
    );
 };

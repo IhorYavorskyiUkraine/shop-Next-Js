@@ -8,12 +8,15 @@ import { Button } from "@/components/ui/button";
 import { formatCreatedAt } from "@/lib/getDataReview";
 
 export const ProductReviewsTab: React.FC = () => {
-   const [product, reviews, limit, setLimit] = useProductStore(state => [
-      state.product,
-      state.reviews,
-      state.limit,
-      state.setLimit,
-   ]);
+   const [product, reviews, hasMoreReviews, limit, setLimit] = useProductStore(
+      state => [
+         state.product,
+         state.reviews,
+         state.hasMoreReviews,
+         state.limit,
+         state.setLimit,
+      ],
+   );
 
    if (!product || !reviews) {
       return null;
@@ -42,13 +45,15 @@ export const ProductReviewsTab: React.FC = () => {
                />
             ))}
          </div>
-         <div className="mt-4 flex justify-center">
-            {reviews.length > 0 && (
-               <Button onClick={() => setLimit(limit + 6)}>
-                  Load More Reviews
-               </Button>
-            )}
-         </div>
+         {hasMoreReviews && (
+            <div className="mt-4 flex justify-center">
+               {reviews.length > 0 && (
+                  <Button onClick={() => setLimit(limit + 6)}>
+                     Load More Reviews
+                  </Button>
+               )}
+            </div>
+         )}
       </section>
    );
 };

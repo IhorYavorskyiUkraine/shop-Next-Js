@@ -20,6 +20,9 @@ export async function getWishList() {
          data: {
             userId: sessionId,
          },
+         include: {
+            items: true,
+         },
       });
    }
 

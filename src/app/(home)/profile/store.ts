@@ -11,7 +11,7 @@ import { create } from "zustand";
 
 type ProfileStore = {
    user: (User & { usersAddressBook: { address: Address[] } }) | null;
-   addressBook: (UserAddressBook & { address: Address }[]) | null;
+   addressBook: (UserAddressBook & { address: Address[] }) | null;
    wishList: (WishList & { items: WishListItem[] }) | null;
    loading: boolean;
    error: boolean;

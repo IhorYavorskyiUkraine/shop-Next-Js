@@ -24,7 +24,9 @@ export async function GET(req: NextRequest) {
          (await getUserCart(sessionId, newToken)) ||
          (await createUserCart(sessionId, newToken));
 
-      await updateCartTotalAmount(userCart);
+      if (userCart) {
+         await updateCartTotalAmount(userCart);
+      }
 
       return NextResponse.json(userCart);
    } catch (error) {

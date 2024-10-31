@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../prisma/PrismaClient";
 import { getSessionId } from "@/lib/getSessionId";
+import { setFalseActiveAddress } from "@/lib/setFalseActiveAddress";
 
 export async function GET() {
    const sessionId = await getSessionId();
@@ -52,14 +53,13 @@ export async function PATCH(req: NextRequest) {
       });
 
       if (!userAddress) {
-         return null;
+         return NextResponse.json(
+            { message: "User address not found" },
+            { status: 404 },
+         );
       }
 
-      await prisma.address.updateMany({
-         data: {
-            active: false,
-         },
-      });
+      await setFalseActiveAddress();
 
       await prisma.address.update({
          where: { id: Number(id) },
@@ -95,15 +95,34 @@ export async function DELETE(req: NextRequest) {
       });
 
       if (!userAddress) {
-         return null;
+         return NextResponse.json(
+            { message: "User address not found" },
+            { status: 404 },
+         );
       }
 
       await prisma.address.delete({
          where: { id: Number(id) },
       });
 
+      const remainingAddresses = await prisma.address.findMany({
+         where: { addressBookId: userAddress.id },
+      });
+
+      await setFalseActiveAddress();
+
+      if (remainingAddresses.length > 0) {
+         const last = remainingAddresses[remainingAddresses.length - 1];
+
+         await prisma.address.update({
+            where: { id: last.id },
+            data: { active: true },
+         });
+      }
+
       return NextResponse.json({ message: "Address deleted" });
    } catch (error) {
+      console.error(error);
       return NextResponse.json(
          { message: "Error when deleting an address", error },
          { status: 500 },

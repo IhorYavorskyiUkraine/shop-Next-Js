@@ -15,6 +15,7 @@ import { OrderInput } from "@/@types/CheckOut";
 import { UpdateUserProfileData } from "@/@types/Profile";
 import { AddressFormValues } from "@/lib/constants";
 import { getSessionId } from "@/lib/getSessionId";
+import { setFalseActiveAddress } from "@/lib/setFalseActiveAddress";
 
 export async function registerUser(data: Prisma.UserCreateInput) {
    try {
@@ -60,9 +61,7 @@ export async function registerUser(data: Prisma.UserCreateInput) {
    }
 }
 
-export async function updateCartTotalAmount(
-   userCart: Pick<Cart, "items" | "id"> | null,
-) {
+export async function updateCartTotalAmount(userCart: Cart | null) {
    try {
       if (!userCart) {
          throw new Error("No cart found");
@@ -214,6 +213,8 @@ export async function createUserAddress(
          where: { userId },
       });
 
+      await setFalseActiveAddress();
+
       await prisma.address.create({
          data: {
             fullName: `${data.firstName} ${data.lastName}`,
@@ -224,6 +225,7 @@ export async function createUserAddress(
             apartment: data.apartment || "",
             postcode: data.postcode,
             addressBookId: addressBook!.id,
+            active: true,
          },
       });
    } catch (e) {

@@ -73,7 +73,6 @@ export const ProfileAddressBookTab: React.FC<Props> = ({ user }) => {
                icon: "✅",
             });
          }
-         reset();
          fetchAddressBook();
          setEditingAddressId(null);
       } catch (e) {
@@ -83,11 +82,26 @@ export const ProfileAddressBookTab: React.FC<Props> = ({ user }) => {
          });
       } finally {
          setSubmitting(false);
-         reset();
+         reset({
+            firstName: "",
+            lastName: "",
+            phone: "",
+            city: "",
+            street: "",
+            house: "",
+            apartment: "",
+            postcode: "",
+         });
       }
    };
 
-   const handleUpdateAddress = async (data: AddressFormValues, id: number) => {
+   const handleUpdateAddress = async (
+      data: Omit<AddressFormValues, "firstName" | "lastName" | "apartment"> & {
+         fullName: string;
+         apartment: string | null;
+      },
+      id: number,
+   ) => {
       try {
          const [firstName, lastName] = data.fullName.split(" ");
 
@@ -200,6 +214,7 @@ export const ProfileAddressBookTab: React.FC<Props> = ({ user }) => {
                   <InputWithValidations
                      label="Phone number"
                      name="phone"
+                     value={form.getValues("phone")}
                      phoneMask
                   />
                   <InputWithValidations

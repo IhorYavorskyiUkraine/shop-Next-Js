@@ -30,27 +30,31 @@ export const Menu: React.FC = () => {
 
    const menuData = [
       { name: "Shop", drop: true },
-      { name: "On Sale", href: "/on_sale", drop: false },
-      { name: "New Arrivals", href: "/new_arrivals", drop: false },
-      { name: "Brands", href: "/brands", drop: false },
+      { name: "On Sale", href: "on_sale", drop: false },
+      { name: "New Arrivals", href: "new_arrivals", drop: false },
+      { name: "Brands", href: "brands", drop: false },
    ];
 
    const navMenuData = [
-      { name: "Shop", href: "/shop", icon: <ShoppingBasket size={20} /> },
-      { name: "On Sale", href: "/on_sale", icon: <BadgePercent size={20} /> },
+      {
+         name: "Top Selling",
+         href: "top_selling",
+         icon: <ShoppingBasket size={20} />,
+      },
+      { name: "On Sale", href: "on_sale", icon: <BadgePercent size={20} /> },
       {
          name: "New Arrivals",
-         href: "/new_arrivals",
+         href: "new_arrivals",
          icon: <PackagePlus size={20} />,
       },
-      { name: "Brands", href: "/brands", icon: <Shirt size={20} /> },
+      { name: "Brands", href: "brands", icon: <Shirt size={20} /> },
    ];
    return (
       <ul className="hidden gap-6 pr-10 md:flex">
          {menuData.map((item: MenuItem) => (
             <li key={item.name} className="text-md leading-22">
                {item.href ? (
-                  <Link href={item.href}>{item.name}</Link>
+                  <Link href={`/categories/${item.href}`}>{item.name}</Link>
                ) : (
                   <div
                      onClick={() => setActive(!active)}
@@ -74,7 +78,7 @@ export const Menu: React.FC = () => {
                                        >
                                           <NavigationMenuLink asChild>
                                              <Link
-                                                href={item.href}
+                                                href={`/categories/${item.href}`}
                                                 className="flex items-center gap-1"
                                              >
                                                 {item.icon}

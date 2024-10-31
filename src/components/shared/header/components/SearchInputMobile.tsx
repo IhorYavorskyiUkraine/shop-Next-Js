@@ -39,7 +39,7 @@ export const SearchInputMobile: React.FC = () => {
          </DrawerTrigger>
          <DrawerContent>
             <Container className="mx-0 justify-between">
-               <DrawerHeader className="flex justify-between pb-6">
+               <DrawerHeader className="flex justify-between py-6">
                   <div className="hidden">
                      <DrawerTitle>Search</DrawerTitle>
                   </div>

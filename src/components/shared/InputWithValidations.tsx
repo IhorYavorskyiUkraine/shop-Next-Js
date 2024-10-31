@@ -45,7 +45,6 @@ export const InputWithValidations: React.FC<Props> = ({
                {label} {required && <RequiredSymbol />}
             </p>
          )}
-
          <div className="relative">
             {phoneMask ? (
                <div className="flex items-center rounded-full bg-gray px-4 py-3 md:flex">

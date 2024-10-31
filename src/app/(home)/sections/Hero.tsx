@@ -3,6 +3,7 @@ import { NumberTable } from "@/app/(home)/components/NumberTable";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Title } from "@/components/ui/title";
+import Link from "next/link";
 
 type TableDataItem = {
    number: string;
@@ -40,12 +41,14 @@ export const Hero: React.FC = () => {
                      garments, designed to bring out your individuality and
                      cater to your sense of style.
                   </p>
-                  <Button
-                     variant="black"
-                     className="mb-5 md:mb-10 md:w-[210px]"
-                  >
-                     Shop Now
-                  </Button>
+                  <Link href="/on_sale">
+                     <Button
+                        variant="black"
+                        className="mb-5 md:mb-10 md:w-[210px]"
+                     >
+                        Shop Now
+                     </Button>
+                  </Link>
                   <div className="flex flex-wrap justify-center gap-7">
                      {tablesData.map((table: TableDataItem, index) => (
                         <div

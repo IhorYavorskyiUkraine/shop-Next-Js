@@ -19,10 +19,10 @@ export const Burger: React.FC = () => {
    const [open, setOpen] = useState(false);
 
    const menuData = [
-      { name: "Shop", href: "/shop" },
-      { name: "On Sale", href: "/on_sale" },
-      { name: "New Arrivals", href: "/new_arrivals" },
-      { name: "Brands", href: "/brands" },
+      { name: "Top Selling", href: "top_selling" },
+      { name: "On Sale", href: "on_sale" },
+      { name: "New Arrivals", href: "new_arrivals" },
+      { name: "Brands", href: "brands" },
    ];
 
    return (
@@ -31,13 +31,13 @@ export const Burger: React.FC = () => {
             <Menu onClick={() => setOpen(!open)} color={"#000"} size={24} />
          </DrawerTrigger>
          <DrawerContent>
-            <Container className="mx-0 justify-between">
+            <Container className="mx-0 justify-between pt-6">
                <DrawerHeader className="flex justify-between border-b-2 border-black/10 pb-6">
                   <DrawerTitle className="-translate-y-1 font-integral-b text-2xl">
                      Catalog
                   </DrawerTitle>
                   <DrawerClose>
-                     <X onClick={() => setOpen(false)} size={20} />
+                     <X onClick={() => setOpen(false)} size={32} />
                   </DrawerClose>
                </DrawerHeader>
                <ul className="flex flex-col gap-4 pt-6">
@@ -45,9 +45,11 @@ export const Burger: React.FC = () => {
                      <li key={item.name}>
                         <Link
                            className="text-2xl font-medium"
-                           href={item.href ?? ""}
+                           href={`/categories/${item.href}` || ""}
                         >
-                           {item.name}
+                           <button onClick={() => setOpen(false)}>
+                              {item.name}
+                           </button>
                         </Link>
                      </li>
                   ))}

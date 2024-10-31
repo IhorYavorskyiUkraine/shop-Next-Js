@@ -228,7 +228,7 @@ model Address {
    addressBook   UserAddressBook @relation(fields: [addressBookId], references: [id])
    addressBookId Int
 
-   active Boolean @default(false)
+   active Boolean @default(true)
 
    fullName  String
    phone     String
