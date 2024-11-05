@@ -93,7 +93,7 @@ export async function updateCartTotalAmount(userCart: Cart | null) {
 
 export async function createOrder(data: OrderInput, fullName: string) {
    try {
-      const cookieStore = cookies();
+      const cookieStore = await cookies();
       const sessionId = await getSessionId();
       const token = cookieStore.get("cartToken")?.value;
 

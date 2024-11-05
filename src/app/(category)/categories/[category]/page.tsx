@@ -16,7 +16,8 @@ export type ProductWithVariants = Prisma.ProductGetPayload<{
    };
 }>;
 
-const CategoriesPage = async ({ params }: { params: { category: string } }) => {
+const CategoriesPage = async (props: { params: Promise<{ category: string }> }) => {
+   const params = await props.params;
    if (!params.category) {
       return <h1>Category not found</h1>;
    }

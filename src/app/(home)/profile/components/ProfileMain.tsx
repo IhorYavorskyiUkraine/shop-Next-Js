@@ -7,7 +7,7 @@ import { ProfileTabs } from "./ProfileTabs";
 
 export const ProfileMain: React.FC = async () => {
    const session = await getUserSession();
-   const token = cookies().get("cartToken")?.value;
+   const token = (await cookies()).get("cartToken")?.value;
 
    if (!session || !token) {
       return redirect("/home");

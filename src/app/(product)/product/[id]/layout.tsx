@@ -5,14 +5,18 @@ import { prisma } from "../../../../../prisma/PrismaClient";
 
 interface LayoutProps {
    children: React.ReactNode;
-   params: {
+   params: Promise<{
       id: string;
-   };
+   }>;
 }
 
-export async function generateMetadata({
-   params: { id },
-}: LayoutProps): Promise<Metadata> {
+export async function generateMetadata(props: LayoutProps): Promise<Metadata> {
+   const params = await props.params;
+
+   const {
+      id
+   } = params;
+
    const product = await prisma.product.findFirst({
       where: { id: Number(id) },
    });

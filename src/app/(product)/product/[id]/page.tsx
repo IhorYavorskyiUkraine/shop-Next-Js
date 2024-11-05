@@ -4,12 +4,18 @@ import { Hero } from "./sections/Hero";
 import { ProductWithVariantsAndDetails } from "@/@types/Product";
 
 interface Props {
-   params: {
+   params: Promise<{
       id: string;
-   };
+   }>;
 }
 
-const ProductPage = async ({ params: { id } }: Props) => {
+const ProductPage = async (props: Props) => {
+   const params = await props.params;
+
+   const {
+      id
+   } = params;
+
    try {
       const product: ProductWithVariantsAndDetails | null =
          await prisma.product.findFirst({
