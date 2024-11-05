@@ -15,6 +15,11 @@ import { SizeItem } from "./SizeItem";
 import { useState } from "react";
 import { ColorItem } from "./ColorItem";
 import { DualRangeSlider } from "@/components/ui/dual-range-slider";
+import {
+   dressStyle as dressStyles,
+   productCategories,
+} from "../../../../prisma/products";
+import { useCategoryStore } from "../store";
 
 interface Props {
    open: boolean;
@@ -27,70 +32,52 @@ export const ProductsFilterMobile: React.FC<Props> = ({
    open,
    setOpen,
 }) => {
-   const [openTabs, setOpenTabs] = useState<string[]>([
-      "Price",
-      "Size",
-      "Colors",
-      "Dress Style",
-   ]);
    const maxValue = products
       .map(product => product.price)
       .sort((a, b) => b - a)[0];
    const [values, setValues] = useState([0, maxValue]);
    const [debouncedValues, setDebouncedValues] = useState(values);
-   const [set, { toggle }] = useSet(new Set<string>([]));
+   const [dressStyle, setDressStyle] = useState<number | null>(null);
+   const setFilteredProducts = useCategoryStore(
+      state => state.setFilteredProducts,
+   );
+   const [sizes, { toggle: toggleSize }] = useSet(new Set<string>([]));
    const [colors, { toggle: toggleColor }] = useSet(new Set<string>([]));
-
-   const handleToggleTab = (tabName: string) => {
-      setOpenTabs(prev =>
-         prev.includes(tabName)
-            ? prev.filter(tab => tab !== tabName)
-            : [...prev, tabName],
-      );
-   };
-
-   useDebounce(
-      () => {
-         setDebouncedValues(values);
-
-         //TODO: Fetching products
-      },
-      250,
-      [values],
+   const [tabs, { toggle: toggleTabs }] = useSet(
+      new Set<string>(["Price", "Size", "Colors", "Dress Style"]),
    );
 
-   const filterItems = [
-      {
-         name: "T-shirts",
-      },
-      {
-         name: "Shorts",
-      },
-      {
-         name: "Shirts",
-      },
-      {
-         name: "Hoodie",
-      },
-      {
-         name: "Jeans",
-      },
-   ];
+   const getFilteredProducts = async () => {
+      const filtered = products.filter(product => {
+         const withinPriceRange =
+            product.price >= values[0] && product.price <= values[1];
 
-   const dressStyleItems = [
-      {
-         name: "Casual",
-      },
-      {
-         name: "Formal",
-      },
-      {
-         name: "Party",
-      },
-      {
-         name: "Gym",
-      },
-   ];
+         const hasSelectedSize =
+            sizes.size === 0 ||
+            product.productVariantOptions.some(variantOption =>
+               variantOption.sizes.some(({ size }) => sizes.has(size)),
+            );
+
+         const hasSelectedColor =
+            colors.size === 0 ||
+            product.productVariantOptions.some(variantOption =>
+               colors.has(String(variantOption.colorId)),
+            );
+
+         const matchesDressStyle =
+            dressStyle === null || product.dressStyleId === dressStyle;
+
+         return (
+            withinPriceRange &&
+            hasSelectedSize &&
+            hasSelectedColor &&
+            matchesDressStyle
+         );
+      });
+
+      setOpen(false);
+      setFilteredProducts(filtered);
+   };
 
    return (
       <Drawer direction="bottom" open={open}>
@@ -117,17 +104,17 @@ export const ProductsFilterMobile: React.FC<Props> = ({
                   />
                </div>
                <div className="border-b-[1px] border-black/10 pb-5">
-                  {filterItems.map(item => (
+                  {productCategories.map(item => (
                      <ProductFilterItem key={item.name} name={item.name} />
                   ))}
                </div>
                <div>
                   <ProductFilterTab
-                     openTabs={openTabs}
-                     onClick={() => handleToggleTab("Price")}
+                     openTabs={tabs}
+                     onClick={() => toggleTabs("Price")}
                      name="Price"
                   >
-                     {openTabs.includes("Price") && (
+                     {tabs.has("Price") && (
                         <DualRangeSlider
                            label={value => <span>${value}</span>}
                            labelPosition="bottom"
@@ -140,11 +127,11 @@ export const ProductsFilterMobile: React.FC<Props> = ({
                      )}
                   </ProductFilterTab>
                   <ProductFilterTab
-                     openTabs={openTabs}
-                     onClick={() => handleToggleTab("Colors")}
+                     openTabs={tabs}
+                     onClick={() => toggleTabs("Colors")}
                      name="Colors"
                   >
-                     {openTabs.includes("Colors") && (
+                     {tabs.has("Colors") && (
                         <div className="flex flex-wrap gap-2 pt-4">
                            {[
                               ...new Set(
@@ -166,11 +153,11 @@ export const ProductsFilterMobile: React.FC<Props> = ({
                      )}
                   </ProductFilterTab>
                   <ProductFilterTab
+                     openTabs={tabs}
                      name="Size"
-                     openTabs={openTabs}
-                     onClick={() => handleToggleTab("Size")}
+                     onClick={() => toggleTabs("Size")}
                   >
-                     {openTabs.includes("Size") && (
+                     {tabs.has("Size") && (
                         <div className="flex flex-wrap gap-2 pt-4">
                            {[
                               ...new Set(
@@ -186,8 +173,8 @@ export const ProductsFilterMobile: React.FC<Props> = ({
                            ].map(size => (
                               <SizeItem
                                  key={size}
-                                 toggle={toggle}
-                                 set={set}
+                                 toggle={toggleSize}
+                                 set={sizes}
                                  size={size}
                               />
                            ))}
@@ -195,22 +182,27 @@ export const ProductsFilterMobile: React.FC<Props> = ({
                      )}
                   </ProductFilterTab>
                   <ProductFilterTab
-                     openTabs={openTabs}
-                     onClick={() => handleToggleTab("Dress Style")}
+                     openTabs={tabs}
+                     onClick={() => toggleTabs("Dress Style")}
                      name="Dress Style"
                   >
                      <div className="pt-4">
-                        {openTabs.includes("Dress Style") &&
-                           dressStyleItems.map(item => (
+                        {tabs.has("Dress Style") &&
+                           dressStyles.map(item => (
                               <ProductFilterItem
                                  key={item.name}
                                  name={item.name}
+                                 onClick={() => setDressStyle(item.id)}
                               />
                            ))}
                      </div>
                   </ProductFilterTab>
                </div>
-               <Button className="w-full flex-1" variant="black">
+               <Button
+                  className="w-full flex-1"
+                  onClick={getFilteredProducts}
+                  variant="black"
+               >
                   Apply Filter
                </Button>
             </Container>

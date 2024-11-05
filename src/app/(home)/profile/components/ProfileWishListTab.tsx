@@ -18,11 +18,6 @@ export const ProfileWishListTab: React.FC = () => {
       fetchWishList();
    }, []);
 
-   const toggleList = async (id: number) => {
-      await toggleWishList(id);
-      fetchWishList();
-   };
-
    if (wishList?.items?.length === 0) {
       return (
          <div className="flex flex-col items-center justify-center">
@@ -47,8 +42,6 @@ export const ProfileWishListTab: React.FC = () => {
                     rating={product.rating || 0}
                     price={product.price}
                     oldPrice={product.oldPrice || 0}
-                    toggleWishList={() => toggleList(product.productId)}
-                    wishList
                  />
               ))}
       </div>

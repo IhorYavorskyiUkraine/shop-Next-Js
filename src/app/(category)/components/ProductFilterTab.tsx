@@ -2,7 +2,7 @@ import { ChevronDown } from "lucide-react";
 
 interface Props {
    name: string;
-   openTabs: string[];
+   openTabs: Set<string>;
    children: React.ReactNode;
    onClick: () => void;
 }
@@ -18,7 +18,7 @@ export const ProductFilterTab: React.FC<Props> = ({
          <div onClick={onClick} className="flex items-center justify-between">
             <p className="text-lg font-bold leading-27">{name}</p>
             <ChevronDown
-               className={openTabs.includes(name) ? "rotate-180" : ""}
+               className={openTabs.has(name) ? "rotate-180" : ""}
                size={16}
             />
          </div>

@@ -4,6 +4,8 @@ import { ProductsFilterMobile } from "./ProductsFilterMobile";
 import { useState } from "react";
 import { ProductCard } from "@/components/shared/ProductCard";
 import { ProductWithVariants } from "../categories/[category]/page";
+import { useCategoryStore } from "../store";
+import { Title } from "@/components/ui/title";
 
 interface Props {
    category: string;
@@ -11,6 +13,7 @@ interface Props {
 }
 
 export const ProductsList: React.FC<Props> = ({ category, products }) => {
+   const filteredProducts = useCategoryStore(state => state.filteredProducts);
    const [open, setOpen] = useState(false);
 
    return (
@@ -21,8 +24,8 @@ export const ProductsList: React.FC<Props> = ({ category, products }) => {
                   {category}
                </h2>
                <p className="-translate-y-[-4px]">
-                  Showing 1-{products.length < 10 ? products.length : 10} of{" "}
-                  {products.length}
+                  {`Showing ${filteredProducts.length > 1 ? 1 : 0}-${filteredProducts.length < 10 ? filteredProducts.length : 10} of
+                  ${filteredProducts.length}`}
                </p>
             </div>
             <div className="md:hidden">
@@ -34,15 +37,25 @@ export const ProductsList: React.FC<Props> = ({ category, products }) => {
             </div>
          </div>
          <div className="flex flex-wrap justify-center gap-4">
-            {products.map(product => (
-               <ProductCard
-                  categoriesPageSizes
-                  key={product.id}
-                  {...product}
-                  rating={product.rating || 0}
-                  oldPrice={product.oldPrice || 0}
-               />
-            ))}
+            {filteredProducts.length === 0 ? (
+               <div className="flex flex-col items-center justify-center">
+                  <Title
+                     text="No Products Available"
+                     className="mb-2 text-center"
+                  />
+                  <p className="text-[64px]">😞</p>
+               </div>
+            ) : (
+               filteredProducts.map(product => (
+                  <ProductCard
+                     categoriesPageSizes
+                     key={product.id}
+                     {...product}
+                     rating={product.rating || 0}
+                     oldPrice={product.oldPrice || 0}
+                  />
+               ))
+            )}
          </div>
       </div>
    );

@@ -16,23 +16,23 @@ export const categories = [
 export const productCategories = [
    {
       id: 1,
-      name: "t-shirts",
+      name: "T-shirts",
    },
    {
       id: 2,
-      name: "shorts",
+      name: "Shorts",
    },
    {
       id: 3,
-      name: "shirts",
+      name: "Shirts",
    },
    {
       id: 4,
-      name: "hoodie",
+      name: "Hoodie",
    },
    {
       id: 5,
-      name: "jeans",
+      name: "Jeans",
    },
 ];
 
