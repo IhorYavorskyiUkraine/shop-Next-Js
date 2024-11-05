@@ -13,6 +13,7 @@ type CartStore = {
 export const useCategoryStore = create<CartStore>(set => ({
    filteredProducts: [],
    loading: true,
+   //ss
    error: false,
    setFilteredProducts: filteredProducts =>
       set({ filteredProducts, loading: false, error: false }),
