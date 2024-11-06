@@ -13,7 +13,6 @@ interface Props {
 }
 
 export const ProductsList: React.FC<Props> = ({ category, products }) => {
-   const filteredProducts = useCategoryStore(state => state.filteredProducts);
    const [open, setOpen] = useState(false);
 
    return (
@@ -24,8 +23,8 @@ export const ProductsList: React.FC<Props> = ({ category, products }) => {
                   {category}
                </h2>
                <p className="-translate-y-[-4px]">
-                  {`Showing ${filteredProducts.length > 1 ? 1 : 0}-${filteredProducts.length < 10 ? filteredProducts.length : 10} of
-                  ${filteredProducts.length}`}
+                  {`Showing ${products.length > 1 ? 1 : 0}-${products.length < 10 ? products.length : 10} of
+                  ${products.length}`}
                </p>
             </div>
             <div className="md:hidden">
@@ -37,7 +36,7 @@ export const ProductsList: React.FC<Props> = ({ category, products }) => {
             </div>
          </div>
          <div className="flex flex-wrap justify-center gap-4">
-            {filteredProducts.length === 0 ? (
+            {products.length === 0 ? (
                <div className="flex flex-col items-center justify-center">
                   <Title
                      text="No Products Available"
@@ -46,7 +45,7 @@ export const ProductsList: React.FC<Props> = ({ category, products }) => {
                   <p className="text-[64px]">😞</p>
                </div>
             ) : (
-               filteredProducts.map(product => (
+               products.map(product => (
                   <ProductCard
                      categoriesPageSizes
                      key={product.id}

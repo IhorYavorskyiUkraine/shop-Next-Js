@@ -1,10 +1,8 @@
 import { BreadCrumb } from "@/components/shared/BreadCrumb";
 import { Container } from "@/components/ui/container";
-import { getProductsByCategory } from "@/lib/getProductsByCategory";
-import { ProductsFilter } from "../../components/ProductsFilter";
-import { ProductsList } from "../../components/ProductsList";
 import { Title } from "@/components/ui/title";
 import { Prisma } from "@prisma/client";
+import { Hero } from "../../components/Hero";
 
 export type ProductWithVariants = Prisma.ProductGetPayload<{
    include: {
@@ -20,8 +18,6 @@ const CategoriesPage = async ({ params }: { params: { category: string } }) => {
    if (!params.category) {
       return <h1>Category not found</h1>;
    }
-
-   const products = await getProductsByCategory(params.category);
 
    const breadCrumbName = () => {
       switch (params.category) {
@@ -55,8 +51,7 @@ const CategoriesPage = async ({ params }: { params: { category: string } }) => {
                link: `/categories/${params.category}`,
             }}
          />
-         <ProductsFilter products={products} />
-         <ProductsList category={crumbName} products={products} />
+         <Hero crumbName={crumbName} category={params.category} />
       </Container>
    );
 };

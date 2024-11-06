@@ -10,9 +10,9 @@ import { ProductFilterTab } from "./ProductFilterTab";
 import { ProductFilterItem } from "./ProductFilterItem";
 import { Button } from "@/components/ui/button";
 import { ProductWithVariants } from "../categories/[category]/page";
-import { useDebounce, useSet } from "react-use";
+import { useSet } from "react-use";
 import { SizeItem } from "./SizeItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ColorItem } from "./ColorItem";
 import { DualRangeSlider } from "@/components/ui/dual-range-slider";
 import {
@@ -32,15 +32,9 @@ export const ProductsFilterMobile: React.FC<Props> = ({
    open,
    setOpen,
 }) => {
-   const maxValue = products
-      .map(product => product.price)
-      .sort((a, b) => b - a)[0];
-   const [values, setValues] = useState([0, maxValue]);
-   const [debouncedValues, setDebouncedValues] = useState(values);
-   const [dressStyle, setDressStyle] = useState<number | null>(null);
-   const setFilteredProducts = useCategoryStore(
-      state => state.setFilteredProducts,
-   );
+   const fetchProducts = useCategoryStore(state => state.fetchProducts);
+   const [values, setValues] = useState([0, 0]);
+   const [dressStyleId, setDressStyleId] = useState<number | null>(null);
    const [sizes, { toggle: toggleSize }] = useSet(new Set<string>([]));
    const [colors, { toggle: toggleColor }] = useSet(new Set<string>([]));
    const [tabs, { toggle: toggleTabs }] = useSet(
@@ -48,36 +42,33 @@ export const ProductsFilterMobile: React.FC<Props> = ({
    );
 
    const getFilteredProducts = async () => {
-      const filtered = products.filter(product => {
-         const withinPriceRange =
-            product.price >= values[0] && product.price <= values[1];
+      try {
+         const filters = {
+            minPrice: values[0],
+            maxPrice: values[1],
+            colors: Array.from(colors),
+            sizes: Array.from(sizes),
+            dressStyleId,
+         };
 
-         const hasSelectedSize =
-            sizes.size === 0 ||
-            product.productVariantOptions.some(variantOption =>
-               variantOption.sizes.some(({ size }) => sizes.has(size)),
-            );
-
-         const hasSelectedColor =
-            colors.size === 0 ||
-            product.productVariantOptions.some(variantOption =>
-               colors.has(String(variantOption.colorId)),
-            );
-
-         const matchesDressStyle =
-            dressStyle === null || product.dressStyleId === dressStyle;
-
-         return (
-            withinPriceRange &&
-            hasSelectedSize &&
-            hasSelectedColor &&
-            matchesDressStyle
-         );
-      });
+         fetchProducts("on_sale", filters);
+      } catch (e) {
+         console.error(e);
+      }
 
       setOpen(false);
-      setFilteredProducts(filtered);
    };
+
+   useEffect(() => {
+      if (products.length > 0) {
+         const prices = products
+            .map(product => product.price)
+            .filter(price => price !== null && price !== undefined);
+         const minPrice = Math.min(...prices);
+         const maxPrice = Math.max(...prices);
+         setValues([minPrice, maxPrice]);
+      }
+   }, []);
 
    return (
       <Drawer direction="bottom" open={open}>
@@ -120,9 +111,9 @@ export const ProductsFilterMobile: React.FC<Props> = ({
                            labelPosition="bottom"
                            value={values}
                            onValueChange={setValues}
-                           min={0}
+                           min={minValue}
                            max={maxValue}
-                           step={1}
+                           step={10}
                         />
                      )}
                   </ProductFilterTab>
@@ -192,7 +183,7 @@ export const ProductsFilterMobile: React.FC<Props> = ({
                               <ProductFilterItem
                                  key={item.name}
                                  name={item.name}
-                                 onClick={() => setDressStyle(item.id)}
+                                 onClick={() => setDressStyleId(item.id)}
                               />
                            ))}
                      </div>

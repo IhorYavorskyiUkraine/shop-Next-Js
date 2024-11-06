@@ -1,39 +1,32 @@
 import { prisma } from "../../prisma/PrismaClient";
 
+const categoryMap: { [key: string]: number } = {
+   new_arrivals: 1,
+   top_selling: 2,
+};
+
 export const getProductsByCategory = async (category: string) => {
-   const categoryId = category === "new_arrivals" ? 1 : 2;
+   const categoryId = categoryMap[category] ?? null;
 
-   const productsByCategory = await prisma.product.findMany({
-      where: {
-         categoryId,
-      },
-      include: {
-         productVariantOptions: {
-            include: {
-               sizes: true,
+   try {
+      const whereCondition = categoryId
+         ? { categoryId }
+         : { oldPrice: { not: null } };
+
+      const products = await prisma.product.findMany({
+         where: whereCondition,
+         include: {
+            productVariantOptions: {
+               include: {
+                  sizes: true,
+               },
             },
          },
-      },
-   });
+      });
 
-   if (productsByCategory.length > 0) {
-      return productsByCategory;
+      return products;
+   } catch (error) {
+      console.error("Error fetching products:", error);
+      throw new Error("Failed to fetch products.");
    }
-
-   const productsOnSale = await prisma.product.findMany({
-      where: {
-         oldPrice: {
-            gt: 0,
-         },
-      },
-      include: {
-         productVariantOptions: {
-            include: {
-               sizes: true,
-            },
-         },
-      },
-   });
-
-   return productsOnSale;
 };

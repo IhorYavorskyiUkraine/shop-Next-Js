@@ -1,19 +1,68 @@
 "use client";
 
 import { create } from "zustand";
-import { Product } from "@prisma/client";
+import { ProductWithVariants } from "./categories/[category]/page";
 
 type CartStore = {
-   filteredProducts: Product[];
+   products: ProductWithVariants[];
    loading: boolean;
    error: boolean;
-   setFilteredProducts: (filteredProducts: Product[]) => void;
+   fetchProducts: (
+      category?: string,
+      filters?: {
+         minPrice?: number;
+         maxPrice?: number;
+         colors?: string[];
+         sizes?: string[];
+         dressStyleId?: number | null;
+      },
+   ) => Promise<void>;
 };
 
 export const useCategoryStore = create<CartStore>(set => ({
-   filteredProducts: [],
+   products: [],
    loading: true,
    error: false,
-   setFilteredProducts: filteredProducts =>
-      set({ filteredProducts, loading: false, error: false }),
+   fetchProducts: async (category, filters) => {
+      set({ loading: true, error: false });
+
+      try {
+         const { minPrice, maxPrice, colors, sizes, dressStyleId } =
+            filters || {};
+
+         let queryParams = `?categoryId=${category}`;
+
+         if (sizes && sizes.length > 0) {
+            queryParams += `&sizes=${sizes.join(",")}`;
+         }
+
+         if (colors && colors.length > 0) {
+            queryParams += `&colors=${colors.join(",")}`;
+         }
+
+         if (dressStyleId) {
+            queryParams += `&dressStyleId=${dressStyleId}`;
+         }
+
+         if (minPrice && minPrice >= 0) {
+            queryParams += `&minPrice=${minPrice}`;
+         }
+
+         if (maxPrice) {
+            queryParams += `&maxPrice=${maxPrice}`;
+         }
+
+         const response = await fetch(`/api/categoryProducts${queryParams}`);
+
+         if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+         }
+
+         const products: ProductWithVariants[] = await response.json();
+
+         set({ products, loading: false, error: false });
+      } catch (e) {
+         console.error(e);
+      }
+   },
 }));
