@@ -14,6 +14,7 @@ export const useCategoryStore = create<CartStore>(set => ({
    filteredProducts: [],
    loading: true,
    error: false,
+   //test
    setFilteredProducts: filteredProducts =>
       set({ filteredProducts, loading: false, error: false }),
 }));
