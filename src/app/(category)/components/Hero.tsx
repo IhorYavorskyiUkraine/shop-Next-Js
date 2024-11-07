@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { ProductsFilter } from "./ProductsFilter";
 import { ProductsList } from "./ProductsList";
 import { useCategoryStore } from "../store";
+import { ProductPagination } from "./ProductPagination";
 
 interface Props {
    category: string;
@@ -30,6 +31,7 @@ export const Hero: React.FC<Props> = ({ category, crumbName }) => {
       <div>
          <ProductsFilter products={products} />
          <ProductsList category={crumbName} products={products} />
+         <ProductPagination totalPages={products.length / 10} />
       </div>
    );
 };

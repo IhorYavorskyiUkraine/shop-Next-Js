@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { ProductWithVariants } from "../categories/[category]/page";
 import { useSet } from "react-use";
 import { SizeItem } from "./SizeItem";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ColorItem } from "./ColorItem";
 import { DualRangeSlider } from "@/components/ui/dual-range-slider";
 import {
@@ -40,6 +40,29 @@ export const ProductsFilterMobile: React.FC<Props> = ({
    const [tabs, { toggle: toggleTabs }] = useSet(
       new Set<string>(["Price", "Size", "Colors", "Dress Style"]),
    );
+   const sizeOrder = ["xs", "s", "m", "l", "xl"];
+   const sizesList = [
+      ...new Set(
+         products.flatMap(product =>
+            product.productVariantOptions.flatMap(variantOption =>
+               variantOption.sizes.map(({ size }) => size),
+            ),
+         ),
+      ),
+   ].sort((a, b) => sizeOrder.indexOf(a) - sizeOrder.indexOf(b));
+
+   const colorsList = [
+      ...new Set(
+         products.flatMap(product =>
+            product.productVariantOptions.flatMap(
+               variantOption => variantOption.colorId,
+            ),
+         ),
+      ),
+   ];
+
+   const minPrice = useRef(0);
+   const maxPrice = useRef(0);
 
    const getFilteredProducts = async () => {
       try {
@@ -60,15 +83,16 @@ export const ProductsFilterMobile: React.FC<Props> = ({
    };
 
    useEffect(() => {
-      if (products.length > 0) {
-         const prices = products
-            .map(product => product.price)
-            .filter(price => price !== null && price !== undefined);
-         const minPrice = Math.min(...prices);
-         const maxPrice = Math.max(...prices);
-         setValues([minPrice, maxPrice]);
+      if (minPrice.current === 0 && maxPrice.current === 0) {
+         const productPrices = products.map(product => product.price);
+         minPrice.current =
+            productPrices.length > 0 ? Math.min(...productPrices) : 0;
+         maxPrice.current =
+            productPrices.length > 0 ? Math.max(...productPrices) : 0;
+
+         setValues([minPrice.current, maxPrice.current]);
       }
-   }, []);
+   }, [products]);
 
    return (
       <Drawer direction="bottom" open={open}>
@@ -111,8 +135,8 @@ export const ProductsFilterMobile: React.FC<Props> = ({
                            labelPosition="bottom"
                            value={values}
                            onValueChange={setValues}
-                           min={minValue}
-                           max={maxValue}
+                           min={minPrice.current}
+                           max={maxPrice.current}
                            step={10}
                         />
                      )}
@@ -124,20 +148,12 @@ export const ProductsFilterMobile: React.FC<Props> = ({
                   >
                      {tabs.has("Colors") && (
                         <div className="flex flex-wrap gap-2 pt-4">
-                           {[
-                              ...new Set(
-                                 products.flatMap(product =>
-                                    product.productVariantOptions.flatMap(
-                                       variantOption => variantOption.colorId,
-                                    ),
-                                 ),
-                              ),
-                           ].map(color => (
+                           {colorsList.map(color => (
                               <ColorItem
                                  key={color}
                                  toggle={toggleColor}
                                  set={colors}
-                                 color={color}
+                                 color={Number(color)}
                               />
                            ))}
                         </div>
@@ -150,18 +166,7 @@ export const ProductsFilterMobile: React.FC<Props> = ({
                   >
                      {tabs.has("Size") && (
                         <div className="flex flex-wrap gap-2 pt-4">
-                           {[
-                              ...new Set(
-                                 products.flatMap(product =>
-                                    product.productVariantOptions.flatMap(
-                                       variantOption =>
-                                          variantOption.sizes.map(
-                                             ({ size }) => size,
-                                          ),
-                                    ),
-                                 ),
-                              ),
-                           ].map(size => (
+                           {sizesList.map(size => (
                               <SizeItem
                                  key={size}
                                  toggle={toggleSize}

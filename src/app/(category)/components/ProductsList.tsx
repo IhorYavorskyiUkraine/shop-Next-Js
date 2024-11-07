@@ -4,7 +4,6 @@ import { ProductsFilterMobile } from "./ProductsFilterMobile";
 import { useState } from "react";
 import { ProductCard } from "@/components/shared/ProductCard";
 import { ProductWithVariants } from "../categories/[category]/page";
-import { useCategoryStore } from "../store";
 import { Title } from "@/components/ui/title";
 
 interface Props {
@@ -16,7 +15,7 @@ export const ProductsList: React.FC<Props> = ({ category, products }) => {
    const [open, setOpen] = useState(false);
 
    return (
-      <div>
+      <div className="border-b-[1px] border-black/10 pb-6">
          <div className="mb-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
                <h2 className="text-xl font-bold leading-32 leading-[43px] md:text-2xl">

@@ -6,9 +6,15 @@ export async function GET(req: NextRequest) {
    const categoryId = searchParams.get("categoryId");
    const minPrice = searchParams.get("minPrice");
    const maxPrice = searchParams.get("maxPrice");
-   const sizes = searchParams.getAll("sizes");
-   const colors = searchParams.getAll("colors");
+   const sizes = searchParams.getAll("sizes")
+      ? searchParams.get("sizes")?.split(",")
+      : [];
+   const colors = searchParams.getAll("colors")
+      ? searchParams.get("colors")?.split(",")
+      : [];
    const dressStyleId = searchParams.get("dressStyleId");
+   const limit = parseInt(req.nextUrl.searchParams.get("limit") || "10", 10);
+   const offset = parseInt(req.nextUrl.searchParams.get("offset") || "0", 10);
 
    if (!categoryId) {
       return NextResponse.json(
@@ -32,30 +38,33 @@ export async function GET(req: NextRequest) {
          };
       }
 
-      console.log(whereCondition);
-
-      if (sizes.length > 0) {
+      if (sizes && sizes?.length > 0) {
+         const normalizedSizes = sizes?.map(size => size.toLowerCase());
          whereCondition.productVariantOptions = {
             some: {
                sizes: {
                   some: {
-                     size: { in: sizes },
+                     size: {
+                        in: normalizedSizes,
+                     },
                   },
                },
             },
          };
       }
 
-      if (colors.length > 0) {
+      if (colors && colors.length > 0) {
          whereCondition.productVariantOptions = {
             some: {
-               colorId: Number(colors),
+               colorId: {
+                  in: colors.map(color => Number(color)),
+               },
             },
          };
       }
 
       if (dressStyleId) {
-         whereCondition.dressStyleId = { dressStyleId };
+         whereCondition.dressStyleId = Number(dressStyleId);
       }
 
       const products = await prisma.product.findMany({
@@ -68,6 +77,8 @@ export async function GET(req: NextRequest) {
                },
             },
          },
+         take: limit,
+         skip: offset,
       });
 
       return NextResponse.json(products);
