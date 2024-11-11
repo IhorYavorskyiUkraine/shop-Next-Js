@@ -38,8 +38,6 @@ export const ProductPagination: React.FC<Props> = ({
          handlePageClick(currentPage - 1);
       }
    };
-<<<<<<< HEAD
-
    const getPageNumbers = () => {
       const pages: number[] = [];
       const maxPagesToShow = 6;
@@ -62,8 +60,6 @@ export const ProductPagination: React.FC<Props> = ({
 
       return pages;
    };
-=======
->>>>>>> origin/next14
 
    return (
       <Pagination className="mb-12 mt-5">
@@ -72,7 +68,6 @@ export const ProductPagination: React.FC<Props> = ({
                <PaginationPrevious onClick={handlePrevPage} />
             </PaginationItem>
             <div className="flex items-center gap-1">
-<<<<<<< HEAD
                {getPageNumbers().map((page, index) => (
                   <PaginationItem key={index}>
                      {page === -1 ? (
@@ -102,53 +97,6 @@ export const ProductPagination: React.FC<Props> = ({
                      )}
                   </PaginationItem>
                ))}
-=======
-               {Array.from({ length: 3 }, (_, index) => (
-                  <PaginationItem key={index}>
-                     <PaginationLink
-                        className={cn(
-                           currentPage === index + 1 ? "bg-gray" : "",
-                           "!h-[36px] !w-[36px] rounded-[8px]",
-                        )}
-                        href="#"
-                        onClick={() => handlePageClick(index + 1)}
-                     >
-                        <span
-                           className={cn(
-                              currentPage === index + 1
-                                 ? "opacity-100"
-                                 : "opacity-60",
-                              "text-sm font-medium leading-20",
-                           )}
-                        >
-                           {index + 1}
-                        </span>
-                     </PaginationLink>
-                  </PaginationItem>
-               ))}
-               {totalPages > 3 && <PaginationEllipsis />}
-               {totalPages > 3 && (
-                  <PaginationItem>
-                     <PaginationLink
-                        className={cn(
-                           currentPage === 8 ? "bg-gray" : "",
-                           "!h-[36px] !w-[36px] rounded-[8px]",
-                        )}
-                        href="#"
-                        onClick={() => handlePageClick(totalPages)}
-                     >
-                        <span
-                           className={cn(
-                              currentPage === 8 ? "opacity-100" : "opacity-60",
-                              "text-sm font-medium leading-20",
-                           )}
-                        >
-                           {totalPages}
-                        </span>
-                     </PaginationLink>
-                  </PaginationItem>
-               )}
->>>>>>> origin/next14
             </div>
             <PaginationItem>
                <PaginationNext onClick={handleNextPage} />
