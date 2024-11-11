@@ -83,6 +83,4652 @@ async function up() {
          },
       },
    });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
+   await prisma.product.create({
+      data: {
+         name: "Skinny Fit Jeans",
+         productCategoryId: 5,
+         categoryId: 1,
+         dressStyleId: 1,
+         description: "Skinny Fit Jeans",
+         imageUrl: "/images/newArrivals/2/2_blue.png",
+         price: 220,
+         oldPrice: 260,
+         rating: 0,
+         productVariantOptions: {
+            create: [
+               {
+                  colorId: 5,
+                  sizes: {
+                     connect: [
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                     ],
+                  },
+                  price: 220,
+                  oldPrice: 260,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                     "/images/newArrivals/2/2_blue.png",
+                  ],
+                  stockQuantity: 100,
+               },
+               {
+                  colorId: 8,
+                  sizes: {
+                     connect: [{ id: 1 }, { id: 2 }, { id: 5 }],
+                  },
+                  price: 210,
+                  imageUrl: [
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                     "/images/newArrivals/2/2_black.png",
+                  ],
+                  stockQuantity: 50,
+               },
+            ],
+         },
+         productDetails: {
+            create: [
+               {
+                  name: "Material",
+                  value: "98% Cotton, 2% Elastane",
+               },
+               {
+                  name: "Fit Type",
+                  value: "Skinny Fit",
+               },
+               {
+                  name: "Care Instructions",
+                  value: "Machine wash cold, tumble dry low",
+               },
+            ],
+         },
+      },
+   });
 
    await prisma.product.create({
       data: {

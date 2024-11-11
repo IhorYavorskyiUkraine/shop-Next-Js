@@ -67,6 +67,36 @@ export async function GET(req: NextRequest) {
          whereCondition.dressStyleId = Number(dressStyleId);
       }
 
+      const totalProducts = await prisma.product.count({
+         where: whereCondition,
+      });
+
+      const totalPages = Math.ceil(totalProducts / limit);
+
+      const filters = await prisma.productVariantOption.findMany({
+         select: {
+            sizes: {
+               select: { size: true },
+            },
+            color: {
+               select: { id: true },
+            },
+            price: true,
+         },
+      });
+
+      const minProductPrice = Math.min(...filters.map(option => option.price));
+      const maxProductPrice = Math.max(...filters.map(option => option.price));
+
+      const productFilters = {
+         sizes: Array.from(
+            new Set(filters.flatMap(option => option.sizes.map(s => s.size))),
+         ),
+         colors: Array.from(new Set(filters.map(option => option.color.id))),
+         minProductPrice,
+         maxProductPrice,
+      };
+
       const products = await prisma.product.findMany({
          where: whereCondition,
          include: {
@@ -81,7 +111,12 @@ export async function GET(req: NextRequest) {
          skip: offset,
       });
 
-      return NextResponse.json(products);
+      return NextResponse.json({
+         products,
+         totalPages,
+         totalProducts,
+         productFilters,
+      });
    } catch (error) {
       console.error(error);
       return NextResponse.json(

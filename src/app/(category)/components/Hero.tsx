@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ProductsFilter } from "./ProductsFilter";
 import { ProductsList } from "./ProductsList";
 import { useCategoryStore } from "../store";
@@ -12,10 +12,16 @@ interface Props {
 }
 
 export const Hero: React.FC<Props> = ({ category, crumbName }) => {
-   const [fetchProducts, products] = useCategoryStore(state => [
-      state.fetchProducts,
-      state.products,
-   ]);
+   const [fetchProducts, products, totalPages, totalProducts] =
+      useCategoryStore(state => [
+         state.fetchProducts,
+         state.products,
+         state.totalPages,
+         state.totalProducts,
+      ]);
+   const [currentPage, setCurrentPage] = useState(1);
+   const [limit, setLimit] = useState(10);
+   const [offset, setOffset] = useState(0);
 
    useEffect(() => {
       const categoryToFetch =
@@ -24,14 +30,28 @@ export const Hero: React.FC<Props> = ({ category, crumbName }) => {
             : category === "top_selling"
               ? "2"
               : category;
-      fetchProducts(categoryToFetch);
-   }, []);
+      fetchProducts(categoryToFetch, {}, limit, offset);
+   }, [offset]);
+
+   const handlePageChange = (page: number) => {
+      setCurrentPage(page);
+      setOffset((page - 1) * limit);
+   };
 
    return (
       <div>
          <ProductsFilter products={products} />
-         <ProductsList category={crumbName} products={products} />
-         <ProductPagination totalPages={products.length / 10} />
+         <ProductsList
+            totalProducts={totalProducts}
+            category={crumbName}
+            products={products}
+         />
+         <ProductPagination
+            setOffset={setOffset}
+            onPageChange={handlePageChange}
+            totalPages={totalPages}
+            currentPage={currentPage}
+         />
       </div>
    );
 };

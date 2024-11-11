@@ -5,6 +5,14 @@ import { ProductWithVariants } from "./categories/[category]/page";
 
 type CartStore = {
    products: ProductWithVariants[];
+   totalPages: number;
+   totalProducts: number;
+   productFilters: {
+      sizes: string[];
+      colors: string[];
+      minProductPrice: number;
+      maxProductPrice: number;
+   };
    loading: boolean;
    error: boolean;
    fetchProducts: (
@@ -23,6 +31,14 @@ type CartStore = {
 
 export const useCategoryStore = create<CartStore>(set => ({
    products: [],
+   totalPages: 0,
+   productFilters: {
+      sizes: [],
+      colors: [],
+      minProductPrice: 0,
+      maxProductPrice: 0,
+   },
+   totalProducts: 0,
    loading: true,
    error: false,
    fetchProducts: async (category, filters, limit = 10, offset = 0) => {
@@ -61,9 +77,17 @@ export const useCategoryStore = create<CartStore>(set => ({
             throw new Error(`Error: ${response.statusText}`);
          }
 
-         const products: ProductWithVariants[] = await response.json();
+         const { products, totalPages, totalProducts, productFilters } =
+            await response.json();
 
-         set({ products, loading: false, error: false });
+         set({
+            products,
+            totalPages,
+            totalProducts,
+            productFilters,
+            loading: false,
+            error: false,
+         });
       } catch (e) {
          console.error(e);
       }
