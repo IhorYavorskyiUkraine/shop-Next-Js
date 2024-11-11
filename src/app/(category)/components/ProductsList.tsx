@@ -8,10 +8,15 @@ import { Title } from "@/components/ui/title";
 
 interface Props {
    category: string;
+   totalProducts: number;
    products: ProductWithVariants[];
 }
 
-export const ProductsList: React.FC<Props> = ({ category, products }) => {
+export const ProductsList: React.FC<Props> = ({
+   category,
+   products,
+   totalProducts,
+}) => {
    const [open, setOpen] = useState(false);
 
    return (
@@ -23,15 +28,11 @@ export const ProductsList: React.FC<Props> = ({ category, products }) => {
                </h2>
                <p className="-translate-y-[-4px]">
                   {`Showing ${products.length > 1 ? 1 : 0}-${products.length < 10 ? products.length : 10} of
-                  ${products.length}`}
+                  ${totalProducts}`}
                </p>
             </div>
             <div className="md:hidden">
-               <ProductsFilterMobile
-                  products={products}
-                  open={open}
-                  setOpen={setOpen}
-               />
+               <ProductsFilterMobile open={open} setOpen={setOpen} />
             </div>
          </div>
          <div className="flex flex-wrap justify-center gap-4">

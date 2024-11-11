@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/container";
 import { Title } from "@/components/ui/title";
 import { Prisma } from "@prisma/client";
 import { Hero } from "../../components/Hero";
+import { prisma } from "../../../../../prisma/PrismaClient";
 
 export type ProductWithVariants = Prisma.ProductGetPayload<{
    include: {

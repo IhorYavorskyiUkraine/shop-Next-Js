@@ -23,16 +23,14 @@ import { useCategoryStore } from "../store";
 
 interface Props {
    open: boolean;
-   products: ProductWithVariants[];
    setOpen: (open: boolean) => void;
 }
 
-export const ProductsFilterMobile: React.FC<Props> = ({
-   products,
-   open,
-   setOpen,
-}) => {
-   const fetchProducts = useCategoryStore(state => state.fetchProducts);
+export const ProductsFilterMobile: React.FC<Props> = ({ open, setOpen }) => {
+   const [fetchProducts, productFilters] = useCategoryStore(state => [
+      state.fetchProducts,
+      state.productFilters,
+   ]);
    const [values, setValues] = useState([0, 0]);
    const [dressStyleId, setDressStyleId] = useState<number | null>(null);
    const [sizes, { toggle: toggleSize }] = useSet(new Set<string>([]));
@@ -40,29 +38,11 @@ export const ProductsFilterMobile: React.FC<Props> = ({
    const [tabs, { toggle: toggleTabs }] = useSet(
       new Set<string>(["Price", "Size", "Colors", "Dress Style"]),
    );
-   const sizeOrder = ["xs", "s", "m", "l", "xl"];
-   const sizesList = [
-      ...new Set(
-         products.flatMap(product =>
-            product.productVariantOptions.flatMap(variantOption =>
-               variantOption.sizes.map(({ size }) => size),
-            ),
-         ),
-      ),
-   ].sort((a, b) => sizeOrder.indexOf(a) - sizeOrder.indexOf(b));
+   const sizesList = productFilters?.sizes;
+   const colorsList = productFilters?.colors;
 
-   const colorsList = [
-      ...new Set(
-         products.flatMap(product =>
-            product.productVariantOptions.flatMap(
-               variantOption => variantOption.colorId,
-            ),
-         ),
-      ),
-   ];
-
-   const minPrice = useRef(0);
-   const maxPrice = useRef(0);
+   const minPrice = useRef<number | null>(null);
+   const maxPrice = useRef<number | null>(null);
 
    const getFilteredProducts = async () => {
       try {
@@ -83,16 +63,15 @@ export const ProductsFilterMobile: React.FC<Props> = ({
    };
 
    useEffect(() => {
-      if (minPrice.current === 0 && maxPrice.current === 0) {
-         const productPrices = products.map(product => product.price);
-         minPrice.current =
-            productPrices.length > 0 ? Math.min(...productPrices) : 0;
-         maxPrice.current =
-            productPrices.length > 0 ? Math.max(...productPrices) : 0;
-
+      if (
+         minPrice.current === null &&
+         productFilters.minProductPrice !== undefined
+      ) {
+         minPrice.current = productFilters.minProductPrice;
+         maxPrice.current = productFilters.maxProductPrice;
          setValues([minPrice.current, maxPrice.current]);
       }
-   }, [products]);
+   }, [productFilters]);
 
    return (
       <Drawer direction="bottom" open={open}>
@@ -135,8 +114,8 @@ export const ProductsFilterMobile: React.FC<Props> = ({
                            labelPosition="bottom"
                            value={values}
                            onValueChange={setValues}
-                           min={minPrice.current}
-                           max={maxPrice.current}
+                           min={minPrice.current ?? 0}
+                           max={maxPrice.current ?? 0}
                            step={10}
                         />
                      )}
@@ -148,7 +127,7 @@ export const ProductsFilterMobile: React.FC<Props> = ({
                   >
                      {tabs.has("Colors") && (
                         <div className="flex flex-wrap gap-2 pt-4">
-                           {colorsList.map(color => (
+                           {colorsList?.map(color => (
                               <ColorItem
                                  key={color}
                                  toggle={toggleColor}
@@ -166,7 +145,7 @@ export const ProductsFilterMobile: React.FC<Props> = ({
                   >
                      {tabs.has("Size") && (
                         <div className="flex flex-wrap gap-2 pt-4">
-                           {sizesList.map(size => (
+                           {sizesList?.map(size => (
                               <SizeItem
                                  key={size}
                                  toggle={toggleSize}
