@@ -32,7 +32,11 @@ export const ProductsList: React.FC<Props> = ({
                </p>
             </div>
             <div className="md:hidden">
-               <ProductsFilterMobile open={open} setOpen={setOpen} />
+               <ProductsFilterMobile
+                  category={category}
+                  open={open}
+                  setOpen={setOpen}
+               />
             </div>
          </div>
          <div className="flex flex-wrap justify-center gap-4">

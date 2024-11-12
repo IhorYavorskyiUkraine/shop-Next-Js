@@ -5,6 +5,7 @@ import { ProductsFilter } from "./ProductsFilter";
 import { ProductsList } from "./ProductsList";
 import { useCategoryStore } from "../store";
 import { ProductPagination } from "./ProductPagination";
+import { useSearchParams } from "next/navigation";
 
 interface Props {
    category: string;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export const Hero: React.FC<Props> = ({ category, crumbName }) => {
+   const searchParams = useSearchParams();
    const [fetchProducts, products, totalPages, totalProducts] =
       useCategoryStore(state => [
          state.fetchProducts,
@@ -24,15 +26,16 @@ export const Hero: React.FC<Props> = ({ category, crumbName }) => {
    const [offset, setOffset] = useState(0);
 
    useEffect(() => {
-      const categoryToFetch =
-         category === "new_arrivals"
-            ? "1"
-            : category === "top_selling"
-              ? "2"
-              : category;
-      const query = `category=${categoryToFetch}`;
+      let query = `category=${category === "new_arrivals" ? "1" : category === "top_selling" ? "2" : category}`;
+
+      searchParams.forEach((value, key) => {
+         if (key !== "category") {
+            query += `&${key}=${value}`;
+         }
+      });
+
       fetchProducts(query, offset);
-   }, [offset]);
+   }, [offset, searchParams, category, fetchProducts]);
 
    const handlePageChange = (page: number) => {
       setCurrentPage(page);

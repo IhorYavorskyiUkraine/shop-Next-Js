@@ -5,7 +5,7 @@ import {
    DrawerTitle,
    DrawerTrigger,
 } from "@/components/ui/drawer";
-import { SlidersHorizontal, X } from "lucide-react";
+import { SlidersHorizontal, Trash, X } from "lucide-react";
 import { ProductFilterTab } from "./ProductFilterTab";
 import { ProductFilterItem } from "./ProductFilterItem";
 import { Button } from "@/components/ui/button";
@@ -25,10 +25,15 @@ import { useDebounce } from "react-use";
 
 interface Props {
    open: boolean;
+   category: string;
    setOpen: (open: boolean) => void;
 }
 
-export const ProductsFilterMobile: React.FC<Props> = ({ open, setOpen }) => {
+export const ProductsFilterMobile: React.FC<Props> = ({
+   open,
+   setOpen,
+   category,
+}) => {
    const router = useRouter();
    const searchParams = useSearchParams();
    const [fetchProducts, productFilters] = useCategoryStore(state => [
@@ -47,10 +52,12 @@ export const ProductsFilterMobile: React.FC<Props> = ({ open, setOpen }) => {
    const [dressStyleId, setDressStyleId] = useState<string | null>(
       searchParams.get("dressStyleId") || null,
    );
-   const [sizes, { toggle: toggleSize }] = useSet(
+   const [prevQuery, setPrevQuery] = useState("");
+
+   const [sizes, { toggle: toggleSize, reset: resetSizes }] = useSet(
       new Set<string>(searchParams.getAll("sizes") || []),
    );
-   const [colors, { toggle: toggleColor }] = useSet(
+   const [colors, { toggle: toggleColor, reset: resetColors }] = useSet(
       new Set<string>(searchParams.getAll("colors") || []),
    );
    const [tabs, { toggle: toggleTabs }] = useSet(
@@ -62,6 +69,13 @@ export const ProductsFilterMobile: React.FC<Props> = ({ open, setOpen }) => {
 
    const minPrice = useRef<number | null>(null);
    const maxPrice = useRef<number | null>(null);
+
+   const clearFilters = () => {
+      setDressStyleId(null);
+      resetSizes();
+      resetColors();
+      setValues([minPrice.current || 0, maxPrice.current || 0]);
+   };
 
    useEffect(() => {
       minPrice.current = productFilters.minProductPrice;
@@ -78,7 +92,7 @@ export const ProductsFilterMobile: React.FC<Props> = ({ open, setOpen }) => {
 
    useEffect(() => {
       const filters: Record<string, any> = {
-         category: "on_sale",
+         category,
          ...(debouncedValue[0] > 0 && { minPrice: debouncedValue[0] }),
          ...(debouncedValue[1] > 0 && { maxPrice: debouncedValue[1] }),
          ...(colors.size > 0 && { colors: Array.from(colors) }),
@@ -88,13 +102,15 @@ export const ProductsFilterMobile: React.FC<Props> = ({ open, setOpen }) => {
 
       const query = qs.stringify(filters, { arrayFormat: "comma" });
 
-      if (query !== searchParams.toString()) {
+      if (query !== prevQuery) {
+         setPrevQuery(query);
          router.push(`?${query}`, { scroll: false });
          fetchProducts(query);
       }
    }, [
       debouncedValue,
       sizes,
+      category,
       colors,
       dressStyleId,
       fetchProducts,
@@ -204,13 +220,16 @@ export const ProductsFilterMobile: React.FC<Props> = ({ open, setOpen }) => {
                      </div>
                   </ProductFilterTab>
                </div>
-               <Button
-                  className="w-full flex-1"
-                  onClick={() => setOpen(false)}
-                  variant="black"
-               >
-                  Apply Filter
-               </Button>
+               <div className="flex items-center gap-4">
+                  <Button
+                     className="w-full flex-1"
+                     onClick={() => setOpen(false)}
+                     variant="black"
+                  >
+                     Apply Filter
+                  </Button>
+                  <Trash onClick={clearFilters} size={20} />
+               </div>
             </Container>
          </DrawerContent>
       </Drawer>
