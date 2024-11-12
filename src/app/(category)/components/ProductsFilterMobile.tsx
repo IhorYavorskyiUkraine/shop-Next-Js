@@ -9,7 +9,6 @@ import { SlidersHorizontal, X } from "lucide-react";
 import { ProductFilterTab } from "./ProductFilterTab";
 import { ProductFilterItem } from "./ProductFilterItem";
 import { Button } from "@/components/ui/button";
-import { ProductWithVariants } from "../categories/[category]/page";
 import { useSet } from "react-use";
 import { SizeItem } from "./SizeItem";
 import { useEffect, useRef, useState } from "react";
@@ -20,6 +19,9 @@ import {
    productCategories,
 } from "../../../../prisma/products";
 import { useCategoryStore } from "../store";
+import qs from "qs";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useDebounce } from "react-use";
 
 interface Props {
    open: boolean;
@@ -27,51 +29,78 @@ interface Props {
 }
 
 export const ProductsFilterMobile: React.FC<Props> = ({ open, setOpen }) => {
+   const router = useRouter();
+   const searchParams = useSearchParams();
    const [fetchProducts, productFilters] = useCategoryStore(state => [
       state.fetchProducts,
       state.productFilters,
    ]);
    const [values, setValues] = useState([0, 0]);
-   const [dressStyleId, setDressStyleId] = useState<number | null>(null);
-   const [sizes, { toggle: toggleSize }] = useSet(new Set<string>([]));
-   const [colors, { toggle: toggleColor }] = useSet(new Set<string>([]));
+   const [debouncedValue, setDebouncedValue] = useState([0, 0]);
+   const [] = useDebounce(
+      () => {
+         setDebouncedValue(values);
+      },
+      200,
+      [values],
+   );
+   const [dressStyleId, setDressStyleId] = useState<string | null>(
+      searchParams.get("dressStyleId") || null,
+   );
+   const [sizes, { toggle: toggleSize }] = useSet(
+      new Set<string>(searchParams.getAll("sizes") || []),
+   );
+   const [colors, { toggle: toggleColor }] = useSet(
+      new Set<string>(searchParams.getAll("colors") || []),
+   );
    const [tabs, { toggle: toggleTabs }] = useSet(
       new Set<string>(["Price", "Size", "Colors", "Dress Style"]),
    );
+
    const sizesList = productFilters?.sizes;
    const colorsList = productFilters?.colors;
 
    const minPrice = useRef<number | null>(null);
    const maxPrice = useRef<number | null>(null);
 
-   const getFilteredProducts = async () => {
-      try {
-         const filters = {
-            minPrice: values[0],
-            maxPrice: values[1],
-            colors: Array.from(colors),
-            sizes: Array.from(sizes),
-            dressStyleId,
-         };
+   useEffect(() => {
+      minPrice.current = productFilters.minProductPrice;
+      maxPrice.current = productFilters.maxProductPrice;
 
-         fetchProducts("on_sale", filters);
-      } catch (e) {
-         console.error(e);
-      }
+      const initialMinPrice = searchParams.get("minPrice");
+      const initialMaxPrice = searchParams.get("maxPrice");
 
-      setOpen(false);
-   };
+      setValues([
+         initialMinPrice ? parseInt(initialMinPrice) : minPrice.current || 0,
+         initialMaxPrice ? parseInt(initialMaxPrice) : maxPrice.current || 0,
+      ]);
+   }, [productFilters]);
 
    useEffect(() => {
-      if (
-         minPrice.current === null &&
-         productFilters.minProductPrice !== undefined
-      ) {
-         minPrice.current = productFilters.minProductPrice;
-         maxPrice.current = productFilters.maxProductPrice;
-         setValues([minPrice.current, maxPrice.current]);
+      const filters: Record<string, any> = {
+         category: "on_sale",
+         ...(debouncedValue[0] > 0 && { minPrice: debouncedValue[0] }),
+         ...(debouncedValue[1] > 0 && { maxPrice: debouncedValue[1] }),
+         ...(colors.size > 0 && { colors: Array.from(colors) }),
+         ...(sizes.size > 0 && { sizes: Array.from(sizes) }),
+         ...(dressStyleId && { dressStyleId }),
+      };
+
+      const query = qs.stringify(filters, { arrayFormat: "comma" });
+
+      if (query !== searchParams.toString()) {
+         router.push(`?${query}`, { scroll: false });
+         fetchProducts(query);
       }
-   }, [productFilters]);
+   }, [
+      debouncedValue,
+      sizes,
+      colors,
+      dressStyleId,
+      fetchProducts,
+      router,
+      searchParams,
+   ]);
 
    return (
       <Drawer direction="bottom" open={open}>
@@ -167,7 +196,9 @@ export const ProductsFilterMobile: React.FC<Props> = ({ open, setOpen }) => {
                               <ProductFilterItem
                                  key={item.name}
                                  name={item.name}
-                                 onClick={() => setDressStyleId(item.id)}
+                                 onClick={() =>
+                                    setDressStyleId(String(item.id))
+                                 }
                               />
                            ))}
                      </div>
@@ -175,7 +206,7 @@ export const ProductsFilterMobile: React.FC<Props> = ({ open, setOpen }) => {
                </div>
                <Button
                   className="w-full flex-1"
-                  onClick={getFilteredProducts}
+                  onClick={() => setOpen(false)}
                   variant="black"
                >
                   Apply Filter

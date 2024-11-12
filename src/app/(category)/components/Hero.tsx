@@ -30,7 +30,8 @@ export const Hero: React.FC<Props> = ({ category, crumbName }) => {
             : category === "top_selling"
               ? "2"
               : category;
-      fetchProducts(categoryToFetch, {}, limit, offset);
+      const query = `category=${categoryToFetch}`;
+      fetchProducts(query, offset);
    }, [offset]);
 
    const handlePageChange = (page: number) => {

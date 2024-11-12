@@ -15,18 +15,7 @@ type CartStore = {
    };
    loading: boolean;
    error: boolean;
-   fetchProducts: (
-      category?: string,
-      filters?: {
-         minPrice?: number;
-         maxPrice?: number;
-         colors?: string[];
-         sizes?: string[];
-         dressStyleId?: number | null;
-      },
-      limit?: number,
-      offset?: number,
-   ) => Promise<void>;
+   fetchProducts: (query?: string, offset?: number) => Promise<void>;
 };
 
 export const useCategoryStore = create<CartStore>(set => ({
@@ -41,36 +30,11 @@ export const useCategoryStore = create<CartStore>(set => ({
    totalProducts: 0,
    loading: true,
    error: false,
-   fetchProducts: async (category, filters, limit = 10, offset = 0) => {
+   fetchProducts: async (query, offset = 0) => {
       set({ loading: true, error: false });
       try {
-         const { minPrice, maxPrice, colors, sizes, dressStyleId } =
-            filters || {};
-
-         let queryParams = `?categoryId=${category}`;
-
-         if (sizes && sizes.length > 0) {
-            queryParams += `&sizes=${sizes.join(",")}`;
-         }
-
-         if (colors && colors.length > 0) {
-            queryParams += `&colors=${colors.join(",")}`;
-         }
-
-         if (dressStyleId) {
-            queryParams += `&dressStyleId=${dressStyleId}`;
-         }
-
-         if (minPrice && minPrice >= 0) {
-            queryParams += `&minPrice=${minPrice}`;
-         }
-
-         if (maxPrice) {
-            queryParams += `&maxPrice=${maxPrice}`;
-         }
-
          const response = await fetch(
-            `/api/categoryProducts${queryParams}&limit=${limit}&offset=${offset}`,
+            `/api/categoryProducts?${query}&limit=10&offset=${offset}`,
          );
 
          if (!response.ok) {

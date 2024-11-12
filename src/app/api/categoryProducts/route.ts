@@ -3,7 +3,7 @@ import { prisma } from "../../../../prisma/PrismaClient";
 
 export async function GET(req: NextRequest) {
    const { searchParams } = new URL(req.url);
-   const categoryId = searchParams.get("categoryId");
+   const category = searchParams.get("category");
    const minPrice = searchParams.get("minPrice");
    const maxPrice = searchParams.get("maxPrice");
    const sizes = searchParams.getAll("sizes")
@@ -12,11 +12,11 @@ export async function GET(req: NextRequest) {
    const colors = searchParams.getAll("colors")
       ? searchParams.get("colors")?.split(",")
       : [];
-   const dressStyleId = searchParams.get("dressStyleId");
-   const limit = parseInt(req.nextUrl.searchParams.get("limit") || "10", 10);
-   const offset = parseInt(req.nextUrl.searchParams.get("offset") || "0", 10);
+   const dressStyleId = searchParams.get("dressStyleId") || null;
+   const limit = Number(searchParams.get("limit")) || 10;
+   const offset = Number(searchParams.get("offset")) || 0;
 
-   if (!categoryId) {
+   if (!category) {
       return NextResponse.json(
          { message: "Category not provided" },
          { status: 400 },
@@ -24,9 +24,9 @@ export async function GET(req: NextRequest) {
    }
 
    try {
-      let whereCondition: any = { categoryId: Number(categoryId) };
+      let whereCondition: any = { categoryId: Number(category) };
 
-      if (categoryId !== "1" && categoryId !== "2") {
+      if (category !== "1" && category !== "2") {
          //on_sale
          whereCondition = { oldPrice: { not: null } };
       }
