@@ -9,127 +9,49 @@ import { SlidersHorizontal, Trash, X } from "lucide-react";
 import { ProductFilterTab } from "./ProductFilterTab";
 import { ProductFilterItem } from "./ProductFilterItem";
 import { Button } from "@/components/ui/button";
-import { useSet } from "react-use";
 import { SizeItem } from "./SizeItem";
-import { useEffect, useRef, useState } from "react";
 import { ColorItem } from "./ColorItem";
 import { DualRangeSlider } from "@/components/ui/dual-range-slider";
 import {
    dressStyle as dressStyles,
    productCategories,
 } from "../../../../prisma/products";
-import { useCategoryStore } from "../store";
-import qs from "qs";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useDebounce } from "react-use";
+import { useFilter } from "@/hooks/useFilter";
+import { useState } from "react";
 
-interface Props {
-   open: boolean;
-   category: string;
-   setOpen: (open: boolean) => void;
-}
+export const ProductsFilterMobile: React.FC = () => {
+   const [open, setOpen] = useState(false);
 
-export const ProductsFilterMobile: React.FC<Props> = ({
-   open,
-   setOpen,
-   category,
-}) => {
-   const router = useRouter();
-   const searchParams = useSearchParams();
-   const [fetchProducts, productFilters] = useCategoryStore(state => [
-      state.fetchProducts,
-      state.productFilters,
-   ]);
-   const [values, setValues] = useState([0, 0]);
-   const [debouncedValue, setDebouncedValue] = useState([0, 0]);
-   const [] = useDebounce(
-      () => {
-         setDebouncedValue(values);
-      },
-      200,
-      [values],
-   );
-   const [dressStyleId, setDressStyleId] = useState<string | null>(
-      searchParams.get("dressStyleId") || null,
-   );
-   const [prevQuery, setPrevQuery] = useState("");
-
-   const [sizes, { toggle: toggleSize, reset: resetSizes }] = useSet(
-      new Set<string>(searchParams.getAll("sizes") || []),
-   );
-   const [colors, { toggle: toggleColor, reset: resetColors }] = useSet(
-      new Set<string>(searchParams.getAll("colors") || []),
-   );
-   const [tabs, { toggle: toggleTabs }] = useSet(
-      new Set<string>(["Price", "Size", "Colors", "Dress Style"]),
-   );
-
-   const sizesList = productFilters?.sizes;
-   const colorsList = productFilters?.colors;
-
-   const minPrice = useRef<number | null>(null);
-   const maxPrice = useRef<number | null>(null);
-
-   const clearFilters = () => {
-      setDressStyleId(null);
-      resetSizes();
-      resetColors();
-      setValues([minPrice.current || 0, maxPrice.current || 0]);
-   };
-
-   useEffect(() => {
-      minPrice.current = productFilters.minProductPrice;
-      maxPrice.current = productFilters.maxProductPrice;
-
-      const initialMinPrice = searchParams.get("minPrice");
-      const initialMaxPrice = searchParams.get("maxPrice");
-
-      setValues([
-         initialMinPrice ? parseInt(initialMinPrice) : minPrice.current || 0,
-         initialMaxPrice ? parseInt(initialMaxPrice) : maxPrice.current || 0,
-      ]);
-   }, [productFilters]);
-
-   useEffect(() => {
-      const filters: Record<string, any> = {
-         category,
-         ...(debouncedValue[0] > 0 && { minPrice: debouncedValue[0] }),
-         ...(debouncedValue[1] > 0 && { maxPrice: debouncedValue[1] }),
-         ...(colors.size > 0 && { colors: Array.from(colors) }),
-         ...(sizes.size > 0 && { sizes: Array.from(sizes) }),
-         ...(dressStyleId && { dressStyleId }),
-      };
-
-      const query = qs.stringify(filters, { arrayFormat: "comma" });
-
-      if (query !== prevQuery) {
-         setPrevQuery(query);
-         router.push(`?${query}`, { scroll: false });
-         fetchProducts(query);
-      }
-   }, [
-      debouncedValue,
-      sizes,
-      category,
+   const {
+      tabs,
+      toggleTabs,
+      toggleColor,
+      toggleSize,
       colors,
-      dressStyleId,
-      fetchProducts,
-      router,
-      searchParams,
-   ]);
+      sizes,
+      values,
+      setValues,
+      minPrice,
+      maxPrice,
+      clearFilters,
+      sizesList,
+      colorsList,
+      setDressStyleId,
+   } = useFilter();
 
    return (
       <Drawer direction="bottom" open={open}>
          <DrawerTrigger>
-            <div className="flex items-center justify-center rounded-[60px] bg-gray p-2">
+            <div className="flex items-center justify-center rounded-[60px] bg-gray p-2 md:hidden">
                <SlidersHorizontal
                   onClick={() => setOpen(!open)}
                   color={"#000"}
+                  className="rotate-90"
                   size={16}
                />
             </div>
          </DrawerTrigger>
-         <DrawerContent className="h-[92%] rounded-t-[20px]">
+         <DrawerContent className="h-[92%] rounded-t-[20px] md:hidden">
             <div className="hidden">
                <DrawerTitle></DrawerTitle>
             </div>

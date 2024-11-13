@@ -14,8 +14,11 @@ export const ProductFilterTab: React.FC<Props> = ({
    children,
 }) => {
    return (
-      <div className="cursor-pointer border-b-[1px] border-black/10 py-5 last:border-b-0">
-         <div onClick={onClick} className="flex items-center justify-between">
+      <div className="border-b-[1px] border-black/10 py-5 last:border-b-0 md:py-6">
+         <div
+            onClick={onClick}
+            className="flex cursor-pointer items-center justify-between"
+         >
             <p className="text-lg font-bold leading-27">{name}</p>
             <ChevronDown
                className={openTabs.has(name) ? "rotate-180" : ""}

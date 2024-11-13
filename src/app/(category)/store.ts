@@ -15,7 +15,7 @@ type CartStore = {
    };
    loading: boolean;
    error: boolean;
-   fetchProducts: (query?: string, offset?: number) => Promise<void>;
+   fetchProducts: (query?: string) => Promise<void>;
 };
 
 export const useCategoryStore = create<CartStore>(set => ({
@@ -30,12 +30,10 @@ export const useCategoryStore = create<CartStore>(set => ({
    totalProducts: 0,
    loading: true,
    error: false,
-   fetchProducts: async (query, offset = 0) => {
+   fetchProducts: async query => {
       set({ loading: true, error: false });
       try {
-         const response = await fetch(
-            `/api/categoryProducts?${query}&limit=10&offset=${offset}`,
-         );
+         const response = await fetch(`/api/categoryProducts?${query}`);
 
          if (!response.ok) {
             throw new Error(`Error: ${response.statusText}`);

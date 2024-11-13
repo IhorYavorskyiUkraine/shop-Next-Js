@@ -44,14 +44,14 @@ type PaginationLinkProps = {
 const PaginationLink = ({
    className,
    isActive,
-   size = "icon",
+   size = "none",
    ...props
 }: PaginationLinkProps) => (
    <a
       aria-current={isActive ? "page" : undefined}
       className={cn(
          buttonVariants({
-            variant: isActive ? "outline" : "ghost",
+            variant: "none",
             size,
          }),
          className,
@@ -69,7 +69,7 @@ const PaginationPrevious = ({
       aria-label="Go to previous page"
       size="default"
       className={cn(
-         "!h-[36px] !w-[90px] gap-3 rounded-[8px] border-[1px] border-black/10 !px-0 !py-0",
+         "!h-[36px] !w-[90px] cursor-pointer gap-3 rounded-[8px] border-[1px] border-black/10 !px-0 !py-0",
          className,
       )}
       {...props}
@@ -88,7 +88,7 @@ const PaginationNext = ({
       aria-label="Go to next page"
       size="default"
       className={cn(
-         "!h-[36px] !w-[73px] gap-3 rounded-[8px] border-[1px] border-black/10 !px-0 !py-0",
+         "!h-[36px] !w-[73px] cursor-pointer gap-3 rounded-[8px] border-[1px] border-black/10 !px-0 !py-0",
          className,
       )}
       {...props}

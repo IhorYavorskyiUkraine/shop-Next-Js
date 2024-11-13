@@ -78,9 +78,8 @@ export const ProductPagination: React.FC<Props> = ({
                         <PaginationLink
                            className={cn(
                               currentPage === page ? "bg-gray" : "",
-                              "!h-[36px] !w-[36px] rounded-[8px]",
+                              "!h-[36px] !w-[36px] cursor-pointer rounded-[8px]",
                            )}
-                           href="#"
                            onClick={() => handlePageClick(page)}
                         >
                            <span

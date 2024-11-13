@@ -15,6 +15,7 @@ export async function GET(req: NextRequest) {
    const dressStyleId = searchParams.get("dressStyleId") || null;
    const limit = Number(searchParams.get("limit")) || 10;
    const offset = Number(searchParams.get("offset")) || 0;
+   const sort = searchParams.get("sort");
 
    if (!category) {
       return NextResponse.json(
@@ -97,6 +98,15 @@ export async function GET(req: NextRequest) {
          maxProductPrice,
       };
 
+      let orderBy: any = {};
+      if (sort === "price_asc") {
+         orderBy = { price: "asc" };
+      } else if (sort === "price_desc") {
+         orderBy = { price: "desc" };
+      } else if (sort === "popularity") {
+         orderBy = { rating: "desc" };
+      }
+
       const products = await prisma.product.findMany({
          where: whereCondition,
          include: {
@@ -109,6 +119,7 @@ export async function GET(req: NextRequest) {
          },
          take: limit,
          skip: offset,
+         orderBy,
       });
 
       return NextResponse.json({
