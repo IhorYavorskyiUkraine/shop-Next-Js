@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { StarRating } from "./StarRating";
 import { cn } from "@/lib/utils";
+import { Heart } from "lucide-react";
 
 interface Props {
    id: number;
@@ -11,6 +12,8 @@ interface Props {
    oldPrice?: number;
    className?: string;
    categoriesPageSizes?: boolean;
+   wishList?: boolean;
+   toggleList?: () => void;
 }
 
 export const ProductCard: React.FC<Props> = ({
@@ -22,6 +25,8 @@ export const ProductCard: React.FC<Props> = ({
    oldPrice,
    className,
    categoriesPageSizes,
+   wishList,
+   toggleList,
 }) => {
    const discountPercentage = oldPrice
       ? ((oldPrice - price) / oldPrice) * 100
@@ -63,6 +68,12 @@ export const ProductCard: React.FC<Props> = ({
                   </div>
                )}
             </div>
+            {wishList && (
+               <Heart
+                  className="cursor-pointer fill-red-500 text-red-500"
+                  onClick={toggleList}
+               />
+            )}
          </div>
       </div>
    );

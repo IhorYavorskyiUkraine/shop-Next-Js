@@ -11,6 +11,7 @@ import { AddressCard } from "./AddressCard";
 import { useProfileStore } from "../store";
 import { Title } from "@/components/ui/title";
 import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/shared/Skeleton";
 
 interface Props {
    user: User | null;
@@ -169,7 +170,29 @@ export const ProfileAddressBookTab: React.FC<Props> = ({ user }) => {
          )}
       >
          <div>
-            {addresses?.length === 0 ? (
+            {loading
+               ? Array.from({ length: 3 }).map((_, index) => (
+                    <Skeleton address key={index} />
+                 ))
+               : addresses?.map(address => (
+                    <AddressCard
+                       key={address.id}
+                       fullName={address.fullName || "Unknown"}
+                       phone={address.phone || "N/A"}
+                       city={address.city || "Unknown"}
+                       street={address.street || "Unknown"}
+                       house={address.house || "Unknown"}
+                       apartment={address.apartment || null}
+                       postcode={address.postcode || "Unknown"}
+                       toggleActivity={() => toggleActivity(address.id)}
+                       updateAddress={() =>
+                          handleUpdateAddress(address, address.id)
+                       }
+                       deleteAddress={() => handleDeleteAddress(address.id)}
+                       active={address.active || false}
+                    />
+                 ))}
+            {addresses?.length === 0 && (
                <div className="flex flex-col items-center justify-center">
                   <Title
                      text="No Address Found"
@@ -177,25 +200,6 @@ export const ProfileAddressBookTab: React.FC<Props> = ({ user }) => {
                   />
                   <p className="text-[32px]">😞</p>
                </div>
-            ) : (
-               addresses?.map(address => (
-                  <AddressCard
-                     key={address.id}
-                     fullName={address.fullName || "Unknown"}
-                     phone={address.phone || "N/A"}
-                     city={address.city || "Unknown"}
-                     street={address.street || "Unknown"}
-                     house={address.house || "Unknown"}
-                     apartment={address.apartment || null}
-                     postcode={address.postcode || "Unknown"}
-                     toggleActivity={() => toggleActivity(address.id)}
-                     updateAddress={() =>
-                        handleUpdateAddress(address, address.id)
-                     }
-                     deleteAddress={() => handleDeleteAddress(address.id)}
-                     active={address.active || false}
-                  />
-               ))
             )}
          </div>
          <FormProvider {...form}>

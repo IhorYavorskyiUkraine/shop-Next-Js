@@ -9,6 +9,7 @@ type Props = {
    productTabs?: boolean;
    cartList?: boolean;
    cartSummary?: boolean;
+   address?: boolean;
    category?: boolean;
 };
 
@@ -20,6 +21,7 @@ export const Skeleton: React.FC<Props> = ({
    productTabs,
    cartList,
    cartSummary,
+   address,
    category,
 }) => {
    if (productCard) {
@@ -152,6 +154,27 @@ export const Skeleton: React.FC<Props> = ({
                <SkeletonBar className="w-full bg-black/5 md:mb-3 md:h-7" />
                <SkeletonBar className="w-full bg-black/5 md:mb-3 md:h-12" />
                <SkeletonBar className="w-full bg-black/5 md:mb-3 md:h-12" />
+            </div>
+         </div>
+      );
+   } else if (address) {
+      return (
+         <div className="mb-4 border-b-[1px] border-black/10 pb-4 last:mb-0 last:border-b-0 last:pb-0">
+            <div className="mb-2 flex items-center justify-between">
+               <SkeletonBar className="h-4 w-[100px] bg-black/5 md:mb-3 md:h-4" />
+               <SkeletonBar className="size-4 bg-black/5 md:mb-3 md:h-4" />
+            </div>
+            <div className="mb-1 flex items-center justify-between">
+               <SkeletonBar className="h-4 w-[180px] bg-black/5 md:mb-3 md:h-4" />
+               <SkeletonBar className="size-4 bg-black/5 md:mb-3 md:h-4" />
+            </div>
+            <SkeletonBar className="h-4 w-[100px] bg-black/5 md:mb-3 md:h-4" />
+            <SkeletonBar className="h-4 w-[100px] bg-black/5 md:mb-3 md:h-4" />{" "}
+            <SkeletonBar className="h-4 w-[100px] bg-black/5 md:mb-3 md:h-4" />
+            <SkeletonBar className="h-4 w-[100px] bg-black/5 md:mb-3 md:h-4" />
+            <div className="flex items-center justify-between">
+               <SkeletonBar className="h-4 w-[100px] bg-black/5 md:mb-3 md:h-4" />
+               <SkeletonBar className="h-4 w-6 bg-black/5 md:mb-3 md:h-4" />
             </div>
          </div>
       );
