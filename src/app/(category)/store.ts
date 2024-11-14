@@ -13,9 +13,16 @@ type CartStore = {
       minProductPrice: number;
       maxProductPrice: number;
    };
+   offset: number;
+   sortBy: {
+      id: string;
+      label: string;
+   };
    loading: boolean;
    error: boolean;
    fetchProducts: (query?: string) => Promise<void>;
+   setOffset: (offset: number) => void;
+   setSortBy: (sortBy: { id: string; label: string }) => void;
 };
 
 export const useCategoryStore = create<CartStore>(set => ({
@@ -28,6 +35,11 @@ export const useCategoryStore = create<CartStore>(set => ({
       maxProductPrice: 0,
    },
    totalProducts: 0,
+   offset: 0,
+   sortBy: {
+      id: "popularity",
+      label: "Popularity",
+   },
    loading: true,
    error: false,
    fetchProducts: async query => {
@@ -54,4 +66,6 @@ export const useCategoryStore = create<CartStore>(set => ({
          console.error(e);
       }
    },
+   setOffset: offset => set({ offset }),
+   setSortBy: sortBy => set({ sortBy }),
 }));

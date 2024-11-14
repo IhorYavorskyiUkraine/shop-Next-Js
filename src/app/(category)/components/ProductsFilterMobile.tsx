@@ -37,6 +37,7 @@ export const ProductsFilterMobile: React.FC = () => {
       sizesList,
       colorsList,
       setDressStyleId,
+      setProductCategoryId,
    } = useFilter();
 
    return (
@@ -66,7 +67,11 @@ export const ProductsFilterMobile: React.FC = () => {
                </div>
                <div className="border-b-[1px] border-black/10 pb-5">
                   {productCategories.map(item => (
-                     <ProductFilterItem key={item.name} name={item.name} />
+                     <ProductFilterItem
+                        key={item.name}
+                        name={item.name}
+                        onClick={() => setProductCategoryId(String(item.id))}
+                     />
                   ))}
                </div>
                <div>

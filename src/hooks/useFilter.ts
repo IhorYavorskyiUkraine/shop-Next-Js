@@ -7,7 +7,11 @@ import qs from "qs";
 export const useFilter = () => {
    const router = useRouter();
    const searchParams = useSearchParams();
-   const productFilters = useCategoryStore(state => state.productFilters);
+   const [productFilters, offset, sortBy] = useCategoryStore(state => [
+      state.productFilters,
+      state.offset,
+      state.sortBy,
+   ]);
    const [values, setValues] = useState([0, 0]);
    const [debouncedValue, setDebouncedValue] = useState([0, 0]);
    const [] = useDebounce(
@@ -19,6 +23,9 @@ export const useFilter = () => {
    );
    const [dressStyleId, setDressStyleId] = useState<string | null>(
       searchParams.get("dressStyleId") || null,
+   );
+   const [productCategoryId, setProductCategoryId] = useState<string | null>(
+      searchParams.get("productCategoryId") || null,
    );
    const [prevQuery, setPrevQuery] = useState("");
    const [sizes, { toggle: toggleSize, reset: resetSizes }] = useSet(
@@ -42,6 +49,7 @@ export const useFilter = () => {
       resetSizes();
       resetColors();
       setValues([minPrice.current || 0, maxPrice.current || 0]);
+      setProductCategoryId(null);
    };
 
    useEffect(() => {
@@ -64,6 +72,9 @@ export const useFilter = () => {
          ...(colors.size > 0 && { colors: Array.from(colors) }),
          ...(sizes.size > 0 && { sizes: Array.from(sizes) }),
          ...(dressStyleId && { dressStyleId }),
+         ...(productCategoryId && { productCategoryId }),
+         ...(sortBy.id && { sortBy: sortBy.id }),
+         ...(offset && { offset }),
       };
 
       const query = qs.stringify(filters, { arrayFormat: "comma" });
@@ -72,7 +83,15 @@ export const useFilter = () => {
          setPrevQuery(query);
          router.push(`?${query}`, { scroll: false });
       }
-   }, [debouncedValue, sizes, colors, dressStyleId, searchParams]);
+   }, [
+      debouncedValue,
+      colors,
+      sizes,
+      dressStyleId,
+      productCategoryId,
+      sortBy.id,
+      offset,
+   ]);
 
    return {
       tabs,
@@ -81,6 +100,7 @@ export const useFilter = () => {
       toggleColor,
       colorsList,
       sizes,
+      setProductCategoryId,
       toggleSize,
       sizesList,
       values,

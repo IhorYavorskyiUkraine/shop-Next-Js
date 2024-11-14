@@ -20,7 +20,7 @@ const PaginationContent = React.forwardRef<
    <ul
       ref={ref}
       className={cn(
-         "flex flex-1 flex-row items-center justify-between gap-1",
+         "grid flex-1 grid-cols-[90px,_1fr,_73px] items-center justify-center gap-1",
          className,
       )}
       {...props}

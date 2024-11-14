@@ -7,13 +7,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import { ReviewModal } from "./ReviewModal";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { AuthModal } from "@/components/shared/header/components/authModal/AuthModal";
 import { useProductStore } from "../store";
+import { useClickAway } from "react-use";
 
 export const ProductReviewsTabOptions: React.FC = () => {
    const setOrderBy = useProductStore(state => state.setOrderBy);
+
+   const ref = useRef(null);
+
+   useClickAway(ref, () => {
+      setOpen(false);
+   });
 
    const { data: session } = useSession();
    const [open, setOpen] = useState(false);
@@ -25,7 +32,7 @@ export const ProductReviewsTabOptions: React.FC = () => {
                <span className="text-medium font-bold leading-22">Sort By</span>
                <ChevronDown size={16} />
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent ref={ref}>
                <DropdownMenuItem onClick={() => setOrderBy("desc")}>
                   Newest First
                </DropdownMenuItem>

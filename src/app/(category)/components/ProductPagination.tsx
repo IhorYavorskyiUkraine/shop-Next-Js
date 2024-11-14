@@ -8,23 +8,35 @@ import {
    PaginationPrevious,
 } from "@/components/ui/pagination";
 import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
 
 interface Props {
    totalPages: number;
    currentPage: number;
    setOffset: (offset: number) => void;
-   onPageChange: (page: number) => void;
+   setCurrentPage: (page: number) => void;
 }
 
 export const ProductPagination: React.FC<Props> = ({
    totalPages,
    currentPage,
    setOffset,
-   onPageChange,
+   setCurrentPage,
 }) => {
+   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+   const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+   };
+
+   useEffect(() => {
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+   }, []);
+
    const handlePageClick = (page: number) => {
-      onPageChange(page);
-      setOffset((page - 1) * 10);
+      setCurrentPage(page);
+      setOffset((page - 1) * 12);
    };
 
    const handleNextPage = () => {
@@ -38,9 +50,10 @@ export const ProductPagination: React.FC<Props> = ({
          handlePageClick(currentPage - 1);
       }
    };
+
    const getPageNumbers = () => {
       const pages: number[] = [];
-      const maxPagesToShow = 6;
+      const maxPagesToShow = windowWidth < 480 ? 2 : windowWidth < 768 ? 6 : 10;
       const halfWindowSize = Math.floor(maxPagesToShow / 2);
 
       const leftEdge = Math.max(1, currentPage - halfWindowSize);
@@ -64,10 +77,12 @@ export const ProductPagination: React.FC<Props> = ({
    return (
       <Pagination className="mb-12 mt-5">
          <PaginationContent>
-            <PaginationItem>
+            <PaginationItem
+               className={cn(currentPage === 1 ? "invisible" : "")}
+            >
                <PaginationPrevious onClick={handlePrevPage} />
             </PaginationItem>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center justify-center gap-1">
                {getPageNumbers().map((page, index) => (
                   <PaginationItem key={index}>
                      {page === -1 ? (
@@ -97,7 +112,9 @@ export const ProductPagination: React.FC<Props> = ({
                   </PaginationItem>
                ))}
             </div>
-            <PaginationItem>
+            <PaginationItem
+               className={cn(currentPage >= totalPages ? "invisible" : "")}
+            >
                <PaginationNext onClick={handleNextPage} />
             </PaginationItem>
          </PaginationContent>

@@ -13,9 +13,10 @@ export async function GET(req: NextRequest) {
       ? searchParams.get("colors")?.split(",")
       : [];
    const dressStyleId = searchParams.get("dressStyleId") || null;
-   const limit = Number(searchParams.get("limit")) || 10;
+   const productCategoryId = searchParams.get("productCategoryId") || null;
+   const sortBy = searchParams.get("sortBy");
+   const limit = Number(searchParams.get("limit")) || 12;
    const offset = Number(searchParams.get("offset")) || 0;
-   const sort = searchParams.get("sort");
 
    if (!category) {
       return NextResponse.json(
@@ -68,6 +69,10 @@ export async function GET(req: NextRequest) {
          whereCondition.dressStyleId = Number(dressStyleId);
       }
 
+      if (productCategoryId) {
+         whereCondition.productCategoryId = Number(productCategoryId);
+      }
+
       const totalProducts = await prisma.product.count({
          where: whereCondition,
       });
@@ -99,11 +104,11 @@ export async function GET(req: NextRequest) {
       };
 
       let orderBy: any = {};
-      if (sort === "price_asc") {
+      if (sortBy === "price_asc") {
          orderBy = { price: "asc" };
-      } else if (sort === "price_desc") {
+      } else if (sortBy === "price_desc") {
          orderBy = { price: "desc" };
-      } else if (sort === "popularity") {
+      } else if (sortBy === "popularity") {
          orderBy = { rating: "desc" };
       }
 

@@ -9,6 +9,7 @@ type Props = {
    productTabs?: boolean;
    cartList?: boolean;
    cartSummary?: boolean;
+   category?: boolean;
 };
 
 export const Skeleton: React.FC<Props> = ({
@@ -19,11 +20,17 @@ export const Skeleton: React.FC<Props> = ({
    productTabs,
    cartList,
    cartSummary,
+   category,
 }) => {
    if (productCard) {
       return (
          <div className="flex flex-col space-y-3">
-            <SkeletonBar className="h-[200px] w-[200px] rounded-[14px] bg-black/5 md:h-[300px] md:w-[300px]" />
+            <SkeletonBar
+               className={cn(
+                  category ? "size-[174px]" : "size-[200px]",
+                  "rounded-[14px] bg-black/5 md:h-[300px] md:w-[300px]",
+               )}
+            />
             <div className="space-y-2">
                <SkeletonBar className="mb-[10px] h-5 w-[160px] bg-black/5 md:mb-4 md:w-[300px]" />
                <SkeletonBar className="mb-1 h-4 w-[140px] bg-black/5 md:mb-2 md:w-[150px]" />

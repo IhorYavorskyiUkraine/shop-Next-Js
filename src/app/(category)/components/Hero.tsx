@@ -9,7 +9,7 @@ import { ProductsFilterMobile } from "./ProductsFilterMobile";
 import { Title } from "@/components/ui/title";
 import { ProductsFilter } from "./ProductsFilter";
 import { ProductSortBy } from "./ProductSortBy";
-import { off } from "process";
+import { Skeleton } from "@/components/shared/Skeleton";
 
 interface Props {
    category: string;
@@ -18,23 +18,26 @@ interface Props {
 
 export const Hero: React.FC<Props> = ({ category, crumbName }) => {
    const searchParams = useSearchParams();
-   const [fetchProducts, products, totalPages, totalProducts] =
-      useCategoryStore(state => [
-         state.fetchProducts,
-         state.products,
-         state.totalPages,
-         state.totalProducts,
-      ]);
+   const [
+      fetchProducts,
+      products,
+      setOffset,
+      totalPages,
+      totalProducts,
+      loading,
+   ] = useCategoryStore(state => [
+      state.fetchProducts,
+      state.products,
+      state.setOffset,
+      state.totalPages,
+      state.totalProducts,
+      state.loading,
+   ]);
    const [currentPage, setCurrentPage] = useState(1);
-   const [offset, setOffset] = useState(0);
-   const limit = 10;
-
-   const sortOptions = [
-      { id: "popularity", label: "Popularity" },
-      { id: "price_asc", label: "Price: Low to High" },
-      { id: "price_desc", label: "Price: High to Low" },
-   ];
-   const [selectedSort, setSelectedSort] = useState(sortOptions[0]);
+   const limit = 12;
+   const offset = Number(
+      searchParams.has("offset") ? Number(searchParams.get("offset")) : 0,
+   );
 
    useEffect(() => {
       let query = `category=${category === "new_arrivals" ? "1" : category === "top_selling" ? "2" : category}`;
@@ -45,44 +48,50 @@ export const Hero: React.FC<Props> = ({ category, crumbName }) => {
          }
       });
 
-      query += `&sort=${selectedSort.id}&offset=${offset}`;
+      setOffset(offset);
+      const page = Math.floor(offset / limit) + 1;
+      setCurrentPage(page);
 
       fetchProducts(query);
-   }, [offset, searchParams, selectedSort]);
-
-   const handlePageChange = (page: number) => {
-      setCurrentPage(page);
-      setOffset((page - 1) * limit);
-   };
+   }, [searchParams]);
 
    return (
       <div className="flex items-start md:gap-5">
          <ProductsFilter />
          <div>
-            <div className="mb-4 flex items-center justify-between">
+            <div className="mb-4 flex items-center justify-between gap-4 md:gap-0">
                <div className="flex flex-1 items-center justify-between gap-2">
                   <h2 className="text-xl font-bold leading-32 leading-[43px] md:text-2xl">
                      {crumbName}
                   </h2>
                   <div className="flex -translate-y-[-4px] items-center gap-2">
                      <p>
-                        {`Showing ${products.length > 1 ? 1 : 0}-${products.length < 10 ? products.length : 10} of
-							${totalProducts}`}
+                        {`Showing ${products.length > 1 ? 1 : 0}-${products.length < 12 ? products.length : 12} of
+							${totalProducts} Products`}
                      </p>
-                     <div className="flex items-center gap-1">
+                     <div className="hidden items-center gap-1 md:flex">
                         <p>Sort by:</p>
-                        <ProductSortBy
-                           sortOptions={sortOptions}
-                           selectedSort={selectedSort}
-                           setSelectedSort={setSelectedSort}
-                        />
+                        <ProductSortBy />
                      </div>
                   </div>
                </div>
                <ProductsFilterMobile />
             </div>
             <div className="flex flex-wrap justify-center gap-4 border-b-[1px] border-black/10 pb-6">
-               {products.length === 0 ? (
+               {loading
+                  ? Array.from({ length: limit }).map((_, index) => (
+                       <Skeleton category key={index} productCard />
+                    ))
+                  : products.map(product => (
+                       <ProductCard
+                          categoriesPageSizes
+                          key={product.id}
+                          {...product}
+                          rating={product.rating || 0}
+                          oldPrice={product.oldPrice || 0}
+                       />
+                    ))}
+               {products.length === 0 && (
                   <div className="flex flex-col items-center justify-center">
                      <Title
                         text="No Products Available"
@@ -90,21 +99,11 @@ export const Hero: React.FC<Props> = ({ category, crumbName }) => {
                      />
                      <p className="text-[64px]">😞</p>
                   </div>
-               ) : (
-                  products.map(product => (
-                     <ProductCard
-                        categoriesPageSizes
-                        key={product.id}
-                        {...product}
-                        rating={product.rating || 0}
-                        oldPrice={product.oldPrice || 0}
-                     />
-                  ))
                )}
             </div>
             <ProductPagination
                setOffset={setOffset}
-               onPageChange={handlePageChange}
+               setCurrentPage={(page: number) => setCurrentPage(page)}
                totalPages={totalPages}
                currentPage={currentPage}
             />
