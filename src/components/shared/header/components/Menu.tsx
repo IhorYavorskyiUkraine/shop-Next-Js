@@ -11,7 +11,7 @@ import {
 
 import { useState } from "react";
 import Link from "next/link";
-import { BadgePercent, PackagePlus, ShoppingBasket, Shirt } from "lucide-react";
+import { menuData, navMenuData } from "../footer.data";
 
 export type MenuItem = {
    name: string;
@@ -28,27 +28,6 @@ export type NavMenuItem = {
 export const Menu: React.FC = () => {
    const [active, setActive] = useState(false);
 
-   const menuData = [
-      { name: "Shop", drop: true },
-      { name: "On Sale", href: "on_sale", drop: false },
-      { name: "New Arrivals", href: "new_arrivals", drop: false },
-      { name: "Brands", href: "brands", drop: false },
-   ];
-
-   const navMenuData = [
-      {
-         name: "Top Selling",
-         href: "top_selling",
-         icon: <ShoppingBasket size={20} />,
-      },
-      { name: "On Sale", href: "on_sale", icon: <BadgePercent size={20} /> },
-      {
-         name: "New Arrivals",
-         href: "new_arrivals",
-         icon: <PackagePlus size={20} />,
-      },
-      { name: "Brands", href: "brands", icon: <Shirt size={20} /> },
-   ];
    return (
       <ul className="hidden gap-6 pr-10 md:flex">
          {menuData.map((item: MenuItem) => (

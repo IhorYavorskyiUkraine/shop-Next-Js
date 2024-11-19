@@ -14,16 +14,10 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { MenuItem } from "./Menu";
+import { burgerMenuData } from "../footer.data";
 
 export const Burger: React.FC = () => {
    const [open, setOpen] = useState(false);
-
-   const menuData = [
-      { name: "Top Selling", href: "top_selling" },
-      { name: "On Sale", href: "on_sale" },
-      { name: "New Arrivals", href: "new_arrivals" },
-      { name: "Brands", href: "brands" },
-   ];
 
    return (
       <Drawer direction="left" open={open}>
@@ -41,7 +35,7 @@ export const Burger: React.FC = () => {
                   </DrawerClose>
                </DrawerHeader>
                <ul className="flex flex-col gap-4 pt-6">
-                  {menuData.map((item: MenuItem) => (
+                  {burgerMenuData.map((item: MenuItem) => (
                      <li key={item.name}>
                         <Link
                            className="text-2xl font-medium"

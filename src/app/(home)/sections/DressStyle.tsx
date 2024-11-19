@@ -1,6 +1,7 @@
-import { DressStyleCard } from "@/app/(home)/components/DressStyleCard";
 import { Container } from "@/components/ui/container";
 import { Title } from "@/components/ui/title";
+import { DressStyleCard } from "../home/components/DressStyleCard";
+import { dressStyleData } from "../home/home.data";
 
 type dressStyle = {
    style: string;
@@ -9,26 +10,6 @@ type dressStyle = {
 };
 
 export const DressStyle: React.FC = () => {
-   const dressStyleData = [
-      {
-         style: "Casual",
-         imageUrl: "/images/dressStyle/1.jpg",
-      },
-      {
-         style: "Formal",
-         imageUrl: "/images/dressStyle/2.jpg",
-         className: "md:col-span-2",
-      },
-      {
-         style: "Party",
-         imageUrl: "/images/dressStyle/3.jpg",
-         className: "md:col-span-2",
-      },
-      {
-         style: "Gym",
-         imageUrl: "/images/dressStyle/4.jpg",
-      },
-   ];
    return (
       <section>
          <Container>

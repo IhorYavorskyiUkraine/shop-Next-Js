@@ -1,6 +1,6 @@
 import { CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { ReviewCard } from "@/components/shared/ReviewCard";
-import { prisma } from "../../../../prisma/PrismaClient";
+import { prisma } from "../../../../../prisma/PrismaClient";
 
 export const ReviewCarousel: React.FC = async () => {
    const reviews = await prisma.review.findMany({

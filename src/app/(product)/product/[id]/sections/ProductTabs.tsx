@@ -6,13 +6,12 @@ import { ProductReviewsTab } from "../components/ProductReviewsTab";
 import { ProductFaqTab } from "../components/ProductFaqTab";
 import { cn } from "@/lib/utils";
 import { useProductStore } from "../store";
+import { tabs } from "../product.data";
 
 export const ProductTabs: React.FC = () => {
    const [product] = useProductStore(state => [state.product]);
 
    const [activeTab, setActiveTab] = useState(1);
-
-   const tabs = ["Product Details", "Rating & Reviews", "FAQs"];
 
    if (!product) {
       return null;

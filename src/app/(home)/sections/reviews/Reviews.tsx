@@ -1,4 +1,3 @@
-import { ReviewCarousel } from "@/app/(home)/components/ReviewCarousel";
 import {
    CarouselNext,
    Carousel,
@@ -6,6 +5,7 @@ import {
 } from "@/components/ui/carousel";
 import { Container } from "@/components/ui/container";
 import { Title } from "@/components/ui/title";
+import { ReviewCarousel } from "../../home/components/ReviewCarousel";
 
 export const Reviews: React.FC = () => {
    return (

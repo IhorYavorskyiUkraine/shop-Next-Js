@@ -1,5 +1,4 @@
 import { useFilter } from "@/hooks/useFilter";
-
 import { dressStyle, productCategories } from "../../../../prisma/products";
 import { ProductFilterItem } from "./ProductFilterItem";
 import { ProductFilterTab } from "./ProductFilterTab";
@@ -26,10 +25,11 @@ export const ProductsFilter: React.FC = () => {
       colorsList,
       setDressStyleId,
       setProductCategoryId,
+      setFilters,
    } = useFilter();
 
    return (
-      <aside className="hidden rounded-[20px] border-[1px] border-black/10 p-5 md:block md:max-w-[295px]">
+      <aside className="hidden rounded-[20px] border-[1px] border-black/10 p-5 md:block md:min-w-[295px] md:max-w-[295px]">
          <div className="mb-5 flex items-center justify-between border-b-[1px] border-black/10 pb-5">
             <p className="text-lg font-bold leading-27">Filters</p>
             <SlidersHorizontal className="rotate-90 opacity-40" size={20} />
@@ -115,7 +115,11 @@ export const ProductsFilter: React.FC = () => {
             </ProductFilterTab>
          </div>
          <div className="flex items-center gap-4">
-            <Button className="w-full flex-1" variant="black">
+            <Button
+               onClick={setFilters}
+               className="w-full flex-1"
+               variant="black"
+            >
                Apply Filter
             </Button>
             <Trash

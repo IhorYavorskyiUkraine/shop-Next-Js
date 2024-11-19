@@ -66,7 +66,7 @@ export const useProfileStore = create<ProfileStore>(set => ({
    },
    toggleAddressActivity: async id => {
       try {
-         set({ error: false, loading: true });
+         set({ error: false });
          const response = await fetch(`/api/addressBook?id=${id}`, {
             method: "PATCH",
          });

@@ -38,7 +38,13 @@ export const ProductsFilterMobile: React.FC = () => {
       colorsList,
       setDressStyleId,
       setProductCategoryId,
+      setFilters,
    } = useFilter();
+
+   const applyFilters = () => {
+      setFilters();
+      setOpen(false);
+   };
 
    return (
       <Drawer direction="bottom" open={open}>
@@ -150,7 +156,7 @@ export const ProductsFilterMobile: React.FC = () => {
                <div className="flex items-center gap-4">
                   <Button
                      className="w-full flex-1"
-                     onClick={() => setOpen(false)}
+                     onClick={applyFilters}
                      variant="black"
                   >
                      Apply Filter

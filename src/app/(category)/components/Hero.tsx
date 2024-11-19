@@ -21,6 +21,7 @@ export const Hero: React.FC<Props> = ({ category, crumbName }) => {
    const [
       fetchProducts,
       products,
+      sortBy,
       setOffset,
       totalPages,
       totalProducts,
@@ -28,6 +29,7 @@ export const Hero: React.FC<Props> = ({ category, crumbName }) => {
    ] = useCategoryStore(state => [
       state.fetchProducts,
       state.products,
+      state.sortBy,
       state.setOffset,
       state.totalPages,
       state.totalProducts,
@@ -52,8 +54,8 @@ export const Hero: React.FC<Props> = ({ category, crumbName }) => {
       const page = Math.floor(offset / limit) + 1;
       setCurrentPage(page);
 
-      fetchProducts(query);
-   }, [searchParams]);
+      fetchProducts(query, sortBy.id);
+   }, [searchParams, sortBy.id]);
 
    return (
       <div className="flex items-start md:gap-5">
@@ -77,7 +79,7 @@ export const Hero: React.FC<Props> = ({ category, crumbName }) => {
                </div>
                <ProductsFilterMobile />
             </div>
-            <div className="flex flex-wrap justify-center gap-4 border-b-[1px] border-black/10 pb-6">
+            <div className="flex flex-wrap justify-center gap-3 border-b-[1px] border-black/10 pb-6">
                {loading
                   ? Array.from({ length: limit }).map((_, index) => (
                        <Skeleton category key={index} productCard />

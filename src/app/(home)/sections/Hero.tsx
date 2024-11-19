@@ -1,9 +1,10 @@
-import { BrandIcons } from "@/app/(home)/components/BrandIcons";
-import { NumberTable } from "@/app/(home)/components/NumberTable";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Title } from "@/components/ui/title";
 import Link from "next/link";
+import { tablesData } from "../home/home.data";
+import { NumberTable } from "../home/components/NumberTable";
+import { BrandIcons } from "../home/components/BrandIcons";
 
 type TableDataItem = {
    number: string;
@@ -11,21 +12,6 @@ type TableDataItem = {
 };
 
 export const Hero: React.FC = () => {
-   const tablesData = [
-      {
-         number: "200",
-         text: "International Brands",
-      },
-      {
-         number: "2,000",
-         text: "High-Quality Products",
-      },
-      {
-         number: "30,000",
-         text: "Happy Customers",
-      },
-   ];
-
    return (
       <section className="bg-bg pt-10">
          <Container>

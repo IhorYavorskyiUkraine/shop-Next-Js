@@ -1,3 +1,5 @@
+"use client";
+
 import {
    Pagination,
    PaginationContent,
@@ -23,14 +25,20 @@ export const ProductPagination: React.FC<Props> = ({
    setOffset,
    setCurrentPage,
 }) => {
-   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+   const [windowWidth, setWindowWidth] = useState(0);
 
    const handleResize = () => {
       setWindowWidth(window.innerWidth);
    };
 
    useEffect(() => {
+      const handleResize = () => {
+         setWindowWidth(window.innerWidth);
+      };
+
+      handleResize();
       window.addEventListener("resize", handleResize);
+
       return () => window.removeEventListener("resize", handleResize);
    }, []);
 

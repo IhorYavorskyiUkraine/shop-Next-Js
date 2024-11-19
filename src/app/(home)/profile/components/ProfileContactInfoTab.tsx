@@ -2,7 +2,6 @@ import { User, UserRole } from "@prisma/client";
 import { ProfileInfo } from "./ProfileInfo";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ButtonSignOut } from "../../components/ButtonSignOut";
 import { InputWithValidations } from "@/components/shared/InputWithValidations";
 import { Button } from "@/components/ui/button";
 import { updateUserProfile } from "@/app/actions";
@@ -10,6 +9,7 @@ import { profileFormSchema, ProfileFormValues } from "@/lib/constants";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { Mail, Lock, Phone, User as UserIcon } from "lucide-react";
+import { ButtonSignOut } from "./ButtonSignOut";
 
 interface Props {
    user: User | null;
@@ -24,7 +24,6 @@ interface Props {
 export const ProfileContactInfoTab: React.FC<Props> = ({ user, session }) => {
    const [firstName = "", lastName = ""] = user?.fullName?.split(" ") || [];
    const [isSubmitting, setIsSubmitting] = useState(false);
-   const [value, setValue] = useState("");
 
    const form = useForm<ProfileFormValues>({
       resolver: zodResolver(profileFormSchema),

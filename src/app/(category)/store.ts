@@ -20,7 +20,7 @@ type CartStore = {
    };
    loading: boolean;
    error: boolean;
-   fetchProducts: (query?: string) => Promise<void>;
+   fetchProducts: (query?: string, sortBy?: string) => Promise<void>;
    setOffset: (offset: number) => void;
    setSortBy: (sortBy: { id: string; label: string }) => void;
 };
@@ -42,10 +42,12 @@ export const useCategoryStore = create<CartStore>(set => ({
    },
    loading: true,
    error: false,
-   fetchProducts: async query => {
+   fetchProducts: async (query, sortBy) => {
       set({ loading: true, error: false });
       try {
-         const response = await fetch(`/api/categoryProducts?${query}`);
+         const response = await fetch(
+            `/api/categoryProducts?${query}&sortBy=${sortBy}`,
+         );
 
          if (!response.ok) {
             throw new Error(`Error: ${response.statusText}`);

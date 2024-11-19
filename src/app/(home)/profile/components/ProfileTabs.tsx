@@ -9,6 +9,7 @@ import { ProfileWishListTab } from "./ProfileWishListTab";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { UserOrdersType } from "@/lib/getUserOrders";
+import { tabs } from "../profile.data";
 
 interface Props {
    user: User | null;
@@ -23,8 +24,6 @@ interface Props {
 
 export const ProfileTabs: React.FC<Props> = ({ user, session, userOrders }) => {
    const [tabIndex, setTabIndex] = useState<number | null>(0);
-
-   const tabs = ["Contact Info", "Order History", "Address Book", "Wish List"];
 
    const renderTab = (index: number) => {
       switch (index) {

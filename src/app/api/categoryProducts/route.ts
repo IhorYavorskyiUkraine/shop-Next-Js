@@ -6,15 +6,13 @@ export async function GET(req: NextRequest) {
    const category = searchParams.get("category");
    const minPrice = searchParams.get("minPrice");
    const maxPrice = searchParams.get("maxPrice");
-   const sizes = searchParams.getAll("sizes")
-      ? searchParams.get("sizes")?.split(",")
-      : [];
-   const colors = searchParams.getAll("colors")
-      ? searchParams.get("colors")?.split(",")
-      : [];
-   const dressStyleId = searchParams.get("dressStyleId") || null;
-   const productCategoryId = searchParams.get("productCategoryId") || null;
-   const sortBy = searchParams.get("sortBy");
+   const sizes =
+      searchParams.getAll("sizes") && searchParams.get("sizes")?.split(",");
+   const colors =
+      searchParams.getAll("colors") && searchParams.get("colors")?.split(",");
+   const dressStyleId = searchParams.get("dressStyleId");
+   const productCategoryId = searchParams.get("productCategoryId");
+   const sortBy = searchParams.get("sortBy") || "popularity";
    const limit = Number(searchParams.get("limit")) || 12;
    const offset = Number(searchParams.get("offset")) || 0;
 

@@ -8,6 +8,7 @@ import { ChevronDown } from "lucide-react";
 import { useRef, useState } from "react";
 import { useCategoryStore } from "../store";
 import { useClickAway } from "react-use";
+import { sortOptions } from "../category.data";
 
 export const ProductSortBy: React.FC = () => {
    const [sortBy, setSortBy] = useCategoryStore(state => [
@@ -20,12 +21,6 @@ export const ProductSortBy: React.FC = () => {
    useClickAway(ref, () => {
       setOpen(false);
    });
-
-   const sortOptions = [
-      { id: "popularity", label: "Popularity" },
-      { id: "price_asc", label: "Price: Low to High" },
-      { id: "price_desc", label: "Price: High to Low" },
-   ];
 
    const handleSelect = (option: (typeof sortOptions)[0]) => {
       setSortBy(option);

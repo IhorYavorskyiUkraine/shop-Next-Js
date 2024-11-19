@@ -22,17 +22,17 @@ export const useFilter = () => {
       [values],
    );
    const [dressStyleId, setDressStyleId] = useState<string | null>(
-      searchParams.get("dressStyleId") || null,
+      searchParams.get("dressStyleId"),
    );
    const [productCategoryId, setProductCategoryId] = useState<string | null>(
-      searchParams.get("productCategoryId") || null,
+      searchParams.get("productCategoryId"),
    );
    const [prevQuery, setPrevQuery] = useState("");
    const [sizes, { toggle: toggleSize, reset: resetSizes }] = useSet(
-      new Set<string>(searchParams.getAll("sizes") || []),
+      new Set<string>(searchParams.getAll("sizes")),
    );
    const [colors, { toggle: toggleColor, reset: resetColors }] = useSet(
-      new Set<string>(searchParams.getAll("colors") || []),
+      new Set<string>(searchParams.getAll("colors")),
    );
    const [tabs, { toggle: toggleTabs }] = useSet(
       new Set<string>(["Price", "Size", "Colors", "Dress Style"]),
@@ -66,6 +66,19 @@ export const useFilter = () => {
    }, [productFilters]);
 
    useEffect(() => {
+      const getOffset = {
+         ...(offset && { offset }),
+      };
+
+      const query = qs.stringify(getOffset, { arrayFormat: "comma" });
+
+      if (query !== prevQuery) {
+         setPrevQuery(query);
+         router.push(`?${query}`, { scroll: false });
+      }
+   }, [offset]);
+
+   const setFilters = () => {
       const filters: Record<string, any> = {
          ...(debouncedValue[0] > 0 && { minPrice: debouncedValue[0] }),
          ...(debouncedValue[1] > 0 && { maxPrice: debouncedValue[1] }),
@@ -73,7 +86,6 @@ export const useFilter = () => {
          ...(sizes.size > 0 && { sizes: Array.from(sizes) }),
          ...(dressStyleId && { dressStyleId }),
          ...(productCategoryId && { productCategoryId }),
-         ...(sortBy.id && { sortBy: sortBy.id }),
          ...(offset && { offset }),
       };
 
@@ -83,15 +95,7 @@ export const useFilter = () => {
          setPrevQuery(query);
          router.push(`?${query}`, { scroll: false });
       }
-   }, [
-      debouncedValue,
-      colors,
-      sizes,
-      dressStyleId,
-      productCategoryId,
-      sortBy.id,
-      offset,
-   ]);
+   };
 
    return {
       tabs,
@@ -108,6 +112,7 @@ export const useFilter = () => {
       minPrice,
       maxPrice,
       setDressStyleId,
+      setFilters,
       clearFilters,
    };
 };
