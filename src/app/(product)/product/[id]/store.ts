@@ -36,7 +36,11 @@ type ProductStore = {
    }) => Promise<void>;
    orderBy: string;
    setOrderBy: (orderBy: string) => void;
-   postReview: (review: ReviewInput, productId: number) => Promise<void>;
+   postReview: (
+      review: ReviewInput,
+      productId: number,
+      reply?: boolean,
+   ) => Promise<void>;
    setColor: (color: string | number) => void;
    setSize: (size: { id: number; size: string }) => void;
    setVariant: (variant: ProductVariantOption) => void;
@@ -82,10 +86,8 @@ export const useProductStore = create<ProductStore>(set => ({
          }
          set({ loading: false });
       } catch (error) {
-         set({ error: true });
+         set({ error: true, loading: false, reviews: [] });
          console.error("Ошибка при загрузке отзывов:", error);
-         set({ loading: false });
-         set({ reviews: [] });
       }
    },
    postReview: async (review, productId: number) => {

@@ -1,4 +1,4 @@
-import { ProductVariantOption } from "@prisma/client";
+import { ProductVariantOption, ReviewReply } from "@prisma/client";
 
 export interface ProductWithVariantsAndDetails {
    id: number;
@@ -52,11 +52,12 @@ export interface Review {
    author: {
       fullName: string;
    };
-   rating: number;
+   rating?: number;
    text: string;
    purchase?: {
       productId: number;
    };
+   reviewReplies?: ReviewReply[];
    createdAt: Date;
 }
 

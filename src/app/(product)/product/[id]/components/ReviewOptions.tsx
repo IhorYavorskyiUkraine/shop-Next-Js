@@ -8,44 +8,49 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Ellipsis } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { ReviewModal } from "./ReviewModal";
 import { AuthModal } from "@/components/shared/header/components/authModal/AuthModal";
-import { useClickAway } from "react-use";
 
-export const ReviewOptions: React.FC = () => {
+interface Props {
+   reviewId: number;
+}
+
+export const ReviewOptions: React.FC<Props> = ({ reviewId }) => {
    const { data: session } = useSession();
-   const [open, setOpen] = useState(false);
+   const [reviewOpen, setReviewOpen] = useState(false);
+   const [authOpen, setAuthOpen] = useState(false);
 
-   const ref = useRef(null);
-
-   useClickAway(ref, () => {
-      setOpen(false);
-   });
+   const handleReplyClick = () => {
+      if (session) {
+         setReviewOpen(true);
+      } else {
+         setAuthOpen(true);
+      }
+   };
 
    return (
       <DropdownMenu>
          <DropdownMenuTrigger>
             <Ellipsis size={20} className="text-black/40" />
          </DropdownMenuTrigger>
-         <DropdownMenuContent ref={ref}>
-            <div onClick={() => setOpen(true)}>
+         <DropdownMenuContent>
+            <div onClick={handleReplyClick}>
                <DropdownMenuItem>Reply</DropdownMenuItem>
             </div>
-            {session ? (
-               <ReviewModal
-                  session={session}
-                  open={open}
-                  onClose={() => setOpen(false)}
-               />
-            ) : (
-               <AuthModal
-                  redirect={false}
-                  open={open}
-                  onClose={() => setOpen(false)}
-               />
-            )}
          </DropdownMenuContent>
+         <ReviewModal
+            reviewId={reviewId}
+            reply={true}
+            session={session}
+            open={reviewOpen}
+            onClose={() => setReviewOpen(false)}
+         />
+         <AuthModal
+            redirect={false}
+            open={authOpen}
+            onClose={() => setAuthOpen(false)}
+         />
       </DropdownMenu>
    );
 };

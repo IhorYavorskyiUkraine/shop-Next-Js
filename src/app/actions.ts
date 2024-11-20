@@ -1,6 +1,5 @@
 "use server";
 
-import { getUserSession } from "@/lib/getUserSession";
 import { getUserCart } from "@/services/getUserCart";
 import { cookies } from "next/headers";
 import { prisma } from "../../prisma/PrismaClient";

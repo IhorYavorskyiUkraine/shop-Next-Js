@@ -13,9 +13,16 @@ import { useState } from "react";
 interface Props {
    onClose: () => void;
    session: Session | null;
+   reply?: boolean;
+   reviewId?: number;
 }
 
-export const ProductReviewForm: React.FC<Props> = ({ onClose, session }) => {
+export const ProductReviewForm: React.FC<Props> = ({
+   onClose,
+   session,
+   reply,
+   reviewId,
+}) => {
    const [product, postReview, fetchReviews, limit, offset, orderBy] =
       useProductStore(state => [
          state.product,
@@ -50,33 +57,44 @@ export const ProductReviewForm: React.FC<Props> = ({ onClose, session }) => {
    const onSubmit = async (values: { rating: number; textarea: string }) => {
       if (submitting) return;
 
-      setSubmitting(true);
-
-      if (values.rating === 0) {
-         setError("rating", {
-            type: "manual",
-            message: "Please select a rating",
-         });
-         return;
+      if (!reply) {
+         if (values.rating === 0) {
+            setError("rating", {
+               type: "manual",
+               message: "Please select a rating",
+            });
+            return;
+         }
       }
+
+      setSubmitting(true);
 
       if (!product) {
          return;
       }
 
-      const review = {
-         rating: values.rating,
-         text: values.textarea,
-         authorId: Number(session?.user.id),
-         productId: product?.id,
-      };
+      const reviewData = reply
+         ? {
+              productId: product.id,
+              authorId: Number(session?.user.id),
+              reviewId,
+              reply,
+              text: values.textarea,
+           }
+         : {
+              rating: values.rating,
+              text: values.textarea,
+              authorId: Number(session?.user.id),
+              productId: product.id,
+              reply,
+           };
 
       try {
-         await postReview(review, product?.id);
+         await postReview(reviewData, product?.id);
 
          await fetchReviews({ id: product?.id, orderBy, limit, offset });
 
-         toast.success(`Thank you for your review`, {
+         toast.success(`Thank you for your ${reply ? "reply" : "review"}`, {
             icon: "✅",
          });
       } catch (e) {
@@ -96,28 +114,32 @@ export const ProductReviewForm: React.FC<Props> = ({ onClose, session }) => {
 
    return (
       <form onSubmit={handleSubmit(onSubmit)}>
-         <div>
-            <p className="mb-1 text-md font-medium">Rating</p>
-            <StarRating
-               rating={ratingValue}
-               onRatingChange={(rate: number) => {
-                  setValue("rating", rate);
-                  if (rate > 0) {
-                     clearErrors("rating");
-                  }
-               }}
-               className="mb-2"
-               readonly={false}
-               size={26}
-            />
-            <input
-               type="hidden"
-               {...register("rating", {
-                  required: "Rating is required",
-               })}
-            />
-            {ratingError && <ErrorText text={ratingError} className="mt-2" />}
-         </div>
+         {reply ? null : (
+            <div>
+               <p className="mb-1 text-md font-medium">Rating</p>
+               <StarRating
+                  rating={ratingValue}
+                  onRatingChange={(rate: number) => {
+                     setValue("rating", rate);
+                     if (rate > 0) {
+                        clearErrors("rating");
+                     }
+                  }}
+                  className="mb-2"
+                  readonly={false}
+                  size={26}
+               />
+               <input
+                  type="hidden"
+                  {...register("rating", {
+                     required: "Rating is required",
+                  })}
+               />
+               {ratingError && (
+                  <ErrorText text={ratingError} className="mt-2" />
+               )}
+            </div>
+         )}
          <div className="md:mb-6">
             <p className="mb-1 text-md font-medium">Text</p>
             <Textarea

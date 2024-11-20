@@ -5639,7 +5639,9 @@ async function down() {
       "Size", 
 		"UserAddressBook",
 		"Address",  
-      "Color" 
+      "Color",
+		"ReviewReply",
+		"ReviewImage"
       RESTART IDENTITY CASCADE`;
 }
 
