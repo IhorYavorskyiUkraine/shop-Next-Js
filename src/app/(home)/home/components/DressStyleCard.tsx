@@ -26,7 +26,8 @@ export const DressStyleCard: React.FC<Props> = ({
          <img
             className="absolute right-0 h-full rounded-[20px]"
             src={imageUrl}
-            alt={""}
+            alt=""
+            loading="lazy"
          />
       </Link>
    );

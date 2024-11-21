@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useProductSearch } from "@/hooks/useProductSearch";
+import Image from "next/image";
 
 export const SearchInput: React.FC = () => {
    const [searchQuery, setSearchQuery] = useState("");
@@ -58,10 +59,13 @@ export const SearchInput: React.FC = () => {
                         className="flex w-full items-center gap-3 px-3 py-2 hover:bg-black/10"
                         href={`/product/${product.id}`}
                      >
-                        <img
-                           className="h-8 w-8 rounded-sm"
+                        <Image
+                           className="rounded-sm"
+                           width={32}
+                           height={32}
                            src={product.imageUrl}
                            alt={product.name}
+                           priority
                         />
                         <span>{product.name}</span>
                      </Link>

@@ -5,6 +5,7 @@ import { useCartStore } from "../store";
 import Link from "next/link";
 
 import { CartItem as ICartItem } from "@/@types/Cart";
+import Image from "next/image";
 
 interface Props {
    cartItem: ICartItem;
@@ -27,10 +28,13 @@ export const CartItem: React.FC<Props> = ({ cartItem, className }) => {
       <div className={cn(className, "flex gap-3 py-3 md:py-5")}>
          <div className="rounded-[8px] bg-[#F0EEED]">
             <Link href={`/product/${cartItem?.product?.id}`}>
-               <img
-                  className="size-[100px] md:size-[125px]"
-                  src={cartItem?.productVariantOption?.imageUrl[0]}
-                  alt="cartItem.imageUrl"
+               <Image
+                  src={cartItem?.productVariantOption?.imageUrl[0] || ""}
+                  width={100}
+                  height={100}
+                  loading="lazy"
+                  alt="Cart Item"
+                  className="md:size-[125px]"
                />
             </Link>
          </div>

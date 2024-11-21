@@ -15,6 +15,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { useProductSearch } from "@/hooks/useProductSearch";
+import Image from "next/image";
 
 export const SearchInputMobile: React.FC = () => {
    const [open, setOpen] = useState(false);
@@ -63,10 +64,12 @@ export const SearchInputMobile: React.FC = () => {
                         className="flex w-full items-center gap-3 px-3 py-2 hover:bg-black/10"
                         href={`/product/${product.id}`}
                      >
-                        <img
-                           className="h-12 w-12 rounded-sm"
+                        <Image
+                           className="rounded-sm"
                            src={product.imageUrl}
                            alt={product.name}
+                           width={48}
+                           height={48}
                         />
                         <span className="text-md">{product.name}</span>
                      </Link>

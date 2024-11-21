@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { Login } from "./forms/Login";
 import { Register } from "./forms/Register";
+import Image from "next/image";
 
 interface Props {
    open: boolean;
@@ -49,8 +50,11 @@ export const AuthModal: React.FC<Props> = ({
                   type="button"
                   className="h-12 flex-1 gap-2 p-2"
                >
-                  <img
-                     className="h-6 w-6"
+                  <Image
+                     alt="GitHub"
+                     width={24}
+                     loading="lazy"
+                     height={24}
                      src="https://github.githubassets.com/favicons/favicon.svg"
                   />
                   GitHub
@@ -65,8 +69,11 @@ export const AuthModal: React.FC<Props> = ({
                   type="button"
                   className="h-12 flex-1 gap-2 p-2"
                >
-                  <img
-                     className="h-6 w-6"
+                  <Image
+                     width={24}
+                     height={24}
+                     loading="lazy"
+                     alt="Google"
                      src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg"
                   />
                   Google

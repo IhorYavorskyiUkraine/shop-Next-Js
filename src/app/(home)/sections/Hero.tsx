@@ -5,6 +5,7 @@ import Link from "next/link";
 import { tablesData } from "../home/home.data";
 import { NumberTable } from "../home/components/NumberTable";
 import { BrandIcons } from "../home/components/BrandIcons";
+import Image from "next/image";
 
 type TableDataItem = {
    number: string;
@@ -53,10 +54,13 @@ export const Hero: React.FC = () => {
                   </div>
                </div>
                <div className="flex items-end justify-end">
-                  <img
+                  <Image
+                     src="/images/home/bg.png"
+                     width={600}
+                     height={600}
+                     alt=""
                      className="w-full"
-                     src={"/images/home/bg.png"}
-                     alt={""}
+                     priority
                   />
                </div>
             </div>

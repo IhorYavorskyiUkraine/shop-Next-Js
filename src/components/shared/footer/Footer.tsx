@@ -3,6 +3,7 @@ import { Container } from "../../ui/container";
 import { TopFooter } from "./components/TopFooter";
 import { cn } from "@/lib/utils";
 import { menuData, payments, socialLogos } from "./footer.data";
+import Image from "next/image";
 
 export const Footer: React.FC = () => {
    return (
@@ -72,7 +73,13 @@ export const Footer: React.FC = () => {
                         className="flex items-center justify-center rounded-[6px] border-[0.22px] border-[#D6DCE5] p-2"
                         key={payment.name}
                      >
-                        <img src={payment.image} alt={payment.name} />
+                        <Image
+                           loading="lazy"
+                           width={24}
+                           height={24}
+                           src={payment.image}
+                           alt={payment.name}
+                        />
                      </div>
                   ))}
                </div>

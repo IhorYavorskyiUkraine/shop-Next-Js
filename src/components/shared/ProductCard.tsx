@@ -2,6 +2,7 @@ import Link from "next/link";
 import { StarRating } from "./StarRating";
 import { cn } from "@/lib/utils";
 import { Heart } from "lucide-react";
+import Image from "next/image";
 
 interface Props {
    id: number;
@@ -46,7 +47,7 @@ export const ProductCard: React.FC<Props> = ({
                   "mb-[10px] rounded-[14px] bg-[#F0EEED] md:mb-4 md:size-[300px] md:rounded-[20px]",
                )}
             >
-               <img src={imageUrl} alt={""} />
+               <Image height={300} width={300} src={imageUrl} alt={""} />
             </div>
             <h4 className="text-md font-bold leading-22 md:text-lg md:leading-27">
                {name}

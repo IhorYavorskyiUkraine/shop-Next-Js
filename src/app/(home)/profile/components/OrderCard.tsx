@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
 import { ProductCard } from "./ProductCard";
 import { OrderItem } from "@/@types/Order";
+import Image from "next/image";
 
 interface Props {
    id: number;
@@ -59,9 +60,11 @@ export const OrderCard: React.FC<Props> = ({
             {open || (
                <div className="flex gap-2">
                   {items?.map((item, index) => (
-                     <img
+                     <Image
                         key={index}
-                        className="size-[50px]"
+                        width={50}
+                        height={50}
+                        loading="lazy"
                         src={item.productVariantOption.imageUrl[0]}
                         alt=""
                      />
