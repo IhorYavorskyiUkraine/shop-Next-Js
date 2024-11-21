@@ -79,6 +79,7 @@ export const ProductReviewForm: React.FC<Props> = ({
               authorId: Number(session?.user.id),
               reviewId,
               reply,
+              rating: 0,
               text: values.textarea,
            }
          : {

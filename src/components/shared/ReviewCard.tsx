@@ -6,13 +6,19 @@ import { ReviewReply } from "@prisma/client";
 import { RepliesModal } from "@/app/(product)/product/[id]/components/RepliesModal";
 
 interface Props {
-   reviewId: number;
+   reviewId?: number;
    rating: number;
    name: string;
    checked: boolean;
    text: string;
    reviewDate?: string;
-   replies?: ReviewReply[];
+   replies?: ReviewReply &
+      {
+         author: { fullName: string };
+         createdAt: Date;
+         purchased: boolean;
+         text: string;
+      }[];
 }
 
 export const ReviewCard: React.FC<Props> = ({
@@ -43,7 +49,7 @@ export const ReviewCard: React.FC<Props> = ({
                   {reviewDate}
                </p>
             )}
-            {replies && <RepliesModal replies={replies} />}
+            {replies?.length === 0 ? null : <RepliesModal replies={replies} />}
          </div>
       </div>
    );

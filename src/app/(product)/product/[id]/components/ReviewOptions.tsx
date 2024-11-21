@@ -13,7 +13,7 @@ import { ReviewModal } from "./ReviewModal";
 import { AuthModal } from "@/components/shared/header/components/authModal/AuthModal";
 
 interface Props {
-   reviewId: number;
+   reviewId?: number;
 }
 
 export const ReviewOptions: React.FC<Props> = ({ reviewId }) => {

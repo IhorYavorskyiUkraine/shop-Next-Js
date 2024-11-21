@@ -29,7 +29,6 @@ model User {
 
    cart          Cart?
    orders        Order[]
-   Purchase      Purchase[]
    reviews       Review[]
    reviewReplies ReviewReply[]
 
@@ -55,9 +54,6 @@ model Review {
 
    product   Product @relation(fields: [productId], references: [id])
    productId Int
-
-   purchase   Purchase? @relation(fields: [purchaseId], references: [id])
-   purchaseId Int?
 
    author   User @relation(fields: [authorId], references: [id])
    authorId Int
@@ -87,9 +83,6 @@ model ReviewReply {
 
    product   Product @relation(fields: [productId], references: [id])
    productId Int
-
-   purchase   Purchase? @relation(fields: [purchaseId], references: [id])
-   purchaseId Int?
 
    author   User @relation(fields: [authorId], references: [id])
    authorId Int
@@ -123,7 +116,6 @@ model Product {
    dressStyle            DressStyle             @relation(fields: [dressStyleId], references: [id])
    productCategory       ProductCategory        @relation(fields: [productCategoryId], references: [id])
    productVariantOptions ProductVariantOption[]
-   Purchase              Purchase[]
    reviews               Review[]
    cartItems             CartItem[]
    ReviewReply           ReviewReply[]
@@ -153,17 +145,6 @@ model ProductVariantOption {
    color         Color       @relation(fields: [colorId], references: [id])
    product       Product     @relation(fields: [productId], references: [id])
    sizes         Size[]      @relation("ProductVariantOptionSizes")
-}
-
-model Purchase {
-   id           Int           @id @default(autoincrement())
-   userId       Int
-   productId    Int
-   purchaseDate DateTime      @default(now())
-   product      Product       @relation(fields: [productId], references: [id])
-   user         User          @relation(fields: [userId], references: [id])
-   Review       Review[]
-   ReviewReply  ReviewReply[]
 }
 
 model Category {

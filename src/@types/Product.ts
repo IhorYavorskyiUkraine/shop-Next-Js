@@ -52,12 +52,16 @@ export interface Review {
    author: {
       fullName: string;
    };
-   rating?: number;
+   rating: number;
    text: string;
-   purchase?: {
-      productId: number;
-   };
-   reviewReplies?: ReviewReply[];
+   purchased?: boolean;
+   reviewReplies?: ReviewReply &
+      {
+         author: { fullName: string };
+         createdAt: Date;
+         purchased: boolean;
+         text: string;
+      }[];
    createdAt: Date;
 }
 

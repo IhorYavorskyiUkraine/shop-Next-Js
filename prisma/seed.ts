@@ -5629,7 +5629,6 @@ async function down() {
       "CartItem", 
       "Order", 
       "OrderItem", 
-		"Purchase",
 		"Review",
       "Product", 
       "ProductVariantOption", 
