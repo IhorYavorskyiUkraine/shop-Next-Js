@@ -22,6 +22,7 @@ export async function GET(req: NextRequest) {
                   author: true,
                },
             },
+            images: true,
          },
          take: limit,
          skip: offset,
@@ -94,7 +95,7 @@ export async function POST(req: NextRequest) {
       );
    }
 
-   const { productId, authorId, rating, text, reply, reviewId } = body;
+   const { productId, authorId, rating, text, reply, reviewId, images } = body;
 
    if (!productId || !authorId || !text) {
       return NextResponse.json(
@@ -110,6 +111,11 @@ export async function POST(req: NextRequest) {
       );
    }
 
+   const imageUrls = images.split(",");
+   const normalizedImageUrls = imageUrls.map((url: string) => ({
+      url: url.trim(),
+   }));
+
    try {
       if (reply) {
          const replyToReview = await prisma.reviewReply.create({
@@ -122,6 +128,14 @@ export async function POST(req: NextRequest) {
                },
                review: {
                   connect: { id: reviewId },
+               },
+               images: {
+                  create: normalizedImageUrls.map((image: { url: string }) => ({
+                     url: image.url,
+                     review: {
+                        connect: { id: reviewId },
+                     },
+                  })),
                },
                text,
             },
@@ -144,6 +158,17 @@ export async function POST(req: NextRequest) {
             text,
          },
       });
+
+      const normalReviewId = review.id;
+
+      if (normalizedImageUrls.length > 0) {
+         await prisma.reviewImage.createMany({
+            data: normalizedImageUrls.map((image: { url: string }) => ({
+               url: image.url,
+               reviewId: normalReviewId,
+            })),
+         });
+      }
 
       return NextResponse.json({ message: "Отзыв успешно добавлен", review });
    } catch (error) {

@@ -22,21 +22,25 @@ export const ProductsWithCategories: React.FC<Props> = ({
       hasMoreTopSelling,
       topSelling,
       newArrivals,
-      loading,
    ] = useProductStore(state => [
       state.fetchProducts,
       state.hasMoreNewArrivals,
       state.hasMoreTopSelling,
       state.topSelling,
       state.newArrivals,
-      state.loading,
    ]);
-
+   const [loading, setLoading] = useState(true);
    const [limit, setLimit] = useState(4);
    const [offset, setOffset] = useState(0);
 
    useEffect(() => {
-      fetchProducts(categoryId, limit, offset);
+      const loadProducts = async () => {
+         setLoading(true);
+         await fetchProducts(categoryId, limit, offset);
+         setLoading(false);
+      };
+
+      loadProducts();
    }, [limit, offset]);
 
    const loadMoreProducts = () => {

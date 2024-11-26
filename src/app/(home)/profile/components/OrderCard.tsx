@@ -42,15 +42,13 @@ export const OrderCard: React.FC<Props> = ({
    const deliveryFee = 15;
 
    return (
-      <article
-         className="mb-4 border-b-[1px] border-black/10 pb-4 last:mb-0 last:border-b-0 last:pb-0"
-         onClick={() => setOpen(!open)}
-      >
+      <article className="mb-4 border-b-[1px] border-black/10 pb-4 last:mb-0 last:border-b-0 last:pb-0">
          <div
             className={cn(
                open && "!grid-cols-[auto_16px]",
                "grid cursor-pointer grid-cols-[auto_1fr_1fr_16px] items-center",
             )}
+            onClick={() => setOpen(!open)}
          >
             <div className="mb-2 flex items-center justify-between">
                <h3 className="pr-4 text-xl font-bold leading-27 md:text-lg">

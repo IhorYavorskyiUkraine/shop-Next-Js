@@ -23,7 +23,7 @@ export const ProductCard: React.FC<Props> = ({
    return (
       <div className="grid grid-cols-[90px_1fr_1fr_1fr] items-center border-b-[1px] border-b-black/10 py-4 first:pt-0">
          <Link href={`/product/${id}`}>
-            <Image width={20} height={20} src={imageUrl} alt="Product Image" />
+            <Image width={90} height={90} src={imageUrl} alt="Product Image" />
          </Link>
          <div className="text-sm font-medium leading-22">
             <Link href={`/product/${id}`}>

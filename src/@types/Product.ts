@@ -47,6 +47,13 @@ export interface ProductVariantWithSizes extends ProductVariantOption {
    sizes: { id: number; size: string }[];
 }
 
+export type ReviewImage = {
+   id?: number;
+   url: string;
+   reviewId?: number;
+   replyId?: number;
+};
+
 export interface Review {
    id: number;
    author: {
@@ -62,6 +69,7 @@ export interface Review {
          purchased: boolean;
          text: string;
       }[];
+   images: ReviewImage[];
    createdAt: Date;
 }
 

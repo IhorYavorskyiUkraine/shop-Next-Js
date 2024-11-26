@@ -2,8 +2,9 @@ import { CircleCheck } from "lucide-react";
 import { StarRating } from "./StarRating";
 import { cn } from "@/lib/utils";
 import { ReviewOptions } from "@/app/(product)/product/[id]/components/ReviewOptions";
-import { ReviewReply } from "@prisma/client";
+import { ReviewImage, ReviewReply } from "@prisma/client";
 import { RepliesModal } from "@/app/(product)/product/[id]/components/RepliesModal";
+import Image from "next/image";
 
 interface Props {
    reviewId?: number;
@@ -19,6 +20,7 @@ interface Props {
          purchased: boolean;
          text: string;
       }[];
+   images?: ReviewImage[];
 }
 
 export const ReviewCard: React.FC<Props> = ({
@@ -29,6 +31,7 @@ export const ReviewCard: React.FC<Props> = ({
    text,
    reviewDate,
    replies,
+   images,
 }) => {
    return (
       <div className="rounded-[20px] border-[1px] border-black/10 p-6 md:px-8 md:py-7">
@@ -40,9 +43,25 @@ export const ReviewCard: React.FC<Props> = ({
             <p className="text-md font-bold leading-22">{name}</p>
             {checked && <CircleCheck color={"green"} size={16} />}
          </div>
-         <p className="leading-20 opacity-60 md:text-md md:leading-22">
+         <p className="mb-1 leading-20 opacity-60 md:text-md md:leading-22">
             "{text?.replace(/\s+/g, " ").trim()}"
          </p>
+         {images?.some(image => image.url !== "") && (
+            <div className="mb-1 flex flex-wrap gap-2">
+               {images.map(
+                  (image, index) =>
+                     image.url !== "" && (
+                        <Image
+                           key={index}
+                           width={80}
+                           height={80}
+                           src={image.url}
+                           alt="Product Image"
+                        />
+                     ),
+               )}
+            </div>
+         )}
          <div className="flex items-center justify-between">
             {reviewDate && (
                <p className="mt-1 text-sm font-bold leading-22 opacity-60 md:text-md">

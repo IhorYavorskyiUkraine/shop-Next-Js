@@ -4,7 +4,6 @@ import { Product } from "@prisma/client";
 type ProductStore = {
    newArrivals: Product[];
    topSelling: Product[];
-   loading: boolean;
    hasMoreNewArrivals: boolean;
    hasMoreTopSelling: boolean;
    error: boolean;
@@ -24,7 +23,7 @@ export const useProductStore = create<ProductStore>(set => ({
    error: false,
    fetchProducts: async (categoryId, limit, offset) => {
       try {
-         set({ loading: true, error: false });
+         set({ error: false });
 
          const response = await fetch(
             `/api/products?categoryId=${categoryId}&limit=${limit}&offset=${offset}`,
@@ -62,12 +61,11 @@ export const useProductStore = create<ProductStore>(set => ({
                   categoryId === 2
                      ? [...state.topSelling, ...uniqueProducts]
                      : state.topSelling,
-               loading: false,
             };
          });
       } catch (error) {
          console.error("Error fetching products", error);
-         set({ loading: false, error: true });
+         set({ error: true });
       }
    },
 }));

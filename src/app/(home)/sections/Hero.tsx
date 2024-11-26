@@ -56,10 +56,10 @@ export const Hero: React.FC = () => {
                <div className="flex items-end justify-end">
                   <Image
                      src="/images/home/bg.png"
+                     className="w-full"
                      width={600}
                      height={600}
                      alt=""
-                     className="w-full"
                      priority
                   />
                </div>

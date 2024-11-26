@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { ProductDetailsTab } from "../components/ProductDetailsTab";
 import { ProductReviewsTab } from "../components/ProductReviewsTab";
-import { ProductFaqTab } from "../components/ProductFaqTab";
 import { cn } from "@/lib/utils";
 import { useProductStore } from "../store";
 import { tabs } from "../product.data";
@@ -19,7 +18,7 @@ export const ProductTabs: React.FC = () => {
 
    return (
       <section>
-         <div className="grid grid-cols-3 border-b-[1px] border-black/10 pt-6">
+         <div className="grid grid-cols-2 border-b-[1px] border-black/10 pt-6">
             {tabs.map((tab: string, index: number) => (
                <button
                   className={cn(
@@ -42,7 +41,6 @@ export const ProductTabs: React.FC = () => {
          </div>
          {activeTab === 0 && <ProductDetailsTab />}
          {activeTab === 1 && <ProductReviewsTab />}
-         {activeTab === 2 && <ProductFaqTab />}
       </section>
    );
 };

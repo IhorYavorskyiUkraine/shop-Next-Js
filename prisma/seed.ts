@@ -5629,18 +5629,21 @@ async function down() {
       "CartItem", 
       "Order", 
       "OrderItem", 
-		"Review",
+      "Review",
       "Product", 
       "ProductVariantOption", 
       "Category", 
-		"ProductCategory", 
+      "ProductCategory", 
       "DressStyle", 
       "Size", 
-		"UserAddressBook",
-		"Address",  
+      "UserAddressBook",
+      "Address",  
       "Color",
-		"ReviewReply",
-		"ReviewImage"
+      "ReviewReply",
+      "ReviewImage",
+      "WishList",
+      "WishListItem",
+      "VerificationCode"
       RESTART IDENTITY CASCADE`;
 }
 
