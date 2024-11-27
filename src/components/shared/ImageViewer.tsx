@@ -1,20 +1,38 @@
 "use client";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import { cn } from "@/lib/utils";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import {
+   Carousel,
+   CarouselContent,
+   CarouselItem,
+   CarouselNext,
+   CarouselPrevious,
+} from "../ui/carousel";
 
 interface Props {
-   className?: string;
+   open: boolean;
+   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+   images: { url: string }[];
 }
 
-export const ImageViewer: React.FC<Props> = ({ className }) => {
+export const ImageViewer: React.FC<Props> = ({ open, setOpen, images }) => {
    return (
-      <Swiper spaceBetween={0} slidesPerView={1} className={cn("", className)}>
-         <SwiperSlide>Slide 1</SwiperSlide>
-         <SwiperSlide>Slide 2</SwiperSlide>
-         <SwiperSlide>Slide 3</SwiperSlide>
-         <SwiperSlide>Slide 4</SwiperSlide>
-      </Swiper>
+      <Dialog open={open} onOpenChange={() => setOpen(false)}>
+         <DialogContent className="bg-gray">
+            <Carousel className="flex items-center justify-center">
+               <CarouselPrevious />
+               <CarouselContent>
+                  {images?.map((image, index) => (
+                     <CarouselItem key={index}>
+                        <div className="flex items-center justify-center">
+                           <img src={image.url} alt="" />
+                        </div>
+                     </CarouselItem>
+                  ))}
+               </CarouselContent>
+               <CarouselNext />
+            </Carousel>
+         </DialogContent>
+      </Dialog>
    );
 };

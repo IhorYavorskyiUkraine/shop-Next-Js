@@ -1,11 +1,13 @@
+"use client";
+
 import { CircleCheck } from "lucide-react";
 import { StarRating } from "./StarRating";
 import { cn } from "@/lib/utils";
 import { ReviewOptions } from "@/app/(product)/product/[id]/components/ReviewOptions";
-import { ReviewImage, ReviewReply } from "@prisma/client";
+import { ReviewReply } from "@prisma/client";
 import { RepliesModal } from "@/app/(product)/product/[id]/components/RepliesModal";
 import { ImageViewer } from "./ImageViewer";
-import Image from "next/image";
+import { useState } from "react";
 
 interface Props {
    reviewId?: number;
@@ -23,8 +25,6 @@ interface Props {
          images?: { url: string }[];
       }[];
    images?: { url: string }[];
-   openModal?: boolean;
-   setOpenModal?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const ReviewCard: React.FC<Props> = ({
@@ -36,9 +36,9 @@ export const ReviewCard: React.FC<Props> = ({
    reviewDate,
    replies,
    images,
-   openModal,
-   setOpenModal,
 }) => {
+   const [openModal, setOpenModal] = useState(false);
+
    return (
       <div className="rounded-[20px] border-[1px] border-black/10 p-6 md:px-8 md:py-7">
          <div className={cn(reviewDate && "flex justify-between", "mb-1")}>
@@ -57,14 +57,21 @@ export const ReviewCard: React.FC<Props> = ({
                {images.map((image, index) => (
                   <img
                      key={index}
-                     className="size-[80px]"
+                     className="size-[80px] cursor-pointer"
                      src={image.url}
+                     onClick={() => setOpenModal?.(true)}
                      alt="Product Image"
                   />
                ))}
             </div>
          )}
-         {images && openModal && <ImageViewer />}
+         {images && (
+            <ImageViewer
+               open={openModal}
+               setOpen={setOpenModal}
+               images={images}
+            />
+         )}
          <div className="flex items-center justify-between">
             {reviewDate && (
                <p className="mt-1 text-sm font-bold leading-22 opacity-60 md:text-md">

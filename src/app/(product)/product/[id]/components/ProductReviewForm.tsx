@@ -99,11 +99,9 @@ export const ProductReviewForm: React.FC<Props> = ({
       setSubmitting(true);
 
       try {
-         if (!inputFileRef.current?.files?.length) {
-            throw new Error("No file selected");
-         }
-
-         const files = Array.from(inputFileRef.current.files);
+         const files = inputFileRef.current?.files
+            ? Array.from(inputFileRef.current.files)
+            : [];
 
          if (files.length > maxFiles) {
             files.length = maxFiles;
