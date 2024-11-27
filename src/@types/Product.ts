@@ -69,7 +69,7 @@ export interface Review {
          purchased: boolean;
          text: string;
       }[];
-   images: ReviewImage[];
+   images?: { url: string }[];
    createdAt: Date;
 }
 

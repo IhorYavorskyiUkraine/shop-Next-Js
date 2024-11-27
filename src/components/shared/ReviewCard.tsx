@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { ReviewOptions } from "@/app/(product)/product/[id]/components/ReviewOptions";
 import { ReviewImage, ReviewReply } from "@prisma/client";
 import { RepliesModal } from "@/app/(product)/product/[id]/components/RepliesModal";
+import { ImageViewer } from "./ImageViewer";
 import Image from "next/image";
 
 interface Props {
@@ -19,8 +20,11 @@ interface Props {
          createdAt: Date;
          purchased: boolean;
          text: string;
+         images?: { url: string }[];
       }[];
-   images?: ReviewImage[];
+   images?: { url: string }[];
+   openModal?: boolean;
+   setOpenModal?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const ReviewCard: React.FC<Props> = ({
@@ -32,6 +36,8 @@ export const ReviewCard: React.FC<Props> = ({
    reviewDate,
    replies,
    images,
+   openModal,
+   setOpenModal,
 }) => {
    return (
       <div className="rounded-[20px] border-[1px] border-black/10 p-6 md:px-8 md:py-7">
@@ -46,22 +52,19 @@ export const ReviewCard: React.FC<Props> = ({
          <p className="mb-1 leading-20 opacity-60 md:text-md md:leading-22">
             "{text?.replace(/\s+/g, " ").trim()}"
          </p>
-         {images?.some(image => image.url !== "") && (
+         {images && images?.length > 0 && (
             <div className="mb-1 flex flex-wrap gap-2">
-               {images.map(
-                  (image, index) =>
-                     image.url !== "" && (
-                        <Image
-                           key={index}
-                           width={80}
-                           height={80}
-                           src={image.url}
-                           alt="Product Image"
-                        />
-                     ),
-               )}
+               {images.map((image, index) => (
+                  <img
+                     key={index}
+                     className="size-[80px]"
+                     src={image.url}
+                     alt="Product Image"
+                  />
+               ))}
             </div>
          )}
+         {images && openModal && <ImageViewer />}
          <div className="flex items-center justify-between">
             {reviewDate && (
                <p className="mt-1 text-sm font-bold leading-22 opacity-60 md:text-md">

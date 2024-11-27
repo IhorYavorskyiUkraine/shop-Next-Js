@@ -20,6 +20,7 @@ export async function GET(req: NextRequest) {
             reviewReplies: {
                include: {
                   author: true,
+                  images: true,
                },
             },
             images: true,
@@ -111,11 +112,6 @@ export async function POST(req: NextRequest) {
       );
    }
 
-   const imageUrls = images.split(",");
-   const normalizedImageUrls = imageUrls.map((url: string) => ({
-      url: url.trim(),
-   }));
-
    try {
       if (reply) {
          const replyToReview = await prisma.reviewReply.create({
@@ -129,17 +125,22 @@ export async function POST(req: NextRequest) {
                review: {
                   connect: { id: reviewId },
                },
-               images: {
-                  create: normalizedImageUrls.map((image: { url: string }) => ({
-                     url: image.url,
-                     review: {
-                        connect: { id: reviewId },
-                     },
-                  })),
-               },
                text,
             },
          });
+
+         if (images) {
+            await prisma.reviewReply.update({
+               where: { id: replyToReview.id },
+               data: {
+                  images: {
+                     create: images.map((image: { url: string }) => ({
+                        url: image.url,
+                     })),
+                  },
+               },
+            });
+         }
          return NextResponse.json({
             message: "Отзыв успешно добавлен",
             replyToReview,
@@ -159,14 +160,16 @@ export async function POST(req: NextRequest) {
          },
       });
 
-      const normalReviewId = review.id;
-
-      if (normalizedImageUrls.length > 0) {
-         await prisma.reviewImage.createMany({
-            data: normalizedImageUrls.map((image: { url: string }) => ({
-               url: image.url,
-               reviewId: normalReviewId,
-            })),
+      if (images) {
+         await prisma.review.update({
+            where: { id: review.id },
+            data: {
+               images: {
+                  create: images.map((image: { url: string }) => ({
+                     url: image.url,
+                  })),
+               },
+            },
          });
       }
 

@@ -15,8 +15,6 @@ export async function POST(request: Request): Promise<NextResponse> {
             };
          },
          onUploadCompleted: async ({ blob, tokenPayload }) => {
-            console.log("blob upload completed", blob, tokenPayload);
-
             try {
             } catch (error) {
                throw new Error("Could not update user");

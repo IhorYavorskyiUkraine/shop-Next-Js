@@ -6,6 +6,7 @@ import { useProductStore } from "../store";
 import { Review } from "@/@types/Product";
 import { Button } from "@/components/ui/button";
 import { formatCreatedAt } from "@/lib/getDataReview";
+import { useState } from "react";
 
 export const ProductReviewsTab: React.FC = () => {
    const [product, reviews, hasMoreReviews, limit, setLimit] = useProductStore(
@@ -17,6 +18,7 @@ export const ProductReviewsTab: React.FC = () => {
          state.setLimit,
       ],
    );
+   const [openModal, setOpenModal] = useState(false);
 
    if (!product || !reviews) {
       return null;
@@ -34,23 +36,24 @@ export const ProductReviewsTab: React.FC = () => {
             <ProductReviewsTabOptions />
          </div>
          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {reviews?.map((review: Review, index: number) => {
-               console.log(review?.images);
-
-               return (
-                  <ReviewCard
-                     key={index}
-                     reviewId={review?.id}
-                     name={review?.author?.fullName}
-                     rating={review?.rating || 0}
-                     text={review?.text}
-                     checked={review.purchased || false}
-                     reviewDate={formatCreatedAt(review?.createdAt)}
-                     replies={review?.reviewReplies}
-                     images={review?.images}
-                  />
-               );
-            })}
+            {reviews?.map((review: Review, index: number) => (
+               <ReviewCard
+                  key={index}
+                  reviewId={review?.id}
+                  name={review?.author?.fullName}
+                  rating={review?.rating || 0}
+                  text={review?.text}
+                  checked={review.purchased || false}
+                  reviewDate={formatCreatedAt(review?.createdAt)}
+                  replies={review?.reviewReplies}
+                  images={
+                     review.images &&
+                     review?.images.map(image => ({ url: image.url }))
+                  }
+                  openModal={openModal}
+                  setOpenModal={setOpenModal}
+               />
+            ))}
          </div>
          {hasMoreReviews && (
             <div className="mt-4 flex justify-center">

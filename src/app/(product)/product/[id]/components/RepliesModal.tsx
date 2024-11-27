@@ -14,6 +14,7 @@ interface Props {
          createdAt: Date;
          purchased: boolean;
          text: string;
+         images?: { url: string }[];
       }[];
 }
 
@@ -42,6 +43,7 @@ export const RepliesModal: React.FC<Props> = ({ replies }) => {
                      checked={reply.purchased}
                      text={reply.text}
                      reviewDate={formatCreatedAt(reply?.createdAt)}
+                     images={reply.images}
                   />
                ))}
             </div>
