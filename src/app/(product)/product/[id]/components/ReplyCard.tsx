@@ -1,27 +1,33 @@
 import { ImageViewer } from "@/components/shared/ImageViewer";
+import { cn } from "@/lib/utils";
 import { CircleCheck } from "lucide-react";
 
 interface Props {
+   className?: string;
    name: string;
    checked?: boolean;
    text: string;
    reviewDate?: string;
    images?: { url: string }[];
    openModal?: boolean;
-   setOpenModal?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const ReplyCard: React.FC<Props> = ({
+   className,
    name,
    text,
    reviewDate,
    checked,
    images,
    openModal,
-   setOpenModal,
 }) => {
    return (
-      <div className="mb-4 rounded-[20px] border-[1px] border-black/10 p-6 last:mb-0 md:px-8 md:py-7">
+      <div
+         className={cn(
+            className,
+            "mb-4 rounded-[20px] border-[1px] border-black/10 p-6 last:mb-0 md:px-8 md:py-7",
+         )}
+      >
          <div className="mb-1 flex items-center gap-1 md:mb-2 md:text-lg">
             <p className="text-md font-bold leading-22">{name}</p>{" "}
             {checked && <CircleCheck color={"green"} size={16} />}

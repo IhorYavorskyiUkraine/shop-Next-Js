@@ -6,7 +6,6 @@ import { useProductStore } from "../store";
 import { Review } from "@/@types/Product";
 import { Button } from "@/components/ui/button";
 import { formatCreatedAt } from "@/lib/getDataReview";
-import { useState } from "react";
 
 export const ProductReviewsTab: React.FC = () => {
    const [product, reviews, hasMoreReviews, limit, setLimit] = useProductStore(
@@ -18,7 +17,6 @@ export const ProductReviewsTab: React.FC = () => {
          state.setLimit,
       ],
    );
-   const [openModal, setOpenModal] = useState(false);
 
    if (!product || !reviews) {
       return null;
@@ -50,8 +48,6 @@ export const ProductReviewsTab: React.FC = () => {
                      review.images &&
                      review?.images.map(image => ({ url: image.url }))
                   }
-                  openModal={openModal}
-                  setOpenModal={setOpenModal}
                />
             ))}
          </div>

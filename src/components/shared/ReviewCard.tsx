@@ -70,6 +70,13 @@ export const ReviewCard: React.FC<Props> = ({
                open={openModal}
                setOpen={setOpenModal}
                images={images}
+               rating={rating}
+               name={name}
+               checked={checked}
+               text={text}
+               reviewDate={reviewDate}
+               replies={replies}
+               reviewId={reviewId}
             />
          )}
          <div className="flex items-center justify-between">
