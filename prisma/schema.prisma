@@ -75,9 +75,6 @@ model ReviewImage {
 
    review   Review? @relation(fields: [reviewId], references: [id], onDelete: Cascade)
    reviewId Int?
-
-   reviewReply   ReviewReply? @relation(fields: [reviewReplyId], references: [id])
-   reviewReplyId Int?
 }
 
 model ReviewReply {
@@ -93,8 +90,6 @@ model ReviewReply {
    reviewId Int
 
    text String
-
-   images ReviewImage[]
 
    createdAt DateTime @default(now())
    updatedAt DateTime @updatedAt

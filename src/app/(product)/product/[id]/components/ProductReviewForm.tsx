@@ -114,7 +114,7 @@ export const ProductReviewForm: React.FC<Props> = ({
          for (let i = 0; i < files.length; i++) {
             const file = files[i];
 
-            const newBlob = await upload(file.name, file, {
+            const newBlob = await upload(`ReviewsImages/${file.name}`, file, {
                access: "public",
                handleUploadUrl: "/api/uploadReviewImages",
             }).catch(err => {

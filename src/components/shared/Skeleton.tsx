@@ -11,6 +11,7 @@ type Props = {
    cartSummary?: boolean;
    address?: boolean;
    category?: boolean;
+   avatar?: boolean;
 };
 
 export const Skeleton: React.FC<Props> = ({
@@ -23,6 +24,7 @@ export const Skeleton: React.FC<Props> = ({
    cartSummary,
    address,
    category,
+   avatar,
 }) => {
    if (productCard) {
       return (
@@ -178,5 +180,7 @@ export const Skeleton: React.FC<Props> = ({
             </div>
          </div>
       );
+   } else if (avatar) {
+      return <SkeletonBar className="size-28 rounded-full bg-black/5" />;
    }
 };

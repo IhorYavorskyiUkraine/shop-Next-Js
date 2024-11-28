@@ -19,7 +19,6 @@ export const ReplyCard: React.FC<Props> = ({
    reviewDate,
    checked,
    images,
-   openModal,
 }) => {
    return (
       <div
@@ -47,7 +46,6 @@ export const ReplyCard: React.FC<Props> = ({
                ))}
             </div>
          )}
-         {images && openModal && <ImageViewer />}
          <div className="flex items-center justify-between">
             {reviewDate && (
                <p className="mt-1 text-sm font-bold leading-22 opacity-60 md:text-md">

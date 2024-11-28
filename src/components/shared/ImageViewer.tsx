@@ -48,7 +48,7 @@ export const ImageViewer: React.FC<Props> = ({
          <DialogContent className="max-w-[80%] overflow-hidden bg-gray">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                <Carousel className="flex items-center justify-center gap-4">
-                  <CarouselPrevious />
+                  {images?.length > 1 && <CarouselPrevious />}
                   <CarouselContent>
                      {images?.map((image, index) => (
                         <CarouselItem key={index}>
@@ -58,19 +58,17 @@ export const ImageViewer: React.FC<Props> = ({
                         </CarouselItem>
                      ))}
                   </CarouselContent>
-                  <CarouselNext />
+                  {images?.length > 1 && <CarouselNext />}
                </Carousel>
-               <div>
-                  <ReviewsModal
-                     reviewId={reviewId}
-                     rating={rating}
-                     name={name}
-                     checked={checked}
-                     text={text}
-                     reviewDate={reviewDate}
-                     replies={replies}
-                  />
-               </div>
+               <ReviewsModal
+                  reviewId={reviewId}
+                  rating={rating}
+                  name={name}
+                  checked={checked}
+                  text={text}
+                  reviewDate={reviewDate}
+                  replies={replies}
+               />
             </div>
          </DialogContent>
       </Dialog>

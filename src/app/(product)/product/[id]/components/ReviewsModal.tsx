@@ -33,7 +33,7 @@ export const ReviewsModal: React.FC<Props> = ({
    replies,
 }) => {
    return (
-      <>
+      <div>
          <div className="mb-4 rounded-[20px] border-[1px] border-black/10 p-6 last:mb-0 md:px-8 md:py-7">
             <div className={cn(reviewDate && "flex justify-between", "mb-1")}>
                <StarRating readonly rating={rating} />
@@ -64,10 +64,9 @@ export const ReviewsModal: React.FC<Props> = ({
                      checked={reply.purchased}
                      text={reply.text}
                      reviewDate={formatCreatedAt(reply?.createdAt)}
-                     images={reply.images}
                   />
                ))}
          </div>
-      </>
+      </div>
    );
 };

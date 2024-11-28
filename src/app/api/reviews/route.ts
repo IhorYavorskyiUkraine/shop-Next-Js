@@ -9,7 +9,10 @@ export async function GET(req: NextRequest) {
    const offset = parseInt(req.nextUrl.searchParams.get("offset") || "0", 10);
 
    if (!id) {
-      return NextResponse.json({ message: "ID не указан" }, { status: 400 });
+      return NextResponse.json(
+         { message: "Id not specified" },
+         { status: 400 },
+      );
    }
 
    try {
@@ -20,7 +23,6 @@ export async function GET(req: NextRequest) {
             reviewReplies: {
                include: {
                   author: true,
-                  images: true,
                },
             },
             images: true,
@@ -78,9 +80,9 @@ export async function GET(req: NextRequest) {
 
       return NextResponse.json(reviewsWithPurchaseInfo, { status: 200 });
    } catch (error) {
-      console.error("Ошибка при получении отзывов и проверке покупок:", error);
+      console.error("Error fetching reviews:", error);
       return NextResponse.json(
-         { message: "Ошибка при получении отзывов", error },
+         { message: "Error fetching reviews:", error },
          { status: 500 },
       );
    }
@@ -90,24 +92,18 @@ export async function POST(req: NextRequest) {
    const body = await req.json();
 
    if (!body) {
-      return NextResponse.json(
-         { message: "Некорректные данные" },
-         { status: 400 },
-      );
+      return NextResponse.json({ message: "Not valid data" }, { status: 400 });
    }
 
    const { productId, authorId, rating, text, reply, reviewId, images } = body;
 
    if (!productId || !authorId || !text) {
-      return NextResponse.json(
-         { message: "Некорректные данные" },
-         { status: 400 },
-      );
+      return NextResponse.json({ message: "Not valid data" }, { status: 400 });
    }
 
    if (reply && !reviewId) {
       return NextResponse.json(
-         { message: "Отзыв обязателен для ответа " },
+         { message: "Feedback is required for a response" },
          { status: 400 },
       );
    }
@@ -129,20 +125,21 @@ export async function POST(req: NextRequest) {
             },
          });
 
-         if (images) {
-            await prisma.reviewReply.update({
-               where: { id: replyToReview.id },
-               data: {
-                  images: {
-                     create: images.map((image: { url: string }) => ({
-                        url: image.url,
-                     })),
-                  },
-               },
-            });
-         }
+         // IF NEED IMAGES FOR REPLIES
+         // if (images) {
+         //    await prisma.reviewReply.update({
+         //       where: { id: replyToReview.id },
+         //       data: {
+         //          images: {
+         //             create: images.map((image: { url: string }) => ({
+         //                url: image.url,
+         //             })),
+         //          },
+         //       },
+         //    });
+         // }
          return NextResponse.json({
-            message: "Отзыв успешно добавлен",
+            message: "Feedback successfully added",
             replyToReview,
          });
       }
@@ -173,11 +170,14 @@ export async function POST(req: NextRequest) {
          });
       }
 
-      return NextResponse.json({ message: "Отзыв успешно добавлен", review });
+      return NextResponse.json({
+         message: "Feedback successfully added",
+         review,
+      });
    } catch (error) {
-      console.error("Ошибка при создании отзыва:", error);
+      console.error("Error while creating a review:", error);
       return NextResponse.json(
-         { message: "Ошибка при создании отзыва", error },
+         { message: "Error while creating a review", error },
          { status: 500 },
       );
    }
