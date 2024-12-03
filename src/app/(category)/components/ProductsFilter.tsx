@@ -7,6 +7,8 @@ import { ColorItem } from "./ColorItem";
 import { SizeItem } from "./SizeItem";
 import { Button } from "@/components/ui/button";
 import { SlidersHorizontal, Trash } from "lucide-react";
+import { BrandCheckbox } from "./BrandCheckbox";
+import { Brand } from "@/@types/Product";
 
 export const ProductsFilter: React.FC = () => {
    const {
@@ -23,9 +25,12 @@ export const ProductsFilter: React.FC = () => {
       clearFilters,
       sizesList,
       colorsList,
+      brandsList,
       setDressStyleId,
       setProductCategoryId,
       setFilters,
+      toggleBrands,
+      brands,
    } = useFilter();
 
    return (
@@ -92,6 +97,25 @@ export const ProductsFilter: React.FC = () => {
                            toggle={toggleSize}
                            set={sizes}
                            size={size}
+                        />
+                     ))}
+                  </div>
+               )}
+            </ProductFilterTab>
+            <ProductFilterTab
+               openTabs={tabs}
+               name="Brands"
+               onClick={() => toggleTabs("Brands")}
+            >
+               {tabs.has("Brands") && (
+                  <div className="flex flex-col gap-[10px] pt-4">
+                     {brandsList?.map((brand: Brand) => (
+                        <BrandCheckbox
+                           key={brand.id}
+                           set={brands}
+                           brandId={brand.id}
+                           toggle={toggleBrands}
+                           name={brand.name}
                         />
                      ))}
                   </div>

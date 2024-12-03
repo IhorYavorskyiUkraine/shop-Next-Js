@@ -2,6 +2,7 @@
 
 import { create } from "zustand";
 import { ProductWithVariants } from "./categories/[category]/page";
+import { Brand } from "@/@types/Product";
 
 type CartStore = {
    products: ProductWithVariants[];
@@ -12,6 +13,7 @@ type CartStore = {
       colors: string[];
       minProductPrice: number;
       maxProductPrice: number;
+      brands: Brand[];
    };
    offset: number;
    sortBy: {
@@ -33,6 +35,7 @@ export const useCategoryStore = create<CartStore>(set => ({
       colors: [],
       minProductPrice: 0,
       maxProductPrice: 0,
+      brands: [],
    },
    totalProducts: 0,
    offset: 0,

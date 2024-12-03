@@ -13,6 +13,7 @@ export async function GET(req: NextRequest) {
    const dressStyleId = searchParams.get("dressStyleId");
    const productCategoryId = searchParams.get("productCategoryId");
    const sortBy = searchParams.get("sortBy") || "popularity";
+   const productBrands = searchParams.getAll("brands");
    const limit = Number(searchParams.get("limit")) || 12;
    const offset = Number(searchParams.get("offset")) || 0;
 
@@ -63,6 +64,20 @@ export async function GET(req: NextRequest) {
          };
       }
 
+      if (productBrands && productBrands.length > 0) {
+         const validBrands = productBrands
+            .map(brand => Number(brand))
+            .filter(brand => !isNaN(brand));
+
+         if (validBrands.length > 0) {
+            whereCondition.productBrandId = {
+               in: validBrands,
+            };
+         }
+
+         console.log(validBrands);
+      }
+
       if (dressStyleId) {
          whereCondition.dressStyleId = Number(dressStyleId);
       }
@@ -89,6 +104,13 @@ export async function GET(req: NextRequest) {
          },
       });
 
+      const brandsFilters = await prisma.product.findMany({
+         select: {
+            brand: true,
+         },
+         distinct: ["productBrandId"],
+      });
+
       const minProductPrice = Math.min(...filters.map(option => option.price));
       const maxProductPrice = Math.max(...filters.map(option => option.price));
 
@@ -97,6 +119,7 @@ export async function GET(req: NextRequest) {
             new Set(filters.flatMap(option => option.sizes.map(s => s.size))),
          ),
          colors: Array.from(new Set(filters.map(option => option.color.id))),
+         brands: Array.from(new Set(brandsFilters.map(brand => brand.brand))),
          minProductPrice,
          maxProductPrice,
       };

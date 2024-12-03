@@ -13,6 +13,29 @@ export const categories = [
    },
 ];
 
+export const productBrands = [
+   {
+      id: 1,
+      name: "Nike",
+      image: "images/brands/nike.png",
+   },
+   {
+      id: 2,
+      name: "Adidas",
+      image: "images/brands/adidas.png",
+   },
+   {
+      id: 3,
+      name: "Puma",
+      image: "images/brands/puma.png",
+   },
+   {
+      id: 4,
+      name: "Levis",
+      image: "images/brands/levis.png",
+   },
+];
+
 export const productCategories = [
    {
       id: 1,

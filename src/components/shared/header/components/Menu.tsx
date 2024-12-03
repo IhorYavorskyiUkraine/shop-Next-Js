@@ -33,7 +33,11 @@ export const Menu: React.FC = () => {
          {menuData.map((item: MenuItem) => (
             <li key={item.name} className="text-md leading-22">
                {item.href ? (
-                  <Link href={`/categories/${item.href}`}>{item.name}</Link>
+                  <Link
+                     href={`/${item.name === "Brands" ? "" : "categories/"}${item.href}`}
+                  >
+                     {item.name}
+                  </Link>
                ) : (
                   <div
                      onClick={() => setActive(!active)}
@@ -57,7 +61,7 @@ export const Menu: React.FC = () => {
                                        >
                                           <NavigationMenuLink asChild>
                                              <Link
-                                                href={`/categories/${item.href}`}
+                                                href={`/${item.name === "Brands" ? "" : "categories/"}${item.href}`}
                                                 className="flex items-center gap-1"
                                              >
                                                 {item.icon}

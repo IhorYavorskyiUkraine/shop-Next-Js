@@ -54,6 +54,11 @@ export type ReviewImage = {
    replyId?: number;
 };
 
+export interface Brand {
+   id: number;
+   name: string;
+}
+
 export interface Review {
    id: number;
    author: {

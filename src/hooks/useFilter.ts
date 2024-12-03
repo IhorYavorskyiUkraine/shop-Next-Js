@@ -3,14 +3,14 @@ import { useDebounce, useSet } from "react-use";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCategoryStore } from "@/app/(category)/store";
 import qs from "qs";
+import { Brand } from "@/@types/Product";
 
 export const useFilter = () => {
    const router = useRouter();
    const searchParams = useSearchParams();
-   const [productFilters, offset, sortBy] = useCategoryStore(state => [
+   const [productFilters, offset] = useCategoryStore(state => [
       state.productFilters,
       state.offset,
-      state.sortBy,
    ]);
    const [values, setValues] = useState([0, 0]);
    const [debouncedValue, setDebouncedValue] = useState([0, 0]);
@@ -34,12 +34,16 @@ export const useFilter = () => {
    const [colors, { toggle: toggleColor, reset: resetColors }] = useSet(
       new Set<string>(searchParams.getAll("colors")),
    );
+   const [brands, { toggle: toggleBrands, reset: resetBrands }] = useSet(
+      new Set<string>(searchParams.getAll("brands")),
+   );
    const [tabs, { toggle: toggleTabs }] = useSet(
-      new Set<string>(["Price", "Size", "Colors", "Dress Style"]),
+      new Set<string>(["Price", "Size", "Colors", "Dress Style", "Brands"]),
    );
 
    const sizesList = productFilters?.sizes;
    const colorsList = productFilters?.colors;
+   const brandsList: Brand[] = productFilters?.brands;
 
    const minPrice = useRef<number | null>(null);
    const maxPrice = useRef<number | null>(null);
@@ -50,6 +54,7 @@ export const useFilter = () => {
       resetColors();
       setValues([minPrice.current || 0, maxPrice.current || 0]);
       setProductCategoryId(null);
+      resetBrands();
    };
 
    useEffect(() => {
@@ -87,6 +92,7 @@ export const useFilter = () => {
          ...(dressStyleId && { dressStyleId }),
          ...(productCategoryId && { productCategoryId }),
          ...(offset && { offset }),
+         ...(brands.size > 0 && { brands: Array.from(brands) }),
       };
 
       const query = qs.stringify(filters, { arrayFormat: "comma" });
@@ -100,12 +106,15 @@ export const useFilter = () => {
    return {
       tabs,
       toggleTabs,
+      brandsList,
+      brands,
       colors,
       toggleColor,
       colorsList,
       sizes,
       setProductCategoryId,
       toggleSize,
+      toggleBrands,
       sizesList,
       values,
       setValues,

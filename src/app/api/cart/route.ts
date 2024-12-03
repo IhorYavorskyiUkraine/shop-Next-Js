@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../prisma/PrismaClient";
-import { getUserSession } from "@/lib/getUserSession";
 import { createCartToken } from "@/services/createCartToken";
 import { getUserCart } from "@/services/getUserCart";
 import { createUserCart } from "@/services/createUserCart";
@@ -16,7 +15,7 @@ export async function GET(req: NextRequest) {
       let newToken = token;
 
       if (!token) {
-         const { response } = await createCartToken();
+         const { response, newToken: createdToken } = await createCartToken();
          return response;
       }
 

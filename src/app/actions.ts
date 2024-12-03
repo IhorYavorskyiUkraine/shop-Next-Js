@@ -70,7 +70,7 @@ export async function updateCartTotalAmount(userCart: Cart | null) {
          userCart.items?.reduce((total, item) => {
             const itemPrice = item.productVariantOption?.price || 0;
             return total + itemPrice * item.quantity;
-         }, 0) || 0;
+         }, 0) ?? 0;
       const discount = totalCartPrice * 0.2;
       const deliveryFee = 15;
       const totalAmount =

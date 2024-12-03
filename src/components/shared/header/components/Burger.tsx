@@ -39,7 +39,7 @@ export const Burger: React.FC = () => {
                      <li key={item.name}>
                         <Link
                            className="text-2xl font-medium"
-                           href={`/categories/${item.href}` || ""}
+                           href={`/${item.name === "Brands" ? "" : "categories/"}${item.href}`}
                         >
                            <button onClick={() => setOpen(false)}>
                               {item.name}
