@@ -12,6 +12,7 @@ export const useFilter = () => {
       state.productFilters,
       state.offset,
    ]);
+   const [loading, setLoading] = useState(true);
    const [values, setValues] = useState([0, 0]);
    const [debouncedValue, setDebouncedValue] = useState([0, 0]);
    const [] = useDebounce(
@@ -58,6 +59,8 @@ export const useFilter = () => {
    };
 
    useEffect(() => {
+      setLoading(true);
+
       minPrice.current = productFilters.minProductPrice;
       maxPrice.current = productFilters.maxProductPrice;
 
@@ -68,9 +71,13 @@ export const useFilter = () => {
          initialMinPrice ? parseInt(initialMinPrice) : minPrice.current || 0,
          initialMaxPrice ? parseInt(initialMaxPrice) : maxPrice.current || 0,
       ]);
+
+      setLoading(false);
    }, [productFilters]);
 
    useEffect(() => {
+      setLoading(true);
+
       const getOffset = {
          ...(offset && { offset }),
       };
@@ -81,6 +88,8 @@ export const useFilter = () => {
          setPrevQuery(query);
          router.push(`?${query}`, { scroll: false });
       }
+
+      setLoading(false);
    }, [offset]);
 
    const setFilters = () => {
@@ -123,5 +132,6 @@ export const useFilter = () => {
       setDressStyleId,
       setFilters,
       clearFilters,
+      loading,
    };
 };

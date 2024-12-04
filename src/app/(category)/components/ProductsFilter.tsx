@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { SlidersHorizontal, Trash } from "lucide-react";
 import { BrandCheckbox } from "./BrandCheckbox";
 import { Brand } from "@/@types/Product";
+import { Skeleton } from "@/components/shared/Skeleton";
 
 export const ProductsFilter: React.FC = () => {
    const {
@@ -31,6 +32,7 @@ export const ProductsFilter: React.FC = () => {
       setFilters,
       toggleBrands,
       brands,
+      loading,
    } = useFilter();
 
    return (
@@ -71,17 +73,25 @@ export const ProductsFilter: React.FC = () => {
                onClick={() => toggleTabs("Colors")}
                name="Colors"
             >
-               {tabs.has("Colors") && (
+               {loading ? (
                   <div className="flex flex-wrap gap-[10px] pt-4">
-                     {colorsList?.map(color => (
-                        <ColorItem
-                           key={color}
-                           toggle={toggleColor}
-                           set={colors}
-                           color={Number(color)}
-                        />
+                     {Array.from({ length: 5 }).map((_, index) => (
+                        <Skeleton key={index} colors />
                      ))}
                   </div>
+               ) : (
+                  tabs.has("Colors") && (
+                     <div className="flex flex-wrap gap-[10px] pt-4">
+                        {colorsList?.map(color => (
+                           <ColorItem
+                              key={color}
+                              toggle={toggleColor}
+                              set={colors}
+                              color={Number(color)}
+                           />
+                        ))}
+                     </div>
+                  )
                )}
             </ProductFilterTab>
             <ProductFilterTab
@@ -89,17 +99,25 @@ export const ProductsFilter: React.FC = () => {
                name="Size"
                onClick={() => toggleTabs("Size")}
             >
-               {tabs.has("Size") && (
+               {loading ? (
                   <div className="flex flex-wrap gap-[10px] pt-4">
-                     {sizesList?.map(size => (
-                        <SizeItem
-                           key={size}
-                           toggle={toggleSize}
-                           set={sizes}
-                           size={size}
-                        />
+                     {Array.from({ length: 5 }).map((_, index) => (
+                        <Skeleton key={index} colors />
                      ))}
                   </div>
+               ) : (
+                  tabs.has("Size") && (
+                     <div className="flex flex-wrap gap-[10px] pt-4">
+                        {sizesList?.map(size => (
+                           <SizeItem
+                              key={size}
+                              toggle={toggleSize}
+                              set={sizes}
+                              size={size}
+                           />
+                        ))}
+                     </div>
+                  )
                )}
             </ProductFilterTab>
             <ProductFilterTab
@@ -107,18 +125,26 @@ export const ProductsFilter: React.FC = () => {
                name="Brands"
                onClick={() => toggleTabs("Brands")}
             >
-               {tabs.has("Brands") && (
+               {loading ? (
                   <div className="flex flex-col gap-[10px] pt-4">
-                     {brandsList?.map((brand: Brand) => (
-                        <BrandCheckbox
-                           key={brand.id}
-                           set={brands}
-                           brandId={brand.id}
-                           toggle={toggleBrands}
-                           name={brand.name}
-                        />
+                     {Array.from({ length: 5 }).map((_, index) => (
+                        <Skeleton key={index} brands />
                      ))}
                   </div>
+               ) : (
+                  tabs.has("Brands") && (
+                     <div className="flex flex-col gap-[10px] pt-4">
+                        {brandsList?.map((brand: Brand) => (
+                           <BrandCheckbox
+                              key={brand.id}
+                              set={brands}
+                              brandId={brand.id}
+                              toggle={toggleBrands}
+                              name={brand.name}
+                           />
+                        ))}
+                     </div>
+                  )
                )}
             </ProductFilterTab>
             <ProductFilterTab

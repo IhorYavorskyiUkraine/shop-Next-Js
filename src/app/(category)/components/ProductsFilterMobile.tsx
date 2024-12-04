@@ -18,6 +18,8 @@ import {
 } from "../../../../prisma/products";
 import { useFilter } from "@/hooks/useFilter";
 import { useState } from "react";
+import { BrandCheckbox } from "./BrandCheckbox";
+import { Brand } from "@/@types/Product";
 
 export const ProductsFilterMobile: React.FC = () => {
    const [open, setOpen] = useState(false);
@@ -27,14 +29,17 @@ export const ProductsFilterMobile: React.FC = () => {
       toggleTabs,
       toggleColor,
       toggleSize,
+      toggleBrands,
       colors,
       sizes,
+      brands,
       values,
       setValues,
       minPrice,
       maxPrice,
       clearFilters,
       sizesList,
+      brandsList,
       colorsList,
       setDressStyleId,
       setProductCategoryId,
@@ -133,6 +138,27 @@ export const ProductsFilterMobile: React.FC = () => {
                            ))}
                         </div>
                      )}
+                  </ProductFilterTab>
+                  <ProductFilterTab
+                     openTabs={tabs}
+                     onClick={() => toggleTabs("Brabds")}
+                     name="Brands"
+                  >
+                     <div className="pt-4">
+                        {tabs.has("Brands") && (
+                           <div className="flex flex-col gap-[10px] pt-4">
+                              {brandsList?.map((brand: Brand) => (
+                                 <BrandCheckbox
+                                    key={brand.id}
+                                    set={brands}
+                                    brandId={brand.id}
+                                    toggle={toggleBrands}
+                                    name={brand.name}
+                                 />
+                              ))}
+                           </div>
+                        )}
+                     </div>
                   </ProductFilterTab>
                   <ProductFilterTab
                      openTabs={tabs}
