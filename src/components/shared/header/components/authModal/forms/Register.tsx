@@ -1,11 +1,11 @@
-import { FormProvider, useForm } from "react-hook-form";
-import { formRegisterSchema, TFormRegisterValues } from "./schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import toast from "react-hot-toast";
-import { Button } from "@/components/ui/button";
-import { InputWithValidations } from "@/components/shared/InputWithValidations";
-import { Mail, Lock, UserIcon } from "lucide-react";
 import { registerUser } from "@/app/actions";
+import { InputWithValidations } from "@/components/shared/InputWithValidations";
+import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Lock, Mail, UserIcon } from "lucide-react";
+import { FormProvider, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { formRegisterSchema, TFormRegisterValues } from "./schema";
 
 interface Props {
    onClose?: VoidFunction;

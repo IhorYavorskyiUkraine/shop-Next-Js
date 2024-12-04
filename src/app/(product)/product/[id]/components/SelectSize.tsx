@@ -1,7 +1,7 @@
-import { useProductStore } from "../store";
-import { sizes } from "../../../../../../prisma/products";
 import { cn } from "@/lib/utils";
 import { useEffect } from "react";
+import { sizes } from "../../../../../../prisma/products";
+import { useProductStore } from "../store";
 
 export const SelectSize: React.FC = () => {
    const [product, variant, setQuantity, setSize, size] = useProductStore(

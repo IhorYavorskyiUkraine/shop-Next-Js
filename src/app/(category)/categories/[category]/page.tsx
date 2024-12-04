@@ -1,6 +1,5 @@
 import { BreadCrumb } from "@/components/shared/BreadCrumb";
 import { Container } from "@/components/ui/container";
-import { Title } from "@/components/ui/title";
 import { Prisma } from "@prisma/client";
 import { Hero } from "../../components/Hero";
 
@@ -28,20 +27,11 @@ const CategoriesPage = async ({ params }: { params: { category: string } }) => {
          case "on_sale":
             return "On Sale";
          default:
-            return "";
+            return "All Products";
       }
    };
 
    const crumbName = breadCrumbName();
-
-   if (crumbName === "") {
-      return (
-         <Container className="flex h-[400px] flex-col items-center justify-center">
-            <Title text="Category not found" className="mb-5 text-center" />
-            <p className="text-[64px]">😞</p>
-         </Container>
-      );
-   }
 
    return (
       <Container>

@@ -1,11 +1,11 @@
 "use client";
 
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { formatCreatedAt } from "@/lib/getDataReview";
 import { ReviewReply } from "@prisma/client";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useState } from "react";
 import { ReplyCard } from "./ReplyCard";
-import { formatCreatedAt } from "@/lib/getDataReview";
 
 interface Props {
    replies?: ReviewReply &

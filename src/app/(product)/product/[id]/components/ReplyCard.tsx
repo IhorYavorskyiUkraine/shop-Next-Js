@@ -1,4 +1,3 @@
-import { ImageViewer } from "@/components/shared/ImageViewer";
 import { cn } from "@/lib/utils";
 import { CircleCheck } from "lucide-react";
 

@@ -1,8 +1,8 @@
+import { OrderItem } from "@/@types/Order";
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
-import { ProductCard } from "./ProductCard";
-import { OrderItem } from "@/@types/Order";
 import Image from "next/image";
+import { ProductCard } from "./ProductCard";
 
 interface Props {
    id: number;

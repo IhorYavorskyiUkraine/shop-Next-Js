@@ -1,8 +1,8 @@
 "use client";
 
-import { create } from "zustand";
-import { ProductVariantOption } from "@prisma/client";
 import { ProductWithVariantsAndDetails, Review } from "@/@types/Product";
+import { ProductVariantOption } from "@prisma/client";
+import { create } from "zustand";
 
 type ReviewInput = Omit<Review, "id" | "author" | "createdAt">;
 

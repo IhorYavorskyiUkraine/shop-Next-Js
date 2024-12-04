@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Title } from "@/components/ui/title";
-import Link from "next/link";
-import { tablesData } from "../home/home.data";
-import { NumberTable } from "../home/components/NumberTable";
-import { BrandIcons } from "../home/components/BrandIcons";
 import Image from "next/image";
+import Link from "next/link";
+import { BrandIcons } from "../home/components/BrandIcons";
+import { NumberTable } from "../home/components/NumberTable";
+import { tablesData } from "../home/home.data";
 
 type TableDataItem = {
    number: string;
@@ -28,7 +28,7 @@ export const Hero: React.FC = () => {
                      garments, designed to bring out your individuality and
                      cater to your sense of style.
                   </p>
-                  <Link href="/categories/on_sale">
+                  <Link href="/categories/all_products">
                      <Button
                         variant="black"
                         className="mb-5 md:mb-10 md:w-[210px]"

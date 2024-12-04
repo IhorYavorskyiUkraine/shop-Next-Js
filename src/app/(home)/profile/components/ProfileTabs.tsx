@@ -1,15 +1,15 @@
 "use client";
 
+import { UserOrdersType } from "@/lib/getUserOrders";
+import { cn } from "@/lib/utils";
 import { User, UserRole } from "@prisma/client";
+import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { tabs } from "../profile.data";
+import { ProfileAddressBookTab } from "./ProfileAddressBookTab";
 import { ProfileContactInfoTab } from "./ProfileContactInfoTab";
 import { ProfileOrderHistoryTab } from "./ProfileOrderHistoryTab";
-import { ProfileAddressBookTab } from "./ProfileAddressBookTab";
 import { ProfileWishListTab } from "./ProfileWishListTab";
-import { ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { UserOrdersType } from "@/lib/getUserOrders";
-import { tabs } from "../profile.data";
 
 interface Props {
    user: User | null;

@@ -1,11 +1,11 @@
 import { prisma } from "./PrismaClient";
 import {
    categories,
-   productCategories,
    colors,
    dressStyle,
-   sizes,
    productBrands,
+   productCategories,
+   sizes,
 } from "./products";
 
 async function up() {

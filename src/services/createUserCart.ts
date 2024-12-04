@@ -1,4 +1,4 @@
-import { prisma } from "../../prisma/PrismaClient";
+import { prisma } from "@prisma/PrismaClient";
 import { getUserCart } from "./getUserCart";
 
 export async function createUserCart(sessionId?: number, token?: string) {

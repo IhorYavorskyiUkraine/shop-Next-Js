@@ -1,20 +1,20 @@
 "use server";
 
-import { getUserCart } from "@/services/getUserCart";
-import { cookies } from "next/headers";
-import { prisma } from "../../prisma/PrismaClient";
-import { OrderStatus, Prisma } from "@prisma/client";
-import { sendEmail } from "@/lib/sendEmail";
-import { PayOrderTemplate } from "@/components/shared/emailTemplates/PayOrderTemplate";
-import { getUser } from "@/lib/getUser";
-import { hashSync } from "bcrypt";
-import { VerificationUserTemplate } from "@/components/shared/emailTemplates/VerificationUserTemplate";
 import { Cart } from "@/@types/Cart";
 import { OrderInput } from "@/@types/CheckOut";
 import { UpdateUserProfileData } from "@/@types/Profile";
+import { PayOrderTemplate } from "@/components/shared/emailTemplates/PayOrderTemplate";
+import { VerificationUserTemplate } from "@/components/shared/emailTemplates/VerificationUserTemplate";
 import { AddressFormValues } from "@/lib/constants";
 import { getSessionId } from "@/lib/getSessionId";
+import { getUser } from "@/lib/getUser";
+import { sendEmail } from "@/lib/sendEmail";
 import { setFalseActiveAddress } from "@/lib/setFalseActiveAddress";
+import { getUserCart } from "@/services";
+import { OrderStatus, Prisma } from "@prisma/client";
+import { prisma } from "@prisma/PrismaClient";
+import { hashSync } from "bcrypt";
+import { cookies } from "next/headers";
 
 export async function registerUser(data: Prisma.UserCreateInput) {
    try {

@@ -6,9 +6,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import { useRef, useState } from "react";
-import { useCategoryStore } from "../store";
 import { useClickAway } from "react-use";
 import { sortOptions } from "../category.data";
+import { useCategoryStore } from "../store";
 
 export const ProductSortBy: React.FC = () => {
    const [sortBy, setSortBy] = useCategoryStore(state => [

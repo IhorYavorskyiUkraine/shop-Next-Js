@@ -1,3 +1,4 @@
+import { AuthModal } from "@/components/shared/header/components/authModal/AuthModal";
 import { Button } from "@/components/ui/button";
 import {
    DropdownMenu,
@@ -6,12 +7,11 @@ import {
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
-import { ReviewModal } from "./ReviewModal";
-import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
-import { AuthModal } from "@/components/shared/header/components/authModal/AuthModal";
-import { useProductStore } from "../store";
+import { useRef, useState } from "react";
 import { useClickAway } from "react-use";
+import { useProductStore } from "../store";
+import { ReviewModal } from "./ReviewModal";
 
 export const ProductReviewsTabOptions: React.FC = () => {
    const setOrderBy = useProductStore(state => state.setOrderBy);

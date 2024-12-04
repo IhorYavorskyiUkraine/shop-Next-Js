@@ -1,6 +1,8 @@
 "use client";
 
+import { ReviewsModal } from "@/app/(product)/product/[id]/components/ReviewsModal";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { ReviewReply } from "@prisma/client";
 import {
    Carousel,
    CarouselContent,
@@ -8,8 +10,6 @@ import {
    CarouselNext,
    CarouselPrevious,
 } from "../ui/carousel";
-import { ReviewReply } from "@prisma/client";
-import { ReviewsModal } from "@/app/(product)/product/[id]/components/ReviewsModal";
 
 interface Props {
    open: boolean;

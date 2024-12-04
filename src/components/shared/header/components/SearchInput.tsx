@@ -1,13 +1,13 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
-import { useClickAway } from "react-use";
-import { useRef, useState } from "react";
+import { useProductSearch } from "@/hooks";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { useProductSearch } from "@/hooks/useProductSearch";
+import { Search } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { useRef, useState } from "react";
+import { useClickAway } from "react-use";
 
 export const SearchInput: React.FC = () => {
    const [searchQuery, setSearchQuery] = useState("");

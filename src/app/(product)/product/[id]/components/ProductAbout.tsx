@@ -1,9 +1,9 @@
 import { StarRating } from "@/components/shared/StarRating";
 import { Title } from "@/components/ui/title";
+import { useProductStore } from "../store";
+import { ProductAddToCart } from "./ProductAddToCart";
 import { SelectColor } from "./SelectColor";
 import { SelectSize } from "./SelectSize";
-import { ProductAddToCart } from "./ProductAddToCart";
-import { useProductStore } from "../store";
 
 export const ProductAbout: React.FC = () => {
    const [product, variant] = useProductStore(state => [

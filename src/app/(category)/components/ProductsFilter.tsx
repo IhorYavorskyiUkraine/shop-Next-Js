@@ -1,15 +1,15 @@
-import { useFilter } from "@/hooks/useFilter";
-import { dressStyle, productCategories } from "../../../../prisma/products";
-import { ProductFilterItem } from "./ProductFilterItem";
-import { ProductFilterTab } from "./ProductFilterTab";
-import { DualRangeSlider } from "@/components/ui/dual-range-slider";
-import { ColorItem } from "./ColorItem";
-import { SizeItem } from "./SizeItem";
-import { Button } from "@/components/ui/button";
-import { SlidersHorizontal, Trash } from "lucide-react";
-import { BrandCheckbox } from "./BrandCheckbox";
 import { Brand } from "@/@types/Product";
 import { Skeleton } from "@/components/shared/Skeleton";
+import { Button } from "@/components/ui/button";
+import { DualRangeSlider } from "@/components/ui/dual-range-slider";
+import { useFilter } from "@/hooks";
+import { SlidersHorizontal, Trash } from "lucide-react";
+import { dressStyle, productCategories } from "../../../../prisma/products";
+import { BrandCheckbox } from "./BrandCheckbox";
+import { ColorItem } from "./ColorItem";
+import { ProductFilterItem } from "./ProductFilterItem";
+import { ProductFilterTab } from "./ProductFilterTab";
+import { SizeItem } from "./SizeItem";
 
 export const ProductsFilter: React.FC = () => {
    const {

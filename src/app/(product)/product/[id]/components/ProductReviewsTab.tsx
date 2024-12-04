@@ -1,11 +1,11 @@
 "use client";
 
-import { ReviewCard } from "@/components/shared/ReviewCard";
-import { ProductReviewsTabOptions } from "./ProductReviewsTabOptions";
-import { useProductStore } from "../store";
 import { Review } from "@/@types/Product";
+import { ReviewCard } from "@/components/shared/ReviewCard";
 import { Button } from "@/components/ui/button";
 import { formatCreatedAt } from "@/lib/getDataReview";
+import { useProductStore } from "../store";
+import { ProductReviewsTabOptions } from "./ProductReviewsTabOptions";
 
 export const ProductReviewsTab: React.FC = () => {
    const [product, reviews, hasMoreReviews, limit, setLimit] = useProductStore(

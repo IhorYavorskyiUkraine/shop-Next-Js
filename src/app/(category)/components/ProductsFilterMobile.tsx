@@ -1,3 +1,5 @@
+import { Brand } from "@/@types/Product";
+import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import {
    Drawer,
@@ -5,21 +7,19 @@ import {
    DrawerTitle,
    DrawerTrigger,
 } from "@/components/ui/drawer";
-import { SlidersHorizontal, Trash, X } from "lucide-react";
-import { ProductFilterTab } from "./ProductFilterTab";
-import { ProductFilterItem } from "./ProductFilterItem";
-import { Button } from "@/components/ui/button";
-import { SizeItem } from "./SizeItem";
-import { ColorItem } from "./ColorItem";
 import { DualRangeSlider } from "@/components/ui/dual-range-slider";
+import { useFilter } from "@/hooks";
+import { SlidersHorizontal, Trash, X } from "lucide-react";
+import { useState } from "react";
 import {
    dressStyle as dressStyles,
    productCategories,
 } from "../../../../prisma/products";
-import { useFilter } from "@/hooks/useFilter";
-import { useState } from "react";
 import { BrandCheckbox } from "./BrandCheckbox";
-import { Brand } from "@/@types/Product";
+import { ColorItem } from "./ColorItem";
+import { ProductFilterItem } from "./ProductFilterItem";
+import { ProductFilterTab } from "./ProductFilterTab";
+import { SizeItem } from "./SizeItem";
 
 export const ProductsFilterMobile: React.FC = () => {
    const [open, setOpen] = useState(false);

@@ -1,7 +1,7 @@
+import { useEffect } from "react";
 import { ProductAbout } from "../components/ProductAbout";
 import { ProductImage } from "../components/ProductImage";
 import { useProductStore } from "../store";
-import { useEffect } from "react";
 
 export const ProductInfo: React.FC = () => {
    const [product, setVariant, setColor, setSize, setQuantity] =

@@ -1,11 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-
 import { signIn } from "next-auth/react";
+import Image from "next/image";
 import { useState } from "react";
 import { Login } from "./forms/Login";
 import { Register } from "./forms/Register";
-import Image from "next/image";
 
 interface Props {
    open: boolean;

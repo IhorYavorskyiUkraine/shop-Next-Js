@@ -1,9 +1,9 @@
+import { Brand } from "@/@types/Product";
+import { useCategoryStore } from "@/app/(category)/store";
+import { useRouter, useSearchParams } from "next/navigation";
+import qs from "qs";
 import { useEffect, useRef, useState } from "react";
 import { useDebounce, useSet } from "react-use";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCategoryStore } from "@/app/(category)/store";
-import qs from "qs";
-import { Brand } from "@/@types/Product";
 
 export const useFilter = () => {
    const router = useRouter();

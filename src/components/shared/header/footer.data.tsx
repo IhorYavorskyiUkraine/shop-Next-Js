@@ -1,4 +1,4 @@
-import { BadgePercent, PackagePlus, ShoppingBasket, Shirt } from "lucide-react";
+import { BadgePercent, PackagePlus, Shirt, ShoppingBasket } from "lucide-react";
 
 export const burgerMenuData = [
    { name: "Top Selling", href: "top_selling" },

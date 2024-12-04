@@ -1,21 +1,20 @@
 "use client";
 
-import { Container } from "../../ui/container";
+import { useCartStore } from "@/app/(cart)/cart/store";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { Burger } from "./components/Burger";
-import { Menu } from "./components/Menu";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { Container } from "../../ui/container";
+import { ProfileButton } from "../ProfileButton";
 import { TopBanner } from "../TopBanner";
+import { AuthModal } from "./components/authModal/AuthModal";
+import { Burger } from "./components/Burger";
+import { CartBtn } from "./components/CartBtn";
+import { Menu } from "./components/Menu";
 import { SearchInput } from "./components/SearchInput";
 import { SearchInputMobile } from "./components/SearchInputMobile";
-import { useSession } from "next-auth/react";
-import { AuthModal } from "./components/authModal/AuthModal";
-import { useEffect, useState } from "react";
-import { ProfileButton } from "../ProfileButton";
-import { CartBtn } from "./components/CartBtn";
-import { useCartStore } from "@/app/(cart)/cart/store";
-import { useSearchParams } from "next/navigation";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
 
 interface Props {
    hasCart?: boolean;

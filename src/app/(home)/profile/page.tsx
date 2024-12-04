@@ -1,5 +1,5 @@
-import { Container } from "@/components/ui/container";
 import { BreadCrumb } from "@/components/shared/BreadCrumb";
+import { Container } from "@/components/ui/container";
 import { ProfileMain } from "./components/ProfileMain";
 
 export default async function Profile() {

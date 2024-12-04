@@ -1,8 +1,8 @@
-import { CartDeleteBtn } from "./CartDeleteBtn";
-import { cn } from "@/lib/utils";
 import { CountButton } from "@/components/shared/CountButton";
-import { useCartStore } from "../store";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useCartStore } from "../store";
+import { CartDeleteBtn } from "./CartDeleteBtn";
 
 import { CartItem as ICartItem } from "@/@types/Cart";
 import Image from "next/image";

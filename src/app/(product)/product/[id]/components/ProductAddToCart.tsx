@@ -1,13 +1,13 @@
-import { Button } from "@/components/ui/button";
-import { useProductStore } from "../store";
-import { useCartStore } from "@/app/(cart)/cart/store";
 import { ProductWithVariantsAndDetails } from "@/@types/Product";
-import toast from "react-hot-toast";
-import { CountButton } from "@/components/shared/CountButton";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { useCartStore } from "@/app/(cart)/cart/store";
 import { useProfileStore } from "@/app/(home)/profile/store";
+import { CountButton } from "@/components/shared/CountButton";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Heart } from "lucide-react";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { useProductStore } from "../store";
 
 interface Props {
    product: ProductWithVariantsAndDetails;

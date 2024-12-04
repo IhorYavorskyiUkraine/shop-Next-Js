@@ -1,7 +1,5 @@
 "use client";
 
-import { Trash2 } from "lucide-react";
-import { useCartStore } from "../store";
 import {
    DropdownMenu,
    DropdownMenuContent,
@@ -9,7 +7,9 @@ import {
    DropdownMenuLabel,
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
+import { useCartStore } from "../store";
 
 interface Props {
    itemId: number;

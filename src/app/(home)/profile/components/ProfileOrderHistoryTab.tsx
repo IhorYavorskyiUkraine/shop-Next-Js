@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { OrderCard } from "./OrderCard";
+import { Order } from "@/@types/Order";
 import { Title } from "@/components/ui/title";
 import { UserOrdersType } from "@/lib/getUserOrders";
-import { Order } from "@/@types/Order";
+import { useState } from "react";
+import { OrderCard } from "./OrderCard";
 
 interface Props {
    userOrders: UserOrdersType | null;

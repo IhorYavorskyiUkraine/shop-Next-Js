@@ -1,9 +1,9 @@
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "../../ui/container";
 import { TopFooter } from "./components/TopFooter";
-import { cn } from "@/lib/utils";
 import { menuData, payments, socialLogos } from "./footer.data";
-import Image from "next/image";
 
 export const Footer: React.FC = () => {
    return (

@@ -1,11 +1,11 @@
 "use client";
 
 import { ProductCard } from "@/components/shared/ProductCard";
-import { Title } from "@/components/ui/title";
+import { Skeleton } from "@/components/shared/Skeleton";
 import { Button } from "@/components/ui/button";
+import { Title } from "@/components/ui/title";
 import { useEffect, useState } from "react";
 import { useProductStore } from "./store";
-import { Skeleton } from "@/components/shared/Skeleton";
 
 interface Props {
    title: string;

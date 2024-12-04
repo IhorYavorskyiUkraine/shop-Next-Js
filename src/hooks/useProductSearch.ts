@@ -1,6 +1,6 @@
+import { Product } from "@prisma/client";
 import { useState } from "react";
 import { useDebounce } from "react-use";
-import { Product } from "@prisma/client";
 
 export const useProductSearch = (searchQuery: string) => {
    const [products, setProducts] = useState<Product[]>([]);

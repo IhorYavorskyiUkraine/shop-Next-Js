@@ -1,7 +1,7 @@
-import { notFound } from "next/navigation";
-import { prisma } from "../../../../../prisma/PrismaClient";
-import { Hero } from "./sections/Hero";
 import { ProductWithVariantsAndDetails } from "@/@types/Product";
+import { notFound } from "next/navigation";
+import { prisma } from "@prisma/PrismaClient";
+import { Hero } from "./sections/Hero";
 
 interface Props {
    params: {

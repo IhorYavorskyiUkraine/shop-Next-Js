@@ -1,7 +1,7 @@
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { ProductReviewForm } from "./ProductReviewForm";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { Session } from "next-auth";
+import { ProductReviewForm } from "./ProductReviewForm";
 
 interface Props {
    reviewId?: number;

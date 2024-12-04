@@ -1,14 +1,14 @@
 "use client";
 
+import { ProductWithVariantsAndDetails } from "@/@types/Product";
 import { BreadCrumb } from "@/components/shared/BreadCrumb";
 import { Skeleton } from "@/components/shared/Skeleton";
 import { Container } from "@/components/ui/container";
+import { ProductsWithCategories } from "@/modules";
+import { useEffect } from "react";
+import { useProductStore } from "../store";
 import { ProductInfo } from "./ProductInfo";
 import { ProductTabs } from "./ProductTabs";
-import { useProductStore } from "../store";
-import { ProductWithVariantsAndDetails } from "@/@types/Product";
-import { useEffect } from "react";
-import { ProductsWithCategories } from "@/modules";
 
 interface Props {
    product: ProductWithVariantsAndDetails;

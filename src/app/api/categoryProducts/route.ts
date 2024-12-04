@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../../../../prisma/PrismaClient";
+import { prisma } from "@prisma/PrismaClient";
 
 export async function GET(req: NextRequest) {
    const { searchParams } = new URL(req.url);
@@ -25,11 +25,14 @@ export async function GET(req: NextRequest) {
    }
 
    try {
-      let whereCondition: any = { categoryId: Number(category) };
+      let whereCondition: any = {};
 
-      if (category !== "1" && category !== "2") {
-         //on_sale
-         whereCondition = { oldPrice: { not: null } };
+      if (category === "1" || category === "2") {
+         whereCondition.categoryId = Number(category);
+      } else if (category === "all_products") {
+         whereCondition = {};
+      } else {
+         whereCondition.oldPrice = { not: null };
       }
 
       if (minPrice && maxPrice) {
@@ -74,8 +77,6 @@ export async function GET(req: NextRequest) {
                in: validBrands,
             };
          }
-
-         console.log(validBrands);
       }
 
       if (dressStyleId) {
@@ -124,7 +125,7 @@ export async function GET(req: NextRequest) {
          maxProductPrice,
       };
 
-      let orderBy: any = {};
+      let orderBy: { [key: string]: "asc" | "desc" } = {};
       if (sortBy === "price_asc") {
          orderBy = { price: "asc" };
       } else if (sortBy === "price_desc") {

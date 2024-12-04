@@ -8,9 +8,8 @@ import {
    NavigationMenuList,
    NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-
-import { useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
 import { menuData, navMenuData } from "../footer.data";
 
 export type MenuItem = {

@@ -1,7 +1,7 @@
-import { Container } from "@/components/ui/container";
-import { prisma } from "../../../../prisma/PrismaClient";
 import { BreadCrumb } from "@/components/shared/BreadCrumb";
+import { Container } from "@/components/ui/container";
 import { Title } from "@/components/ui/title";
+import { prisma } from "@prisma/PrismaClient";
 import { BrandCard } from "./components/BrandCard";
 
 const BrandsPage = async () => {

@@ -1,13 +1,13 @@
 "use client";
 
-import { CircleCheck } from "lucide-react";
-import { StarRating } from "./StarRating";
-import { cn } from "@/lib/utils";
-import { ReviewOptions } from "@/app/(product)/product/[id]/components/ReviewOptions";
-import { ReviewReply } from "@prisma/client";
 import { RepliesModal } from "@/app/(product)/product/[id]/components/RepliesModal";
-import { ImageViewer } from "./ImageViewer";
+import { ReviewOptions } from "@/app/(product)/product/[id]/components/ReviewOptions";
+import { cn } from "@/lib/utils";
+import { ReviewReply } from "@prisma/client";
+import { CircleCheck } from "lucide-react";
 import { useState } from "react";
+import { ImageViewer } from "./ImageViewer";
+import { StarRating } from "./StarRating";
 
 interface Props {
    reviewId?: number;

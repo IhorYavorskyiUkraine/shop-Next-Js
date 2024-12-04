@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
 import { put } from "@vercel/blob";
-import { prisma } from "../../../../prisma/PrismaClient";
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@prisma/PrismaClient";
 
 export async function POST(req: NextRequest) {
    try {

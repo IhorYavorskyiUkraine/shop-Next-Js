@@ -1,15 +1,15 @@
-import { User, UserRole } from "@prisma/client";
-import { ProfileInfo } from "./ProfileInfo";
-import { FormProvider, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { updateUserProfile } from "@/app/actions";
 import { InputWithValidations } from "@/components/shared/InputWithValidations";
 import { Button } from "@/components/ui/button";
-import { updateUserProfile } from "@/app/actions";
 import { profileFormSchema, ProfileFormValues } from "@/lib/constants";
-import toast from "react-hot-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { User, UserRole } from "@prisma/client";
+import { Lock, Mail, Phone, User as UserIcon } from "lucide-react";
 import { useState } from "react";
-import { Mail, Lock, Phone, User as UserIcon } from "lucide-react";
+import { FormProvider, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { ButtonSignOut } from "./ButtonSignOut";
+import { ProfileInfo } from "./ProfileInfo";
 
 interface Props {
    user: User | null;

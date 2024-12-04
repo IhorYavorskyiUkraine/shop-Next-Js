@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import { useProfileStore } from "../store";
 import { ProductCard } from "@/components/shared/ProductCard";
 import { Skeleton } from "@/components/shared/Skeleton";
 import { Title } from "@/components/ui/title";
+import { useEffect } from "react";
+import { useProfileStore } from "../store";
 
 export const ProfileWishListTab: React.FC = () => {
    const [wishList, fetchWishList, toggleWishList, loading] = useProfileStore(

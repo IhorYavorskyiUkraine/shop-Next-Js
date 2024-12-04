@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 import { useState } from "react";
 import { useProductStore } from "../store";
-import Image from "next/image";
 
 export const ProductImage: React.FC = () => {
    const [variant] = useProductStore(state => [state.variant]);

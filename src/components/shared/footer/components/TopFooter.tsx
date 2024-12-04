@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
-
+import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
 import { Input } from "@/components/ui/input";
 import { Title } from "@/components/ui/title";
 import { Mail } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Container } from "@/components/ui/container";
+import { useState } from "react";
 
 export const TopFooter: React.FC = () => {
    const [mail, setMail] = useState("");

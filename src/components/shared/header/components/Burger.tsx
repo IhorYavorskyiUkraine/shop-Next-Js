@@ -9,12 +9,11 @@ import {
    DrawerTitle,
    DrawerTrigger,
 } from "@/components/ui/drawer";
-
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { MenuItem } from "./Menu";
 import { burgerMenuData } from "../footer.data";
+import { MenuItem } from "./Menu";
 
 export const Burger: React.FC = () => {
    const [open, setOpen] = useState(false);

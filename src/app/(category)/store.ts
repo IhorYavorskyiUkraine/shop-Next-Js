@@ -1,8 +1,8 @@
 "use client";
 
+import { Brand } from "@/@types/Product";
 import { create } from "zustand";
 import { ProductWithVariants } from "./categories/[category]/page";
-import { Brand } from "@/@types/Product";
 
 type CartStore = {
    products: ProductWithVariants[];

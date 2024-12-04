@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { X } from "lucide-react";
 import { useState } from "react";
 import { Container } from "../ui/container";
-import { X } from "lucide-react";
 
 interface Props {
    onClickSignIn: () => void;

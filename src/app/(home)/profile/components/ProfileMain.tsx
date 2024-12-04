@@ -1,8 +1,8 @@
-import { cookies } from "next/headers";
-import { getUserSession } from "@/lib/getUserSession";
-import { redirect } from "next/navigation";
-import { getUserOrders } from "@/lib/getUserOrders";
 import { getUser } from "@/lib/getUser";
+import { getUserOrders } from "@/lib/getUserOrders";
+import { getUserSession } from "@/lib/getUserSession";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { ProfileTabs } from "./ProfileTabs";
 
 export const ProfileMain: React.FC = async () => {

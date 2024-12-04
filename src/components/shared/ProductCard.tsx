@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { StarRating } from "./StarRating";
 import { cn } from "@/lib/utils";
 import { Heart } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { StarRating } from "./StarRating";
 
 interface Props {
    id: number;

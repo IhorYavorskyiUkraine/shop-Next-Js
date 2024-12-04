@@ -1,12 +1,14 @@
-import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../../../../prisma/PrismaClient";
-import { createCartToken } from "@/services/createCartToken";
-import { getUserCart } from "@/services/getUserCart";
-import { createUserCart } from "@/services/createUserCart";
-import { createCartItem } from "@/services/createCartItem";
-import { getCartItem } from "@/services/getCartItem";
 import { updateCartTotalAmount } from "@/app/actions";
 import { getSessionId } from "@/lib/getSessionId";
+import {
+   createCartItem,
+   createCartToken,
+   createUserCart,
+   getCartItem,
+   getUserCart,
+} from "@/services";
+import { prisma } from "@prisma/PrismaClient";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
    try {

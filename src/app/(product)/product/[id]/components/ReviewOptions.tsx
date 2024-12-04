@@ -1,5 +1,6 @@
 "use client";
 
+import { AuthModal } from "@/components/shared/header/components/authModal/AuthModal";
 import {
    DropdownMenu,
    DropdownMenuContent,
@@ -10,7 +11,6 @@ import { Ellipsis } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { ReviewModal } from "./ReviewModal";
-import { AuthModal } from "@/components/shared/header/components/authModal/AuthModal";
 
 interface Props {
    reviewId?: number;

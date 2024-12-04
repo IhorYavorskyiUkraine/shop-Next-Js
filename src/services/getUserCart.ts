@@ -1,4 +1,4 @@
-import { prisma } from "../../prisma/PrismaClient";
+import { prisma } from "@prisma/PrismaClient";
 
 export async function getUserCart(sessionId?: number, token?: string | null) {
    const userId = sessionId ? sessionId : null;

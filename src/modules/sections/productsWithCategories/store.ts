@@ -1,5 +1,5 @@
-import { create } from "zustand";
 import { Product } from "@prisma/client";
+import { create } from "zustand";
 
 type ProductStore = {
    newArrivals: Product[];

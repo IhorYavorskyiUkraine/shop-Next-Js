@@ -1,6 +1,6 @@
-import { useRef } from "react";
-import Image from "next/image";
 import { Upload } from "lucide-react";
+import Image from "next/image";
+import { useRef } from "react";
 
 interface ImageUploaderProps {
    images: string[];

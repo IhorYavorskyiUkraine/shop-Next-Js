@@ -1,8 +1,8 @@
-import { ProductsWithCategories } from "@/modules";
 import { Reviews } from "@/app/(home)/sections/reviews/Reviews";
+import { Container } from "@/components/ui/container";
+import { ProductsWithCategories } from "@/modules";
 import { DressStyle } from "../sections/DressStyle";
 import { Hero } from "../sections/Hero";
-import { Container } from "@/components/ui/container";
 
 export default function Home() {
    return (

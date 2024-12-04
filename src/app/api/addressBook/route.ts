@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../../../../prisma/PrismaClient";
 import { getSessionId } from "@/lib/getSessionId";
 import { setFalseActiveAddress } from "@/lib/setFalseActiveAddress";
+import { prisma } from "@prisma/PrismaClient";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
    const sessionId = await getSessionId();

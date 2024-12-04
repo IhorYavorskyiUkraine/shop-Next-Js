@@ -1,11 +1,11 @@
-import { FormProvider, useForm } from "react-hook-form";
-import { formLoginSchema, TFormLoginValues } from "./schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
-import toast from "react-hot-toast";
-import { signIn } from "next-auth/react";
 import { InputWithValidations } from "@/components/shared/InputWithValidations";
-import { Mail, Lock } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Lock, Mail } from "lucide-react";
+import { signIn } from "next-auth/react";
+import { FormProvider, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { formLoginSchema, TFormLoginValues } from "./schema";
 
 type Props = {
    onClose: () => void;

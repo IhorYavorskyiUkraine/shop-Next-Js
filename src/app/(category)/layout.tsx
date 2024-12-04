@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
-import { Header } from "@/components/shared/header/Header";
 import { Footer } from "@/components/shared/footer/Footer";
+import { Header } from "@/components/shared/header/Header";
+import type { Metadata } from "next";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {

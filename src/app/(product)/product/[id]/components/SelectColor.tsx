@@ -1,7 +1,7 @@
+import { Color, ProductVariantOption } from "@prisma/client";
+import { Check } from "lucide-react";
 import { colors } from "../../../../../../prisma/products";
 import { useProductStore } from "../store";
-import { Check } from "lucide-react";
-import { Color, ProductVariantOption } from "@prisma/client";
 
 export const SelectColor: React.FC = () => {
    const [product, setVariant, variant, setColor] = useProductStore(state => [

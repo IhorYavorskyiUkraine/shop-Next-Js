@@ -1,10 +1,10 @@
+import { StarRating } from "@/components/shared/StarRating";
+import { formatCreatedAt } from "@/lib/getDataReview";
+import { cn } from "@/lib/utils";
 import { ReviewReply } from "@prisma/client";
 import { CircleCheck } from "lucide-react";
-import { ReviewOptions } from "./ReviewOptions";
-import { StarRating } from "@/components/shared/StarRating";
-import { cn } from "@/lib/utils";
-import { formatCreatedAt } from "@/lib/getDataReview";
 import { ReplyCard } from "./ReplyCard";
+import { ReviewOptions } from "./ReviewOptions";
 
 interface Props {
    reviewId?: number;

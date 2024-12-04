@@ -1,11 +1,11 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { ProductDetailsTab } from "../components/ProductDetailsTab";
 import { ProductReviewsTab } from "../components/ProductReviewsTab";
-import { cn } from "@/lib/utils";
-import { useProductStore } from "../store";
 import { tabs } from "../product.data";
+import { useProductStore } from "../store";
 
 export const ProductTabs: React.FC = () => {
    const [product] = useProductStore(state => [state.product]);

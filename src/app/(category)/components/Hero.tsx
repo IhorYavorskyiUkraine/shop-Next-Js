@@ -1,15 +1,15 @@
 "use client";
 
+import { ProductCard } from "@/components/shared/ProductCard";
+import { Skeleton } from "@/components/shared/Skeleton";
+import { Title } from "@/components/ui/title";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useCategoryStore } from "../store";
-import { useSearchParams } from "next/navigation";
-import { ProductCard } from "@/components/shared/ProductCard";
 import { ProductPagination } from "./ProductPagination";
-import { ProductsFilterMobile } from "./ProductsFilterMobile";
-import { Title } from "@/components/ui/title";
 import { ProductsFilter } from "./ProductsFilter";
+import { ProductsFilterMobile } from "./ProductsFilterMobile";
 import { ProductSortBy } from "./ProductSortBy";
-import { Skeleton } from "@/components/shared/Skeleton";
 
 interface Props {
    category: string;

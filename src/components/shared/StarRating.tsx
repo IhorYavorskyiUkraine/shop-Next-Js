@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
 import { cn } from "@/lib/utils";
+import React from "react";
 import { Rating } from "react-simple-star-rating";
 
 interface Props {

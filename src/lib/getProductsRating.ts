@@ -1,5 +1,5 @@
 import { ProductWithVariantsAndDetails } from "@/@types/Product";
-import { prisma } from "../../prisma/PrismaClient";
+import { prisma } from "@prisma/PrismaClient";
 
 export const getProductsRating = async (
    products: ProductWithVariantsAndDetails[],

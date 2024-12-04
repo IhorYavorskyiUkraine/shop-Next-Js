@@ -1,4 +1,4 @@
-import { prisma } from "../../prisma/PrismaClient";
+import { prisma } from "@prisma/PrismaClient";
 import { getSessionId } from "./getSessionId";
 
 export async function getWishList() {

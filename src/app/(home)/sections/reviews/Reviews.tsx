@@ -1,6 +1,6 @@
 import {
-   CarouselNext,
    Carousel,
+   CarouselNext,
    CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Container } from "@/components/ui/container";

@@ -9,13 +9,12 @@ import {
    DrawerTitle,
    DrawerTrigger,
 } from "@/components/ui/drawer";
-
+import { Input } from "@/components/ui/input";
+import { useProductSearch } from "@/hooks";
 import { Search, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { useProductSearch } from "@/hooks/useProductSearch";
-import Image from "next/image";
 
 export const SearchInputMobile: React.FC = () => {
    const [open, setOpen] = useState(false);

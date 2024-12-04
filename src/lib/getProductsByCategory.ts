@@ -1,4 +1,4 @@
-import { prisma } from "../../prisma/PrismaClient";
+import { prisma } from "@prisma/PrismaClient";
 
 const categoryMap: { [key: string]: number } = {
    new_arrivals: 1,

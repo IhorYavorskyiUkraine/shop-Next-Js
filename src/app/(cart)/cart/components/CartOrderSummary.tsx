@@ -2,8 +2,8 @@ import { CartItem } from "@/@types/Cart";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tag } from "lucide-react";
-import { CartInfo } from "./CartInfo";
 import { CartCheckOutButton } from "./CartCheckOutButton";
+import { CartInfo } from "./CartInfo";
 
 interface Props {
    cartItems: CartItem[];
