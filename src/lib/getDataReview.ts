@@ -1,4 +1,4 @@
-export const formatCreatedAt = (createdAt: Date) => {
+export const getDataReview = (createdAt: Date) => {
    const date = new Date(createdAt);
 
    if (isNaN(date.getTime())) {

@@ -1,5 +1,5 @@
-import { ClearButton } from "@/components/ui/clear-button";
 import { useFormContext } from "react-hook-form";
+import { ClearButton } from "../ui";
 import { ErrorText } from "./ErrorText";
 
 interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {

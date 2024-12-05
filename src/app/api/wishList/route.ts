@@ -1,6 +1,6 @@
 import { getWishList } from "@/lib/getWishList";
-import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@prisma/PrismaClient";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
    try {

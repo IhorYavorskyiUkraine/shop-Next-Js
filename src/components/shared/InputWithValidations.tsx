@@ -1,7 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import InputMask from "react-input-mask";
-import { ClearButton } from "../ui/clear-button";
-import { Input } from "../ui/input";
+import { ClearButton, Input } from "../ui";
 import { ErrorText } from "./ErrorText";
 import { RequiredSymbol } from "./RequiredSymbol";
 

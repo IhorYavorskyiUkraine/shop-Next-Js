@@ -1,5 +1,5 @@
+import { colors } from "@prisma/products";
 import { Check } from "lucide-react";
-import { colors } from "../../../../prisma/products";
 
 interface Props {
    color: number;

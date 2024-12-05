@@ -1,7 +1,7 @@
 "use client";
 
+import { cn } from "@/lib";
 import { UserOrdersType } from "@/lib/getUserOrders";
-import { cn } from "@/lib/utils";
 import { User, UserRole } from "@prisma/client";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";

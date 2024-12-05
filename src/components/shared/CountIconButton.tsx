@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib";
 import { Minus, Plus } from "lucide-react";
 
 interface IconButtonProps {

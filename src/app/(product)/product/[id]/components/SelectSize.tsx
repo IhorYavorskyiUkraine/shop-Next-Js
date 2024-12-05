@@ -1,6 +1,6 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib";
+import { sizes } from "@prisma/products";
 import { useEffect } from "react";
-import { sizes } from "../../../../../../prisma/products";
 import { useProductStore } from "../store";
 
 export const SelectSize: React.FC = () => {

@@ -1,5 +1,5 @@
 import { CountButton } from "@/components/shared/CountButton";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib";
 import Link from "next/link";
 import { useCartStore } from "../store";
 import { CartDeleteBtn } from "./CartDeleteBtn";

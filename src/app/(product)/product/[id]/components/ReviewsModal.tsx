@@ -1,6 +1,5 @@
 import { StarRating } from "@/components/shared/StarRating";
-import { formatCreatedAt } from "@/lib/getDataReview";
-import { cn } from "@/lib/utils";
+import { cn, getDataReview } from "@/lib";
 import { ReviewReply } from "@prisma/client";
 import { CircleCheck } from "lucide-react";
 import { ReplyCard } from "./ReplyCard";
@@ -63,7 +62,7 @@ export const ReviewsModal: React.FC<Props> = ({
                      name={reply.author.fullName}
                      checked={reply.purchased}
                      text={reply.text}
-                     reviewDate={formatCreatedAt(reply?.createdAt)}
+                     reviewDate={getDataReview(reply?.createdAt)}
                   />
                ))}
          </div>

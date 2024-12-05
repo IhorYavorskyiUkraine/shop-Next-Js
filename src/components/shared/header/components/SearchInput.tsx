@@ -2,7 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import { useProductSearch } from "@/hooks";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib";
 import { Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

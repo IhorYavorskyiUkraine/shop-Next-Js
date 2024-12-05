@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utils";
+import { Container } from "@/components/ui";
+import { cn } from "@/lib";
 import Image from "next/image";
 import Link from "next/link";
-import { Container } from "../../ui/container";
 import { TopFooter } from "./components/TopFooter";
 import { menuData, payments, socialLogos } from "./footer.data";
 

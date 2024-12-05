@@ -3,7 +3,7 @@
 import { Review } from "@/@types/Product";
 import { ReviewCard } from "@/components/shared/ReviewCard";
 import { Button } from "@/components/ui/button";
-import { formatCreatedAt } from "@/lib/getDataReview";
+import { getDataReview } from "@/lib";
 import { useProductStore } from "../store";
 import { ProductReviewsTabOptions } from "./ProductReviewsTabOptions";
 
@@ -42,7 +42,7 @@ export const ProductReviewsTab: React.FC = () => {
                   rating={review?.rating || 0}
                   text={review?.text}
                   checked={review.purchased || false}
-                  reviewDate={formatCreatedAt(review?.createdAt)}
+                  reviewDate={getDataReview(review?.createdAt)}
                   replies={review?.reviewReplies}
                   images={
                      review.images &&

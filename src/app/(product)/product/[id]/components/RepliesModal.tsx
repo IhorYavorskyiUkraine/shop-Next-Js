@@ -1,7 +1,7 @@
 "use client";
 
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { formatCreatedAt } from "@/lib/getDataReview";
+import { getDataReview } from "@/lib";
 import { ReviewReply } from "@prisma/client";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useState } from "react";
@@ -42,7 +42,7 @@ export const RepliesModal: React.FC<Props> = ({ replies }) => {
                      name={reply.author.fullName}
                      checked={reply.purchased}
                      text={reply.text}
-                     reviewDate={formatCreatedAt(reply?.createdAt)}
+                     reviewDate={getDataReview(reply?.createdAt)}
                      images={reply.images}
                   />
                ))}

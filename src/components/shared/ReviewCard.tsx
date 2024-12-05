@@ -1,8 +1,10 @@
 "use client";
 
-import { RepliesModal } from "@/app/(product)/product/[id]/components/RepliesModal";
-import { ReviewOptions } from "@/app/(product)/product/[id]/components/ReviewOptions";
-import { cn } from "@/lib/utils";
+import {
+   RepliesModal,
+   ReviewOptions,
+} from "@/app/(product)/product/[id]/components";
+import { cn } from "@/lib";
 import { ReviewReply } from "@prisma/client";
 import { CircleCheck } from "lucide-react";
 import { useState } from "react";

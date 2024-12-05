@@ -3,7 +3,7 @@ import { useCartStore } from "@/app/(cart)/cart/store";
 import { useProfileStore } from "@/app/(home)/profile/store";
 import { CountButton } from "@/components/shared/CountButton";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib";
 import { Heart } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";

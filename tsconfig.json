@@ -20,7 +20,9 @@
       "baseUrl": ".",
       "paths": {
          "@/*": ["src/*"],
-         "@prisma/*": ["prisma/*"]
+         "@prisma/*": ["prisma/*"],
+         "@ui/*": ["src/components/ui/*"],
+         "@shared/*": ["src/components/shared/*"]
       },
       "module": "esnext"
    },

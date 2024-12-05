@@ -2,7 +2,7 @@
 
 import { X } from "lucide-react";
 import { useState } from "react";
-import { Container } from "../ui/container";
+import { Container } from "../ui";
 
 interface Props {
    onClickSignIn: () => void;

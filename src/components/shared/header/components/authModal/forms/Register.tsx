@@ -1,5 +1,5 @@
 import { registerUser } from "@/app/actions";
-import { InputWithValidations } from "@/components/shared/InputWithValidations";
+import { InputWithValidations } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Lock, Mail, UserIcon } from "lucide-react";
@@ -9,10 +9,9 @@ import { formRegisterSchema, TFormRegisterValues } from "./schema";
 
 interface Props {
    onClose?: VoidFunction;
-   onClickLogin?: VoidFunction;
 }
 
-export const Register: React.FC<Props> = ({ onClose, onClickLogin }) => {
+export const Register: React.FC<Props> = ({ onClose }) => {
    const form = useForm<TFormRegisterValues>({
       resolver: zodResolver(formRegisterSchema),
       defaultValues: {

@@ -1,5 +1,4 @@
-import { getUser } from "@/lib/getUser";
-import { getUserOrders } from "@/lib/getUserOrders";
+import { getUser, getUserOrders } from "@/lib";
 import { getUserSession } from "@/lib/getUserSession";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";

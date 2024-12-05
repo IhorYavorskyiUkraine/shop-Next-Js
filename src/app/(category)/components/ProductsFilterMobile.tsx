@@ -9,12 +9,9 @@ import {
 } from "@/components/ui/drawer";
 import { DualRangeSlider } from "@/components/ui/dual-range-slider";
 import { useFilter } from "@/hooks";
+import { dressStyle as dressStyles, productCategories } from "@prisma/products";
 import { SlidersHorizontal, Trash, X } from "lucide-react";
 import { useState } from "react";
-import {
-   dressStyle as dressStyles,
-   productCategories,
-} from "../../../../prisma/products";
 import { BrandCheckbox } from "./BrandCheckbox";
 import { ColorItem } from "./ColorItem";
 import { ProductFilterItem } from "./ProductFilterItem";
