@@ -4,6 +4,10 @@ import { getSessionId } from "./getSessionId";
 export async function getWishList() {
    const sessionId = await getSessionId();
 
+   if (!sessionId) {
+      return null;
+   }
+
    const wishList = await prisma.wishList.findFirst({
       where: { userId: sessionId },
       include: {

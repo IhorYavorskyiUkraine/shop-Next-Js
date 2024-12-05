@@ -1,6 +1,9 @@
 import { prisma } from "@prisma/PrismaClient";
 
-export async function getUserCart(sessionId?: number, token?: string | null) {
+export async function getUserCart(
+   sessionId?: number | null,
+   token?: string | null,
+) {
    const userId = sessionId ? sessionId : null;
    const whereClause = sessionId ? { userId: Number(userId) } : { token };
 

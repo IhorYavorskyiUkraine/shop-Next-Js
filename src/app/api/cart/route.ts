@@ -1,3 +1,4 @@
+import { Cart } from "@/@types/Cart";
 import { updateCartTotalAmount } from "@/app/actions";
 import { getSessionId } from "@/lib/getSessionId";
 import {
@@ -18,6 +19,7 @@ export async function GET(req: NextRequest) {
 
       if (!token) {
          const { response, newToken: createdToken } = await createCartToken();
+         newToken = createdToken;
          return response;
       }
 
@@ -26,7 +28,7 @@ export async function GET(req: NextRequest) {
          (await createUserCart(sessionId, newToken));
 
       if (userCart) {
-         await updateCartTotalAmount(userCart);
+         await updateCartTotalAmount(userCart as Cart);
       }
 
       return NextResponse.json(userCart);
@@ -42,14 +44,15 @@ export async function POST(req: NextRequest) {
    try {
       const token = req.cookies.get("cartToken")?.value;
       const sessionId = await getSessionId();
-      let newToken = token;
 
       if (!token) {
-         const { response } = await createCartToken();
-         return response;
+         return NextResponse.json(
+            { message: "No valid identifier for cart" },
+            { status: 404 },
+         );
       }
 
-      const userCart = await getUserCart(sessionId, newToken);
+      const userCart = await getUserCart(sessionId, token);
 
       if (!userCart) {
          return NextResponse.json(
@@ -90,12 +93,12 @@ export async function POST(req: NextRequest) {
 
 export async function PATCH(req: NextRequest) {
    const { searchParams } = new URL(req.url);
-   const id = searchParams.get("id");
+   const productId = searchParams.get("id");
    const quantity = searchParams.get("quantity");
    const token = req.cookies.get("cartToken")?.value;
    const sessionId = await getSessionId();
 
-   if (!id && !quantity) {
+   if (!productId) {
       return NextResponse.json(
          {
             message: "No product id",
@@ -112,7 +115,7 @@ export async function PATCH(req: NextRequest) {
       });
    }
 
-   const cartItem = await getCartItem(userCart, Number(id));
+   const cartItem = await getCartItem(userCart, Number(productId));
 
    if (!cartItem) {
       return NextResponse.json(
@@ -125,7 +128,7 @@ export async function PATCH(req: NextRequest) {
 
    await prisma.cartItem.update({
       where: {
-         id: Number(id),
+         id: Number(productId),
       },
       data: {
          quantity: Number(quantity),
@@ -138,11 +141,11 @@ export async function PATCH(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
    try {
       const { searchParams } = new URL(req.url);
-      const id = searchParams.get("id");
+      const productId = searchParams.get("id");
       const token = req.cookies.get("cartToken")?.value;
       const sessionId = await getSessionId();
 
-      if (!id) {
+      if (!productId) {
          return NextResponse.json(
             {
                message: "No product id",
@@ -159,7 +162,7 @@ export async function DELETE(req: NextRequest) {
          });
       }
 
-      const cartItem = await getCartItem(userCart, Number(id));
+      const cartItem = await getCartItem(userCart, Number(productId));
 
       if (!cartItem) {
          return NextResponse.json(
@@ -172,7 +175,7 @@ export async function DELETE(req: NextRequest) {
 
       await prisma.cartItem.delete({
          where: {
-            id: Number(id),
+            id: Number(productId),
          },
       });
 

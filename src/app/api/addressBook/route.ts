@@ -6,6 +6,13 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET() {
    const sessionId = await getSessionId();
 
+   if (!sessionId) {
+      return NextResponse.json(
+         { message: "User not logged in" },
+         { status: 401 },
+      );
+   }
+
    try {
       let userAddress = await prisma.userAddressBook.findFirst({
          where: { id: sessionId },
@@ -43,8 +50,11 @@ export async function PATCH(req: NextRequest) {
    const { searchParams } = new URL(req.url);
    const id = searchParams.get("id");
 
-   if (!id) {
-      return NextResponse.json({ message: "ID not provided" }, { status: 400 });
+   if (!id || !sessionId) {
+      return NextResponse.json(
+         { message: "ID or sessionId not provided" },
+         { status: 400 },
+      );
    }
 
    try {
@@ -82,8 +92,11 @@ export async function DELETE(req: NextRequest) {
    const { searchParams } = new URL(req.url);
    const id = searchParams.get("id");
 
-   if (!id) {
-      return NextResponse.json({ message: "ID not provided" }, { status: 400 });
+   if (!id || !sessionId) {
+      return NextResponse.json(
+         { message: "Id or sessionId not provided" },
+         { status: 400 },
+      );
    }
 
    try {

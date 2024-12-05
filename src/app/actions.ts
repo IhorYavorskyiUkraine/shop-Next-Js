@@ -71,17 +71,16 @@ export async function updateCartTotalAmount(userCart: Cart | null) {
          }, 0) ?? 0;
       const discount = totalCartPrice * 0.2;
       const deliveryFee = 15;
-      const totalAmount =
-         totalCartPrice - discount + (totalCartPrice > 0 ? deliveryFee : 0) ||
-         0;
+      const totalAmount = Math.max(
+         totalCartPrice - discount + (totalCartPrice > 0 ? deliveryFee : 0),
+         0,
+      );
 
       await prisma.cart.update({
          where: {
             id: userCart.id,
          },
-         data: {
-            totalAmount: totalAmount || 0,
-         },
+         data: { totalAmount },
       });
    } catch (e) {
       console.error(e);

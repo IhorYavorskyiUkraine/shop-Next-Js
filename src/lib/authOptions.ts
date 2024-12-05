@@ -119,6 +119,8 @@ export const authOptions: AuthOptions = {
                   verified: new Date(),
                   provider: account?.provider,
                   providerId: account?.providerAccountId,
+                  imageUrl:
+                     user.image || "/images/user/userImagePlaceholder.png",
                },
             });
 

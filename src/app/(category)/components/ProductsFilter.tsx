@@ -32,7 +32,7 @@ export const ProductsFilter: React.FC = () => {
       setFilters,
       toggleBrands,
       brands,
-      loading,
+      filterLoading,
    } = useFilter();
 
    return (
@@ -73,7 +73,7 @@ export const ProductsFilter: React.FC = () => {
                onClick={() => toggleTabs("Colors")}
                name="Colors"
             >
-               {loading ? (
+               {filterLoading ? (
                   <div className="flex flex-wrap gap-[10px] pt-4">
                      {Array.from({ length: 5 }).map((_, index) => (
                         <Skeleton key={index} colors />
@@ -99,7 +99,7 @@ export const ProductsFilter: React.FC = () => {
                name="Size"
                onClick={() => toggleTabs("Size")}
             >
-               {loading ? (
+               {filterLoading ? (
                   <div className="flex flex-wrap gap-[10px] pt-4">
                      {Array.from({ length: 5 }).map((_, index) => (
                         <Skeleton key={index} colors />
@@ -125,7 +125,7 @@ export const ProductsFilter: React.FC = () => {
                name="Brands"
                onClick={() => toggleTabs("Brands")}
             >
-               {loading ? (
+               {filterLoading ? (
                   <div className="flex flex-col gap-[10px] pt-4">
                      {Array.from({ length: 5 }).map((_, index) => (
                         <Skeleton key={index} brands />

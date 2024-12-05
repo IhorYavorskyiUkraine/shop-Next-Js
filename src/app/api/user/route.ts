@@ -7,7 +7,6 @@ export async function GET() {
 
    try {
       const user = await getUser(sessionId);
-
       return NextResponse.json(user);
    } catch (error) {
       return NextResponse.json(

@@ -21,6 +21,7 @@ type CartStore = {
       label: string;
    };
    loading: boolean;
+   filterLoading: boolean;
    error: boolean;
    fetchProducts: (query?: string, sortBy?: string) => Promise<void>;
    setOffset: (offset: number) => void;
@@ -44,6 +45,7 @@ export const useCategoryStore = create<CartStore>(set => ({
       label: "Popularity",
    },
    loading: true,
+   filterLoading: true,
    error: false,
    fetchProducts: async (query, sortBy) => {
       set({ loading: true, error: false });
@@ -66,6 +68,7 @@ export const useCategoryStore = create<CartStore>(set => ({
             productFilters,
             loading: false,
             error: false,
+            filterLoading: false,
          });
       } catch (e) {
          console.error(e);
