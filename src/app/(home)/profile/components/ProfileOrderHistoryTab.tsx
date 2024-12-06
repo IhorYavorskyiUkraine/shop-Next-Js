@@ -1,4 +1,5 @@
 import { Order } from "@/@types/Order";
+import { useCartStore } from "@/app/(cart)/cart/store";
 import { Title } from "@/components/ui/title";
 import { UserOrdersType } from "@/lib/getUserOrders";
 import { useState } from "react";
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export const ProfileOrderHistoryTab: React.FC<Props> = ({ userOrders }) => {
+   const firstOrder = useCartStore(state => state.firstOrder);
    const [open, setOpen] = useState<number | null>(null);
 
    if (!userOrders || userOrders.length === 0) {
@@ -28,6 +30,7 @@ export const ProfileOrderHistoryTab: React.FC<Props> = ({ userOrders }) => {
       <div className="rounded-[20px] bg-gray p-4">
          {userOrders?.map((order: Order, index: number) => (
             <OrderCard
+               firstOrder={firstOrder}
                setOpen={() => toggleTab(index)}
                open={open === index}
                key={order.id}

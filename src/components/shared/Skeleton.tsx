@@ -175,7 +175,7 @@ export const Skeleton: React.FC<Props> = ({
                <SkeletonBar className="size-4 bg-black/5 md:mb-3 md:h-4" />
             </div>
             <SkeletonBar className="h-4 w-[100px] bg-black/5 md:mb-3 md:h-4" />
-            <SkeletonBar className="h-4 w-[100px] bg-black/5 md:mb-3 md:h-4" />{" "}
+            <SkeletonBar className="h-4 w-[100px] bg-black/5 md:mb-3 md:h-4" />
             <SkeletonBar className="h-4 w-[100px] bg-black/5 md:mb-3 md:h-4" />
             <SkeletonBar className="h-4 w-[100px] bg-black/5 md:mb-3 md:h-4" />
             <div className="flex items-center justify-between">
@@ -191,7 +191,7 @@ export const Skeleton: React.FC<Props> = ({
    } else if (brands) {
       return (
          <div className="flex items-center gap-2">
-            <SkeletonBar className="h-5 w-5 bg-black/5" />{" "}
+            <SkeletonBar className="h-5 w-5 bg-black/5" />
             <SkeletonBar className="h-5 w-1/2 rounded-full bg-black/5" />
          </div>
       );

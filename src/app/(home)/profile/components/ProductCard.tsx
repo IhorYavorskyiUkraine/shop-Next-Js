@@ -9,6 +9,7 @@ interface Props {
    quantity: number;
    price: number;
    size: string;
+   firstOrder: boolean;
 }
 
 export const ProductCard: React.FC<Props> = ({
@@ -19,6 +20,7 @@ export const ProductCard: React.FC<Props> = ({
    quantity,
    price,
    size,
+   firstOrder = false,
 }) => {
    return (
       <div className="grid grid-cols-[90px_1fr_1fr_1fr] items-center border-b-[1px] border-b-black/10 py-4 first:pt-0">
@@ -33,7 +35,7 @@ export const ProductCard: React.FC<Props> = ({
             <p className="opacity-60">{size}</p>
          </div>
          <p className="text-center">{quantity} qty</p>
-         <p className="text-center">${price * 0.8}</p>
+         <p className="text-center">${price}</p>
       </div>
    );
 };

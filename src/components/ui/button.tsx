@@ -55,7 +55,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
          >
             {loading ? (
                <div className="flex items-center justify-center">
-                  <div className="border-gray-200 h-5 w-5 animate-spin rounded-full border-b-2 border-t-2"></div>{" "}
+                  <div className="border-gray-200 h-5 w-5 animate-spin rounded-full border-b-2 border-t-2"></div>
                </div>
             ) : (
                children

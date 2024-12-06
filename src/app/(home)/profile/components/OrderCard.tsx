@@ -13,6 +13,7 @@ interface Props {
    phone: string;
    totalAmount: number;
    items: OrderItem[];
+   firstOrder: boolean;
    setOpen: (open: boolean) => void;
 }
 
@@ -26,6 +27,7 @@ export const OrderCard: React.FC<Props> = ({
    phone,
    totalAmount,
    items,
+   firstOrder = false,
 }) => {
    const orderDetails = {
       "Delivery Address": address,
@@ -71,7 +73,10 @@ export const OrderCard: React.FC<Props> = ({
             )}
             {open || (
                <div className="flex items-center justify-center text-xl font-bold leading-27 md:text-lg">
-                  ${totalProductPrice * 0.8 + deliveryFee}
+                  $
+                  {firstOrder
+                     ? totalProductPrice * 0.8 + deliveryFee
+                     : totalProductPrice + deliveryFee}
                </div>
             )}
             <ChevronDown className={cn(open && "rotate-180")} size={16} />
@@ -105,18 +110,29 @@ export const OrderCard: React.FC<Props> = ({
                         quantity={item.quantity}
                         price={item.price}
                         size={item.size.size}
+                        firstOrder={firstOrder}
                      />
                   ))}
                </div>
                <div>
                   <div className="flex justify-between">
-                     Price: <span>${totalProductPrice * 0.8}</span>
+                     Price:
+                     <span>${totalProductPrice}</span>
                   </div>
+                  {firstOrder && (
+                     <div className="flex justify-between">
+                        Discount:
+                        <span className="text-red-500">
+                           -${totalProductPrice * 0.2}
+                        </span>
+                     </div>
+                  )}
                   <div className="mb-3 flex justify-between">
                      Delivery: <span>${deliveryFee}</span>
                   </div>
                   <div className="flex justify-between text-xl font-bold leading-27 md:text-lg">
-                     Total Amount: <span>${totalAmount}</span>
+                     Total Amount:
+                     <span>${totalAmount}</span>
                   </div>
                </div>
             </div>

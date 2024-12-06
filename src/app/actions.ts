@@ -58,7 +58,10 @@ export async function registerUser(data: Prisma.UserCreateInput) {
    }
 }
 
-export async function updateCartTotalAmount(userCart: Cart | null) {
+export async function updateCartTotalAmount(
+   userCart: Cart | null,
+   userId?: number | null,
+) {
    try {
       if (!userCart) {
          throw new Error("No cart found");
@@ -69,7 +72,12 @@ export async function updateCartTotalAmount(userCart: Cart | null) {
             const itemPrice = item.productVariantOption?.price || 0;
             return total + itemPrice * item.quantity;
          }, 0) ?? 0;
-      const discount = totalCartPrice * 0.2;
+
+      const ordersCount = await prisma.order.count({
+         where: { userId },
+      });
+
+      const discount = ordersCount > 0 ? 0 : totalCartPrice * 0.2;
       const deliveryFee = 15;
       const totalAmount = Math.max(
          totalCartPrice - discount + (totalCartPrice > 0 ? deliveryFee : 0),
@@ -87,7 +95,11 @@ export async function updateCartTotalAmount(userCart: Cart | null) {
    }
 }
 
-export async function createOrder(data: OrderInput, fullName: string) {
+export async function createOrder(
+   data: OrderInput,
+   fullName: string,
+   firstOrder = false,
+) {
    try {
       const cookieStore = cookies();
       const sessionId = await getSessionId();
@@ -132,6 +144,7 @@ export async function createOrder(data: OrderInput, fullName: string) {
                })),
             },
             fullName,
+            firstOrder,
             email: data.email,
             phone: data.phone,
             address: data.address,
@@ -242,4 +255,17 @@ export async function updateUserAddress(data: AddressFormValues, id: number) {
          postcode: data.postcode,
       },
    });
+}
+
+export async function isFirstOrder(userId?: number, email?: string) {
+   if (!userId && !email) {
+      throw new Error("userId или email обязательны");
+   }
+
+   const whereClause = userId ? { userId } : { email };
+   const ordersCount = await prisma.order.count({
+      where: whereClause,
+   });
+
+   return ordersCount === 0;
 }

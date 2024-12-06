@@ -8,6 +8,7 @@ import { CartInfo } from "./CartInfo";
 interface Props {
    cartItems: CartItem[];
    contactOpen: boolean;
+   firstOrder: boolean;
    isSubmitting: boolean;
    triggerSubmit: () => void;
    setContactOpen: (value: boolean) => void;
@@ -19,6 +20,7 @@ export const CartOrderSummary: React.FC<Props> = ({
    setContactOpen,
    isSubmitting,
    triggerSubmit,
+   firstOrder,
 }) => {
    const totalCartPrice =
       cartItems?.reduce((cartTotal, item) => {
@@ -28,7 +30,7 @@ export const CartOrderSummary: React.FC<Props> = ({
          return cartTotal + itemTotal * (item.quantity || 1);
       }, 0) || 0;
 
-   const discount = totalCartPrice * 0.2 || 0;
+   const discount = firstOrder ? totalCartPrice * 0.2 : 0;
    const deliveryFee = 15;
    const totalWithDiscount =
       totalCartPrice - discount + (totalCartPrice > 0 ? deliveryFee : 0) || 0;
@@ -43,11 +45,13 @@ export const CartOrderSummary: React.FC<Props> = ({
                text="Subtotal"
                price={Number(totalCartPrice?.toFixed(2))}
             />
-            <CartInfo
-               text="Discount (-20%)"
-               discount
-               price={Number(discount.toFixed(2))}
-            />
+            {Boolean(discount) && (
+               <CartInfo
+                  text="Discount (-20%)"
+                  discount
+                  price={Number(discount.toFixed(2))}
+               />
+            )}
             <CartInfo
                text="Delivery Fee"
                price={Number(totalWithDiscount > 0 ? deliveryFee : 0)}

@@ -10,6 +10,7 @@ type addToCartItem = Omit<
 
 type CartStore = {
    cart: Cart | null;
+   firstOrder: boolean;
    newQuantity: number;
    loading: boolean;
    error: boolean;
@@ -17,11 +18,13 @@ type CartStore = {
    fetchCart: () => Promise<void>;
    addToCart: (item: addToCartItem) => Promise<void>;
    removeFromCart: (id: number) => Promise<void>;
+   setFirstOrder: (value: boolean) => void;
 };
 
 export const useCartStore = create<CartStore>(set => ({
    cart: null,
    newQuantity: 0,
+   firstOrder: false,
    loading: true,
    error: false,
    updateItemQuantity: async (id: number, quantity: number) => {
@@ -130,4 +133,5 @@ export const useCartStore = create<CartStore>(set => ({
          set({ loading: false });
       }
    },
+   setFirstOrder: value => set({ firstOrder: value }),
 }));

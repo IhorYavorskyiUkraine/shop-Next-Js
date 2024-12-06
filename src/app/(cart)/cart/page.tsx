@@ -1,13 +1,14 @@
 "use client";
 
 import { useProfileStore } from "@/app/(home)/profile/store";
-import { createOrder } from "@/app/actions";
+import { createOrder, isFirstOrder } from "@/app/actions";
 import { BreadCrumb } from "@/components/shared/BreadCrumb";
 import { Skeleton } from "@/components/shared/Skeleton";
 import { Container } from "@/components/ui/container";
 import { Title } from "@/components/ui/title";
 import { checkoutFormSchema, CheckoutFormValues } from "@/lib/constants";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -17,11 +18,15 @@ import { ContactForm } from "./components/ContactForm";
 import { useCartStore } from "./store";
 
 const CartPage = () => {
-   const [cart, fetchCart, loading] = useCartStore(state => [
-      state.cart,
-      state.fetchCart,
-      state.loading,
-   ]);
+   const [cart, fetchCart, setIsFirstOrder, firstOrder, loading] = useCartStore(
+      state => [
+         state.cart,
+         state.fetchCart,
+         state.setFirstOrder,
+         state.firstOrder,
+         state.loading,
+      ],
+   );
    const [user, fetchUser] = useProfileStore(state => [
       state.user,
       state.fetchUser,
@@ -33,6 +38,7 @@ const CartPage = () => {
 
    const [firstName = "", lastName = ""] =
       userAddress[0]?.fullName.split(" ") || [];
+   const { data: session } = useSession();
 
    const form = useForm<CheckoutFormValues>({
       resolver: zodResolver(checkoutFormSchema),
@@ -49,6 +55,13 @@ const CartPage = () => {
    useEffect(() => {
       fetchCart();
       fetchUser();
+      async function checkFirstOrder() {
+         if (session?.user) {
+            const result = await isFirstOrder(Number(session.user.id));
+            setIsFirstOrder(result);
+         }
+      }
+      checkFirstOrder();
    }, [fetchCart]);
 
    useEffect(() => {
@@ -84,7 +97,7 @@ const CartPage = () => {
 
          const fullName = `${data.firstName} ${data.lastName}`;
 
-         const url = await createOrder(data, fullName);
+         const url = await createOrder(data, fullName, firstOrder);
 
          toast.success("Order created", {
             icon: "✅",
@@ -147,6 +160,7 @@ const CartPage = () => {
                   contactOpen={contactOpen}
                   triggerSubmit={triggerSubmit}
                   cartItems={cart.items}
+                  firstOrder={firstOrder}
                />
             </FormProvider>
          </div>

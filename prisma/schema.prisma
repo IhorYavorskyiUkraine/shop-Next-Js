@@ -222,6 +222,7 @@ model Order {
    fullName    String
    email       String
    phone       String
+   firstOrder  Boolean
    address     String
    comment     String?
    status      OrderStatus @default(PENDING)

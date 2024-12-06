@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
          (await createUserCart(sessionId, newToken));
 
       if (userCart) {
-         await updateCartTotalAmount(userCart as Cart);
+         await updateCartTotalAmount(userCart as Cart, sessionId);
       }
 
       return NextResponse.json(userCart);
