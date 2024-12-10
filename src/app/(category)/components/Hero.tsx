@@ -58,9 +58,9 @@ export const Hero: React.FC<Props> = ({ category, crumbName }) => {
    }, [searchParams, sortBy.id]);
 
    return (
-      <div className="flex items-start md:gap-5">
+      <div className="flex items-start pb-6 md:gap-5">
          <ProductsFilter />
-         <div>
+         <div className="w-full">
             <div className="mb-4 flex items-center justify-between gap-4 md:gap-0">
                <div className="flex flex-1 items-center justify-between gap-2">
                   <h2 className="text-xl font-bold leading-32 leading-[43px] md:text-2xl">
@@ -79,7 +79,7 @@ export const Hero: React.FC<Props> = ({ category, crumbName }) => {
                </div>
                <ProductsFilterMobile />
             </div>
-            <div className="flex flex-wrap justify-center gap-3 border-b-[1px] border-black/10 pb-6">
+            <div className="flex flex-wrap justify-center gap-3 border-b-[1px] border-black/10 pb-6 xl:justify-start">
                {loading
                   ? Array.from({ length: limit }).map((_, index) => (
                        <Skeleton category key={index} productCard />

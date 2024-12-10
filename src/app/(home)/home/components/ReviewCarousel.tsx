@@ -1,10 +1,12 @@
 import { ReviewCard } from "@/components/shared/ReviewCard";
 import { CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { getDataReview } from "@/lib";
 import { prisma } from "@prisma/PrismaClient";
 
 export const ReviewCarousel: React.FC = async () => {
    const reviews = await prisma.review.findMany({
       include: {
+         reviewReplies: true,
          author: {
             select: {
                imageUrl: true,
@@ -27,6 +29,8 @@ export const ReviewCarousel: React.FC = async () => {
                   checked={true}
                   text={review.text}
                   userImage={review.author.imageUrl}
+                  reviewDate={getDataReview(review?.createdAt)}
+                  home
                />
             </CarouselItem>
          ))}

@@ -3,7 +3,7 @@ import { Title } from "@/components/ui/title";
 import { DressStyleCard } from "../home/components/DressStyleCard";
 import { dressStyleData } from "../home/home.data";
 
-type dressStyle = {
+type DressStyle = {
    style: string;
    imageUrl: string;
    className?: string;
@@ -20,7 +20,7 @@ export const DressStyle: React.FC = () => {
                   size="lg"
                />
                <div className="grid grid-cols-1 grid-rows-[repeat(4,190px)] gap-y-4 md:grid-cols-[minmax(200px,_400px)_minmax(134px,_268px)_minmax(200px,_400px)] md:grid-rows-[repeat(2,290px)] md:gap-4">
-                  {dressStyleData.map((dressStyle: dressStyle, index) => (
+                  {dressStyleData.map((dressStyle: DressStyle, index) => (
                      <DressStyleCard key={index} {...dressStyle} />
                   ))}
                </div>

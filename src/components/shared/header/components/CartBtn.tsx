@@ -8,9 +8,11 @@ interface Props {
 
 export const CartBtn: React.FC<Props> = ({ cart }) => {
    return (
-      <Link href="/cart">
+      <Link className="relative" href="/cart">
          <ShoppingCart color={"#000"} size={20} />
-         <span>{cart?.items?.length || null}</span>
+         <span className="absolute -bottom-2">
+            {cart?.items?.length || null}
+         </span>
       </Link>
    );
 };

@@ -58,7 +58,7 @@ export const ProductsWithCategories: React.FC<Props> = ({
                className="mb-8 text-center md:mb-[56px]"
                text={title}
             />
-            <div className="flex justify-center gap-4 overflow-x-scroll md:flex-wrap md:gap-3 md:overflow-x-hidden md:overflow-y-hidden xl:justify-start">
+            <div className="flex gap-4 overflow-x-scroll md:flex-wrap md:justify-center md:gap-3 md:overflow-x-hidden md:overflow-y-hidden xl:justify-start">
                {loading
                   ? Array.from({ length: limit }).map((_, index) => (
                        <Skeleton productCard key={index} />

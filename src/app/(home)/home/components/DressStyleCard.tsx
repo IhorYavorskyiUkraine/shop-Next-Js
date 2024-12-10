@@ -1,4 +1,5 @@
 import { cn } from "@/lib";
+import { dressStyle } from "@prisma/products";
 import Link from "next/link";
 
 interface Props {
@@ -12,9 +13,10 @@ export const DressStyleCard: React.FC<Props> = ({
    style,
    imageUrl,
 }) => {
+   const matchDressStyle = dressStyle.find(d => d.name === style);
    return (
       <Link
-         href={`category/${style.toLocaleLowerCase()}`}
+         href={`categories/all_products?dressStyleId=${matchDressStyle && matchDressStyle.id}`}
          className={cn(
             "relative rounded-[20px] bg-white transition hover:scale-[1.01] hover:shadow-xl",
             className,

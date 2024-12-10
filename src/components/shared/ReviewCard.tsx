@@ -29,6 +29,7 @@ interface Props {
       }[];
    images?: { url: string }[];
    userImage: string | null;
+   home?: boolean;
 }
 
 export const ReviewCard: React.FC<Props> = ({
@@ -41,6 +42,7 @@ export const ReviewCard: React.FC<Props> = ({
    replies,
    images,
    userImage,
+   home = false,
 }) => {
    const [openModal, setOpenModal] = useState(false);
 
@@ -89,7 +91,7 @@ export const ReviewCard: React.FC<Props> = ({
                         {reviewDate}
                      </p>
                   )}
-                  {replies?.length === 0 ? null : (
+                  {home || replies?.length === 0 ? null : (
                      <RepliesModal replies={replies} />
                   )}
                </div>
