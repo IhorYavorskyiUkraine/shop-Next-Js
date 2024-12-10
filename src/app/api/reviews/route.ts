@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@prisma/PrismaClient";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
    const { searchParams } = new URL(req.url);
@@ -19,10 +19,20 @@ export async function GET(req: NextRequest) {
       const reviews = await prisma.review.findMany({
          where: { productId: Number(id) },
          include: {
-            author: true,
+            author: {
+               select: {
+                  imageUrl: true,
+                  fullName: true,
+               },
+            },
             reviewReplies: {
                include: {
-                  author: true,
+                  author: {
+                     select: {
+                        imageUrl: true,
+                        fullName: true,
+                     },
+                  },
                },
             },
             images: true,

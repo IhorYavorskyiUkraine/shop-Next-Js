@@ -23,12 +23,13 @@ interface Props {
    reviewDate?: string;
    replies?: ReviewReply &
       {
-         author: { fullName: string };
+         author: { fullName: string; imageUrl: string | null };
          createdAt: Date;
          purchased: boolean;
          text: string;
          images?: { url: string }[];
       }[];
+   userImage: string | null;
 }
 
 export const ImageViewer: React.FC<Props> = ({
@@ -42,6 +43,7 @@ export const ImageViewer: React.FC<Props> = ({
    reviewDate,
    replies,
    images,
+   userImage,
 }) => {
    return (
       <Dialog open={open} onOpenChange={() => setOpen(false)}>
@@ -68,6 +70,7 @@ export const ImageViewer: React.FC<Props> = ({
                   text={text}
                   reviewDate={reviewDate}
                   replies={replies}
+                  userImage={userImage}
                />
             </div>
          </DialogContent>

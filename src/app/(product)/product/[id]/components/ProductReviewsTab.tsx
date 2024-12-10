@@ -21,7 +21,6 @@ export const ProductReviewsTab: React.FC = () => {
    if (!product || !reviews) {
       return null;
    }
-   console.log(reviews);
 
    return (
       <section className="py-6">
@@ -49,6 +48,7 @@ export const ProductReviewsTab: React.FC = () => {
                      review.images &&
                      review?.images.map(image => ({ url: image.url }))
                   }
+                  userImage={review?.author?.imageUrl}
                />
             ))}
          </div>

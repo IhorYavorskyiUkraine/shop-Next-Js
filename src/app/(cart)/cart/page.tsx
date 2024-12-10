@@ -8,7 +8,6 @@ import { Container } from "@/components/ui/container";
 import { Title } from "@/components/ui/title";
 import { checkoutFormSchema, CheckoutFormValues } from "@/lib/constants";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -38,7 +37,6 @@ const CartPage = () => {
 
    const [firstName = "", lastName = ""] =
       userAddress[0]?.fullName.split(" ") || [];
-   const { data: session } = useSession();
 
    const form = useForm<CheckoutFormValues>({
       resolver: zodResolver(checkoutFormSchema),
@@ -55,13 +53,15 @@ const CartPage = () => {
    useEffect(() => {
       fetchCart();
       fetchUser();
-      async function checkFirstOrder() {
-         if (session?.user) {
-            const result = await isFirstOrder(Number(session.user.id));
+      try {
+         async function checkFirstOrder() {
+            const result = await isFirstOrder();
             setIsFirstOrder(result);
          }
+         checkFirstOrder();
+      } catch (e) {
+         console.error(e);
       }
-      checkFirstOrder();
    }, [fetchCart]);
 
    useEffect(() => {

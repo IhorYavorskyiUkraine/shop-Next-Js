@@ -63,13 +63,14 @@ export interface Review {
    id: number;
    author: {
       fullName: string;
+      imageUrl: string | null;
    };
    rating: number;
    text: string;
    purchased?: boolean;
    reviewReplies?: ReviewReply &
       {
-         author: { fullName: string };
+         author: { fullName: string; imageUrl: string };
          createdAt: Date;
          purchased: boolean;
          text: string;

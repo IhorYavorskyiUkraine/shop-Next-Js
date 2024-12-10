@@ -1,6 +1,6 @@
 import { ProductWithVariantsAndDetails } from "@/@types/Product";
-import { notFound } from "next/navigation";
 import { prisma } from "@prisma/PrismaClient";
+import { notFound } from "next/navigation";
 import { Hero } from "./sections/Hero";
 
 interface Props {
@@ -22,7 +22,12 @@ const ProductPage = async ({ params: { id } }: Props) => {
                },
                reviews: {
                   include: {
-                     author: true,
+                     author: {
+                        select: {
+                           fullName: true,
+                           imageUrl: true,
+                        },
+                     },
                   },
                },
                productDetails: true,

@@ -101,7 +101,7 @@ export const ProfileInfo: React.FC<Props> = ({ user, session }) => {
             ) : (
                <img
                   className="size-28 rounded-full border-[1px] border-black/20"
-                  src={avatar}
+                  src={avatar || "images/userImagePlaceholder.png"}
                   alt="User Avatar"
                />
             )}

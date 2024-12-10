@@ -10,7 +10,7 @@ import { ReplyCard } from "./ReplyCard";
 interface Props {
    replies?: ReviewReply &
       {
-         author: { fullName: string };
+         author: { fullName: string; imageUrl: string };
          createdAt: Date;
          purchased: boolean;
          text: string;
@@ -44,6 +44,7 @@ export const RepliesModal: React.FC<Props> = ({ replies }) => {
                      text={reply.text}
                      reviewDate={getDataReview(reply?.createdAt)}
                      images={reply.images}
+                     userImage={reply.author.imageUrl}
                   />
                ))}
             </div>

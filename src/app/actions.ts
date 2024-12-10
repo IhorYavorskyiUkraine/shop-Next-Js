@@ -8,6 +8,7 @@ import { VerificationUserTemplate } from "@/components/shared/emailTemplates/Ver
 import { getUser, sendEmail, setFalseActiveAddress } from "@/lib";
 import { AddressFormValues } from "@/lib/constants";
 import { getSessionId } from "@/lib/getSessionId";
+import { getUserSession } from "@/lib/getUserSession";
 import { getUserCart } from "@/services";
 import { OrderStatus, Prisma } from "@prisma/client";
 import { prisma } from "@prisma/PrismaClient";
@@ -257,12 +258,16 @@ export async function updateUserAddress(data: AddressFormValues, id: number) {
    });
 }
 
-export async function isFirstOrder(userId?: number, email?: string) {
-   if (!userId && !email) {
-      throw new Error("userId или email обязательны");
+export async function isFirstOrder() {
+   const token = cookies().get("cartToken")?.value;
+   const session = await getUserSession();
+
+   if (!session && !token) {
+      throw new Error("session or token is missing");
    }
 
-   const whereClause = userId ? { userId } : { email };
+   const whereClause = session ? { userId: Number(session.id) } : { token };
+
    const ordersCount = await prisma.order.count({
       where: whereClause,
    });

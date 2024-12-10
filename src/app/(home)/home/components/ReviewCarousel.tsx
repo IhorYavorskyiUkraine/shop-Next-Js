@@ -5,7 +5,12 @@ import { prisma } from "@prisma/PrismaClient";
 export const ReviewCarousel: React.FC = async () => {
    const reviews = await prisma.review.findMany({
       include: {
-         author: true,
+         author: {
+            select: {
+               imageUrl: true,
+               fullName: true,
+            },
+         },
       },
    });
 
@@ -21,6 +26,7 @@ export const ReviewCarousel: React.FC = async () => {
                   name={review.author.fullName}
                   checked={true}
                   text={review.text}
+                  userImage={review.author.imageUrl}
                />
             </CarouselItem>
          ))}
