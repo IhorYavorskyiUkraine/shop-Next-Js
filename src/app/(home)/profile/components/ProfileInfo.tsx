@@ -110,6 +110,7 @@ export const ProfileInfo: React.FC<Props> = ({ user, session }) => {
                   type="file"
                   className="hidden"
                   onChange={handleAvatarUpload}
+                  accept="image/*"
                />
                <Pencil size={16} />
             </label>

@@ -1,19 +1,19 @@
 "use client";
 
+import { ReviewImage } from "@/@types/Product";
 import { ErrorText } from "@/components/shared/ErrorText";
 import { StarRating } from "@/components/shared/StarRating";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Session } from "next-auth";
-import { useForm } from "react-hook-form";
-import { useProductStore } from "../store";
-import toast from "react-hot-toast";
-import { useRef, useState } from "react";
 import { upload } from "@vercel/blob/client";
-import { useDropArea } from "react-use";
-import Image from "next/image";
 import { Upload } from "lucide-react";
-import { ReviewImage } from "@/@types/Product";
+import { Session } from "next-auth";
+import Image from "next/image";
+import { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useDropArea } from "react-use";
+import { useProductStore } from "../store";
 
 interface Props {
    onClose: () => void;
@@ -138,7 +138,6 @@ export const ProductReviewForm: React.FC<Props> = ({
                  reviewId,
                  reply,
                  rating: 0,
-                 images: uploadedImages,
                  text: values.textarea,
               }
             : {
@@ -186,37 +185,39 @@ export const ProductReviewForm: React.FC<Props> = ({
 
    return (
       <form onSubmit={handleSubmit(onSubmit)}>
-         <div>
-            <div
-               {...bond}
-               className="relative mb-1 flex h-[200px] w-full cursor-pointer items-center justify-center rounded-md border border-black/30 bg-gray"
-            >
-               <div className="flex flex-col items-center">
-                  <Upload size={40} color={"#000"} />
-                  <p className="text-md font-medium">Upload images</p>
-                  {images.length > 0 && <p>{images.length}/4</p>}
-               </div>
-               <input
-                  ref={inputFileRef}
-                  onChange={handleImagesChange}
-                  className="pointer-events-auto absolute inset-0 h-full w-full cursor-pointer opacity-0"
-                  accept="image/*"
-                  type="file"
-                  multiple
-               />
-            </div>
-            <div className="mb-1 flex gap-2">
-               {images.map(image => (
-                  <Image
-                     key={image}
-                     width={80}
-                     height={80}
-                     src={image}
-                     alt="Product Preview"
+         {reply ? null : (
+            <div>
+               <div
+                  {...bond}
+                  className="relative mb-1 flex h-[200px] w-full cursor-pointer items-center justify-center rounded-md border border-black/30 bg-gray"
+               >
+                  <div className="flex flex-col items-center">
+                     <Upload size={40} color={"#000"} />
+                     <p className="text-md font-medium">Upload images</p>
+                     {images.length > 0 && <p>{images.length}/4</p>}
+                  </div>
+                  <input
+                     ref={inputFileRef}
+                     onChange={handleImagesChange}
+                     className="pointer-events-auto absolute inset-0 h-full w-full cursor-pointer opacity-0"
+                     accept="image/*"
+                     type="file"
+                     multiple
                   />
-               ))}
+               </div>
+               <div className="mb-1 flex gap-2">
+                  {images.map(image => (
+                     <Image
+                        key={image}
+                        width={80}
+                        height={80}
+                        src={image}
+                        alt="Product Preview"
+                     />
+                  ))}
+               </div>
             </div>
-         </div>
+         )}
          {reply ? null : (
             <div>
                <p className="mb-1 text-md font-medium">Rating</p>

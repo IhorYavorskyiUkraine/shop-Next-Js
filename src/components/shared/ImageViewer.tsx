@@ -54,7 +54,7 @@ export const ImageViewer: React.FC<Props> = ({
                   <CarouselContent>
                      {images?.map((image, index) => (
                         <CarouselItem key={index}>
-                           <div className="flex items-center justify-center">
+                           <div className="flex h-full items-center justify-center">
                               <img src={image.url} alt="" />
                            </div>
                         </CarouselItem>
